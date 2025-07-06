@@ -102,14 +102,19 @@ export const ProcessSteps = () => {
                 >
                   <h3
                     className={clsx(
-                      'font-semibold mb-2',
+                      'font-semibold mb-2 transition-colors duration-300',
                       active === idx ? 'text-lime-default' : 'text-text',
                       isLeft ? 'text-left' : 'text-right'
                     )}
                   >
                     {step.title}
                   </h3>
-                  <div className={clsx('text-sm leading-snug space-y-1', isLeft ? 'text-left' : 'text-right')}>
+                  <div
+                    className={clsx(
+                      'text-sm leading-snug space-y-1 transition-colors duration-300',
+                      isLeft ? 'text-left' : 'text-right'
+                    )}
+                  >
                     {step.description.map((line, i) => (
                       <div key={i}>{line}</div>
                     ))}

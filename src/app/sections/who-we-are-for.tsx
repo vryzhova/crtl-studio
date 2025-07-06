@@ -11,10 +11,10 @@ type CardProps = {
 const Card: React.FC<CardProps> = ({ icon, title, description }) => (
   <div className="relative p-8 rounded-lg h-full group">
     {/* Corner borders */}
-    <div className="absolute top-0 left-0 w-14 h-14 border-t border-l border-gray-elements rounded-tl-lg" />
-    <div className="absolute top-0 right-0 w-14 h-14 border-t border-r border-gray-elements rounded-tr-lg" />
-    <div className="absolute bottom-0 left-0 w-14 h-14 border-b border-l border-gray-elements rounded-bl-lg" />
-    <div className="absolute bottom-0 right-0 w-14 h-14 border-b border-r border-gray-elements rounded-br-lg" />
+    <div className="absolute top-0 left-0 w-14 h-14 border-t border-l border-gray-elements rounded-tl-lg group-hover:border-lime-default transition-colors duration-300" />
+    <div className="absolute top-0 right-0 w-14 h-14 border-t border-r border-gray-elements rounded-tr-lg group-hover:border-lime-default transition-colors duration-300" />
+    <div className="absolute bottom-0 left-0 w-14 h-14 border-b border-l border-gray-elements rounded-bl-lg group-hover:border-lime-default transition-colors duration-300" />
+    <div className="absolute bottom-0 right-0 w-14 h-14 border-b border-r border-gray-elements rounded-br-lg group-hover:border-lime-default transition-colors duration-300" />
 
     {/* Content */}
     <div className="flex flex-col items-center text-center h-full">

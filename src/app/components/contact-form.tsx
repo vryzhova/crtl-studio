@@ -16,83 +16,139 @@ export const ContactForm: React.FC = () => {
     // TODO: отправка данных на сервер
   };
 
+  const leftTopLine = 'absolute left-0 top-0 w-8 h-2.5  border-t border-l border-gray-400 rounded-tl-[8px]';
+  const leftBottomLine = 'absolute left-0 bottom-0 w-8 h-2.5 border-b border-l border-gray-400 rounded-bl-[8px]';
+  const rightTopLine = 'absolute right-0 top-0 w-8 h-2.5 border-t border-r border-gray-400 rounded-tr-[8px]';
+  const rightBottomLine = 'absolute right-0 bottom-0 w-8 h-2.5  border-b border-r border-gray-400 rounded-br-[8px]';
+
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-md flex flex-col gap-6 bg-transparent p-0">
-      <div className="flex flex-col gap-2">
-        <label className="text-xs uppercase tracking-widest text-gray-400">Как вас зовут?</label>
-        <input
-          className="bg-transparent border-b border-gray-700 px-2 py-2 outline-none text-white"
-          type="text"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          required
-        />
-      </div>
-      <div className="flex flex-col gap-2">
-        <label className="text-xs uppercase tracking-widest text-gray-400">Предпочтительный способ связи</label>
-        <select
-          className="bg-transparent border-b border-gray-700 px-2 py-2 outline-none text-white appearance-none"
-          value={contactType}
-          onChange={e => setContactType(e.target.value)}
-          required
-        >
-          <option value="" disabled hidden>
-            Выберите...
-          </option>
-          <option value="phone">Телефон</option>
-          <option value="telegram">Telegram</option>
-          <option value="email">Email</option>
-        </select>
-      </div>
-      {contactType === 'phone' && (
-        <div className="flex flex-col gap-2">
-          <label className="text-xs uppercase tracking-widest text-gray-400">Ваш телефон</label>
+    <form onSubmit={handleSubmit} className="w-full max-w-md flex flex-col gap-2.5 bg-transparent p-0">
+      {/* Имя */}
+      <div className="relative flex items-center my-2">
+        <div className={leftTopLine} />
+        <div className={leftBottomLine} />
+        <div className={rightTopLine} />
+        <div className={rightBottomLine} />
+        <div className="flex-1 flex flex-col gap-2 pl-8 pr-8">
           <input
-            className="bg-transparent border-b border-gray-700 px-2 py-2 outline-none text-white"
+            className="bg-transparent outline-none text-white font-mono text-lg py-1 h-15"
+            type="text"
+            placeholder="КАК ВАС ЗОВУТ?"
+            value={name}
+            onChange={e => setName(e.target.value)}
+            required
+          />
+        </div>
+      </div>
+
+      {/* Тип связи */}
+      <div className="relative flex items-center my-2">
+        <div className={leftTopLine} />
+        <div className={leftBottomLine} />
+        <div className={rightTopLine} />
+        <div className={rightBottomLine} />
+
+        <svg
+          className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-lime-default pointer-events-none"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+        <div className="flex-1 flex flex-col gap-2 pl-8 pr-8">
+          <label className="text-base font-mono tracking-widest text-gray-400 bg-transparent">
+            ПРЕДПОЧТИТЕЛЬНЫЙ СПОСОБ СВЯЗИ
+          </label>
+          <select
+            className="bg-transparent outline-none text-white font-mono text-lg py-1 appearance-none pr-8"
+            value={contactType}
+            onChange={e => setContactType(e.target.value)}
+            required
+          >
+            <option value="" disabled hidden>
+              Выберите...
+            </option>
+            <option value="phone">Телефон</option>
+            <option value="telegram">Telegram</option>
+            <option value="email">Email</option>
+          </select>
+        </div>
+      </div>
+      <div className="relative flex items-center my-2">
+        <div className={leftTopLine} />
+        <div className={leftBottomLine} />
+        <div className={rightTopLine} />
+        <div className={rightTopLine} />
+
+        <div className="flex-1 flex flex-col gap-2 pl-8 pr-8">
+          <input
+            className="bg-transparent outline-none text-white font-mono text-lg py-1 h-15"
             type="tel"
+            placeholder="ВАШ ТЕЛЕФОН"
             value={phone}
             onChange={e => setPhone(e.target.value)}
             required
           />
         </div>
-      )}
-      {contactType === 'telegram' && (
-        <div className="flex flex-col gap-2">
-          <label className="text-xs uppercase tracking-widest text-gray-400">Ваш Telegram</label>
+      </div>
+
+      <div className="relative flex items-center my-2">
+        {/*TELEGRAM*/}
+        <div className={leftTopLine} />
+        <div className={leftBottomLine} />
+        <div className={rightTopLine} />
+        <div className={rightBottomLine} />
+        <div className="flex-1 flex flex-col gap-2 pl-8 pr-8">
           <input
-            className="bg-transparent border-b border-gray-700 px-2 py-2 outline-none text-white"
+            className="bg-transparent outline-none text-white font-mono text-lg py-1 h-15"
             type="text"
+            placeholder="ВАШ TELEGRAM"
             value={telegram}
             onChange={e => setTelegram(e.target.value)}
             required
           />
         </div>
-      )}
-      {contactType === 'email' && (
-        <div className="flex flex-col gap-2">
-          <label className="text-xs uppercase tracking-widest text-gray-400">Ваш Email</label>
+      </div>
+
+      <div className="relative flex items-center my-2">
+        {/* EMAIL */}
+        <div className={leftTopLine} />
+        <div className={leftBottomLine} />
+        <div className={rightTopLine} />
+        <div className={rightBottomLine} />
+        <div className="flex-1 flex flex-col gap-2 pl-8 pr-8">
           <input
-            className="bg-transparent border-b border-gray-700 px-2 py-2 outline-none text-white"
+            className="bg-transparent outline-none text-white font-mono text-lg py-1 h-15"
+            placeholder="ВАШ EMAIL"
             type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
           />
         </div>
-      )}
-      <div className="flex flex-col gap-2">
-        <label className="text-xs uppercase tracking-widest text-gray-400">Ориентировочный бюджет</label>
-        <div className="flex items-center gap-4">
-          <input
-            type="range"
-            min={50000}
-            max={1000000}
-            step={10000}
-            value={budget}
-            onChange={e => setBudget(Number(e.target.value))}
-            className="w-full accent-lime-default"
-          />
-          <span className="font-mono text-sm text-white min-w-[80px] text-right">{budget.toLocaleString('ru-RU')}</span>
+      </div>
+
+      <div className="relative flex items-center my-2">
+        {/* Бюджет */}
+        <div className="flex-1 flex flex-col gap-2 ">
+          <label className="text-base font-mono tracking-widest text-gray-400 bg-transparent">
+            Ориентировочный бюджет
+          </label>
+          <div className="flex items-center gap-4">
+            <input
+              type="range"
+              min={50000}
+              max={1000000}
+              step={10000}
+              value={budget}
+              onChange={e => setBudget(Number(e.target.value))}
+              className="range-input w-full accent-lime-default"
+            />
+            <span className="font-mono text-sm text-white min-w-[80px] text-right">
+              {budget.toLocaleString('ru-RU')}
+            </span>
+          </div>
         </div>
       </div>
       <div className="flex items-center gap-2 mt-2">

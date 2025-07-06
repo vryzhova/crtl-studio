@@ -19,29 +19,29 @@
 
 /* Анимация мигающего курсора для typewriter */
 @keyframes blink {
-  0%, 100% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 .blink {
-  animation: blink 1s step-end infinite;
+    animation: blink 1s step-end infinite;
 }
 
 @keyframes levitate {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
 }
 
 .levitate {
-  animation: levitate 2s ease-in-out infinite;
+    animation: levitate 2s ease-in-out infinite;
 }
 
 @theme inline {
@@ -99,21 +99,12 @@ body {
     animation: rotate 20s infinite linear;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+
+.range-input::-webkit-slider-runnable-track {
+    height: 2px; /* ← толщина трека */
 }
 
-::-webkit-scrollbar-track {
-    background: var(--background);
-}
+.range-input::-moz-range-track {
+    height: 2px; /* ← толщина трека для Firefox */
 
-::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #444;
 }
