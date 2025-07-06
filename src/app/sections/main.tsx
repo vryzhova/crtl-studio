@@ -2,6 +2,7 @@
 import { Header } from '../components/header';
 import React from 'react';
 import Image from 'next/image';
+import { TypewriterLines } from '@/app/components/typed-written-lines';
 
 type TProps = {
   title?: string;
@@ -20,11 +21,13 @@ export const MainSection: React.FC = () => {
         <Header />
         <div className="container mx-auto flex flex-1 justify-center items-center">
           <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-              Мы — Ctrl. <br />
-              Студия цифровых
-              <br className="hidden md:inline" /> и AI-решений
-            </h1>
+            <TypewriterLines
+              lines={['Мы — Ctrl.', 'Студия цифровых', 'и AI-решений.']}
+              className="text-4xl md:text-6xl font-bold leading-tight mb-6"
+              speed={60}
+              delayBetweenLines={1000}
+              loop={false}
+            />
 
             <p className="text-base md:text-lg text-gray-300 mb-8">
               Создаём digital-решения и AI-продукты, в которых дизайн, бренд и технологии работают на рост, прибыль и

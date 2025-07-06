@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 :root {
     --background: #EAEAEA;
     --foreground: #ededed;
@@ -16,7 +15,33 @@
     --color-lime-active: #C0FF2B;
     --color-red-error: #FF0E0E;
     --color-text-grad-dbg: #626262;
+}
 
+/* Анимация мигающего курсора для typewriter */
+@keyframes blink {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes levitate {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.levitate {
+  animation: levitate 2s ease-in-out infinite;
 }
 
 @theme inline {
@@ -59,7 +84,6 @@
         border-right: 2px solid;
     }
 }
-
 
 body {
     background: var(--background);

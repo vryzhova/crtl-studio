@@ -4,18 +4,13 @@ module.exports = {
   theme: {
     extend: {
       keyframes: {
-        typing: {
-          from: { width: '0ch' },
-          to: { width: '100%' },
-        },
         blink: {
-          '0%, 100%': { borderColor: 'transparent' },
-          '50%': { borderColor: 'white' },
+          '0%, 100%': { opacity: '0' },
+          '50%': { opacity: '1' },
         },
       },
       animation: {
-        typing: 'typing 3s steps(30) forwards',
-        blink: 'blink 0.8s step-end infinite',
+        blink: 'blink 1s step-end infinite',
       },
     },
   },
