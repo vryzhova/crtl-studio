@@ -1,4 +1,3 @@
-import React from 'react';
 import { SectionTitle } from '@/app/components/section-title';
 
 const steps = [
@@ -29,11 +28,7 @@ export const HowWeWork = () => {
     <section className="relative min-h-screen flex flex-col items-center justify-center text-black py-20 overflow-hidden">
       <div className="w-full max-w-7xl px-4 mx-auto">
         {/* Чип */}
-        <div className="text-sm font-mono uppercase text-center mb-6">
-          <span className="inline-block bg-black text-lime-400 px-3 py-1 rounded-full tracking-widest">
-            Full-cycle-разработка
-          </span>
-        </div>
+        <SectionTitle title="//Full-cycle-разработка" />
 
         {/* Заголовок */}
         <h2 className="text-center text-3xl md:text-5xl font-semibold mb-20 bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent ">

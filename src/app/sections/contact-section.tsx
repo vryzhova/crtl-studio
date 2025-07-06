@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export const ContactSection: React.FC = () => {
   return (
-    <section className="relative min-h-screen w-full bg-black text-white overflow-hidden px-4">
+    <section id="contact" className="relative min-h-screen w-full bg-black text-white overflow-hidden px-4">
       <SectionTitle title="// ОСТАВИТЬ ЗАЯВКУ" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-7xl mx-auto items-center">
         {/* Левая колонка: заголовок, текст, картинка */}

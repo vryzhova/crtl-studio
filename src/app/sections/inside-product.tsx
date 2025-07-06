@@ -44,7 +44,7 @@ export const InsideProduct = () => {
           <div className="relative h-96 lg:h-[32rem] w-full">
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="relative w-140 h-140">
-                <Image src="./cube.svg" alt="cube" width={500} height={500} />
+                <Image src="./cube.svg" className="levitate" alt="cube" width={500} height={500} />
               </div>
             </div>
           </div>
