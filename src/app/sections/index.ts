@@ -1,0 +1,8 @@
+export { Header } from '../components/header';
+export { MainSection } from './main';
+export { WhySection } from './why-section';
+export { InsideProduct } from './inside-product';
+export { HowWeWork } from './how-we-work';
+export { WhoWeAreFor } from './who-we-are-for';
+export { ProcessSteps } from './process-steps';
+export { ContactSection } from './contact-section';
