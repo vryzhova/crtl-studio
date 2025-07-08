@@ -1,0 +1,17 @@
+{
+  "header": {
+    "about": "Why us",
+    "services": "Our services",
+    "cases": "Case studies",
+    "clients": "Who it’s for",
+    "how": "How we work"
+  },
+  "main": {
+    "title": "We are CTRL.",
+    "subtitle": "A studio for digital and",
+    "subtitle2": "AI-driven solutions.",
+    "description": "We create digital solutions and AI products\nin which design, brand, and technology work\nfor business growth, profit, and scale."
+  },
+  "contact-btn": "Get in touch",
+  "contact-us": "Contact us"
+}

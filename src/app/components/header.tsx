@@ -4,23 +4,30 @@ import Link from 'next/link';
 import { useState } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const navItems = [
-  { label: 'Почему мы', href: '#why' },
-  { label: 'Наши услуги', href: '#services' },
-  { label: 'Наши кейсы', href: '#cases' },
-  { label: 'Для кого', href: '#clients' },
-  { label: 'Как мы работаем', href: '#how' },
-];
-
 export const Header = () => {
-  const [locale, setLocale] = useState<'RU' | 'EN'>('RU');
+  const [locale, setLocale] = useState<'ru' | 'en'>('ru');
   const [menuOpen, setMenuOpen] = useState(false);
+  const { i18n, t } = useTranslation();
+
+  const toggleLanguage = (lang: 'ru' | 'en') => {
+    console.log(lang);
+    setLocale(lang);
+    i18n.changeLanguage(lang);
+  };
+
+  const navItems = [
+    { label: t('header.about'), href: '#why' },
+    { label: t('header.services'), href: '#services' },
+    { label: t('header.cases'), href: '#cases' },
+    { label: t('header.clients'), href: '#clients' },
+    { label: t('header.how'), href: '#how' },
+  ];
 
   return (
-    <header className="w-full bg-gradient-to-r from-header-800/100 to-header-800/55 text-white">
+    <header className="w-full bg-gradient-to-r from-black/90 to-black/55 text-white">
       {/* Desktop Header */}
       <div className="max-w-[1440px] h-[64px] mx-auto items-center justify-between px-25 hidden lg:flex">
         {/* Logo + Divider + Nav */}
@@ -45,19 +52,19 @@ export const Header = () => {
           <div className="flex gap-1 overflow-hidden text-sm">
             <button
               className={clsx('px-3 py-1 border border-white/30 rounded', {
-                'bg-white text-black': locale === 'RU',
-                'hover:bg-white/10': locale !== 'RU',
+                'bg-white text-black': locale === 'ru',
+                'hover:bg-white/10': locale !== 'ru',
               })}
-              onClick={() => setLocale('RU')}
+              onClick={() => toggleLanguage('ru')}
             >
               RU
             </button>
             <button
               className={clsx('px-3 py-1 border border-white/30 rounded', {
-                'bg-white text-black': locale === 'EN',
-                'hover:bg-white/10': locale !== 'EN',
+                'bg-white text-black': locale === 'en',
+                'hover:bg-white/10': locale !== 'en',
               })}
-              onClick={() => setLocale('EN')}
+              onClick={() => toggleLanguage('en')}
             >
               EN
             </button>
@@ -171,19 +178,19 @@ export const Header = () => {
                   <div className="flex gap-3">
                     <button
                       className={clsx('px-4 py-2 border border-white/30 rounded text-sm', {
-                        'bg-white text-black': locale === 'RU',
-                        'hover:bg-white/10': locale !== 'RU',
+                        'bg-white text-black': locale === 'ru',
+                        'hover:bg-white/10': locale !== 'ru',
                       })}
-                      onClick={() => setLocale('RU')}
+                      onClick={() => toggleLanguage('ru')}
                     >
                       RU
                     </button>
                     <button
                       className={clsx('px-4 py-2 border border-white/30 rounded text-sm', {
-                        'bg-white text-black': locale === 'EN',
-                        'hover:bg-white/10': locale !== 'EN',
+                        'bg-white text-black': locale === 'en',
+                        'hover:bg-white/10': locale !== 'en',
                       })}
-                      onClick={() => setLocale('EN')}
+                      onClick={() => toggleLanguage('en')}
                     >
                       EN
                     </button>
@@ -193,7 +200,7 @@ export const Header = () => {
                     className="border border-white rounded px-6 py-2 text-sm text-center hover:bg-white hover:text-black transition self-stretch lg:self-start"
                     onClick={() => setMenuOpen(false)}
                   >
-                    Связаться с нами
+                    {t('contact-us')}
                   </Link>
                 </div>
               </div>

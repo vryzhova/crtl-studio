@@ -10,18 +10,15 @@ const steps = [
     title: 'Думаем как предприниматели, а не исполнители',
     description:
       'Ctrl — команда бизнес-визионеров, дизайнеров и разработчиков. Понимаем фаундеров с полуслова: вникаем в идею, проектируем стратегически и собираем продукт как единая команда — от логики до запуска.',
-    image: '/img/why-1.png',
   },
   {
     title: 'AI в реальном бизнесе',
     description:
       'Мы не просто внедряем AI — мы делаем его частью бизнес-ценности. Помогаем находить точки роста и автоматизации.',
-    image: '/img/why-2.png',
   },
   {
     title: 'Технологии под задачи',
     description: 'Используем современные технологии и подбираем стек под ваш продукт, а не наоборот.',
-    image: '/img/why-3.png',
   },
 ];
 
@@ -81,15 +78,15 @@ export const WhySection: React.FC = () => {
           </div>
           {/* Правая колонка — динамичная картинка */}
           <div className="flex justify-center items-center w-full h-full min-h-[320px]">
-            <Image
-              key={steps[activeIndex].image}
-              src={steps[activeIndex].image}
-              alt={steps[activeIndex].title}
-              width={400}
-              height={400}
-              className="rounded-2xl object-contain shadow-xl transition-all duration-500"
-              priority
-            />
+            {/*<Image*/}
+            {/*  key={steps[activeIndex].title}}*/}
+            {/*  src={steps[activeIndex].image}*/}
+            {/*  alt={steps[activeIndex].title}*/}
+            {/*  width={400}*/}
+            {/*  height={400}*/}
+            {/*  className="rounded-2xl object-contain shadow-xl transition-all duration-500"*/}
+            {/*  priority*/}
+            {/*/>*/}
           </div>
         </div>
       </div>

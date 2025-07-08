@@ -6,3 +6,4 @@ export { HowWeWork } from './how-we-work';
 export { WhoWeAreFor } from './who-we-are-for';
 export { ProcessSteps } from './process-steps';
 export { ContactSection } from './contact-section';
+export { Cases } from './cases';

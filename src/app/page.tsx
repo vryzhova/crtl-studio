@@ -4,6 +4,7 @@ import {
   InsideProduct,
   HowWeWork,
   WhoWeAreFor,
+  Cases,
   ProcessSteps,
   ContactSection,
 } from './sections';
@@ -16,6 +17,7 @@ export default function Home() {
       <WhySection />
       <InsideProduct />
       <HowWeWork />
+      <Cases />
       <WhoWeAreFor />
       <ProcessSteps />
       <ContactSection />

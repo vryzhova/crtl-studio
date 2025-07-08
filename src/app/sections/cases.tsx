@@ -1,0 +1,112 @@
+'use client';
+import { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+
+export const Cases = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const initialTextRef = useRef<HTMLDivElement>(null);
+  const rightPanelRef = useRef<HTMLDivElement>(null);
+  const mainContentRef = useRef<HTMLDivElement>(null);
+  const animationPlayedRef = useRef(false);
+  const caseNumbersRef = useRef<HTMLSpanElement>(null);
+  const packedTextRef = useRef<HTMLSpanElement>(null);
+  const businessesTextRef = useRef<HTMLSpanElement>(null);
+  const textStyle =
+    'text-2xl md:text-4xl text-end font-bold mb-2 bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent';
+
+  const isDesktop = window.innerWidth > 1024;
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    gsap.set(containerRef.current, { backgroundColor: '#141414' });
+    gsap.set(initialTextRef.current, { opacity: 1 });
+    gsap.set(mainContentRef.current, { opacity: 0 });
+
+    if (isDesktop) {
+      // Set initial state for desktop
+      gsap.set(rightPanelRef.current, { opacity: 1, x: '100%' });
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !animationPlayedRef.current) {
+            animationPlayedRef.current = true;
+            playAnimation();
+          }
+        });
+      },
+      {
+        threshold: 0.8, // Срабатывает когда 80% элемента видно
+      }
+    );
+
+    observer.observe(containerRef.current);
+
+    const playAnimation = () => {
+      const timeline = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+
+      console.log(isDesktop);
+
+      if (isDesktop) {
+        timeline
+          .to({}, { duration: 1 })
+          .to(containerRef.current, { duration: 1 })
+          .to(initialTextRef.current, { x: -350, duration: 1 }, '-=0.8')
+          .to(rightPanelRef.current, { opacity: 1, x: '0%', duration: 0.8 }, '-=0.8')
+          .to(initialTextRef.current, { opacity: 0, duration: 0.8 })
+          .to(rightPanelRef.current, { opacity: 0, duration: 0.8 })
+          .to(mainContentRef.current, { opacity: 1, duration: 0.8 });
+      } else {
+        timeline
+          .to({}, { duration: 1 })
+          .from(caseNumbersRef.current, { y: 20, opacity: 0, duration: 0.4 })
+          .from(packedTextRef.current, { y: 20, opacity: 0, duration: 0.4 }, '-=0.2')
+          .from(businessesTextRef.current, { y: 20, opacity: 0, duration: 0.4 }, '-=0.2');
+      }
+    };
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isDesktop]);
+
+  return (
+    <section
+      ref={containerRef}
+      className="relative w-full min-h-screen overflow-hidden bg-black flex items-start justify-start lg:items-center lg:justify-center"
+    >
+      {/* Initial text */}
+      <h2
+        ref={initialTextRef}
+        className="absolute text-start lg:text-center py-20 px-5 text-3xl md:text-5xl font-semibold text-white z-10"
+      >
+        Наши кейсы
+      </h2>
+
+      <div
+        ref={rightPanelRef}
+        className="hidden lg:flex absolute w-1/2 h-full right-0  flex-col items-center justify-center pl-12 bg-white"
+      >
+        <div>
+          <span ref={caseNumbersRef} className={textStyle}>
+            8 кейсов
+          </span>
+          <span ref={packedTextRef} className={textStyle}>
+            8 упакованных
+          </span>
+          <span ref={businessesTextRef} className={textStyle}>
+            бизнесов
+          </span>
+        </div>
+      </div>
+
+      <div
+        ref={mainContentRef}
+        className="absolute w-full h-full right-0 flex flex-col items-center justify-center pl-12"
+      >
+        main content
+      </div>
+    </section>
+  );
+};
