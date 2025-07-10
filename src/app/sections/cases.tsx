@@ -12,7 +12,7 @@ export const Cases = () => {
   const packedTextRef = useRef<HTMLSpanElement>(null);
   const businessesTextRef = useRef<HTMLSpanElement>(null);
   const textStyle =
-    'text-2xl md:text-4xl text-end font-bold mb-2 bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent';
+    'text-2xl md:text-4xl px-5 lg:px-0 lg:text-end font-bold mb-2 bg-gradient-to-b from-white lg:from-black to-gray-gradient bg-clip-text text-transparent';
 
   const isDesktop = window.innerWidth > 1024;
 
@@ -25,6 +25,9 @@ export const Cases = () => {
     if (isDesktop) {
       // Set initial state for desktop
       gsap.set(rightPanelRef.current, { opacity: 1, x: '100%' });
+    } else {
+      gsap.set(caseNumbersRef.current, { opacity: 0, y: 20 });
+      gsap.set(packedTextRef.current, { opacity: 0, y: 20 });
     }
 
     const observer = new IntersectionObserver(
@@ -60,9 +63,8 @@ export const Cases = () => {
       } else {
         timeline
           .to({}, { duration: 1 })
-          .from(caseNumbersRef.current, { y: 20, opacity: 0, duration: 0.4 })
-          .from(packedTextRef.current, { y: 20, opacity: 0, duration: 0.4 }, '-=0.2')
-          .from(businessesTextRef.current, { y: 20, opacity: 0, duration: 0.4 }, '-=0.2');
+          .to(caseNumbersRef.current, { y: 0, opacity: 1, duration: 1 }, '-=0.2')
+          .to(packedTextRef.current, { y: 0, opacity: 1, duration: 1 }, '-=0.4');
       }
     };
 
@@ -74,30 +76,33 @@ export const Cases = () => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-screen overflow-hidden bg-black flex items-start justify-start lg:items-center lg:justify-center z-10"
+      className="relative w-full min-h-screen overflow-hidden bg-black flex flex-col lg:flex-row items-start justify-start lg:items-center lg:justify-center z-10"
     >
       {/* Initial text */}
       <h2
         ref={initialTextRef}
-        className="absolute text-start lg:text-center py-20 px-5 text-white z-10 font-inter-tight font-bold leading-tight mb-4 lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px]"
+        className="lg:absolute text-start lg:text-center py-10 lg:pb-20 px-5 text-white z-10 font-inter-tight font-bold leading-tight lg:mb-4 lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px]"
       >
         Наши кейсы
       </h2>
+
+      <div className="flex flex-col lg:hidden">
+        <span ref={caseNumbersRef} className={textStyle}>
+          8 кейсов
+        </span>
+        <span ref={packedTextRef} className={textStyle}>
+          8 упакованных бизнесов
+        </span>
+      </div>
 
       <div
         ref={rightPanelRef}
         className="hidden lg:flex absolute w-1/2 h-full right-0  flex-col items-center justify-center pl-12 bg-white"
       >
-        <div className="flex flex-col items-end">
-          <span ref={caseNumbersRef} className={textStyle}>
-            8 кейсов
-          </span>
-          <span ref={packedTextRef} className={textStyle}>
-            8 упакованных
-          </span>
-          <span ref={businessesTextRef} className={textStyle}>
-            бизнесов
-          </span>
+        <div className="flex flex-col lg:items-end">
+          <span className={textStyle}>8 кейсов</span>
+          <span className={textStyle}>8 упакованных</span>
+          <span className={textStyle}>бизнесов</span>
         </div>
       </div>
 

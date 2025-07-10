@@ -28,7 +28,6 @@ export const HowWeWork = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const lastElementRef = useRef<HTMLDivElement>(null);
   const isDesktop = useMediaQuery('(min-width: 1024px)');
-  console.log(isDesktop);
   const { t } = useTranslation();
 
   const scrollStart = isDesktop ? 'center center+=20%' : 'top center';
@@ -45,7 +44,6 @@ export const HowWeWork = () => {
         scrub: 1,
         start: scrollStart,
         end: 'bottom top-=20%',
-        markers: true, // Для отладки
         anticipatePin: 1,
       },
     });

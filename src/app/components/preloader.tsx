@@ -24,11 +24,11 @@ export const Preloader = ({ onDone }: { onDone: () => void }) => {
 
   return (
     <div
-      className={`fixed inset-0 bg-black flex flex-col items-center justify-center z-50 transition-opacity duration-500 ${
+      className={`fixed inset-0 px-10 bg-black flex flex-col items-center justify-center z-50 transition-opacity duration-500 ${
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
     >
-      <div className="w-xl h-20 space-x-2 md:w-[570px] md:h-[80px] text-white text-2xl font-semibold">
+      <div className="w-40 h-10 space-x-2 md:w-[570px] md:h-[80px] text-white text-2xl font-semibold">
         <Image src="/logo.svg" fill alt="logo" />
       </div>
       <p className="mt-4 text-gray-400 text-lg">{progress}%</p>
