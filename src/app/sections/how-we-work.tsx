@@ -1,6 +1,7 @@
 'use client';
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
+import { useTranslation } from 'react-i18next';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SectionTitle } from '@/app/components/section-title';
 import Image from 'next/image';
@@ -33,10 +34,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const HowWeWork = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const morphRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const isDesktop = window.innerWidth > 1024;
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!sectionRef.current || !circleRef.current) return;
@@ -53,14 +54,6 @@ export const HowWeWork = () => {
         markers: true, // Для отладки
         anticipatePin: 1,
       },
-    });
-
-    // Анимация морфинга элемента
-    tl.to(circleRef.current, {
-      scale: 1.5,
-      duration: 2,
-      rotation: 30,
-      ease: 'power2.inOut',
     });
 
     // Анимация увеличения круга
@@ -95,18 +88,18 @@ export const HowWeWork = () => {
     <section
       ref={sectionRef}
       id="main"
-      className="relative min-h-screen lg:h-[150vh] flex flex-col items-center justify-start text-black overflow-hidden"
+      className="relative w-full min-h-screen lg:h-[150vh] flex flex-col items-center justify-start text-black overflow-hidden"
     >
       <div className="w-full max-w-7xl px-4 mx-auto h-screen flex flex-col justify-center">
         {/* Ваш контент */}
-        <div ref={contentRef} className="relative z-30">
+        <div ref={contentRef} className="relative z-10 w-full">
           <div className="w-full max-w-7xl px-4 mx-auto">
             {/* Чип */}
-            <SectionTitle title="//Full-cycle-разработка" />
+            <SectionTitle title={t('inside-focus.tag')} />
 
             {/* Заголовок */}
-            <h2 className="text-center text-3xl lg:text-5xl font-semibold mb-20 bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent">
-              Наш фокус — скорость, <br /> кастом и результат
+            <h2 className="text-center font-inter-tight font-bold leading-tight lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] mb-20 bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent">
+              {t('inside-focus.title')}
             </h2>
 
             {/* Сетка из 4 блоков */}
@@ -123,12 +116,10 @@ export const HowWeWork = () => {
               <div className="flex flex-col items-center lg:items-end justify-center lg:justify-end w-full">
                 <div className="text-center lg:text-right w-full">
                   <h3 className="font-semibold mb-2 text-center text-base lg:text-lg">
-                    Креативные и визуальные системы
+                    {t('inside-focus.creative_title')}
                   </h3>
                   <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center lg:text-right">
-                    Логотипы и бренд-айдентика AI-поддержка <br /> и визуальные генерации изображений <br />
-                    Креативные коммуникации Геймификация <br /> сервисов и программ лояльности (Telegram, HTML5/WebGL и
-                    др.)
+                    {t('inside-focus.creative_text')}
                   </p>
                 </div>
                 {/* Линия-разделитель для mobile */}
@@ -138,13 +129,9 @@ export const HowWeWork = () => {
               {/* Верхний правый */}
               <div className="flex flex-col items-center lg:items-start justify-center lg:justify-start w-full">
                 <div className="text-center lg:text-left w-full">
-                  <h3 className="font-semibold mb-2 text-center text-base lg:text-lg">
-                    AI-инструменты и автоматизация
-                  </h3>
+                  <h3 className="font-semibold mb-2 text-center text-base lg:text-lg">{t('inside-focus.ai_title')}</h3>
                   <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center lg:text-left">
-                    AI-чаты, персонализация, аналитика <br />
-                    Автоматизация бизнес-процессов <br />
-                    Внедрение моделей в продукт (AI-консьержи, ассистенты, промпт-интерфейсы)
+                    {t('inside-focus.ai_text')}
                   </p>
                 </div>
                 {/* Линия-разделитель для mobile */}
@@ -154,11 +141,9 @@ export const HowWeWork = () => {
               {/* Нижний левый */}
               <div className="flex flex-col items-center lg:items-end justify-center lg:justify-end w-full">
                 <div className="text-center lg:text-right w-full">
-                  <h3 className="font-semibold text-center mb-2 text-base lg:text-lg">UX/UI и кастомные платформы</h3>
+                  <h3 className="font-semibold text-center mb-2 text-base lg:text-lg">{t('inside-focus.ux_title')}</h3>
                   <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center lg:text-right">
-                    Лендинги и промо-сайты SaaS-интерфейсы, платёжные сценарии <br />
-                    Личные кабинеты, панели администратора <br />
-                    Telegram Mini Apps и web-адаптации (игры, сервисы)
+                    {t('inside-focus.ux_text')}
                   </p>
                 </div>
                 {/* Линия-разделитель для mobile */}
@@ -168,11 +153,9 @@ export const HowWeWork = () => {
               {/* Нижний правый */}
               <div className="flex flex-col items-center lg:items-start justify-center lg:justify-start w-full">
                 <div className="text-center lg:text-left w-full">
-                  <h3 className="font-semibold mb-2 text-base lg:text-lg">Блокчейн-технологии</h3>
+                  <h3 className="font-semibold mb-2 text-base lg:text-lg">{t('inside-focus.blockchain_title')}</h3>
                   <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center lg:text-left">
-                    Разработка смарт-контрактов (Ethereum, TON, Solana) <br />
-                    NFT-проекты и токенизация активов <br />
-                    Децентрализованные приложения (DApps)
+                    {t('inside-focus.blockchain_text')}
                   </p>
                 </div>
               </div>
@@ -188,7 +171,7 @@ export const HowWeWork = () => {
                       fill
                       src="/circle.svg"
                       alt="avatar"
-                      className="z-10 w-10 h-10 rounded-full border-2 absolute -bottom-2 -right-2"
+                      className="z-20 w-10 h-10 rounded-full border-2 absolute -bottom-2 -right-2"
                     />
                   </div>
                 </div>
@@ -202,7 +185,7 @@ export const HowWeWork = () => {
                     fill
                     src="/circle.svg"
                     alt="avatar"
-                    className="w-10 h-10 rounded-full border-2  absolute -bottom-2 -right-2"
+                    className="z-20 w-10 h-10 rounded-full border-2  absolute -bottom-2 -right-2"
                   />
                 </div>
               </div>

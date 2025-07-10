@@ -1,16 +1,24 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter, Roboto_Mono, Inter_Tight } from 'next/font/google';
 import { I18nProvider } from './i18n-provider';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const inter = Inter({
   subsets: ['latin'],
+  weight: ['500'], // Medium
+  variable: '--font-inter',
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const robotoMono = Roboto_Mono({
   subsets: ['latin'],
+  weight: ['400'], // Regular
+  variable: '--font-roboto-mono',
+});
+
+const interTight = Inter_Tight({
+  subsets: ['latin'],
+  weight: ['500', '700'], // Medium, Bold
+  variable: '--font-inter-tight',
 });
 
 export const metadata: Metadata = {
@@ -25,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={` ${inter.variable} ${robotoMono.variable} ${interTight.variable} antialiased`}>
         <I18nProvider>{children}</I18nProvider>
       </body>
     </html>

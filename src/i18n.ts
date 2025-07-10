@@ -7,7 +7,7 @@ if (!i18n.isInitialized) {
     .use(HttpBackend)
     .use(initReactI18next)
     .init({
-      fallbackLng: 'en',
+      fallbackLng: 'ru',
       supportedLngs: ['en', 'ru'],
       debug: process.env.NODE_ENV === 'development',
       interpolation: {
@@ -17,8 +17,8 @@ if (!i18n.isInitialized) {
         loadPath: '/locales/{{lng}}/translation.json',
       },
       detection: {
-        order: ['localStorage', 'navigator'],
-        caches: ['localStorage'],
+        order: ['navigator'],
+        // caches: ['localStorage'],
       },
     });
 }

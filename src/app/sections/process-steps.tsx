@@ -3,48 +3,38 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { SectionTitle } from '@/app/components/section-title';
 import clsx from 'clsx';
-
-const steps = [
-  {
-    label: 'Встреча и бриф',
-    title: 'Встреча и бриф',
-    description: [
-      'Фокусируемся на сути задачи,',
-      'а не на форме. Быстро определяем,',
-      'в чём настоящая ценность продукта.',
-    ],
-    side: 'right',
-  },
-  {
-    label: 'Идея → дизайн',
-    title: 'Идея → дизайн',
-    description: [
-      'Прототипируем, запускаем пилоты,',
-      'собираем обратную связь.',
-      'Всё ради одного — чтобы не строить лишнего.',
-    ],
-    side: 'left',
-  },
-  {
-    label: 'MVP за 2-6 недель',
-    title: 'MVP за 2-6 недель',
-    description: [
-      'Создаём MVP с потенциалом масштабирования.',
-      'Продуманные интерфейсы, брендинг',
-      'и AI — всё в одном решении.',
-    ],
-    side: 'right',
-  },
-  {
-    label: 'Поддержка, улучшения',
-    title: 'Поддержка, улучшения',
-    description: ['Улучшаем. Усиливаем. Развиваем.', 'Дорабатываем. Масштабируем.'],
-    side: 'left',
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 export const ProcessSteps = () => {
-  const [active, setActive] = useState(1); // default: второй этап активен
+  const [active, setActive] = useState(1); // default: второй этап
+  const { t } = useTranslation();
+
+  const steps = [
+    {
+      label: t('how-we-work.step_1_title'),
+      title: t('how-we-work.step_1_title'),
+      description: t('how-we-work.step_1_text'),
+      side: 'right',
+    },
+    {
+      label: t('how-we-work.step_2_title'),
+      title: t('how-we-work.step_2_title'),
+      description: t('how-we-work.step_2_text'),
+      side: 'left',
+    },
+    {
+      label: t('how-we-work.step_3_title'),
+      title: t('how-we-work.step_3_title'),
+      description: t('how-we-work.step_3_text'),
+      side: 'right',
+    },
+    {
+      label: t('how-we-work.step_4_title'),
+      title: t('how-we-work.step_4_title'),
+      description: t('how-we-work.step_4_text'),
+      side: 'left',
+    },
+  ];
 
   return (
     <section className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden py-20">
@@ -115,9 +105,7 @@ export const ProcessSteps = () => {
                       isLeft ? 'text-left' : 'text-right'
                     )}
                   >
-                    {step.description.map((line, i) => (
-                      <div key={i}>{line}</div>
-                    ))}
+                    {step.description}
                   </div>
                 </div>
               </div>
@@ -128,5 +116,3 @@ export const ProcessSteps = () => {
     </section>
   );
 };
-
-export default ProcessSteps;

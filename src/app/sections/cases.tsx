@@ -79,7 +79,7 @@ export const Cases = () => {
       {/* Initial text */}
       <h2
         ref={initialTextRef}
-        className="absolute text-start lg:text-center py-20 px-5 text-3xl md:text-5xl font-semibold text-white z-10"
+        className="absolute text-start lg:text-center py-20 px-5 text-white z-10 font-inter-tight font-bold leading-tight mb-4 lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px]"
       >
         Наши кейсы
       </h2>
@@ -88,7 +88,7 @@ export const Cases = () => {
         ref={rightPanelRef}
         className="hidden lg:flex absolute w-1/2 h-full right-0  flex-col items-center justify-center pl-12 bg-white"
       >
-        <div>
+        <div className="flex flex-col items-end">
           <span ref={caseNumbersRef} className={textStyle}>
             8 кейсов
           </span>

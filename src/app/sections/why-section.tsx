@@ -1,8 +1,10 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react';
 import Image from 'next/image';
-import { SectionTitle } from '@/app/components';
+import { motion, AnimatePresence } from 'framer-motion';
+import { AutoGlitchText, SectionTitle } from '@/app/components';
 import { ProgressElement } from '@/app/components/progress-element';
+import { useTranslation } from 'react-i18next';
 
 // Данные для шагов
 const steps = [
@@ -28,8 +30,19 @@ export const WhySection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const { t } = useTranslation();
 
-  useEffect(() => {
+  const glitchContent = useMemo(
+    () => (
+      <AutoGlitchText
+        lineClassName="font-inter-tight font-bold leading-tight mb-4 lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-black to-gray-elements bg-clip-text text-transparent"
+        text={t('why-us.subtitle')}
+      />
+    ),
+    []
+  );
+
+  useLayoutEffect(() => {
     setProgress(0);
     if (timerRef.current) clearInterval(timerRef.current);
     let start = Date.now();
@@ -41,9 +54,9 @@ export const WhySection: React.FC = () => {
         clearInterval(timerRef.current!);
         setTimeout(() => {
           setActiveIndex(prev => (prev === steps.length - 1 ? 0 : prev + 1));
-        }, 400);
+        }, 100);
       }
-    }, 20);
+    }, 10);
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
@@ -54,27 +67,42 @@ export const WhySection: React.FC = () => {
       <SectionTitle title="// ПОЧЕМУ CTRL" />
       <div className="container mx-auto px-4 py-20 relative z-10">
         {/* Заголовок и описание секции */}
-        <div className="mb-12 max-w-2xl">
-          <h2 className="font-bold leading-tight mb-4 lg:text-4xl 2xl:text-6xl md:text-3xl bg-gradient-to-b from-black to-gray-elements bg-clip-text text-transparent">
-            Мы не агентство.
-            <br />
-            Мы — партнёр с бизнес-мышлением, технологиями
-            <br />и умным подходом к AI
-          </h2>
-        </div>
+        <div className="mb-12 max-w-[647]">{glitchContent}</div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center justify-items-center">
           {/* Левая колонка — плашки с прогресс баром */}
           <div className="flex flex-col gap-6 w-full max-w-xl">
-            {steps.map((step, idx) => (
-              <ProgressElement
-                progress={progress}
-                activeIndex={activeIndex}
-                key={step.title}
-                step={step}
-                idx={idx}
-                onClick={setActiveIndex}
-              />
-            ))}
+            {steps.map((step, idx) => {
+              const isActive = idx === activeIndex;
+
+              return isActive ? (
+                <motion.div
+                  key={step.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full"
+                >
+                  <ProgressElement
+                    progress={progress}
+                    activeIndex={activeIndex}
+                    step={step}
+                    idx={idx}
+                    onClick={setActiveIndex}
+                  />
+                </motion.div>
+              ) : (
+                <div key={step.title} className="w-full">
+                  <ProgressElement
+                    progress={progress}
+                    activeIndex={activeIndex}
+                    step={step}
+                    idx={idx}
+                    onClick={setActiveIndex}
+                  />
+                </div>
+              );
+            })}
           </div>
           {/* Правая колонка — динамичная картинка */}
           <div className="flex justify-center items-center w-full h-full min-h-[320px]">

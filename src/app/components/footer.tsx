@@ -1,40 +1,50 @@
-import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+
+const links = ['Почему мы', 'Наши услуги', 'Наши кейсы', 'Для кого', 'Как мы работаем'];
+const docs = ['Документ 1', 'Документ 2'];
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black text-white py-12">
-      <div className="container mx-auto px-4">
-        {/* Separator */}
-        <div className="border-t border-e-gray-elements mb-12"></div>
-
-        <div className="flex flex-col lg:flex-row justify-between gap-12">
-          {/* Left side - Links */}
-          <div className="flex flex-col md:flex-row gap-12">
-            {/* Links Column */}
-            <div>
-              <h3 className="text-gray-400 text-sm font-medium mb-4">Ссылки</h3>
-              <ul className="space-y-3">
-                {['Почему мы', 'Наши услуги', 'Наши кейсы', 'Для кого', 'Как мы работаем'].map((item, index) => (
-                  <li key={index}>
-                    <Link href="#" className="hover:text-lime-400 transition-colors">
+    <footer className="bg-black text-white pt-8 pb-6 px-4 relative overflow-hidden">
+      {/* Background pattern */}
+      <div className="absolute inset-0 w-full h-full opacity-20 pointer-events-none z-0">
+        <div
+          className="w-full h-full bg-[url('/footer-bg.svg')] bg-center bg-no-repeat bg-cover"
+          style={{ backgroundSize: '80%' }}
+        />
+      </div>
+      <div className="relative z-10 flex flex-col md:flex-row md:justify-between max-w-7xl mx-auto w-full gap-8 md:gap-0">
+        {/* Левая часть: ссылки и документы + копирайт */}
+        <div className="flex flex-col gap-8 md:gap-12 md:w-1/2">
+          {/* Ссылки и документы в одну строку */}
+          <div className="flex flex-row w-full justify-between md:justify-start md:gap-5 gap-x-8">
+            <div className="min-w-0">
+              <h3 className="text-gray-400 text-md font-semibold mb-2 whitespace-nowrap">Ссылки</h3>
+              <ul className="space-y-2">
+                {links.map((item, idx) => (
+                  <li key={idx}>
+                    <Link
+                      href="#"
+                      className="hover:text-lime-400 transition-colors text-base font-normal whitespace-nowrap"
+                    >
                       {item}
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
-
-            {/* Documents Column */}
-            <div>
-              <h3 className="text-gray-400 text-sm font-medium mb-4">Документы</h3>
-              <ul className="space-y-3">
-                {['Документ 1', 'Документ 2'].map((item, index) => (
-                  <li key={index}>
-                    <Link href="#" className="hover:text-lime-400 transition-colors">
+            <div className="min-w-0">
+              <h3 className="text-gray-400 text-md font-semibold mb-2 whitespace-nowrap">Документы</h3>
+              <ul className="space-y-2">
+                {docs.map((item, idx) => (
+                  <li key={idx}>
+                    <Link
+                      href="#"
+                      className="hover:text-lime-400 transition-colors text-base font-normal whitespace-nowrap"
+                    >
                       {item}
                     </Link>
                   </li>
@@ -42,26 +52,27 @@ export const Footer = () => {
               </ul>
             </div>
           </div>
-
-          {/* Right side - Contact Button */}
-          <div className="lg:text-right">
-            <button className="border border-white rounded-full px-8 py-3 hover:bg-white hover:text-black transition-colors mb-8 lg:mb-0">
-              Связаться с нами
-            </button>
+          {/* Копирайт */}
+          <div className="text-left text-white text-base leading-tight mt-2 md:mt-8">
+            <p>
+              Сайт сделан <span className="font-semibold">Business Art</span>
+            </p>
+            <p className="mt-1">
+              {currentYear} © CTRL Studio.
+              <br />
+              Все права защищены.
+            </p>
           </div>
         </div>
-
-        {/* Bottom section */}
-        <div className="mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          {/* Logo */}
-          <div className="relative w-40 h-12">
-            <Image src="/logo.svg" alt="CTRL Studio Logo" fill className="object-contain" />
-          </div>
-
-          {/* Copyright */}
-          <div className="text-center md:text-right text-gray-500 text-sm">
-            <p>Сайт сделан Business Art</p>
-            <p>{currentYear} © CTRL Studio. Все права защищены.</p>
+        {/* Правая часть: кнопка и логотип */}
+        <div className="flex flex-col gap-6 items-center md:items-end justify-end md:justify-between w-full md:w-auto mt-6 md:mt-0">
+          <button className="w-full md:w-auto border border-white rounded-md py-3 px-6 text-md hover:bg-white hover:text-black transition-colors">
+            Связаться с нами
+          </button>
+          <div className="w-full flex justify-center md:justify-end">
+            <div className="relative w-48 h-14 md:w-60 md:h-16">
+              <Image src="/logo.svg" alt="CTRL Studio Logo" fill className="object-contain" />
+            </div>
           </div>
         </div>
       </div>

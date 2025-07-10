@@ -47,8 +47,6 @@
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
-    --font-sans: var(--font-geist-sans);
-    --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -107,4 +105,14 @@ body {
 .range-input::-moz-range-track {
     height: 2px; /* ← толщина трека для Firefox */
 
+}
+
+.title {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 700;
 }

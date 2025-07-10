@@ -1,3 +1,5 @@
+'use client';
+import { useState } from 'react';
 import {
   MainSection,
   WhySection,
@@ -8,10 +10,12 @@ import {
   ProcessSteps,
   ContactSection,
 } from './sections';
-import { Footer } from './components';
+import { Footer, Preloader } from './components';
 
 export default function Home() {
-  return (
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return isLoaded ? (
     <div>
       <MainSection />
       <WhySection />
@@ -23,5 +27,7 @@ export default function Home() {
       <ContactSection />
       <Footer />
     </div>
+  ) : (
+    <Preloader onDone={() => setIsLoaded(true)} />
   );
 }

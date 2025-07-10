@@ -26,7 +26,7 @@ const Card: React.FC<CardProps> = ({ icon, title, description }) => (
       </div>
 
       {/* Description */}
-      <div className="space-y-1 text-gray-300 flex-grow flex flex-col justify-center">
+      <div className="space-y-1 text-white font-inter text-base lg:text-[22px] flex-grow flex flex-col justify-center">
         {description.map((line, index) => (
           <p key={index} className="leading-tight">
             {line}
@@ -57,7 +57,7 @@ export const WhoWeAreFor = () => {
   ];
 
   return (
-    <section className="relative py-20 bg-black text-white">
+    <section className="min-h-screen relative py-20 bg-black text-white">
       <SectionTitle title="// КОМУ МЫ ПОДХОДИМ" />
 
       <div className="container mx-auto px-4 mt-12">

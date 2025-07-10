@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const ContactForm: React.FC = () => {
   const [budget, setBudget] = useState(120000);
@@ -10,6 +11,8 @@ export const ContactForm: React.FC = () => {
   const [telegram, setTelegram] = useState('');
   const [email, setEmail] = useState('');
   const [agree, setAgree] = useState(false);
+
+  const { t } = useTranslation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +36,7 @@ export const ContactForm: React.FC = () => {
           <input
             className="bg-transparent outline-none text-white font-mono text-lg py-1 h-15"
             type="text"
-            placeholder="КАК ВАС ЗОВУТ?"
+            placeholder={t('contact-form.name')}
             value={name}
             onChange={e => setName(e.target.value)}
             required
@@ -58,7 +61,7 @@ export const ContactForm: React.FC = () => {
         </svg>
         <div className="flex-1 flex flex-col gap-2 pl-8 pr-8">
           <label className="text-base font-mono tracking-widest text-gray-400 bg-transparent">
-            ПРЕДПОЧТИТЕЛЬНЫЙ СПОСОБ СВЯЗИ
+            {t('contact-form.contact_method')}
           </label>
           <select
             className="bg-transparent outline-none text-white font-mono text-lg py-1 appearance-none pr-8"
@@ -67,11 +70,11 @@ export const ContactForm: React.FC = () => {
             required
           >
             <option value="" disabled hidden>
-              Выберите...
+              {t('contact-form.contact_method_placeholder')}
             </option>
-            <option value="phone">Телефон</option>
-            <option value="telegram">Telegram</option>
-            <option value="email">Email</option>
+            <option value="phone">{t('contact-form.contact_method_phone')}</option>
+            <option value="telegram">{t('contact-form.contact_method_telegram')}</option>
+            <option value="email">{t('contact-form.contact_method_email')}</option>
           </select>
         </div>
       </div>
@@ -85,7 +88,7 @@ export const ContactForm: React.FC = () => {
           <input
             className="bg-transparent outline-none text-white font-mono text-lg py-1 h-15"
             type="tel"
-            placeholder="ВАШ ТЕЛЕФОН"
+            placeholder={t('contact-form.phone')}
             value={phone}
             onChange={e => setPhone(e.target.value)}
             required
@@ -103,7 +106,7 @@ export const ContactForm: React.FC = () => {
           <input
             className="bg-transparent outline-none text-white font-mono text-lg py-1 h-15"
             type="text"
-            placeholder="ВАШ TELEGRAM"
+            placeholder={t('contact-form.telegram')}
             value={telegram}
             onChange={e => setTelegram(e.target.value)}
             required
@@ -120,7 +123,7 @@ export const ContactForm: React.FC = () => {
         <div className="flex-1 flex flex-col gap-2 pl-8 pr-8">
           <input
             className="bg-transparent outline-none text-white font-mono text-lg py-1 h-15"
-            placeholder="ВАШ EMAIL"
+            placeholder={t('contact-form.email')}
             type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
@@ -133,7 +136,7 @@ export const ContactForm: React.FC = () => {
         {/* Бюджет */}
         <div className="flex-1 flex flex-col gap-2 ">
           <label className="text-base font-mono tracking-widest text-gray-400 bg-transparent">
-            Ориентировочный бюджет
+            {t('contact-form.budget')}
           </label>
           <div className="flex items-center gap-4">
             <input
@@ -160,9 +163,9 @@ export const ContactForm: React.FC = () => {
           className="accent-lime-default"
         />
         <span className="text-xs text-gray-400">
-          Я соглашаюсь с условиями{' '}
+          {t('contact-form.agree')}{' '}
           <a href="/privacy" className="underline text-lime-default">
-            Политики конфиденциальности
+            {t('contact-form.privacy_policy')}
           </a>
           .
         </span>
@@ -172,7 +175,7 @@ export const ContactForm: React.FC = () => {
         className="mt-4 w-full bg-lime-default text-black py-3 rounded font-semibold text-base transition hover:bg-lime-active"
         disabled={!agree}
       >
-        Оставить заявку
+        {t('contact-form.submit')}
       </button>
     </form>
   );

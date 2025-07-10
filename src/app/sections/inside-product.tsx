@@ -1,9 +1,12 @@
+'use client';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SectionTitle } from '../components';
+import { SectionTitle, AutoGlitchText } from '../components';
 
 export const InsideProduct = () => {
+  const { t } = useTranslation();
   return (
     <section className="relative min-h-screen bg-black text-white overflow-hidden">
       <SectionTitle title="// AI ВНУТРИ ПРОДУКТА" />
@@ -17,26 +20,20 @@ export const InsideProduct = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Text content */}
           <div className="space-y-6">
-            <h1 className="md:text-4xl lg:text-4xl font-bold leading-tight bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent">
-              Используем и внедряем AI осознанно — с фокусом на пользу, а не ради трендов
-            </h1>
-
-            <div className="space-y-4 text-base text-gray-300">
-              <p>
-                Мы интегрируем искусственный интеллект в ваш бизнес таким образом, чтобы он приносил реальную пользу и
-                помогал достигать поставленных целей.
-              </p>
-              <p>
-                Наш подход основан на глубоком анализе ваших процессов и подборе оптимальных AI-решений, которые
-                действительно работают на ваш бизнес.
-              </p>
+            <AutoGlitchText
+              text={t('inside-product.title')}
+              lineClassName="font-inter-tight font-bold leading-tight mb-4 lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
+            />
+            <div className="space-y-4 font-inter text-base text-gray-300">
+              <p>{t('inside-product.main_subtitle')}</p>
+              <p>{t('inside-product.main_subtitle2')}</p>
             </div>
 
             <Link
               href="#contact"
-              className="inline-block bg-lime-default hover:bg-lime-active text-black font-medium px-8 py-3 rounded-md transition-colors duration-200"
+              className="inline-block bg-lime-default hover:bg-lime-active text-black font-inter font-medium px-8 py-3 rounded-md transition-colors duration-200"
             >
-              Оставить заявку
+              {t('inside-product.main_cta')}
             </Link>
           </div>
 

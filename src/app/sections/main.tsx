@@ -1,10 +1,9 @@
 'use client';
 
-import { Header } from '../components/header';
 import React from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
-import { TypewriterLines } from '@/app/components/typed-written-lines';
+import { Header, AutoGlitchText } from '../components';
 
 type TProps = {
   title?: string;
@@ -25,15 +24,12 @@ export const MainSection: React.FC = () => {
         <Header />
         <div className="container mx-auto flex flex-1 justify-center items-center">
           <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-            <TypewriterLines
-              lines={[t('main.title'), t('main.subtitle'), t('main.subtitle2')]}
-              className="text-4xl md:text-6xl font-bold leading-tight mb-6"
-              speed={60}
-              delayBetweenLines={1000}
-              loop={false}
+            <AutoGlitchText
+              text={t('main.title')}
+              lineClassName="title text-4xl md:text-6xl font-inter-tight font-bold leading-tight mb-6"
             />
 
-            <p className="text-base md:text-lg text-gray-300 mb-8">{t('main.description')}</p>
+            <p className="text-base md:text-lg text-gray-300 mb-8 font-inter">{t('main.description')}</p>
 
             <a href="#contact" className="inline-block bg-lime-300 text-black px-6 py-3 rounded font-medium transition">
               {t('contact-btn')}
