@@ -28,6 +28,7 @@ export const HowWeWork = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const lastElementRef = useRef<HTMLDivElement>(null);
   const isDesktop = useMediaQuery('(min-width: 1024px)');
+  console.log(isDesktop);
   const { t } = useTranslation();
 
   const scrollStart = isDesktop ? 'center center+=20%' : 'top center';
@@ -107,24 +108,24 @@ export const HowWeWork = () => {
             <div className="hidden lg:block absolute top-1/2 right-0 w-[calc(50%-48px)] h-px bg-gray-300 -translate-y-1/2" />
 
             {/* Верхний левый */}
-            <div className="flex flex-col items-center lg:items-end justify-center lg:justify-end">
-              <div className="text-center lg:text-right">
+            <div className="flex flex-col items-center justify-center ">
+              <div className="text-center w-full">
                 <h3 className="font-semibold mb-2 text-center text-base lg:text-lg">
                   {t('inside-focus.creative_title')}
                 </h3>
-                <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center lg:text-right">
+                <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center">
                   {t('inside-focus.creative_text')}
                 </p>
               </div>
               {/* Линия-разделитель для mobile */}
-              <div className=" h-px bg-gray-300 my-6 lg:hidden" />
+              <div className="h-px bg-gray-300 my-6 lg:hidden" />
             </div>
 
             {/* Верхний правый */}
-            <div className="flex flex-col items-center lg:items-start justify-center lg:justify-start w-full">
-              <div className="text-center lg:text-left w-full">
+            <div className="flex flex-col items-center justify-center w-full">
+              <div className="text-center w-full">
                 <h3 className="font-semibold mb-2 text-center text-base lg:text-lg">{t('inside-focus.ai_title')}</h3>
-                <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center lg:text-left">
+                <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center">
                   {t('inside-focus.ai_text')}
                 </p>
               </div>
@@ -133,10 +134,10 @@ export const HowWeWork = () => {
             </div>
 
             {/* Нижний левый */}
-            <div className="flex flex-col items-center lg:items-end justify-center lg:justify-end w-full">
-              <div className="text-center lg:text-right w-full">
+            <div className="flex flex-col items-center justify-center w-full">
+              <div className="text-center w-full">
                 <h3 className="font-semibold text-center mb-2 text-base lg:text-lg">{t('inside-focus.ux_title')}</h3>
-                <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center lg:text-right">
+                <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center">
                   {t('inside-focus.ux_text')}
                 </p>
               </div>
@@ -145,13 +146,10 @@ export const HowWeWork = () => {
             </div>
 
             {/* Нижний правый */}
-            <div
-              ref={lastElementRef}
-              className="flex flex-col items-center lg:items-start justify-center lg:justify-start w-full"
-            >
-              <div className="text-center lg:text-left w-full">
+            <div ref={lastElementRef} className="flex flex-col items-center justify-center w-full">
+              <div className="text-center w-full">
                 <h3 className="font-semibold mb-2 text-base lg:text-lg">{t('inside-focus.blockchain_title')}</h3>
-                <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center lg:text-left">
+                <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center">
                   {t('inside-focus.blockchain_text')}
                 </p>
               </div>

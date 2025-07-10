@@ -12,11 +12,11 @@ export const InsideProduct = () => {
       <SectionTitle title={t('inside-product.tag')} />
 
       {/* Background pattern */}
-      <div className="absolute right-[-100px] top-[-40px] w-[970px] h-full opacity-80 pointer-events-none z-0">
+      <div className="absolute bottom-[-300px] right-0 lg:right-[-100px] lg:top-[-40px] w-[370px] lg:w-[970px] h-full pointer-events-none z-0">
         <div className="w-full h-full bg-[url('/cube-bg.svg')] bg-center bg-no-repeat bg-contain" />
       </div>
 
-      <div className="container mx-auto px-4 pb-20 relative z-10">
+      <div className="container mx-auto px-4 lg:pb-20 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Text content */}
           <div className="space-y-6">
@@ -38,9 +38,9 @@ export const InsideProduct = () => {
           </div>
 
           {/* Right side - 3D Cube */}
-          <div className="relative h-96 lg:h-[32rem] w-full">
+          <div className="relative h-96 lg:h-[32rem] w-full mt-6 lg:mt-0">
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative w-140 h-140">
+              <div className="relative lg:w-140 lg:h-140">
                 <Image src="./cube.svg" className="levitate" alt="cube" width={500} height={500} />
               </div>
             </div>

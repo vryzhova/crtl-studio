@@ -28,8 +28,8 @@ export const Preloader = ({ onDone }: { onDone: () => void }) => {
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
     >
-      <div className="w-xl h-20 space-x-2 text-white text-2xl font-semibold">
-        <Image src="/logo.svg" width={570} height={80} alt="logo" />
+      <div className="w-xl h-20 space-x-2 md:w-[570px] md:h-[80px] text-white text-2xl font-semibold">
+        <Image src="/logo.svg" fill alt="logo" />
       </div>
       <p className="mt-4 text-gray-400 text-lg">{progress}%</p>
     </div>
