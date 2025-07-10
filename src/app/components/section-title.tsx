@@ -2,16 +2,18 @@ import React from 'react';
 
 type TProps = {
   title: string;
-  position?: 'left' | 'center';
+  position?: 'start' | 'center';
 };
-export const SectionTitle: React.FC<TProps> = ({ title, position = 'left' }) => {
+export const SectionTitle: React.FC<TProps> = ({ title, position = 'start' }) => {
   const finalPosition = {
-    center: 'text-center',
-    left: 'text-left',
+    center: 'justify-center',
+    start: 'justify-start',
   };
 
   return (
-    <div className="container mx-auto px-4 pt-20 relative z-10">
+    <div
+      className={`${finalPosition[position]} mb-10 lg:mb-15 container flex items-center mx-auto px-4 pt-20 relative`}
+    >
       <div className="inline-flex  items-center justify-center  bg-black px-6 py-2 border border-lime-active rounded-full text-lime-active text-sm md:text-base font-mono whitespace-nowrap">
         {title}
       </div>

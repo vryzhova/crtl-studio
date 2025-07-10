@@ -38,7 +38,7 @@ export const ProcessSteps = () => {
 
   return (
     <section className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden py-20">
-      <SectionTitle title="// КАК МЫ РАБОТАЕМ" position="center" />
+      <SectionTitle title={t('how-we-work.tag')} position="center" />
 
       {/* Фоновое изображение */}
       <div className="absolute inset-0 w-full h-full  pointer-events-none z-0">

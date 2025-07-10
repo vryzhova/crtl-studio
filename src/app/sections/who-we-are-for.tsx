@@ -1,6 +1,8 @@
+'use client';
 import React from 'react';
 import { SectionTitle } from '@/app/components/section-title';
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 
 type CardProps = {
   icon: string;
@@ -38,6 +40,7 @@ const Card: React.FC<CardProps> = ({ icon, title, description }) => (
 );
 
 export const WhoWeAreFor = () => {
+  const { t } = useTranslation();
   const cards = [
     {
       icon: '/streamline.svg',
@@ -58,7 +61,7 @@ export const WhoWeAreFor = () => {
 
   return (
     <section className="min-h-screen relative py-20 bg-black text-white">
-      <SectionTitle title="// КОМУ МЫ ПОДХОДИМ" />
+      <SectionTitle title={t('who-we-are-for.tag')} position="center" />
 
       <div className="container mx-auto px-4 mt-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">

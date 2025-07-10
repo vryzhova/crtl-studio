@@ -9,14 +9,14 @@ export const InsideProduct = () => {
   const { t } = useTranslation();
   return (
     <section className="relative min-h-screen bg-black text-white overflow-hidden">
-      <SectionTitle title="// AI ВНУТРИ ПРОДУКТА" />
+      <SectionTitle title={t('inside-product.tag')} />
 
       {/* Background pattern */}
-      <div className="absolute right-0 top-0 w-[970px] h-full opacity-80 pointer-events-none z-0">
+      <div className="absolute right-[-100px] top-[-40px] w-[970px] h-full opacity-80 pointer-events-none z-0">
         <div className="w-full h-full bg-[url('/cube-bg.svg')] bg-center bg-no-repeat bg-contain" />
       </div>
 
-      <div className="container mx-auto px-4 py-20 relative z-10">
+      <div className="container mx-auto px-4 pb-20 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Text content */}
           <div className="space-y-6">

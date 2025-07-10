@@ -26,7 +26,7 @@ export const MainSection: React.FC = () => {
           <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
             <AutoGlitchText
               text={t('main.title')}
-              lineClassName="title text-4xl md:text-6xl font-inter-tight font-bold leading-tight mb-6"
+              lineClassName="title text-4xl md:text-6xl font-inter-tight font-bold leading-tight"
             />
 
             <p className="text-base md:text-lg text-gray-300 mb-8 font-inter">{t('main.description')}</p>

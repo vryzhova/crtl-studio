@@ -144,7 +144,7 @@ export const Header = () => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -40, opacity: 0 }}
               transition={{ type: 'tween', duration: 0.38, ease: 'easeInOut' }}
-              className="fixed left-0 top-0 z-50 w-full max-w-[1024px] bg-black border border-gray-elements shadow-2xl px-6 pt-6 pb-8  flex flex-col"
+              className="fixed left-0 top-0 z-50 w-full max-w-[1024px] bg-black border border-gray-elements shadow-2xl px-6 pt-6 pb-8  flex flex-col lg:hidden"
               style={{ minHeight: 'auto' }}
             >
               <div className="flex items-start justify-between mb-8">

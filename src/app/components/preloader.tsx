@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 export const Preloader = ({ onDone }: { onDone: () => void }) => {
   const [progress, setProgress] = useState(0);
@@ -27,9 +28,8 @@ export const Preloader = ({ onDone }: { onDone: () => void }) => {
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
     >
-      <div className="flex items-center space-x-2 text-white text-2xl font-semibold">
-        <div className="w-6 h-6 bg-white rounded-full" />
-        <span>Ctrl Studio</span>
+      <div className="w-xl h-20 space-x-2 text-white text-2xl font-semibold">
+        <Image src="/logo.svg" width={570} height={80} alt="logo" />
       </div>
       <p className="mt-4 text-gray-400 text-lg">{progress}%</p>
     </div>

@@ -1,11 +1,15 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-
-const links = ['Почему мы', 'Наши услуги', 'Наши кейсы', 'Для кого', 'Как мы работаем'];
-const docs = ['Документ 1', 'Документ 2'];
+import { useTranslation } from 'react-i18next';
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useTranslation();
+
+  const links = ['Почему мы', 'Наши услуги', 'Наши кейсы', 'Для кого', 'Как мы работаем'];
+  const docs = ['Документ 1', 'Документ 2'];
 
   return (
     <footer className="bg-black text-white pt-8 pb-6 px-4 relative overflow-hidden">

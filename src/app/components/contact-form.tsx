@@ -60,17 +60,14 @@ export const ContactForm: React.FC = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
         <div className="flex-1 flex flex-col gap-2 pl-8 pr-8">
-          <label className="text-base font-mono tracking-widest text-gray-400 bg-transparent">
-            {t('contact-form.contact_method')}
-          </label>
           <select
-            className="bg-transparent outline-none text-white font-mono text-lg py-1 appearance-none pr-8"
+            className="bg-transparent outline-none text-white first:text-gray-elements font-mono text-lg py-1 appearance-none h-15 pr-8"
             value={contactType}
             onChange={e => setContactType(e.target.value)}
             required
           >
             <option value="" disabled hidden>
-              {t('contact-form.contact_method_placeholder')}
+              {t('contact-form.contact_method')}
             </option>
             <option value="phone">{t('contact-form.contact_method_phone')}</option>
             <option value="telegram">{t('contact-form.contact_method_telegram')}</option>

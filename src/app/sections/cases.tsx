@@ -74,7 +74,7 @@ export const Cases = () => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-screen overflow-hidden bg-black flex items-start justify-start lg:items-center lg:justify-center"
+      className="relative w-full min-h-screen overflow-hidden bg-black flex items-start justify-start lg:items-center lg:justify-center z-10"
     >
       {/* Initial text */}
       <h2
