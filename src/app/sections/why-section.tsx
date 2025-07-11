@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AutoGlitchText, SectionTitle } from '@/app/components';
+import { GlitchTypewriterText, SectionTitle } from '../components';
 import { ProgressElement } from '@/app/components/progress-element';
 import { useTranslation } from 'react-i18next';
 
@@ -37,7 +37,7 @@ export const WhySection: React.FC = () => {
 
   const glitchContent = useMemo(
     () => (
-      <AutoGlitchText
+      <GlitchTypewriterText
         lineClassName="font-inter-tight font-bold leading-tight lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-black to-gray-elements bg-clip-text text-transparent"
         text={t('why-us.subtitle')}
       />

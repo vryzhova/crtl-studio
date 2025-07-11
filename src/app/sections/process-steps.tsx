@@ -16,6 +16,7 @@ export const ProcessSteps = () => {
   const { t } = useTranslation();
 
   const sectionRef = useRef<HTMLDivElement>(null);
+  const mobileStepsRef = useRef<HTMLDivElement>(null);
 
   const steps = [
     {
@@ -48,33 +49,69 @@ export const ProcessSteps = () => {
     const section = sectionRef.current;
     if (!section) return;
 
-    const totalSteps = steps.length;
-    const stepLength = 1 / totalSteps;
+    const isMobile = window.innerWidth < 768;
+    let trigger: ScrollTrigger | null = null;
 
-    const trigger = ScrollTrigger.create({
-      trigger: section,
-      start: 'top top-=20%',
-      end: `+=${window.innerHeight * totalSteps * 0.5}`,
-      pin: true,
-      scrub: true,
-      markers: true,
-      onUpdate: self => {
-        const progress = self.progress;
-        const currentStep = Math.floor(progress / stepLength);
-        setActive(Math.min(currentStep, totalSteps - 1));
-      },
-    });
+    if (!isMobile) {
+      const totalSteps = steps.length;
+      const stepLength = 1 / totalSteps;
+      trigger = ScrollTrigger.create({
+        trigger: section,
+        start: 'top top-=20%',
+        end: `+=${window.innerHeight * totalSteps * 0.5}`,
+        pin: true,
+        scrub: true,
+        onUpdate: self => {
+          const progress = self.progress;
+          const currentStep = Math.floor(progress / stepLength);
+          setActive(Math.min(currentStep, totalSteps - 1));
+        },
+      });
+    }
+    // На мобильных pin не нужен
 
     return () => {
-      trigger.kill();
+      trigger?.kill();
     };
   }, [steps.length]);
+
+  // Мобильная анимация: появление справа при смене active
+  // useEffect(() => {
+  //   if (typeof window === 'undefined' || window.innerWidth >= 768) return;
+  //   const nodes = mobileStepsRef.current?.querySelectorAll('.process-mobile-step');
+  //   if (!nodes) return;
+  //   nodes.forEach((el, idx) => {
+  //     if (idx === active) {
+  //       gsap.fromTo(el, { x: 100, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out' });
+  //     } else {
+  //       gsap.set(el, { x: 0, opacity: 0.6 });
+  //     }
+  //   });
+  // }, [active]);
+
+  // Синхронизация вертикального скролла с горизонтальным на мобильных
+  useEffect(() => {
+    if (typeof window === 'undefined' || window.innerWidth >= 768) return;
+    let lastScrollY = window.scrollY;
+    const container = mobileStepsRef.current;
+    if (!container) return;
+    const onScroll = () => {
+      const deltaY = window.scrollY - lastScrollY;
+      lastScrollY = window.scrollY;
+      // Скроллим вправо при прокрутке вниз, влево при прокрутке вверх
+      container.scrollLeft += deltaY;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
 
   return (
     <section
       id="how"
       ref={sectionRef}
-      className="relative min-h-screen text-white flex flex-col items-center justify-center overflow-hidden py-20"
+      className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden lg:py-20"
     >
       {/* Фоновое изображение — только фон, прозрачность не влияет на контент */}
       <div className="absolute inset-0 w-full h-full bg-[url('/mountain-bg.svg')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" />
@@ -89,12 +126,45 @@ export const ProcessSteps = () => {
             style={{ minWidth: '600px' }}
           />
           {/* Этапы */}
-          <div className="flex flex-row gap-10 overflow-x-auto no-scrollbar px-4 relative z-10 w-full">
+          <div
+            ref={mobileStepsRef}
+            className="flex flex-row gap-10 overflow-x-auto no-scrollbar px-4 relative z-10 w-full scroll-smooth"
+            style={{ scrollSnapType: 'x mandatory' }}
+            onScroll={e => {
+              const container = e.currentTarget;
+              const children = Array.from(container.children);
+              const containerRect = container.getBoundingClientRect();
+              let minDiff = Infinity;
+              let activeIdx = 0;
+              children.forEach((child, idx) => {
+                const rect = child.getBoundingClientRect();
+                const diff = Math.abs(rect.left + rect.width / 2 - (containerRect.left + containerRect.width / 2));
+                if (diff < minDiff) {
+                  minDiff = diff;
+                  activeIdx = idx;
+                }
+              });
+              setActive(activeIdx);
+            }}
+          >
             {steps.map((step, idx) => (
-              <div key={idx} className="flex flex-col items-center min-w-[180px]">
+              <div
+                key={idx}
+                className="process-mobile-step flex flex-col items-center min-w-[80vw] max-w-[380px] snap-center"
+                style={{ scrollSnapAlign: 'center' }}
+              >
                 {/* Кружок-номер на линии */}
                 <span
                   className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-base mb-2 shadow transition-all duration-300 ${active === idx ? 'bg-lime-default text-black scale-110' : 'bg-gray-elements text-black opacity-60'}`}
+                  onClick={() => {
+                    // Прокрутка к этапу по клику
+                    const container = mobileStepsRef.current;
+                    const el = container?.children[idx] as HTMLElement;
+                    if (el && container) {
+                      const offset = el.offsetLeft - container.offsetWidth / 2 + el.offsetWidth / 2;
+                      container.scrollTo({ left: offset, behavior: 'smooth' });
+                    }
+                  }}
                 >
                   {idx + 1}
                 </span>

@@ -1,6 +1,7 @@
 'use client';
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
+import { CaseGallery } from '../components';
 
 export const Cases = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -111,7 +112,7 @@ export const Cases = () => {
         ref={mainContentRef}
         className="absolute w-full h-full right-0 flex flex-col items-center justify-center pl-12"
       >
-        main content
+        <CaseGallery />
       </div>
     </section>
   );

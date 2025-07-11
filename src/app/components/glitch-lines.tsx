@@ -74,9 +74,9 @@ export const AutoGlitchText: React.FC<Props> = ({
   }, [text, delay, lineClassName]);
 
   return (
-    <div className={`whitespace-pre-wrap break-keep ${className}`} style={{ whiteSpace: 'pre-wrap' }}>
+    <div className={`whitespace-nowrap ${className}`}>
       <div
-        className="whitespace-pre-wrap break-keep"
+        className="whitespace-nowrap"
         ref={textRef}
         style={{ visibility: 'hidden', position: 'absolute', pointerEvents: 'none' }}
       >

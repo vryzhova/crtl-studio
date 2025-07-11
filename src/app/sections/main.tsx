@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
-import { Header, AutoGlitchText } from '../components';
+import { Header, AutoGlitchText, GlitchTypewriterText } from '../components';
 
 type TProps = {
   title?: string;
@@ -24,7 +24,7 @@ export const MainSection: React.FC = () => {
         <Header />
         <div className="container mx-auto flex flex-1 justify-center items-center">
           <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-            <AutoGlitchText
+            <GlitchTypewriterText
               text={t('main.title')}
               lineClassName="title text-4xl md:text-6xl font-inter-tight font-bold leading-tight"
             />

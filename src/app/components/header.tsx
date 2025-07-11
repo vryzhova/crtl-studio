@@ -33,7 +33,7 @@ export const Header = () => {
         {/* Logo + Divider + Nav */}
         <div className="flex items-center gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 text-lg font-inter">
+          <Link href="/" className="flex items-center gap-2 text-lg font-inter scroll-smooth">
             <Image src="./logo.svg" alt="header-logo" width={140} height={28} />
           </Link>
           {/* Вертикальная линия */}
@@ -41,7 +41,7 @@ export const Header = () => {
           {/* Navigation */}
           <nav className="flex gap-4 text-sm font-medium">
             {navItems.map(item => (
-              <Link key={item.href} href={item.href} className="hover:gray-elements transition">
+              <Link key={item.href} href={item.href} className="hover:gray-elements scroll-smooth transition">
                 {item.label}
               </Link>
             ))}

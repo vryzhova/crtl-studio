@@ -5,3 +5,5 @@ export { Preloader } from './preloader';
 export { AutoGlitchText } from './glitch-lines';
 export { Header } from './header';
 export { BudgetSlider } from './budget-slider';
+export { CaseGallery } from './case-gallary';
+export { GlitchTypewriterText } from './glitch-type-writer';

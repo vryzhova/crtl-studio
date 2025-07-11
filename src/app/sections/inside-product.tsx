@@ -3,13 +3,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SectionTitle, AutoGlitchText } from '../components';
+import { SectionTitle, GlitchTypewriterText } from '../components';
 
 export const InsideProduct = () => {
   const { t } = useTranslation();
   return (
     <section className="relative min-h-screen bg-black text-white overflow-hidden">
-      <SectionTitle title={t('inside-product.tag')} />
+      <SectionTitle title={t('inside-product.ai_inside_product')} />
 
       {/* Background pattern */}
       <div className="absolute bottom-[-300px] right-0 lg:right-[-100px] lg:top-[-40px] w-[370px] lg:w-[970px] h-full pointer-events-none z-0">
@@ -20,7 +20,7 @@ export const InsideProduct = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Text content */}
           <div className="space-y-6">
-            <AutoGlitchText
+            <GlitchTypewriterText
               text={t('inside-product.title')}
               lineClassName="font-inter-tight font-bold leading-tight mb-4 lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
             />

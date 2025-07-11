@@ -3,7 +3,7 @@ import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { useTranslation } from 'react-i18next';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SectionTitle, AutoGlitchText } from '../components';
+import { SectionTitle, GlitchTypewriterText } from '../components';
 import Image from 'next/image';
 
 function useMediaQuery(query: string) {
@@ -41,7 +41,6 @@ export const HowWeWork = () => {
         trigger: isDesktop ? sectionRef.current : lastElementRef.current,
         scrub: 1,
         start: scrollStart,
-        markers: true,
         end: 'bottom top-=20%',
         anticipatePin: 1,
       },
@@ -91,7 +90,7 @@ export const HowWeWork = () => {
         <SectionTitle title={t('inside-focus.tag')} position="center" />
 
         {/* Заголовок */}
-        <AutoGlitchText
+        <GlitchTypewriterText
           className="mb-20"
           lineClassName="text-center font-inter-tight font-bold leading-tight lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent"
           text={t('inside-focus.title')}
