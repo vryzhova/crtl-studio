@@ -60,7 +60,7 @@ export const WhoWeAreFor = () => {
   ];
 
   return (
-    <section className="min-h-screen relative py-20 bg-black text-white">
+    <section id="clients" className="min-h-screen relative py-20 bg-black text-white">
       <SectionTitle title={t('who-we-are-for.tag')} position="center" />
 
       <div className="container mx-auto px-4 mt-12">

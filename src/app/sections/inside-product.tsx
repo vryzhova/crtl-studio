@@ -31,7 +31,7 @@ export const InsideProduct = () => {
 
             <Link
               href="#contact"
-              className="inline-block bg-lime-default hover:bg-lime-active text-black font-inter font-medium px-8 py-3 rounded-md transition-colors duration-200"
+              className="inline-block bg-lime-default hover:bg-lime-active active:bg-lime-active active:border-white text-black font-inter font-medium px-8 py-3 rounded-md transition-colors duration-200"
             >
               {t('inside-product.main_cta')}
             </Link>

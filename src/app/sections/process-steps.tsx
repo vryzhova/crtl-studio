@@ -72,18 +72,17 @@ export const ProcessSteps = () => {
 
   return (
     <section
+      id="how"
       ref={sectionRef}
-      className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden py-20"
+      className="relative min-h-screen text-white flex flex-col items-center justify-center overflow-hidden py-20"
     >
+      {/* Фоновое изображение — только фон, прозрачность не влияет на контент */}
+      <div className="absolute inset-0 w-full h-full bg-[url('/mountain-bg.svg')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" />
       <SectionTitle title={t('how-we-work.tag')} position="center" />
-      {/* Фоновое изображение */}
-      <div className="absolute inset-0 w-full h-full  pointer-events-none z-0">
-        <div className="w-full h-full bg-[url('/mountain-bg.svg')] bg-center opacity-80 bg-no-repeat lg:bg-contain" />
-      </div>
       {/* Ваша прежняя верстка этапов — не меняю! */}
       <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center mt-16">
         {/* Mobile: горизонтальный таймлайн без карточек */}
-        <div className="block lg:hidden w-full relative py-8">
+        <div className="block md:hidden w-full relative py-8">
           {/* Горизонтальная линия */}
           <div
             className="absolute top-8 left-0 right-0 h-0.5 from-gray-elements/70 via-gray-elements to-gray-elements/70 z-0"
@@ -95,29 +94,28 @@ export const ProcessSteps = () => {
               <div key={idx} className="flex flex-col items-center min-w-[180px]">
                 {/* Кружок-номер на линии */}
                 <span
-                  className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-base mb-2 shadow transition-all duration-300 ${active === idx ? 'bg-lime-default text-black scale-110' : 'bg-gray-700 text-lime-default opacity-60'}`}
+                  className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-base mb-2 shadow transition-all duration-300 ${active === idx ? 'bg-lime-default text-black scale-110' : 'bg-gray-elements text-black opacity-60'}`}
                 >
                   {idx + 1}
                 </span>
                 {/* Заголовок */}
                 <span
-                  className={`text-center font-bold text-sm mb-2 transition-colors duration-300 ${active === idx ? 'text-lime-default' : 'text-gray-400'}`}
+                  className={`text-center font-bold text-sm mb-2 transition-colors duration-300 ${active === idx ? 'text-lime-default' : 'text-gray-elements'}`}
                 >
-                  {t(`how-we-work.step${idx + 1}.title`)}
+                  {t(`how-we-work.step_${idx + 1}_title`)}
                 </span>
                 {/* Текст */}
                 <span
                   className={`text-white text-xs text-center whitespace-pre-line transition-opacity duration-300 ${active === idx ? 'opacity-100' : 'opacity-60'}`}
                 >
-                  {t(`how-we-work.step${idx + 1}.description`)}
+                  {t(`how-we-work.step_${idx + 1}_text`)}
                 </span>
               </div>
             ))}
           </div>
         </div>
         {/* Desktop: вертикальный таймлайн */}
-        <div className="hidden lg:block w-full">
-          {/* Линия по центру (TimelineLineSvg, ещё тоньше) */}
+        <div className="hidden md:block w-full">
           <TimelineLineSvg
             className="absolute left-1/2 top-0 -translate-x-1/2 z-0 select-none pointer-events-none"
             height={640}
@@ -161,7 +159,7 @@ export const ProcessSteps = () => {
                   <div
                     className={clsx(
                       'transition-colors duration-300 max-w-md z-5',
-                      isLeft ? 'text-left mr-[70px]' : 'text-right ml-[70px]',
+                      isLeft ? 'text-right mr-[70px]' : 'text-left ml-[70px]',
                       active === idx ? 'text-white' : 'text-gray-text opacity-60'
                     )}
                   >
@@ -169,7 +167,7 @@ export const ProcessSteps = () => {
                       className={clsx(
                         'font-semibold mb-2 transition-colors duration-300',
                         active === idx ? 'text-lime-default' : 'text-text',
-                        isLeft ? 'text-left' : 'text-right'
+                        isLeft ? 'text-right' : 'text-left'
                       )}
                     >
                       {step.title}
@@ -177,7 +175,7 @@ export const ProcessSteps = () => {
                     <div
                       className={clsx(
                         'text-sm leading-snug space-y-1 transition-colors duration-300',
-                        isLeft ? 'text-left' : 'text-right'
+                        isLeft ? 'text-right' : 'text-left'
                       )}
                     >
                       {step.description}

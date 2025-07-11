@@ -31,7 +31,10 @@ export const MainSection: React.FC = () => {
 
             <p className="text-base md:text-lg text-gray-300 mb-8 font-inter">{t('main.description')}</p>
 
-            <a href="#contact" className="inline-block bg-lime-300 text-black px-6 py-3 rounded font-medium transition">
+            <a
+              href="#contact"
+              className="inline-block bg-lime-default hover:bg-lime-active active:bg-lime-active active:border-white text-black px-6 py-3 rounded font-medium transition"
+            >
               {t('contact-btn')}
             </a>
           </div>

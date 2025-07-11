@@ -29,11 +29,11 @@ export const Header = () => {
   return (
     <header className="w-full bg-gradient-to-r from-black/90 to-black/55 text-white">
       {/* Desktop Header */}
-      <div className="max-w-[1440px] h-[64px] mx-auto items-center justify-between px-25 hidden lg:flex">
+      <div className="max-w-[1440px] h-[64px] mx-auto items-center justify-between px-5 xl:px-25 hidden lg:flex">
         {/* Logo + Divider + Nav */}
         <div className="flex items-center gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 text-lg font-semibold">
+          <Link href="/" className="flex items-center gap-2 text-lg font-inter">
             <Image src="./logo.svg" alt="header-logo" width={140} height={28} />
           </Link>
           {/* Вертикальная линия */}
@@ -41,7 +41,7 @@ export const Header = () => {
           {/* Navigation */}
           <nav className="flex gap-4 text-sm font-medium">
             {navItems.map(item => (
-              <Link key={item.href} href={item.href} className="hover:text-purple-400 transition">
+              <Link key={item.href} href={item.href} className="hover:gray-elements transition">
                 {item.label}
               </Link>
             ))}

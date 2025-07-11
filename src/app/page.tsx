@@ -1,5 +1,6 @@
 'use client';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import {
   MainSection,
   WhySection,
@@ -15,8 +16,24 @@ import { Footer, Preloader } from './components';
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  return isLoaded ? (
-    <div>
+  // Блокировка скролла при прелоадере
+  useEffect(() => {
+    if (!isLoaded) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isLoaded]);
+
+  // Callback для прелоадера
+  const handlePreloaderDone = () => {
+    setIsLoaded(true);
+  };
+
+  return !isLoaded ? (
+    <Preloader onDone={handlePreloaderDone} />
+  ) : (
+    <div className="animate-fade-in">
       <MainSection />
       <WhySection />
       <InsideProduct />
@@ -27,7 +44,5 @@ export default function Home() {
       <ContactSection />
       <Footer />
     </div>
-  ) : (
-    <Preloader onDone={() => setIsLoaded(true)} />
   );
 }
