@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { CaseCarousel } from './portfolio-slider';
+import dynamic from 'next/dynamic';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 // Тип для кейса
 type Case = {
   id: string;
@@ -13,6 +14,8 @@ type Case = {
   description: string;
   tags: string[];
 };
+
+const CaseCarousel = dynamic(() => import('./portfolio-slider').then(mod => mod.CaseCarousel), { ssr: false });
 
 export const CaseGallery: React.FC = () => {
   const [activeCase, setActiveCase] = useState<Case | null>(null); // выбранный кейс для попапа
@@ -25,7 +28,7 @@ export const CaseGallery: React.FC = () => {
       id: 'right-side',
       title: 'Right Side',
       year: '2025',
-      cover: '/cases/case1.png',
+      cover: '/cases/RS_cover.png',
       images: ['/cases/RS.png', '/cases/RS2.png', '/cases/RS3.png', '/cases/RS_4.png', '/cases/RS5.png'],
       description: 'Описание кейса...',
       tags: [t('cases.case_2_tag_1'), t('cases.case_2_tag_2'), t('cases.case_2_tag_3')],
@@ -34,7 +37,7 @@ export const CaseGallery: React.FC = () => {
       id: 'seven-senses',
       title: 'SEVEN SENSES',
       year: '2025',
-      cover: '/cases/case2.png',
+      cover: '/cases/7S_cover.png',
       images: ['/cases/S7_1.png', '/cases/S7_2.png', '/cases/S7_3.png', '/cases/S7_4.png', '/cases/S7_5.png'],
       description: 'Описание кейса...',
       tags: [t('cases.case_2_tag_1'), t('cases.case_2_tag_2'), t('cases.case_2_tag_3')],
@@ -43,7 +46,7 @@ export const CaseGallery: React.FC = () => {
       id: 'pay-killa',
       title: 'PayKilla',
       year: '2025',
-      cover: '/cases/case3.png',
+      cover: '/cases/PAYK_cover.png',
       images: ['/cases/PK_1.png', '/cases/PK_2.png', '/cases/PK_3.png', '/cases/PK_4.png', '/cases/PK_5.png'],
       description: 'Описание кейса...',
       tags: [t('cases.case_3_tag_1'), t('cases.case_3_tag_2'), t('cases.case_3_tag_3')],
@@ -52,43 +55,34 @@ export const CaseGallery: React.FC = () => {
       id: 'aim',
       title: 'AIM',
       year: '2025',
-      cover: '/cases/case4.png',
+      cover: '/cases/AIM_cover.png',
       images: ['/cases/AIM.png', '/cases/AIM_1.png', '/cases/AIM_2.png', '/cases/AIM_3.png', '/cases/AIM_4.png'],
       description: 'Описание кейса...',
       tags: [t('cases.case_4_tag_1')],
     },
     {
-      id: 'aim',
-      title: 'AIM',
+      id: 'pythia',
+      title: 'PYTHIA',
       year: '2025',
-      cover: '/cases/case4.png',
+      cover: '/cases/PYTHIA_cover.png',
       images: ['/cases/PYTHIA.png', '/cases/PYTHIA_5.png', '/cases/PYTHIA_3.png', '/cases/PYTHIA_4.png'],
       description: 'Описание кейса...',
       tags: [t('cases.case_5_tag_1')],
     },
     {
-      id: 'aim',
-      title: 'AIM',
+      id: '3d',
+      title: t('cases.case_6_name'),
       year: '2025',
-      cover: '/cases/case5.png',
-      images: ['/cases/PYTHIA.png', '/cases/PYTHIA_5.png', '/cases/PYTHIA_3.png', '/cases/PYTHIA_4.png'],
-      description: 'Описание кейса...',
-      tags: [t('cases.case_5_tag_1')],
-    },
-    {
-      id: 'aim',
-      title: 'AIM',
-      year: '2025',
-      cover: '/cases/case6.png',
+      cover: '/cases/3D_game_cover.png',
       images: ['/cases/3D_игра.png', '/cases/3D_игра_2.png', '/cases/3D_игра_3.png', '/cases/3D_игра_4.png'],
       description: 'Описание кейса...',
       tags: [t('cases.case_5_tag_1')],
     },
     {
-      id: 'aim',
-      title: 'AIM',
+      id: 'mini-app',
+      title: t('cases.case_7_name'),
       year: '2025',
-      cover: '/cases/case7.png', // замените на свой путь
+      cover: '/cases/club_cover.png',
       images: [
         '/cases/Инвестиционный_клуб_1.png',
         '/cases/Инвестиционный_клуб_2.png',
@@ -132,7 +126,13 @@ export const CaseGallery: React.FC = () => {
       >
         {cases.map(item => (
           <div key={item.id} className="min-w-[600px] cursor-pointer snap-start" onClick={() => openGallery(item)}>
-            <img src={item.cover} alt={item.title} className="rounded-xl shadow-lg w-full object-cover" />
+            <Image
+              src={item.cover}
+              alt={item.title}
+              className="rounded-xl shadow-lg w-full object-cover"
+              width={600}
+              height={400}
+            />
             <div className="mt-4 flex items-center justify-between">
               <span className="font-bold text-lg">{item.title}</span>
               <span className="bg-lime-200 px-3 py-1 rounded text-black">{item.year}</span>

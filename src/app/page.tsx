@@ -1,17 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import {
-  MainSection,
-  WhySection,
-  InsideProduct,
-  HowWeWork,
-  WhoWeAreFor,
-  Cases,
-  ProcessSteps,
-  ContactSection,
-} from './sections';
+import dynamic from 'next/dynamic';
+import { MainSection, WhySection, InsideProduct, HowWeWork, WhoWeAreFor, Cases, ContactSection } from './sections';
 import { Footer, Preloader } from './components';
+
+const ProcessSteps = dynamic(() => import('./sections/process-steps').then(mod => mod.ProcessSteps), {
+  ssr: false,
+});
 
 export default function Home() {
   const [showPreloader, setShowPreloader] = useState(true);

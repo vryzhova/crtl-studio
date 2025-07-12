@@ -1,8 +1,5 @@
-'use client';
-
-import 'keen-slider/keen-slider.min.css';
-import { useKeenSlider } from 'keen-slider/react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import Image from 'next/image';
 
 type Case = {
   id: string;
@@ -20,87 +17,115 @@ type Props = {
 };
 
 export const CaseCarousel = ({ caseData, onClose }: Props) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
-    slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel);
-    },
-    slides: {
-      perView: 1,
-      spacing: 30,
-    },
-  });
+  const [selected, setSelected] = useState(0);
+  const imagesCount = caseData.images.length;
+
+  // Функции для переключения слайдов
+  const prev = () => setSelected(prev => (prev === 0 ? imagesCount - 1 : prev - 1));
+  const next = () => setSelected(prev => (prev === imagesCount - 1 ? 0 : prev + 1));
+
+  // Примерные размеры для главного фото (можно скорректировать под ваши реальные размеры)
+  const mainImgWidth = 900; // desktop
+  const mainImgHeight = 540; // desktop
+  const thumbWidth = 120;
+  const thumbHeight = 84;
 
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center p-2 sm:p-4">
       <div className="relative text-black w-full max-w-6xl max-h-[95vh] rounded-lg overflow-auto shadow-lg p-2 sm:p-6 flex flex-col items-center">
-        {/* Название кейса — сверху только на мобилках */}
+        {/* Мобильная шапка с тайтлом и кнопкой закрытия */}
         <div className="sm:hidden flex justify-between w-full">
-          <span className=" text-2xl font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent  text-left mb-2 mt-2">
+          <span className="text-2xl font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent text-left mb-2 mt-2">
             {caseData.title}
           </span>
-          {/* Кнопка закрытия */}
           <button
-            className="absolute h-10 w-10  top-4 right-4  text-white border border-white z-20 rounded-md p-2"
+            className="absolute h-10 w-10 top-4 right-4 text-white border border-white z-20 rounded-md p-2"
             onClick={onClose}
           >
             ✕
           </button>
         </div>
+        {/* Крупное фото + стрелки */}
         <div
-          ref={sliderRef}
-          className="keen-slider rounded-md overflow-hidden w-full bg-black/90 min-h-[180px] sm:min-h-[320px] flex items-center justify-center"
+          className="relative w-full flex items-center justify-center bg-black/90 rounded-md min-h-[180px] sm:min-h-[320px] lg:min-h-[480px]"
+          style={{ maxHeight: '70vh' }}
         >
-          Кнопка закрытия
+          {/* Левая стрелка — только на desktop */}
           <button
-            className="absolute hidden sm:block top-4 right-4 bg-white text-black border-black z-20 rounded-md p-2"
+            onClick={prev}
+            className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 rounded-md shadow text-black"
+            style={{ width: 40, height: 40 }}
+            aria-label="Предыдущий слайд"
+          >
+            ←
+          </button>
+          д{' '}
+          <Image
+            src={caseData.images[selected]}
+            alt={`slide ${selected}`}
+            className="block mx-auto w-auto max-w-full h-auto object-contain rounded-md border-lime-default"
+            style={{ maxHeight: '65vh', minHeight: 120 }}
+            width={mainImgWidth}
+            height={mainImgHeight}
+            priority
+          />
+          {/* Правая стрелка — только на desktop */}
+          <button
+            onClick={next}
+            className="hidden lg:block absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 rounded-md shadow text-black"
+            style={{ width: 40, height: 40 }}
+            aria-label="Следующий слайд"
+          >
+            →
+          </button>
+          {/* Кнопка закрытия для desktop — поверх фото, справа сверху, отступ 30px */}
+          <button
+            className="hidden sm:block absolute z-20 bg-white text-black border-black rounded-md p-2"
+            style={{ top: 30, right: 30, width: 40, height: 40 }}
             onClick={onClose}
+            aria-label="Закрыть"
           >
             ✕
           </button>
-          {caseData.images.map((src, i) => (
-            <div key={i} className="keen-slider__slide flex items-center justify-center">
-              <img
-                src={src}
-                alt={`slide ${i}`}
-                className="w-full h-auto object-contain rounded-md border-lime-default"
-                style={{ maxHeight: '38vh', minHeight: 120 }}
-              />
-            </div>
-          ))}
         </div>
-        {/* Миниатюры — только на desktop */}
-        <div className="hidden md:flex flex-wrap justify-center gap-2 my-2">
-          {caseData.images.map((src, i) => (
-            <button
-              key={i}
-              onClick={() => instanceRef.current?.moveToIdx(i)}
-              className={`border-2 rounded-md overflow-hidden w-24 h-16 transition-all ${
-                i === currentSlide ? 'border-red-error opacity-100' : 'border-transparent opacity-60 hover:opacity-90'
-              }`}
-            >
-              <img src={src} alt={`thumb ${i}`} className="w-full h-full object-cover" />
-            </button>
-          ))}
-        </div>
-        {/* Стрелки навигации — мобильные: над тегами, desktop: по бокам */}
-        <div className="flex w-full justify-center gap-4 mt-4 sm:hidden">
+        {/* Стрелки снизу — только на мобильных и tablet до 1024px */}
+        <div className="flex lg:hidden w-full justify-center gap-2.5 mt-4">
           <button
-            onClick={() => instanceRef.current?.prev()}
-            className="z-10 bg-white bg-opacity-70 p-2 rounded-md shadow text-black"
-            style={{ width: 48, height: 48 }}
+            onClick={prev}
+            className="bg-white bg-opacity-70 p-2 rounded-md shadow text-black"
+            style={{ width: 40, height: 40 }}
             aria-label="Предыдущий слайд"
           >
             ←
           </button>
           <button
-            onClick={() => instanceRef.current?.next()}
-            className="z-10 bg-white bg-opacity-70 p-2 rounded-md shadow text-black"
-            style={{ width: 48, height: 48 }}
+            onClick={next}
+            className="bg-white bg-opacity-70 p-2 rounded-md shadow text-black"
+            style={{ width: 40, height: 40 }}
             aria-label="Следующий слайд"
           >
             →
           </button>
+        </div>
+        {/* Превью только на desktop >=1024px (lg) */}
+        <div className="hidden lg:flex flex-row gap-2 justify-center items-center w-full overflow-x-auto mt-4 pb-2">
+          {caseData.images.map((src, i) => (
+            <button
+              key={i}
+              className={`group block w-20 h-14 rounded-md border-2 transition-all cursor-pointer flex-shrink-0 ${i === selected ? 'border-lime-default' : 'border-transparent'}`}
+              onClick={() => setSelected(i)}
+              tabIndex={0}
+              aria-label={`Показать фото ${i + 1}`}
+            >
+              <Image
+                src={src}
+                alt={`thumb ${i}`}
+                className="w-full h-full object-cover rounded-md group-hover:opacity-90"
+                width={thumbWidth}
+                height={thumbHeight}
+              />
+            </button>
+          ))}
         </div>
         {/* Теги и тайтл (desktop) */}
         <div className="flex justify-between flex-wrap gap-3 w-full mt-10 sm:mt-4">
@@ -120,19 +145,6 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           </div>
         </div>
       </div>
-      {/* Desktop стрелки */}
-      <button
-        onClick={() => instanceRef.current?.prev()}
-        className="absolute left-30 top-1/2 transform text-black -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 rounded-md shadow hidden sm:block"
-      >
-        ←
-      </button>
-      <button
-        onClick={() => instanceRef.current?.next()}
-        className="absolute right-30 top-1/2 transform -translate-y-1/2 z-10 bg-white text-black bg-opacity-70 p-2 rounded-md shadow hidden sm:block"
-      >
-        →
-      </button>
     </div>
   );
 };

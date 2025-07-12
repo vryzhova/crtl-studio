@@ -85,7 +85,7 @@ export const HowWeWork = () => {
   return (
     <section ref={sectionRef} id="main" className="relative h-full lg:h-[150vh] text-black overflow-hidden w-full">
       {/* Ваш контент */}
-      <div ref={contentRef} className="container mx-auto px-4 py-20 relative z-10">
+      <div ref={contentRef} className="container mx-auto px-4 relative z-10">
         {/* Чип */}
         <SectionTitle title={t('inside-focus.tag')} position="center" />
 
@@ -97,19 +97,21 @@ export const HowWeWork = () => {
         />
 
         {/* Сетка из 4 блоков desktop */}
-        <div className="hidden lg:grid relative w-full grid-cols-2 gap-20">
+        <div className="hidden lg:grid relative w-full grid-cols-2 gap-x-60 gap-y-50">
           {/* Вертикальная линия (desktop only) */}
-          <div className="hidden lg:block absolute left-1/2 top-0 h-[calc(50%-48px)] w-px bg-gray-300 -translate-x-1/2" />
-          <div className="hidden lg:block absolute left-1/2 bottom-0 h-[calc(50%-48px)] w-px bg-gray-300 -translate-x-1/2" />
+          <div className="hidden lg:block absolute left-1/2 top-[-40px] h-[calc(48%-20px)] w-px bg-gray-elements -translate-x-1/2" />
+          <div className="hidden lg:block absolute left-1/2 bottom-[-40px] h-[calc(48%-20px)] w-px bg-gray-elements -translate-x-1/2" />
 
           {/* Горизонтальная линия (desktop only) */}
-          <div className="hidden lg:block absolute top-1/2 left-0 w-[calc(50%-48px)] h-px bg-gray-300 -translate-y-1/2" />
-          <div className="hidden lg:block absolute top-1/2 right-0 w-[calc(50%-48px)] h-px bg-gray-300 -translate-y-1/2" />
+          <div className="hidden lg:block absolute top-1/2 left-0 w-[calc(48%-48px)] h-px bg-gray-elements -translate-y-1/2" />
+          <div className="hidden lg:block absolute top-1/2 right-0 w-[calc(48%-48px)] h-px bg-gray-elements -translate-y-1/2" />
 
           {/* Верхний левый */}
           <div className="flex flex-col items-center justify-center ">
-            <div className="text-center w-full">
-              <h3 className="font-inter mb-2 text-center text-base lg:text-lg">{t('inside-focus.creative_title')}</h3>
+            <div className="text-center w-full mx-auto">
+              <h3 className="font-inter text-bold mb-2 text-center text-base lg:text-lg">
+                {t('inside-focus.creative_title')}
+              </h3>
               <p className="text-sm lg:text-base text-black leading-relaxed text-center">
                 {t('inside-focus.creative_text')}
               </p>
@@ -119,7 +121,9 @@ export const HowWeWork = () => {
           {/* Верхний правый */}
           <div className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-full">
-              <h3 className="font-inter mb-2 text-center text-base lg:text-lg">{t('inside-focus.ai_title')}</h3>
+              <h3 className="font-inter mb-2 text-bold text-center text-base lg:text-lg">
+                {t('inside-focus.ai_title')}
+              </h3>
               <p className="text-sm lg:text-base text-black leading-relaxed text-center">{t('inside-focus.ai_text')}</p>
             </div>
           </div>
@@ -127,7 +131,9 @@ export const HowWeWork = () => {
           {/* Нижний левый */}
           <div className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-full">
-              <h3 className="font-inter text-center mb-2 text-base lg:text-lg">{t('inside-focus.ux_title')}</h3>
+              <h3 className="font-inter text-center text-bold mb-2 text-base lg:text-lg">
+                {t('inside-focus.ux_title')}
+              </h3>
               <p className="text-sm lg:text-base text-black leading-relaxed text-center">{t('inside-focus.ux_text')}</p>
             </div>
           </div>
@@ -135,7 +141,7 @@ export const HowWeWork = () => {
           {/* Нижний правый */}
           <div className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-full">
-              <h3 className="font-inter mb-2 text-base lg:text-lg">{t('inside-focus.blockchain_title')}</h3>
+              <h3 className="font-inter mb-2 text-bold text-base lg:text-lg">{t('inside-focus.blockchain_title')}</h3>
               <p className="text-sm lg:text-base text-black leading-relaxed text-center">
                 {t('inside-focus.blockchain_text')}
               </p>
