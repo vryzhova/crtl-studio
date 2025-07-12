@@ -11,17 +11,19 @@ export const ContactSection: React.FC = () => {
   return (
     <section id="contact" className="relative min-h-screen w-full bg-black text-white overflow-hidden px-4">
       <SectionTitle title={t('contact-form.tag')} />
-      <div className="container pb-20 grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-7xl mx-auto items-center">
+      <div className="container pb-20 grid grid-cols-1 lg:grid-cols-2 gap-8 w-full max-w-7xl mx-auto items-center">
         {/* Левая колонка: заголовок, текст, картинка */}
-        <div className="flex flex-col h-full justify-center bg-[url('/ctrl-btn-bg.svg')] bg-center bg-no-repeat md:pl-12 bg">
-          <GlitchTypewriterText
-            lineClassName="md:text-4xl lg:text-4xl font-bold leading-tight bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
-            text={t('contact-form.title')}
-          />
-          <div className="space-y-4 text-base text-gray-300 mt-6">
-            <p>{t('contact-form.subtitle')}</p>
+        <div className="flex flex-col h-full md:flex-row lg:flex-col justify-center md:bg-[url('/ctrl-btn-bg.svg')] bg-right lg:bg-center md:bg-auto bg-no-repeat lg:pl-12 bg">
+          <div className="flex flex-col items-start">
+            <GlitchTypewriterText
+              lineClassName="md:text-4xl lg:text-4xl font-bold leading-tight bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
+              text={t('contact-form.title')}
+            />
+            <div className="space-y-4 text-base text-gray-300 mt-6">
+              <p>{t('contact-form.subtitle')}</p>
+            </div>
           </div>
-          <div className="justify-self-end">
+          <div className="justify-self-end hidden md:block">
             <Image
               src="/ctrl-btn.svg"
               alt="ctrl"
@@ -35,6 +37,17 @@ export const ContactSection: React.FC = () => {
         {/* Правая колонка: форма */}
         <div className="flex justify-center items-center w-full max-w-xl mx-auto">
           <ContactForm />
+        </div>
+
+        <div className="md:hidden bg-[url('/ctrl-btn-bg.svg')] bg-contain bg-center bg-no-repeat bg">
+          <Image
+            src="/ctrl-btn.svg"
+            alt="ctrl"
+            className="w-40 h-40 mt-10 select-none levitate justify-self-end"
+            draggable={false}
+            width={218}
+            height={260}
+          />
         </div>
       </div>
     </section>

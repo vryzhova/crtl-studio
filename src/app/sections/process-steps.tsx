@@ -7,6 +7,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslation } from 'react-i18next';
 import TimelineLineSvg from '../components/TimelineLineSvg';
+import { useBreakpoints } from '@/app/hooks/use-break-points';
 
 // Регистрируем плагин ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
@@ -17,6 +18,7 @@ export const ProcessSteps = () => {
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const mobileStepsRef = useRef<HTMLDivElement>(null);
+  const { isMobile, isTablet } = useBreakpoints();
 
   const steps = [
     {
@@ -49,7 +51,6 @@ export const ProcessSteps = () => {
     const section = sectionRef.current;
     if (!section) return;
 
-    const isMobile = window.innerWidth < 768;
     let trigger: ScrollTrigger | null = null;
 
     if (!isMobile) {
@@ -68,26 +69,11 @@ export const ProcessSteps = () => {
         },
       });
     }
-    // На мобильных pin не нужен
 
     return () => {
       trigger?.kill();
     };
   }, [steps.length]);
-
-  // Мобильная анимация: появление справа при смене active
-  // useEffect(() => {
-  //   if (typeof window === 'undefined' || window.innerWidth >= 768) return;
-  //   const nodes = mobileStepsRef.current?.querySelectorAll('.process-mobile-step');
-  //   if (!nodes) return;
-  //   nodes.forEach((el, idx) => {
-  //     if (idx === active) {
-  //       gsap.fromTo(el, { x: 100, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out' });
-  //     } else {
-  //       gsap.set(el, { x: 0, opacity: 0.6 });
-  //     }
-  //   });
-  // }, [active]);
 
   // Синхронизация вертикального скролла с горизонтальным на мобильных
   useEffect(() => {
@@ -187,7 +173,7 @@ export const ProcessSteps = () => {
         {/* Desktop: вертикальный таймлайн */}
         <div className="hidden md:block w-full">
           <TimelineLineSvg
-            className="absolute left-1/2 top-0 -translate-x-1/2 z-0 select-none pointer-events-none"
+            className="absolute lg:left-1/2 left-20 top-0 -translate-x-1/2 z-0 select-none pointer-events-none"
             height={640}
             width={1}
           />
@@ -196,14 +182,14 @@ export const ProcessSteps = () => {
             {steps.map((step, idx) => {
               // Распределение по вертикали (равномерно)
               const top = `calc(${idx * 25}% - 0px)`;
-              const isLeft = step.side === 'left';
+              const isRight = step.side === 'right' || isTablet;
               return (
                 <div
                   key={step.label}
                   style={{ top }}
                   className={clsx(
                     'absolute flex items-center w-1/2',
-                    isLeft ? 'left-0 flex-row-reverse' : 'right-0 flex-row',
+                    isRight ? `${isTablet ? 'left-20' : 'right-0'} flex-row` : 'left-0 flex-row-reverse',
                     'group'
                   )}
                 >
@@ -217,19 +203,19 @@ export const ProcessSteps = () => {
                     )}
                     style={{
                       position: 'absolute',
-                      left: isLeft ? '100%' : '0',
+                      left: isRight ? '0' : '100%',
                       transform: 'translateX(-50%)',
                     }}
                     onClick={() => setActive(idx)}
                     aria-label={step.label}
                   >
-                    {active === idx && <span className="font-mono font-bold text-lg">{idx + 1}</span>}
+                    {active === idx && <span className="font-mono text-lg">{idx + 1}</span>}
                   </button>
                   {/* Контент этапа */}
                   <div
                     className={clsx(
                       'transition-colors duration-300 max-w-md z-5',
-                      isLeft ? 'text-right mr-[70px]' : 'text-left ml-[70px]',
+                      isRight ? 'text-left ml-[70px]' : 'text-right mr-[70px]',
                       active === idx ? 'text-white' : 'text-gray-text opacity-60'
                     )}
                   >
@@ -237,7 +223,7 @@ export const ProcessSteps = () => {
                       className={clsx(
                         'font-semibold mb-2 transition-colors duration-300',
                         active === idx ? 'text-lime-default' : 'text-text',
-                        isLeft ? 'text-right' : 'text-left'
+                        isRight ? 'text-left' : 'text-right'
                       )}
                     >
                       {step.title}
@@ -245,7 +231,7 @@ export const ProcessSteps = () => {
                     <div
                       className={clsx(
                         'text-sm leading-snug space-y-1 transition-colors duration-300',
-                        isLeft ? 'text-right' : 'text-left'
+                        isRight ? 'text-left' : 'text-right'
                       )}
                     >
                       {step.description}

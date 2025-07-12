@@ -33,6 +33,7 @@ const CustomSelect: React.FC<TProps> = ({ onChange }) => {
 
   const handleOptionClick = (option: SelectOption) => {
     onChange(option.value);
+    setSelectedOption(option);
     setIsOpen(false);
   };
 
