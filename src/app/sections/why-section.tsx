@@ -1,69 +1,78 @@
 'use client';
-import React, { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GlitchTypewriterText, SectionTitle } from '../components';
 import { ProgressElement } from '@/app/components/progress-element';
 import { useTranslation } from 'react-i18next';
 
-// Данные для шагов
-const steps = [
-  {
-    title: 'Думаем как предприниматели, а не исполнители',
-    description:
-      'Ctrl — команда бизнес-визионеров, дизайнеров и разработчиков. Понимаем фаундеров с полуслова: вникаем в идею, проектируем стратегически и собираем продукт как единая команда — от логики до запуска.',
-    image: '/why-1.svg',
-  },
-  {
-    title: 'AI в реальном бизнесе',
-    description:
-      'Мы не просто внедряем AI — мы делаем его частью бизнес-ценности. Помогаем находить точки роста и автоматизации.',
-    image: '/why-2.svg',
-  },
-  {
-    title: 'Технологии под задачи',
-    description: 'Используем современные технологии и подбираем стек под ваш продукт, а не наоборот.',
-    image: '/why-3.svg',
-  },
-];
-
-const PROGRESS_DURATION = 30000; // ms, длительность заполнения прогресс-бара
+const PROGRESS_DURATION = 10000; // ms, длительность заполнения прогресс-бара
 
 export const WhySection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const frameIdRef = useRef<number | null>(null);
+  const startRef = useRef<number>(0);
   const { t } = useTranslation();
+
+  const steps = [
+    {
+      title: t('why-us.card-title'),
+      description: t('why-us.card-description'),
+      image: '/why-1.svg',
+    },
+    {
+      title: t('why-us.card-title2'),
+      description: t('why-us.card-description2'),
+      image: '/why-2.svg',
+    },
+    {
+      title: t('why-us.card-title3'),
+      description: t('why-us.card-description3'),
+      image: '/why-3.svg',
+    },
+  ];
 
   const glitchContent = useMemo(
     () => (
       <GlitchTypewriterText
-        lineClassName="font-inter-tight font-bold leading-tight lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-black to-gray-elements bg-clip-text text-transparent"
+        lineClassName="title leading-tight lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-black to-gray-elements bg-clip-text text-transparent"
         text={t('why-us.subtitle')}
       />
     ),
-    []
+    [t]
   );
 
-  useLayoutEffect(() => {
-    setProgress(0);
-    if (timerRef.current) clearInterval(timerRef.current);
-    let start = Date.now();
-    timerRef.current = setInterval(() => {
-      const elapsed = Date.now() - start;
+  useEffect(() => {
+    setProgress(10);
+    startRef.current = Date.now();
+
+    function animate() {
+      const elapsed = Date.now() - startRef.current;
       const percent = Math.min(100, (elapsed / PROGRESS_DURATION) * 100);
       setProgress(percent);
       if (percent >= 100) {
-        clearInterval(timerRef.current!);
         setTimeout(() => {
           setActiveIndex(prev => (prev === steps.length - 1 ? 0 : prev + 1));
         }, 100);
+      } else {
+        frameIdRef.current = requestAnimationFrame(animate);
       }
-    }, 10);
+    }
+
+    frameIdRef.current = requestAnimationFrame(animate);
+
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
+      if (frameIdRef.current) cancelAnimationFrame(frameIdRef.current);
     };
-  }, [activeIndex]);
+  }, [activeIndex, steps.length]);
+
+  const handleManualSwitch = (idx: number) => {
+    if (frameIdRef.current) cancelAnimationFrame(frameIdRef.current);
+    setProgress(0);
+    setTimeout(() => setActiveIndex(idx), 0);
+  };
 
   return (
     <section id="why" className="relative min-h-screen text-white overflow-hidden flex flex-col items-center h-full">
@@ -91,17 +100,16 @@ export const WhySection: React.FC = () => {
                     activeIndex={activeIndex}
                     step={step}
                     idx={idx}
-                    onClick={setActiveIndex}
+                    onClick={() => handleManualSwitch(idx)}
                   />
                 </motion.div>
               ) : (
                 <div key={step.title} className="w-full">
                   <ProgressElement
-                    progress={progress}
                     activeIndex={activeIndex}
                     step={step}
                     idx={idx}
-                    onClick={setActiveIndex}
+                    onClick={() => handleManualSwitch(idx)}
                   />
                 </div>
               );

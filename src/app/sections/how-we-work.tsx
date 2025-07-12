@@ -92,7 +92,7 @@ export const HowWeWork = () => {
         {/* Заголовок */}
         <GlitchTypewriterText
           className="mb-20"
-          lineClassName="text-center font-inter-tight font-bold leading-tight lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent"
+          lineClassName="text-center title lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent"
           text={t('inside-focus.title')}
         />
 
@@ -109,10 +109,8 @@ export const HowWeWork = () => {
           {/* Верхний левый */}
           <div className="flex flex-col items-center justify-center ">
             <div className="text-center w-full">
-              <h3 className="font-semibold mb-2 text-center text-base lg:text-lg">
-                {t('inside-focus.creative_title')}
-              </h3>
-              <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center">
+              <h3 className="font-inter mb-2 text-center text-base lg:text-lg">{t('inside-focus.creative_title')}</h3>
+              <p className="text-sm lg:text-base text-black leading-relaxed text-center">
                 {t('inside-focus.creative_text')}
               </p>
             </div>
@@ -121,28 +119,24 @@ export const HowWeWork = () => {
           {/* Верхний правый */}
           <div className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-full">
-              <h3 className="font-semibold mb-2 text-center text-base lg:text-lg">{t('inside-focus.ai_title')}</h3>
-              <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center">
-                {t('inside-focus.ai_text')}
-              </p>
+              <h3 className="font-inter mb-2 text-center text-base lg:text-lg">{t('inside-focus.ai_title')}</h3>
+              <p className="text-sm lg:text-base text-black leading-relaxed text-center">{t('inside-focus.ai_text')}</p>
             </div>
           </div>
 
           {/* Нижний левый */}
           <div className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-full">
-              <h3 className="font-semibold text-center mb-2 text-base lg:text-lg">{t('inside-focus.ux_title')}</h3>
-              <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center">
-                {t('inside-focus.ux_text')}
-              </p>
+              <h3 className="font-inter text-center mb-2 text-base lg:text-lg">{t('inside-focus.ux_title')}</h3>
+              <p className="text-sm lg:text-base text-black leading-relaxed text-center">{t('inside-focus.ux_text')}</p>
             </div>
           </div>
 
           {/* Нижний правый */}
           <div className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-full">
-              <h3 className="font-semibold mb-2 text-base lg:text-lg">{t('inside-focus.blockchain_title')}</h3>
-              <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center">
+              <h3 className="font-inter mb-2 text-base lg:text-lg">{t('inside-focus.blockchain_title')}</h3>
+              <p className="text-sm lg:text-base text-black leading-relaxed text-center">
                 {t('inside-focus.blockchain_text')}
               </p>
             </div>
@@ -170,46 +164,40 @@ export const HowWeWork = () => {
           {/* Верхний левый */}
           <div className="flex flex-col items-center justify-center ">
             <div className="text-center w-full">
-              <h3 className="font-semibold mb-2 text-center text-base lg:text-lg">
-                {t('inside-focus.creative_title')}
-              </h3>
-              <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center">
+              <h3 className="font-inter mb-2 text-center text-base lg:text-lg">{t('inside-focus.creative_title')}</h3>
+              <p className="text-sm lg:text-base text-black leading-relaxed text-center">
                 {t('inside-focus.creative_text')}
               </p>
             </div>
             {/* Линия-разделитель для mobile */}
-            <div className="h-px bg-gray-300 my-6 lg:hidden" />
+            <div className="w-full h-px bg-gray-elements my-6 lg:hidden" />
           </div>
 
           {/* Верхний правый */}
           <div className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-full">
-              <h3 className="font-semibold mb-2 text-center text-base lg:text-lg">{t('inside-focus.ai_title')}</h3>
-              <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center">
-                {t('inside-focus.ai_text')}
-              </p>
+              <h3 className="font-inter mb-2 text-center text-base lg:text-lg">{t('inside-focus.ai_title')}</h3>
+              <p className="text-sm lg:text-base text-black leading-relaxed text-center">{t('inside-focus.ai_text')}</p>
             </div>
             {/* Линия-разделитель для mobile */}
-            <div className="w-full h-px bg-gray-300 my-6 lg:hidden" />
+            <div className="w-full h-px bg-gray-elements my-6 lg:hidden" />
           </div>
 
           {/* Нижний левый */}
           <div className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-full">
-              <h3 className="font-semibold text-center mb-2 text-base lg:text-lg">{t('inside-focus.ux_title')}</h3>
-              <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center">
-                {t('inside-focus.ux_text')}
-              </p>
+              <h3 className="font-inter text-center mb-2 text-base lg:text-lg">{t('inside-focus.ux_title')}</h3>
+              <p className="text-sm lg:text-base text-black leading-relaxed text-center">{t('inside-focus.ux_text')}</p>
             </div>
             {/* Линия-разделитель для mobile */}
-            <div className="w-full h-px bg-gray-300 my-6 lg:hidden" />
+            <div className="w-full h-px bg-gray-elements my-6 lg:hidden" />
           </div>
 
           {/* Нижний правый */}
           <div ref={lastElementRef} className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-full">
-              <h3 className="font-semibold mb-2 text-base lg:text-lg">{t('inside-focus.blockchain_title')}</h3>
-              <p className="text-sm lg:text-base text-gray-700 leading-relaxed text-center">
+              <h3 className="font-inter mb-2 text-base lg:text-lg">{t('inside-focus.blockchain_title')}</h3>
+              <p className="text-sm lg:text-base text-black leading-relaxed text-center">
                 {t('inside-focus.blockchain_text')}
               </p>
             </div>

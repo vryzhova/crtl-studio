@@ -15,7 +15,7 @@ export const ContactSection: React.FC = () => {
         {/* Левая колонка: заголовок, текст, картинка */}
         <div className="flex flex-col h-full justify-center bg-[url('/ctrl-btn-bg.svg')] bg-center bg-no-repeat md:pl-12 bg">
           <GlitchTypewriterText
-            lineClassName="md:text-4xl lg:text-4xl font-bold leading-tight bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent mt-8"
+            lineClassName="md:text-4xl lg:text-4xl font-bold leading-tight bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
             text={t('contact-form.title')}
           />
           <div className="space-y-4 text-base text-gray-300 mt-6">

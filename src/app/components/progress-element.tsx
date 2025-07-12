@@ -4,7 +4,7 @@ type TProps = {
   step: any;
   idx: number;
   activeIndex: number;
-  progress: number;
+  progress?: number;
   onClick?: (idx: number) => void;
 };
 

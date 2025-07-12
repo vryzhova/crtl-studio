@@ -80,46 +80,20 @@ export const Header = () => {
       </div>
 
       {/* Mobile Header */}
-      <div className="flex lg:hidden h-[56px] w-full items-center justify-between px-4">
+      <div className="flex lg:hidden h-[84px] w-full items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 text-lg font-semibold">
-          <Image src="./logo.svg" alt="header-logo" width={120} height={24} />
+          <Image src="./logo.svg" alt="header-logo" width={180} height={29} />
         </Link>
         <button
-          onClick={() => setMenuOpen(v => !v)}
+          className="lg:hidden flex items-center justify-center w-16 h-16"
+          onClick={() => setMenuOpen(true)}
           aria-label="Открыть меню"
-          className="relative w-10 h-10 flex items-center justify-center"
         >
-          {/* Animated burger/close icon */}
-          <motion.span
-            initial={false}
-            animate={menuOpen ? 'open' : 'closed'}
-            variants={{
-              open: { rotate: 45 },
-              closed: { rotate: 0 },
-            }}
-            className="absolute w-6 h-0.5 bg-white rounded transition-all"
-            style={{ top: '12px' }}
-          />
-          <motion.span
-            initial={false}
-            animate={menuOpen ? 'open' : 'closed'}
-            variants={{
-              open: { opacity: 0, x: 16 },
-              closed: { opacity: 1, x: 0 },
-            }}
-            className="absolute w-6 h-0.5 bg-white rounded transition-all"
-            style={{ top: '18px' }}
-          />
-          <motion.span
-            initial={false}
-            animate={menuOpen ? 'open' : 'closed'}
-            variants={{
-              open: { rotate: -45 },
-              closed: { rotate: 0 },
-            }}
-            className="absolute w-6 h-0.5 bg-white rounded transition-all"
-            style={{ top: '24px' }}
-          />
+          <svg width="44" height="44" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="28" stroke="#E5E5E5" strokeWidth="4" />
+            <line x1="22" y1="26" x2="42" y2="26" stroke="#E5E5E5" strokeWidth="4" strokeLinecap="round" />
+            <line x1="22" y1="34" x2="42" y2="34" stroke="#E5E5E5" strokeWidth="4" strokeLinecap="round" />
+          </svg>
         </button>
       </div>
 
@@ -144,21 +118,27 @@ export const Header = () => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -40, opacity: 0 }}
               transition={{ type: 'tween', duration: 0.38, ease: 'easeInOut' }}
-              className="fixed left-0 top-0 z-50 w-full max-w-[1024px] bg-black border border-gray-elements shadow-2xl px-6 pt-6 pb-8  flex flex-col lg:hidden"
+              className="fixed left-0 top-0 z-50 w-full max-w-[1024px] bg-black border border-gray-elements shadow-2xl px-5 pt-5 pb-8  flex flex-col lg:hidden"
               style={{ minHeight: 'auto' }}
             >
-              <div className="flex items-start justify-between mb-8">
+              <div className="flex items-center justify-between">
                 <Link
                   href="/"
                   className="flex items-center gap-2 text-lg font-semibold"
                   onClick={() => setMenuOpen(false)}
                 >
-                  <Image src="./logo.svg" alt="header-logo" width={120} height={24} />
+                  <Image src="./logo.svg" alt="header-logo" width={180} height={30} />
                 </Link>
-                <button onClick={() => setMenuOpen(false)} aria-label="Закрыть меню" className="ml-2">
-                  <motion.span initial={false} animate={{ rotate: 45 }} className="block w-7 h-7 text-white text-2xl">
-                    ×
-                  </motion.span>
+                <button
+                  onClick={() => setMenuOpen(false)}
+                  aria-label="Закрыть меню"
+                  className="ml-2 flex items-center justify-center w-16 h-16"
+                >
+                  <svg width="44" height="44" viewBox="0 0 64 64" fill="none">
+                    <circle cx="32" cy="32" r="28" stroke="#E5E5E5" strokeWidth="4" />
+                    <line x1="21" y1="21" x2="43" y2="43" stroke="#E5E5E5" strokeWidth="4" strokeLinecap="round" />
+                    <line x1="43" y1="21" x2="21" y2="43" stroke="#E5E5E5" strokeWidth="4" strokeLinecap="round" />
+                  </svg>
                 </button>
               </div>
               <div className="flex flex-col lg:flex-row gap-6 w-full">

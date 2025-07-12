@@ -1,4 +1,6 @@
+'use client';
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface SelectOption {
   value: string;
@@ -13,6 +15,7 @@ const CustomSelect: React.FC<TProps> = ({ onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<SelectOption | null>(null);
   const selectRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   const options: SelectOption[] = [
     { value: 'telegram', label: 'TELEGRAM' },
@@ -58,8 +61,8 @@ const CustomSelect: React.FC<TProps> = ({ onChange }) => {
         onClick={toggleDropdown}
       >
         <div className="relative py-3 border-e-gray-elements">
-          <span className={`text-lg font-mono ${selectedOption ? 'text-white' : 'text-gray-400'}`}>
-            {selectedOption ? selectedOption.label : 'ПРЕДПОЧТИТЕЛЬНЫЙ СПОСОБ СВЯЗИ'}
+          <span className={`text-lg font-mono ${selectedOption ? 'text-white' : 'text-gray-elements'}`}>
+            {selectedOption ? selectedOption.label : t('contact-form.contact_method')}
           </span>
         </div>
       </div>

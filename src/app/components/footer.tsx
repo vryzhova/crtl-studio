@@ -8,7 +8,7 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { t } = useTranslation();
 
-  const links = ['Почему мы', 'Наши услуги', 'Наши кейсы', 'Для кого', 'Как мы работаем'];
+  const links = [t('header.about'), t('header.services'), t('header.cases'), t('header.clients'), t('header.how')];
   const docs = ['Документ 1', 'Документ 2'];
 
   return (
@@ -26,7 +26,7 @@ export const Footer = () => {
           {/* Ссылки и документы в одну строку */}
           <div className="flex flex-row w-full justify-between md:justify-start md:gap-5 gap-x-8">
             <div className="min-w-0">
-              <h3 className="text-gray-400 text-md font-semibold mb-2 whitespace-nowrap">Ссылки</h3>
+              <h3 className="text-gray-elements text-md font-semibold mb-2 whitespace-nowrap">Ссылки</h3>
               <ul className="space-y-2">
                 {links.map((item, idx) => (
                   <li key={idx}>

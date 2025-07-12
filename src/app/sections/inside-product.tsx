@@ -22,19 +22,21 @@ export const InsideProduct = () => {
           <div className="space-y-6">
             <GlitchTypewriterText
               text={t('inside-product.title')}
-              lineClassName="font-inter-tight font-bold leading-tight mb-4 lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
+              lineClassName="title leading-tight lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
             />
-            <div className="space-y-4 font-inter text-base text-gray-300">
+            <div className="space-y-4 font-inter text-base text-white">
               <p>{t('inside-product.main_subtitle')}</p>
               <p>{t('inside-product.main_subtitle2')}</p>
             </div>
 
-            <Link
-              href="#contact"
-              className="inline-block bg-lime-default hover:bg-lime-active active:bg-lime-active active:border-white text-black font-inter font-medium px-8 py-3 rounded-md transition-colors duration-200"
-            >
-              {t('inside-product.main_cta')}
-            </Link>
+            <div className="flex">
+              <Link
+                href="#contact"
+                className="inline-block w-full text-center md:w-62 bg-lime-default hover:bg-lime-active active:bg-lime-active active:border-white text-black font-inter font-medium px-8 py-3 rounded-md transition-colors duration-200"
+              >
+                {t('inside-product.main_cta')}
+              </Link>
+            </div>
           </div>
 
           {/* Right side - 3D Cube */}

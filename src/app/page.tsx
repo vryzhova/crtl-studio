@@ -14,35 +14,34 @@ import {
 import { Footer, Preloader } from './components';
 
 export default function Home() {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [showPreloader, setShowPreloader] = useState(true);
 
-  // Блокировка скролла при прелоадере
   useEffect(() => {
-    if (!isLoaded) {
+    if (showPreloader) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
-  }, [isLoaded]);
+  }, [showPreloader]);
 
-  // Callback для прелоадера
-  const handlePreloaderDone = () => {
-    setIsLoaded(true);
-  };
-
-  return !isLoaded ? (
-    <Preloader onDone={handlePreloaderDone} />
-  ) : (
-    <div className="animate-fade-in">
-      <MainSection />
-      <WhySection />
-      <InsideProduct />
-      <HowWeWork />
-      <Cases />
-      <WhoWeAreFor />
-      <ProcessSteps />
-      <ContactSection />
-      <Footer />
-    </div>
+  return (
+    <>
+      <Preloader onDone={() => setShowPreloader(false)} />
+      {!showPreloader && (
+        <div className="animate-fade-in">
+          <MainSection />
+          <WhySection />
+          <InsideProduct />
+          <HowWeWork />
+          <Cases />
+          <WhoWeAreFor />
+          <ProcessSteps />
+          <ContactSection />
+          <Footer />
+        </div>
+      )}
+    </>
   );
 }
+
+// Замените <MainContent /> на ваш основной JSX страницы

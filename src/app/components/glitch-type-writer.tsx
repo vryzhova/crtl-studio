@@ -17,7 +17,7 @@ type Props = {
 
 export const GlitchTypewriterText: React.FC<Props> = ({
   text,
-  className = 'text-2xl font-mono text-white space-y-2',
+  className = 'text-white',
   lineClassName = '',
   glitchChars = '/|\\',
   glitchDuration = 80,

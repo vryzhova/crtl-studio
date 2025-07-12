@@ -13,12 +13,35 @@ export const ContactForm: React.FC = () => {
   const [telegram, setTelegram] = useState('');
   const [email, setEmail] = useState('');
   const [agree, setAgree] = useState(true);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const { t } = useTranslation();
 
+  // Валидация: имя (только буквы), телефон, email
+  const validate = () => {
+    const newErrors: { [key: string]: string } = {};
+    // Имя: только буквы (рус/лат)
+    if (!name.trim() || !/^[a-zA-Zа-яА-ЯёЁ\s'-]+$/.test(name)) {
+      newErrors.name = 'ПРОВЕРЬТЕ ПРАВИЛЬНОСТЬ ВВОДА';
+    }
+    // Телефон: простой паттерн, минимум 10 цифр
+    if (!phone.trim() || !/^\+?\d{10,15}$/.test(phone.replace(/\D/g, ''))) {
+      newErrors.phone = 'ПРОВЕРЬТЕ ПРАВИЛЬНОСТЬ ВВОДА';
+    }
+    // Email: базовая проверка
+    if (!email.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      newErrors.email = 'ПРОВЕРЬТЕ ПРАВИЛЬНОСТЬ ВВОДА';
+    }
+    return newErrors;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: отправка данных на сервер
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
+      // TODO: отправка данных на сервер
+    }
   };
 
   const leftTopLine = 'absolute left-0 top-0 w-8 h-2.5  border-t border-l border-gray-400 rounded-tl-[8px]';
@@ -37,15 +60,19 @@ export const ContactForm: React.FC = () => {
         <div className={leftBottomLine} />
         <div className={rightTopLine} />
         <div className={rightBottomLine} />
-        <div className="flex-1 flex flex-col gap-2 pl-8 pr-8">
+        <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative">
           <input
-            className="bg-transparent outline-none text-white font-mono text-lg py-1 h-15 w-full"
+            className={`bg-transparent outline-none font-mono text-lg py-1 h-15 w-full pr-16 ${errors.name ? 'text-red-error' : 'text-white'}`}
             type="text"
             placeholder={t('contact-form.name')}
             value={name}
             onChange={e => setName(e.target.value)}
-            required
           />
+          {errors.name && (
+            <span className="absolute right-2 top-1/2 -translate-y-1/2 text-red-error font-mono text-xs uppercase">
+              {errors.name}
+            </span>
+          )}
         </div>
       </div>
 
@@ -57,15 +84,19 @@ export const ContactForm: React.FC = () => {
         <div className={leftBottomLine} />
         <div className={rightTopLine} />
         <div className={rightBottomLine} />
-        <div className="flex-1 flex flex-col gap-2 pl-8 pr-8">
+        <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative">
           <input
-            className="bg-transparent outline-none text-white font-mono text-lg py-1 h-15 w-full"
+            className={`bg-transparent outline-none font-mono text-lg py-1 h-15 w-full pr-16 ${errors.phone ? 'text-red-error' : 'text-white'}`}
             type="tel"
             placeholder={t('contact-form.phone')}
             value={phone}
             onChange={e => setPhone(e.target.value)}
-            required
           />
+          {errors.phone && (
+            <span className="absolute right-2 top-1/2 -translate-y-1/2 text-red-error font-mono text-xs uppercase">
+              {errors.phone}
+            </span>
+          )}
         </div>
       </div>
 
@@ -82,7 +113,6 @@ export const ContactForm: React.FC = () => {
             placeholder={t('contact-form.telegram')}
             value={telegram}
             onChange={e => setTelegram(e.target.value)}
-            required
           />
         </div>
       </div>
@@ -93,15 +123,19 @@ export const ContactForm: React.FC = () => {
         <div className={leftBottomLine} />
         <div className={rightTopLine} />
         <div className={rightBottomLine} />
-        <div className="flex-1 flex flex-col gap-2 pl-8 pr-8">
+        <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative">
           <input
-            className="bg-transparent outline-none text-white font-mono text-lg py-1 h-15 w-full"
+            className={`bg-transparent outline-none font-mono text-lg py-1 h-15 w-full pr-16 ${errors.email ? 'text-red-error' : 'text-white'}`}
             placeholder={t('contact-form.email')}
             type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            required
           />
+          {errors.email && (
+            <span className="absolute right-2 top-1/2 -translate-y-1/2 text-red-error font-mono text-xs uppercase">
+              {errors.email}
+            </span>
+          )}
         </div>
       </div>
 
@@ -118,7 +152,6 @@ export const ContactForm: React.FC = () => {
           type="checkbox"
           checked={agree}
           onChange={e => setAgree(e.target.checked)}
-          required
           className="accent-lime-default w-6 h-6 rounded border-2 border-lime-default"
         />
         <span className="text-lg text-white">

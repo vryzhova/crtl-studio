@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 type CardProps = {
   icon: string;
   title: string;
-  description: string[];
+  description: string;
 };
 
 const Card: React.FC<CardProps> = ({ icon, title, description }) => (
@@ -17,23 +17,14 @@ const Card: React.FC<CardProps> = ({ icon, title, description }) => (
     <div className="absolute top-0 right-0 w-14 h-14 border-t border-r border-gray-elements rounded-tr-lg group-hover:border-lime-default transition-colors duration-300" />
     <div className="absolute bottom-0 left-0 w-14 h-14 border-b border-l border-gray-elements rounded-bl-lg group-hover:border-lime-default transition-colors duration-300" />
     <div className="absolute bottom-0 right-0 w-14 h-14 border-b border-r border-gray-elements rounded-br-lg group-hover:border-lime-default transition-colors duration-300" />
-
-    {/* Content */}
     <div className="flex flex-col items-center text-center h-full">
-      {/* Icon with background */}
       <div className="w-16 h-16 rounded-full  flex items-center justify-center mb-5 transition-colors">
         <div className="w-8 h-8 relative">
           <Image src={icon} alt={title} height={40} width={40} />
         </div>
       </div>
-
-      {/* Description */}
       <div className="space-y-1 text-white font-inter text-base lg:text-[22px] flex-grow flex flex-col justify-center">
-        {description.map((line, index) => (
-          <p key={index} className="leading-tight">
-            {line}
-          </p>
-        ))}
+        {description}
       </div>
     </div>
   </div>
@@ -45,17 +36,17 @@ export const WhoWeAreFor = () => {
     {
       icon: '/streamline.svg',
       title: 'Быстрый старт',
-      description: ['Тем, у кого есть идея', 'и кому нужен', 'Быстрый,', 'уверенный старт'],
+      description: t('who-we-are-for.card_1'),
     },
     {
       icon: '/artificial-intelligence.svg',
       title: 'AI интеграция',
-      description: ['Тем, кто хочет внедрить AI', 'в продукт или прокачать', 'процессы через', 'автоматизацию'],
+      description: t('who-we-are-for.card_2'),
     },
     {
       icon: '/diamond.svg',
       title: 'Уникальный дизайн',
-      description: ['Тем, кто хочет', 'выделиться', 'за счёт стильного', 'дизайна и digital-решений'],
+      description: t('who-we-are-for.card_3'),
     },
   ];
 
