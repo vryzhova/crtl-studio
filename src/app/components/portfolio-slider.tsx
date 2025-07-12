@@ -33,20 +33,23 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
 
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center p-4">
+      <button
+        onClick={() => instanceRef.current?.prev()}
+        className="absolute left-30 top-1/2 transform text-black -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 rounded-md shadow"
+      >
+        ←
+      </button>
+
       <div className="relative  text-black w-full max-w-6xl max-h-[95vh] rounded-lg overflow-auto shadow-lg p-6">
-        {/* Кнопка закрытия */}
-        <button className="absolute top-4 right-4 text-2xl text-black" onClick={onClose}>
-          ✕
-        </button>
-
-        <button
-          onClick={() => instanceRef.current?.prev()}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 rounded-full shadow"
-        >
-          ←
-        </button>
-
         <div ref={sliderRef} className="keen-slider rounded-md overflow-hidden">
+          {/* Кнопка закрытия */}
+          <button
+            className="absolute top-4 right-4 bg-white text-black border-black z-20 rounded-md p-2"
+            onClick={onClose}
+          >
+            ✕
+          </button>
+
           {caseData.images.map((src, i) => (
             <div key={i} className="keen-slider__slide">
               <img
@@ -58,22 +61,14 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           ))}
         </div>
 
-        {/* → Стрелка */}
-        <button
-          onClick={() => instanceRef.current?.next()}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 rounded-full shadow"
-        >
-          →
-        </button>
-
         {/* Миниатюры */}
-        <div className="flex flex-wrap justify-center gap-2 mb-6">
+        <div className="flex flex-wrap justify-center gap-2 my-2">
           {caseData.images.map((src, i) => (
             <button
               key={i}
               onClick={() => instanceRef.current?.moveToIdx(i)}
               className={`border-2 rounded-md overflow-hidden w-24 h-16 transition-all ${
-                i === currentSlide ? 'border-red-500 opacity-100' : 'border-transparent opacity-60 hover:opacity-90'
+                i === currentSlide ? 'border-red-error opacity-100' : 'border-transparent opacity-60 hover:opacity-90'
               }`}
             >
               <img src={src} alt={`thumb ${i}`} className="w-full h-full object-cover" />
@@ -81,24 +76,30 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           ))}
         </div>
 
-        {/* Описание */}
-        <p className="text-base mb-4">{caseData.description}</p>
-
         {/* Теги */}
-        <div className="flex justify-between flex-wrap gap-3 text-sm  text-lime-default">
-          <div className="mb-4">
-            <h2 className="text-2xl font-semibold">{caseData.title}</h2>
-            <p className="text-sm text-gray-500">{caseData.year}</p>
-          </div>
-          <div>
+        <div className="flex justify-between flex-wrap gap-3">
+          <span className="text-2xl font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent">
+            {caseData.title}
+          </span>
+          <div className="flex gap-2">
             {caseData.tags.map((tag, i) => (
-              <span key={i} className="bg-black px-3 py-1 rounded-full">
+              <span
+                key={i}
+                className="bg-black px-3 py-1 text-sm rounded-full text-lime-default border border-lime-default"
+              >
                 {tag}
               </span>
             ))}
           </div>
         </div>
       </div>
+      {/* → Стрелка */}
+      <button
+        onClick={() => instanceRef.current?.next()}
+        className="absolute right-30 top-1/2 transform -translate-y-1/2 z-10 bg-white text-black bg-opacity-70 p-2 rounded-md shadow"
+      >
+        →
+      </button>
     </div>
   );
 };

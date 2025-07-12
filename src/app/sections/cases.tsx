@@ -65,7 +65,8 @@ export const Cases = () => {
         timeline
           .to({}, { duration: 1 })
           .to(caseNumbersRef.current, { y: 0, opacity: 1, duration: 1 }, '-=0.2')
-          .to(packedTextRef.current, { y: 0, opacity: 1, duration: 1 }, '-=0.4');
+          .to(packedTextRef.current, { y: 0, opacity: 1, duration: 1 }, '-=0.4')
+          .to(mainContentRef.current, { opacity: 1, duration: 0.8 });
       }
     };
 
@@ -110,7 +111,7 @@ export const Cases = () => {
 
       <div
         ref={mainContentRef}
-        className="absolute w-full h-full right-0 flex flex-col items-center justify-center pl-12"
+        className="lg: absolute w-full h-full right-0 flex flex-col items-center justify-center pl-12"
       >
         <CaseGallery />
       </div>
