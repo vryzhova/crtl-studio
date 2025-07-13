@@ -96,6 +96,7 @@ export const CaseGallery: React.FC = () => {
   ];
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -120,12 +121,13 @@ export const CaseGallery: React.FC = () => {
         ease: 'none',
         scrollTrigger: {
           trigger: wrapper,
-          start: 'top top',
+          start: 'top top+=20%',
           end: () => `+=${scrollDistance}`,
           scrub: true,
-          pin: true,
+          pin: contentRef.current,
+          markers: true,
           anticipatePin: 1,
-          onUpdate: () => {
+          onUpdate: self => {
             const viewportCenter = window.innerWidth / 2;
 
             itemRefs.current.forEach(ref => {
@@ -146,6 +148,10 @@ export const CaseGallery: React.FC = () => {
                 ease: 'power2.out',
               });
             });
+            // 🔥 Сбросить wrapper высоту, если достигли конца
+            if (self.progress === 1 || self.progress === 0) {
+              wrapper.style.height = '';
+            }
           },
           onLeave: () => {
             wrapper.style.height = '';
@@ -168,44 +174,60 @@ export const CaseGallery: React.FC = () => {
 
   return (
     <section ref={wrapperRef} className="relative overflow-hidden bg-black text-white select-none">
-      {/* Горизонтальный контейнер */}
-      <div ref={containerRef} className="flex h-screen items-center" style={{ width: `${cases.length * 70}vw` }}>
-        {cases.map((item, index) => (
-          <div
-            ref={el => (itemRefs.current[index] = el)}
-            key={item.id}
-            className="w-[70vw] h-[70vh] flex items-center justify-center p-10 cursor-pointer"
-            onClick={() => openGallery(item)}
-          >
-            <Image
-              src={item.cover}
-              alt={item.title}
-              className="rounded-xl shadow-lg object-cover"
-              width={900}
-              height={500}
-              priority={index === 0} // можно префетчить первый для скорости
-            />
+      <div id="gallery" ref={contentRef} className="relative h-screen overflow-hidden">
+        {/* Заголовки секции */}
+        <div className="absolute top-0 left-0 w-full flex justify-between items-start px-10 pt-12 z-20 pointer-events-none">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#CFCFCF]">Наши кейсы</h2>
+          <div className="text-right">
+            <div className="text-2xl md:text-3xl font-bold text-white">8 кейсов</div>
+            <div className="text-xl md:text-2xl font-bold text-[#979797] leading-tight">
+              8 упакованных
+              <br />
+              бизнесов
+            </div>
           </div>
-        ))}
-      </div>
-
-      {/* Информационный блок — фиксированный относительно wrapper'а */}
-      <div className="absolute right-10 bottom-10 flex gap-2 h-[70px] z-30">
-        <div className="p-6 flex items-center justify-between bg-lime-default rounded-md w-[540px] cursor-default select-none">
-          <span className="font-bold text-black truncate">{cases[activeIndex]?.title}</span>
-          <span className="px-3 text-black">{cases[activeIndex]?.year}</span>
+        </div>
+        {/* Горизонтальный контейнер */}
+        <div ref={containerRef} className="flex items-center" style={{ width: `${cases.length * 70}vw` }}>
+          {cases.map((item, index) => (
+            <div
+              ref={el => (itemRefs.current[index] = el)}
+              key={item.id}
+              className="w-[70vw] h-[70vh] flex items-center justify-center p-10 cursor-pointer"
+              onClick={() => openGallery(item)}
+            >
+              <Image
+                src={item.cover}
+                alt={item.title}
+                className="rounded-xl shadow-lg object-cover"
+                width={900}
+                height={500}
+                priority={index === 0} // можно префетчить первый для скорости
+              />
+            </div>
+          ))}
         </div>
 
         <div
-          className="flex items-center justify-center h-full w-[70px] bg-lime-default rounded-md cursor-pointer"
-          onClick={() => setActiveCase(cases[activeIndex])}
+          className="sticky bottom-10 right-10 flex gap-2 h-[70px] z-30"
+          style={{ position: 'sticky', marginLeft: 'auto', width: 'fit-content' }}
         >
-          <img src="/arrow-btn.svg" alt="arrow" width={50} height={50} />
-        </div>
-      </div>
+          <div className="p-6 flex items-center justify-between bg-lime-default rounded-md w-[540px] cursor-default select-none">
+            <span className="font-bold text-black truncate">{cases[activeIndex]?.title}</span>
+            <span className="px-3 text-black">{cases[activeIndex]?.year}</span>
+          </div>
 
-      {/* Модалка с кейсом */}
-      {activeCase && <CaseCarousel caseData={activeCase} onClose={closeGallery} />}
+          <div
+            className="flex items-center justify-center h-full w-[70px] bg-lime-default rounded-md cursor-pointer"
+            onClick={() => setActiveCase(cases[activeIndex])}
+          >
+            <img src="/arrow-btn.svg" alt="arrow" width={50} height={50} />
+          </div>
+        </div>
+
+        {/* Модалка с кейсом */}
+        {activeCase && <CaseCarousel caseData={activeCase} onClose={closeGallery} />}
+      </div>
     </section>
   );
 };
