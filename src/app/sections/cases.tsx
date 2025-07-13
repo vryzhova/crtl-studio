@@ -90,7 +90,7 @@ export const Cases = () => {
           .to(initialTextRef.current, { x: -350, duration: 1 }, '-=0.8')
           .to(rightPanelRef.current, { opacity: 1, x: '0%', duration: 0.8 }, '-=0.8')
           .to(rightPanelRef.current, { opacity: 1, duration: 0.8, backgroundColor: '#141414' })
-          .to(initialTextRef.current, { opacity: 0, duration: 1 })
+          .to(initialTextRef.current, { display: 'none', duration: 1 })
           .to(contentRef.current, { opacity: 1, duration: 0.8 });
 
         console.log('here1');
@@ -269,7 +269,17 @@ export const Cases = () => {
             className="flex items-center justify-center h-full w-[70px] bg-lime-default rounded-md cursor-pointer"
             onClick={() => setActiveCase(cases[activeIndex])}
           >
-            <img src="/arrow-btn.svg" alt="arrow" width={50} height={50} />
+            <svg width="70" height="70" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="56" height="56" rx="12" fill="#D1F48C" />
+              <rect x="2" y="2" width="56" height="56" rx="12" stroke="none" />
+              <path d="M15 15 V25 M15 15 H25" stroke="#222" strokeWidth="3" strokeLinecap="round" />
+              <path d="M45 15 V25 M45 15 H35" stroke="#222" strokeWidth="3" strokeLinecap="round" />
+              <path d="M15 45 V35 M15 45 H25" stroke="#222" strokeWidth="3" strokeLinecap="round" />
+              <path d="M45 45 V35 M45 45 H35" stroke="#222" strokeWidth="3" strokeLinecap="round" />
+              <path d="M23 23 L37 37" stroke="#222" strokeWidth="3" strokeLinecap="round" />
+              <path d="M37 37 H30" stroke="#222" strokeWidth="3" strokeLinecap="round" />
+              <path d="M37 37 V30" stroke="#222" strokeWidth="3" strokeLinecap="round" />
+            </svg>
           </div>
         </div>
 

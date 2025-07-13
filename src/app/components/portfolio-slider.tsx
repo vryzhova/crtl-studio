@@ -31,7 +31,7 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
   const thumbHeight = 84;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center p-2 sm:p-4">
+    <div className="fixed h-full w-full inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center p-2 sm:p-4">
       <div className="relative text-black w-full max-w-6xl max-h-[95vh] rounded-lg overflow-auto shadow-lg p-2 sm:p-6 flex flex-col items-center">
         {/* Мобильная шапка с тайтлом и кнопкой закрытия */}
         <div className="sm:hidden flex justify-between w-full">
@@ -80,7 +80,7 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           {/* Кнопка закрытия для desktop — поверх фото, справа сверху, отступ 30px */}
           <button
             className="hidden sm:block absolute z-20 bg-white text-black border-black rounded-md p-2"
-            style={{ top: 30, right: 30, width: 40, height: 40 }}
+            style={{ top: 20, right: 100, width: 40, height: 40 }}
             onClick={onClose}
             aria-label="Закрыть"
           >
