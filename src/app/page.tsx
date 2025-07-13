@@ -30,7 +30,6 @@ export default function Home() {
           <InsideProduct />
           <HowWeWork />
           <Cases />
-          {/*<CaseGallery />*/}
           <WhoWeAreFor />
           <ProcessSteps />
           <ContactSection />

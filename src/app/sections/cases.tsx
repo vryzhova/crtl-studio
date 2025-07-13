@@ -2,7 +2,6 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { CaseGallery } from '../components';
 import { getCases } from '../sections/helpers';
 import { useTranslation } from 'react-i18next';
 import dynamic from 'next/dynamic';
@@ -184,7 +183,7 @@ export const Cases = () => {
       ctx.revert();
       if (container) container.style.height = '';
     };
-  }, [containerAnimationDone]);
+  }, [containerAnimationDone, isDesktop]);
 
   const openGallery = (caseItem: Case) => setActiveCase(caseItem);
   const closeGallery = () => setActiveCase(null);

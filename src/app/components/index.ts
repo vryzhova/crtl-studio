@@ -4,6 +4,5 @@ export { Footer } from './footer';
 export { Preloader } from './preloader';
 export { Header } from './header';
 export { BudgetSlider } from './budget-slider';
-export { CaseGallery } from './case-gallary';
 export { GlitchTypewriterText } from './glitch-type-writer';
 export { SecondaryButton } from './secondary-btn';
