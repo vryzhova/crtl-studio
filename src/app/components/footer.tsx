@@ -32,7 +32,7 @@ export const Footer = () => {
                   <li key={idx}>
                     <Link
                       href="#"
-                      className="hover:text-lime-400 transition-colors text-base font-normal whitespace-nowrap"
+                      className="hover:text-lime-default active:text-lime-active transition-colors text-base font-normal whitespace-nowrap"
                     >
                       {item}
                     </Link>
@@ -47,7 +47,7 @@ export const Footer = () => {
                   <li key={idx}>
                     <Link
                       href="#"
-                      className="hover:text-lime-400 transition-colors text-base font-normal whitespace-nowrap"
+                      className="hover:text-lime-default active:text-lime-active transition-colors text-base font-normal whitespace-nowrap"
                     >
                       {item}
                     </Link>

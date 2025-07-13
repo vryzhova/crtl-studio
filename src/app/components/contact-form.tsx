@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BudgetSlider } from '@/app/components/budget-slider';
+import { BudgetSlider, Button } from '@/app/components';
 import CustomSelect from '@/app/components/custom-select';
 import { ThankYouModal } from './thankyou-modal';
 
@@ -166,13 +166,14 @@ export const ContactForm: React.FC = () => {
             .
           </span>
         </div>
-        <button
+        <Button
+          onClick={handleSubmit}
           type="submit"
-          className="mt-4 w-full bg-lime-default hover:bg-lime-active active:bg-lime-active active:border-white text-black py-3 rounded font-semibold text-base transition "
+          className="mt-4 w-[320px] lg:w-[244px] 2xl:w-[300px]"
           disabled={!agree}
         >
           {t('contact-form.submit')}
-        </button>
+        </Button>
       </form>
       <ThankYouModal
         title={t('contact-form.thank_you_title')}

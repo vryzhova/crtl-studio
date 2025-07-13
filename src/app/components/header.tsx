@@ -1,11 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
+import { SecondaryButton } from '@/app/components';
 
 export const Header = () => {
   const [locale, setLocale] = useState<'ru' | 'en'>('ru');
@@ -41,7 +42,11 @@ export const Header = () => {
           {/* Navigation */}
           <nav className="flex gap-4 text-sm font-medium">
             {navItems.map(item => (
-              <Link key={item.href} href={item.href} className="hover:gray-elements scroll-smooth transition">
+              <Link
+                key={item.href}
+                href={item.href}
+                className="hover:text-lime-default active:text-lime-active scroll-smooth transition"
+              >
                 {item.label}
               </Link>
             ))}
@@ -51,18 +56,18 @@ export const Header = () => {
           {/* Language switch */}
           <div className="flex gap-1 overflow-hidden text-sm">
             <button
-              className={clsx('px-3 py-1 border border-white/30 rounded', {
+              className={clsx('px-3 py-1 border border-white rounded hover:bg-lime-default h-[37px]', {
                 'bg-white text-black': locale === 'ru',
-                'hover:bg-white/10': locale !== 'ru',
+                'hover:text-black': locale !== 'ru',
               })}
               onClick={() => toggleLanguage('ru')}
             >
               RU
             </button>
             <button
-              className={clsx('px-3 py-1 border border-white/30 rounded', {
+              className={clsx('px-3 py-1 border border-white rounded hover:bg-lime-default h-[37px]', {
                 'bg-white text-black': locale === 'en',
-                'hover:bg-white/10': locale !== 'en',
+                'hover:text-black': locale !== 'en',
               })}
               onClick={() => toggleLanguage('en')}
             >
@@ -70,12 +75,16 @@ export const Header = () => {
             </button>
           </div>
           {/* Contact button */}
-          <Link
-            href="#contact"
-            className="border border-white/70 rounded px-4 py-1 text-sm hover:bg-white hover:text-black transition"
+
+          <SecondaryButton
+            className="w-[320px] lg:w-[163px] 2xl:w-[196px] h-[60px] lg:h-[37px] text-sm 2xl:h-[44px]"
+            onClick={() => {
+              const el = document.getElementById('contact');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
           >
-            Связаться с нами
-          </Link>
+            {t('contact-us')}
+          </SecondaryButton>
         </div>
       </div>
 
@@ -124,7 +133,7 @@ export const Header = () => {
               <div className="flex items-center justify-between">
                 <Link
                   href="/"
-                  className="flex items-center gap-2 text-lg font-semibold"
+                  className="flex items-center gap-2 text-lg font-semibold hover:bg-lime-default active:bg-lime-active"
                   onClick={() => setMenuOpen(false)}
                 >
                   <Image src="./logo.svg" alt="header-logo" width={180} height={30} />
@@ -148,7 +157,7 @@ export const Header = () => {
                       key={item.href}
                       href={item.href}
                       onClick={() => setMenuOpen(false)}
-                      className="hover:text-purple-400 transition text-left"
+                      className="hover:bg-lime-default active:bg-lime-active transition text-left"
                     >
                       {item.label}
                     </Link>

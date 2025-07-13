@@ -2,7 +2,7 @@ import React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
 }
 
 const getCornerSVG = (cornerOffset: number, cornerLength: number, cornerRadius: number, svgSize: number) => (
@@ -70,12 +70,13 @@ const getCornerSVG = (cornerOffset: number, cornerLength: number, cornerRadius: 
   </>
 );
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, disabled, className = '', variant, ...props }, ref) => {
+export const SecondaryButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, disabled, className = '', size, ...props }, ref) => {
     const base =
-      'relative flex items-center justify-center w-full min-w-[180px] h-[60px] py-2 px-5 rounded-md text-black text-base xl:text-lg font-medium transition-all duration-200 outline-none group';
+      'relative flex items-center justify-center py-2.5 px-5 w-full min-w-[180px] h-[37px] border border-white rounded-md text-white text-base font-medium transition-all duration-200 outline-none group';
 
-    const enabled = 'bg-lime-default hover:bg-lime-active focus:bg-lime-active focus:border-2 focus:border-white';
+    const enabled =
+      'hover:text-black active:text-black  focus:text-black hover:bg-lime-default focus:bg-lime-active focus:border-1 focus:border-white';
     const disabledStyle = 'bg-[#B9B9B9] cursor-not-allowed';
 
     const CORNER_OFFSET = 5; // отступ от краёв
@@ -93,14 +94,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {/* SVG corners только на hover, не на focus-visible */}
-        {!disabled && (
-          <span className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-150 group-focus-visible:opacity-0">
-            {CornerSVG}
-          </span>
-        )}
+        {/*{!disabled && (*/}
+        {/*  <span className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-150 group-focus-visible:opacity-0">*/}
+        {/*    {CornerSVG}*/}
+        {/*  </span>*/}
+        {/*)}*/}
         <span className="relative z-20">{children}</span>
       </button>
     );
   }
 );
-Button.displayName = 'Button';
+SecondaryButton.displayName = 'SecondaryButton';

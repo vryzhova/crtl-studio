@@ -39,7 +39,7 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
             {caseData.title}
           </span>
           <button
-            className="absolute h-10 w-10 top-4 right-4 text-white border border-white z-20 rounded-md p-2"
+            className="absolute h-10 w-10 top-4 right-4 text-white border border-white z-20 rounded-md p-2 hover:bg-lime-default active:bg-lime-active"
             onClick={onClose}
           >
             ✕
@@ -53,13 +53,12 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           {/* Левая стрелка — только на desktop */}
           <button
             onClick={prev}
-            className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 rounded-md shadow text-black"
+            className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 rounded-md shadow text-black hover:bg-lime-default active:bg-lime-active"
             style={{ width: 40, height: 40 }}
             aria-label="Предыдущий слайд"
           >
             ←
-          </button>
-          д{' '}
+          </button>{' '}
           <Image
             src={caseData.images[selected]}
             alt={`slide ${selected}`}
@@ -72,7 +71,7 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           {/* Правая стрелка — только на desktop */}
           <button
             onClick={next}
-            className="hidden lg:block absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 rounded-md shadow text-black"
+            className="hidden lg:block absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 rounded-md shadow text-black hover:bg-lime-default active:bg-lime-active"
             style={{ width: 40, height: 40 }}
             aria-label="Следующий слайд"
           >

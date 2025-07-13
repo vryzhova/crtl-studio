@@ -2,8 +2,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
-import Link from 'next/link';
-import { SectionTitle, GlitchTypewriterText } from '../components';
+
+import { SectionTitle, GlitchTypewriterText, Button } from '../components';
 
 export const InsideProduct = () => {
   const { t } = useTranslation();
@@ -30,12 +30,15 @@ export const InsideProduct = () => {
             </div>
 
             <div className="flex">
-              <Link
-                href="#contact"
-                className="inline-block w-full text-center md:w-62 bg-lime-default hover:bg-lime-active active:bg-lime-active active:border-white text-black font-inter font-medium px-8 py-3 rounded-md transition-colors duration-200"
+              <Button
+                className="w-[320px] lg:w-[244px] 2xl:w-[300px]"
+                onClick={() => {
+                  const el = document.getElementById('contact');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 {t('inside-product.main_cta')}
-              </Link>
+              </Button>
             </div>
           </div>
 

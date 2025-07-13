@@ -124,7 +124,7 @@ export const WhySection: React.FC = () => {
                 alt={steps[activeIndex].title}
                 width={400}
                 height={400}
-                className=" object-contain transition-all duration-500"
+                className="object-contain transition-all duration-500"
                 priority
               />
             </div>

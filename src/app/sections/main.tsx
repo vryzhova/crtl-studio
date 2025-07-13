@@ -1,13 +1,8 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
-import { Header, AutoGlitchText, GlitchTypewriterText } from '../components';
-
-type TProps = {
-  title?: string;
-};
+import { Header, Button, GlitchTypewriterText } from '../components';
 
 export const MainSection: React.FC = () => {
   const { t } = useTranslation();
@@ -23,7 +18,7 @@ export const MainSection: React.FC = () => {
       <div className="relative flex flex-col min-h-screen">
         <Header />
         <div className="container mx-auto flex flex-1 justify-center items-center">
-          <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
+          <div className="relative z-10 text-center px-6 max-w-3xl mx-auto flex flex-col justify-center items-center ">
             <GlitchTypewriterText
               text={t('main.title')}
               lineClassName="title text-4xl md:text-6xl font-bold leading-tight"
@@ -33,12 +28,22 @@ export const MainSection: React.FC = () => {
               {t('main.description')}
             </p>
 
-            <a
-              href="#contact"
-              className="inline-block bg-lime-default hover:bg-lime-active active:bg-lime-active active:border-white text-black px-6 py-3 rounded font-medium transition"
+            <Button
+              className="w-[320px] lg:w-[244px] 2xl:w-[300px]"
+              onClick={() => {
+                const el = document.getElementById('contact');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               {t('contact-btn')}
-            </a>
+            </Button>
+
+            {/*<a*/}
+            {/*  href="#contact"*/}
+            {/*  className="inline-block bg-lime-default hover:bg-lime-active active:bg-lime-active active:border-white text-black px-6 py-3 rounded font-medium transition"*/}
+            {/*>*/}
+            {/*  {t('contact-btn')}*/}
+            {/*</a>*/}
           </div>
         </div>
       </div>

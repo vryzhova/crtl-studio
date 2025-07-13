@@ -1,10 +1,14 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
-// Тип для кейса
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 type Case = {
   id: string;
   title: string;
@@ -18,9 +22,13 @@ type Case = {
 const CaseCarousel = dynamic(() => import('./portfolio-slider').then(mod => mod.CaseCarousel), { ssr: false });
 
 export const CaseGallery: React.FC = () => {
-  const [activeCase, setActiveCase] = useState<Case | null>(null); // выбранный кейс для попапа
+  const [activeCase, setActiveCase] = useState<Case | null>(null);
   const [activeImg, setActiveImg] = useState(0);
+
   const containerRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
   const { t } = useTranslation();
 
   const cases: Case[] = [
@@ -95,53 +103,91 @@ export const CaseGallery: React.FC = () => {
     // Добавьте другие кейсы по аналогии
   ];
 
-  // Горизонтальный скролл колесиком
-  const handleWheel = (e: React.WheelEvent) => {
-    if (containerRef.current) {
-      containerRef.current.scrollLeft += e.deltaY;
-    }
-  };
+  useEffect(() => {
+    const container = containerRef.current;
+    const wrapper = wrapperRef.current;
+    if (!container || !wrapper) return;
 
-  // Открыть попап
-  const openGallery = (caseItem: Case) => {
-    setActiveCase(caseItem);
-    setActiveImg(0);
-  };
+    const scrollLength = container.scrollWidth - wrapper.offsetWidth;
 
-  // Закрыть попап
+    const ctx = gsap.context(() => {
+      // Главный scroll-trigger
+      gsap.to(container, {
+        x: () => `-${scrollLength}px`,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: wrapper,
+          start: 'top top',
+          end: () => `+=${scrollLength}`,
+          scrub: true,
+          pin: true,
+          anticipatePin: 1,
+          onUpdate: self => {
+            const viewportCenter = window.innerWidth / 2;
+
+            itemRefs.current.forEach(ref => {
+              if (!ref) return;
+              const rect = ref.getBoundingClientRect();
+              const elementCenter = rect.left + rect.width / 2;
+              const distanceToCenter = Math.abs(viewportCenter - elementCenter);
+
+              // Чем ближе к центру — тем больше scale
+              const maxScale = 1;
+              const minScale = 0.8;
+              const maxDistance = window.innerWidth / 2;
+              const scale = maxScale - (distanceToCenter / maxDistance) * (maxScale - minScale);
+
+              gsap.to(ref, {
+                scale: Math.max(minScale, Math.min(maxScale, scale)),
+                duration: 0.2,
+                ease: 'power2.out',
+              });
+            });
+          },
+        },
+      });
+    }, wrapper);
+
+    return () => ctx.revert();
+  }, []);
+
+  const openGallery = (caseItem: Case) => setActiveCase(caseItem);
   const closeGallery = () => setActiveCase(null);
 
-  // Листать фото в попапе
-  const prevImg = () => setActiveImg(i => (i > 0 ? i - 1 : 0));
-  const nextImg = () => setActiveImg(i => (activeCase ? Math.min(i + 1, activeCase.images.length - 1) : 0));
-
   return (
-    <div className="relative w-full">
-      {/* Галерея кейсов (горизонтальный скролл) */}
-      <div
-        ref={containerRef}
-        onWheel={handleWheel}
-        className="flex overflow-x-auto space-x-6 py-8 snap-x"
-        style={{ scrollSnapType: 'x mandatory' }}
-      >
-        {cases.map(item => (
-          <div key={item.id} className="min-w-[600px] cursor-pointer snap-start" onClick={() => openGallery(item)}>
+    <div ref={wrapperRef} className="relative w-full h-full overflow-hidden bg-black text-white">
+      {/* Горизонтальный контейнер */}
+      <div ref={containerRef} className="flex h-full" style={{ width: `${cases.length * 100}vw` }}>
+        {cases.map((item, index) => (
+          <div
+            ref={el => (itemRefs.current[index] = el)}
+            key={item.id}
+            className="w-max-[900px] h-full flex items-center justify-center p-10 cursor-pointer"
+            onClick={() => openGallery(item)}
+          >
             <Image
               src={item.cover}
               alt={item.title}
-              className="rounded-xl shadow-lg w-full object-cover"
-              width={600}
-              height={400}
+              className="rounded-xl shadow-lg object-cover"
+              width={900}
+              height={500}
             />
-            <div className="mt-4 flex items-center justify-between">
-              <span className="font-bold text-lg">{item.title}</span>
-              <span className="bg-lime-200 px-3 py-1 rounded text-black">{item.year}</span>
-            </div>
           </div>
         ))}
       </div>
 
-      {/* Попап-галерея выбранного кейса */}
+      {/* Кнопки */}
+      <div className="absolute right-10 bottom-10 flex gap-2 h-[70px] z-10">
+        <div className="p-6 flex items-center justify-between bg-lime-default rounded-md w-[540px]">
+          <span className="font-bold text-black">Get Crypto</span>
+          <span className="px-3 text-black">2025</span>
+        </div>
+        <div className="flex items-center justify-center h-full w-[70px] bg-lime-default rounded-md">
+          <img src="/arrow-btn.svg" alt="arrow" width={50} height={50} />
+        </div>
+      </div>
+
+      {/* Модалка */}
       {activeCase && <CaseCarousel caseData={activeCase} onClose={closeGallery} />}
     </div>
   );
