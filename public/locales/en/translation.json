@@ -80,7 +80,17 @@
   "cases": {
     "tag": "// OUR CASES",
     "title": "Our cases",
-    "subtitle": "8 cases\n8 streamlined\nbusinesses"
+    "subtitle": "8 cases\n8 streamlined\nbusinesses",
+    "case_2_tag_1": "// BRAND STRATEGY",
+    "case_2_tag_2": "// IDENTITY",
+    "case_2_tag_3": "// WEBSITE DESIGN & DEVELOPMENT",
+    "case_3_tag_1": "// PROTOTYPING",
+    "case_3_tag_2": "// UX/UI DESIGN",
+    "case_3_tag_3": "// WEBSITE DEVELOPMENT",
+    "case_4_tag_1": "// TELEGRAM MINI APP",
+    "case_5_tag_1": "// GAME DEVELOPMENT",
+    "case_6_name": "Casual Game",
+    "case_7_name": "TG Mini App for an Investment Club"
   },
   "contact-btn": "Submit application",
   "contact-us": "Contact us",

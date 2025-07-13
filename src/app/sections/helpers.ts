@@ -42,7 +42,7 @@ export const getCases = (t: (key: string) => string) => {
       title: 'AIM',
       year: '2025',
       cover: '/cases/AIM_cover.png',
-      images: ['/cases/AIM.png', '/cases/AIM_1.png', '/cases/AIM_2.png', '/cases/AIM_3.png', '/cases/AIM_4.png'],
+      images: ['/cases/AIM.png', '/cases/AIM_2.png', '/cases/AIM_3.png', '/cases/AIM_4.png'],
       description: 'Описание кейса...',
       tags: [t('cases.case_4_tag_1')],
     },

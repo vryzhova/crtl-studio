@@ -40,9 +40,7 @@ export const Cases = () => {
   const [activeCase, setActiveCase] = useState<Case | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [containerAnimationDone, setContainerAnimationDone] = useState(false);
-  const [shouldInitScrollTrigger, setShouldInitScrollTrigger] = useState(false);
   const animationPlayedRef = useRef(false);
-  console.log('Cases rendered', containerAnimationDone);
 
   const cases = useMemo(() => getCases(t), [t]);
   const isDesktop = typeof window !== 'undefined' && window.innerWidth > 1024;
@@ -145,13 +143,20 @@ export const Cases = () => {
           anticipatePin: 1,
           onUpdate: self => {
             const viewportCenter = window.innerWidth / 2;
+            let closestIdx = 0;
+            let minDistance = Infinity;
 
-            itemRefs.current.forEach(ref => {
+            itemRefs.current.forEach((ref, idx) => {
               if (!ref) return;
               const rect = ref.getBoundingClientRect();
               const elementCenter = rect.left + rect.width / 2;
               const distanceToCenter = Math.abs(viewportCenter - elementCenter);
 
+              // Найти ближайший элемент
+              if (distanceToCenter < minDistance) {
+                minDistance = distanceToCenter;
+                closestIdx = idx;
+              }
               const maxScale = 1;
               const minScale = 0.8;
               const maxDistance = window.innerWidth / 2;
@@ -164,6 +169,8 @@ export const Cases = () => {
                 ease: 'power2.out',
               });
             });
+
+            setActiveIndex(closestIdx);
             // 🔥 Сбросить wrapper высоту, если достигли конца
             if (self.progress === 1 || self.progress === 0) {
               container.style.height = '';
