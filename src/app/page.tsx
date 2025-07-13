@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { MainSection, WhySection, InsideProduct, HowWeWork, WhoWeAreFor, Cases, ContactSection } from './sections';
-import { Footer, Preloader } from './components';
+import { CaseGallery, Footer, Preloader } from './components';
 
 const ProcessSteps = dynamic(() => import('./sections/process-steps').then(mod => mod.ProcessSteps), {
   ssr: false,
@@ -29,7 +29,7 @@ export default function Home() {
           <WhySection />
           <InsideProduct />
           <HowWeWork />
-          <Cases />
+          <CaseGallery />
           <WhoWeAreFor />
           <ProcessSteps />
           <ContactSection />

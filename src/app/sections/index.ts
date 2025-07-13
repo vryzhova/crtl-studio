@@ -7,3 +7,4 @@ export { WhoWeAreFor } from './who-we-are-for';
 export { ProcessSteps } from './process-steps';
 export { ContactSection } from './contact-section';
 export { Cases } from './cases';
+export { CaseGallery } from './gallery-section';

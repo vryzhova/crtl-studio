@@ -22,13 +22,6 @@ type Case = {
 const CaseCarousel = dynamic(() => import('./portfolio-slider').then(mod => mod.CaseCarousel), { ssr: false });
 
 export const CaseGallery: React.FC = () => {
-  const [activeCase, setActiveCase] = useState<Case | null>(null);
-  const [activeImg, setActiveImg] = useState(0);
-
-  const containerRef = useRef<HTMLDivElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-
   const { t } = useTranslation();
 
   const cases: Case[] = [
@@ -98,31 +91,41 @@ export const CaseGallery: React.FC = () => {
         '/cases/Инвестиционный_клуб_4.png',
       ],
       description: 'Описание кейса...',
-      tags: ['Прототипирование', 'UX/UI-дизайн', 'Разработка сайта'],
+      tags: [t('cases.case_5_tag_1')],
     },
-    // Добавьте другие кейсы по аналогии
   ];
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const [activeCase, setActiveCase] = useState<Case | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const container = containerRef.current;
     const wrapper = wrapperRef.current;
     if (!container || !wrapper) return;
 
-    const scrollLength = container.scrollWidth - wrapper.offsetWidth;
+    const totalWidth = container.scrollWidth;
+    const scrollDistance = totalWidth - window.innerWidth;
+
+    // Высота wrapper — длина прокрутки + высота окна,
+    // чтобы ScrollTrigger мог прокрутить весь горизонтальный контент
+    wrapper.style.height = `${scrollDistance + window.innerHeight}px`;
 
     const ctx = gsap.context(() => {
-      // Главный scroll-trigger
       gsap.to(container, {
-        x: () => `-${scrollLength}px`,
+        x: () => `-${scrollDistance}px`,
         ease: 'none',
         scrollTrigger: {
           trigger: wrapper,
           start: 'top top',
-          end: () => `+=${scrollLength}`,
+          end: () => `+=${scrollDistance}`,
           scrub: true,
           pin: true,
           anticipatePin: 1,
-          onUpdate: self => {
+          onUpdate: () => {
             const viewportCenter = window.innerWidth / 2;
 
             itemRefs.current.forEach(ref => {
@@ -131,10 +134,10 @@ export const CaseGallery: React.FC = () => {
               const elementCenter = rect.left + rect.width / 2;
               const distanceToCenter = Math.abs(viewportCenter - elementCenter);
 
-              // Чем ближе к центру — тем больше scale
               const maxScale = 1;
               const minScale = 0.8;
               const maxDistance = window.innerWidth / 2;
+
               const scale = maxScale - (distanceToCenter / maxDistance) * (maxScale - minScale);
 
               gsap.to(ref, {
@@ -144,25 +147,34 @@ export const CaseGallery: React.FC = () => {
               });
             });
           },
+          onLeave: () => {
+            wrapper.style.height = '';
+          },
+          onLeaveBack: () => {
+            wrapper.style.height = '';
+          },
         },
       });
     }, wrapper);
 
-    return () => ctx.revert();
-  }, []);
+    return () => {
+      ctx.revert();
+      if (wrapper) wrapper.style.height = '';
+    };
+  }, [cases.length]);
 
   const openGallery = (caseItem: Case) => setActiveCase(caseItem);
   const closeGallery = () => setActiveCase(null);
 
   return (
-    <div ref={wrapperRef} className="relative w-full h-full overflow-hidden bg-black text-white">
+    <section ref={wrapperRef} className="relative overflow-hidden bg-black text-white select-none">
       {/* Горизонтальный контейнер */}
-      <div ref={containerRef} className="flex h-full" style={{ width: `${cases.length * 100}vw` }}>
+      <div ref={containerRef} className="flex h-screen items-center" style={{ width: `${cases.length * 70}vw` }}>
         {cases.map((item, index) => (
           <div
             ref={el => (itemRefs.current[index] = el)}
             key={item.id}
-            className="w-max-[900px] h-full flex items-center justify-center p-10 cursor-pointer"
+            className="w-[70vw] h-[70vh] flex items-center justify-center p-10 cursor-pointer"
             onClick={() => openGallery(item)}
           >
             <Image
@@ -171,24 +183,29 @@ export const CaseGallery: React.FC = () => {
               className="rounded-xl shadow-lg object-cover"
               width={900}
               height={500}
+              priority={index === 0} // можно префетчить первый для скорости
             />
           </div>
         ))}
       </div>
 
-      {/* Кнопки */}
-      <div className="absolute right-10 bottom-10 flex gap-2 h-[70px] z-10">
-        <div className="p-6 flex items-center justify-between bg-lime-default rounded-md w-[540px]">
-          <span className="font-bold text-black">Get Crypto</span>
-          <span className="px-3 text-black">2025</span>
+      {/* Информационный блок — фиксированный относительно wrapper'а */}
+      <div className="absolute right-10 bottom-10 flex gap-2 h-[70px] z-30">
+        <div className="p-6 flex items-center justify-between bg-lime-default rounded-md w-[540px] cursor-default select-none">
+          <span className="font-bold text-black truncate">{cases[activeIndex]?.title}</span>
+          <span className="px-3 text-black">{cases[activeIndex]?.year}</span>
         </div>
-        <div className="flex items-center justify-center h-full w-[70px] bg-lime-default rounded-md">
+
+        <div
+          className="flex items-center justify-center h-full w-[70px] bg-lime-default rounded-md cursor-pointer"
+          onClick={() => setActiveCase(cases[activeIndex])}
+        >
           <img src="/arrow-btn.svg" alt="arrow" width={50} height={50} />
         </div>
       </div>
 
-      {/* Модалка */}
+      {/* Модалка с кейсом */}
       {activeCase && <CaseCarousel caseData={activeCase} onClose={closeGallery} />}
-    </div>
+    </section>
   );
 };

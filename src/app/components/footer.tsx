@@ -1,8 +1,10 @@
 'use client';
-
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+
+import { SecondaryButton } from '@/app/components/secondary-btn';
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -70,9 +72,15 @@ export const Footer = () => {
         </div>
         {/* Правая часть: кнопка и логотип */}
         <div className="flex flex-col gap-6 items-center md:items-end justify-end md:justify-between w-full md:w-auto mt-6 md:mt-0">
-          <button className="w-full md:w-auto border border-white rounded-md py-3 px-6 text-md hover:bg-white hover:text-black transition-colors">
-            Связаться с нами
-          </button>
+          <SecondaryButton
+            className="w-[320px] lg:w-[163px] 2xl:w-[196px] h-[60px] lg:h-[37px] text-sm 2xl:h-[44px]"
+            onClick={() => {
+              const el = document.getElementById('contact');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            {t('contact-us')}
+          </SecondaryButton>
           <div className="w-full flex justify-center md:justify-end">
             <div className="relative w-48 h-14 md:w-60 md:h-16">
               <Image src="/logo.svg" alt="CTRL Studio Logo" fill className="object-contain" />
