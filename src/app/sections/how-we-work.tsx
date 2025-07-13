@@ -40,7 +40,6 @@ export const HowWeWork = () => {
       scrollTrigger: {
         trigger: isDesktop ? sectionRef.current : lastElementRef.current,
         scrub: 1,
-        markers: true,
         start: scrollStart,
         end: 'bottom top-=20%',
         anticipatePin: 1,

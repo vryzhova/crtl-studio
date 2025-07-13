@@ -1,7 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import IMask from 'imask';
+
 import { BudgetSlider, Button } from '@/app/components';
 import CustomSelect from '@/app/components/custom-select';
 import { ThankYouModal } from './thankyou-modal';
@@ -16,6 +18,7 @@ export const ContactForm: React.FC = () => {
   const [agree, setAgree] = useState(true);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const { t } = useTranslation();
 
@@ -46,6 +49,18 @@ export const ContactForm: React.FC = () => {
       // TODO: отправка данных на сервер
     }
   };
+
+  useEffect(() => {
+    if (!inputRef.current) return;
+
+    const mask = IMask(inputRef.current, {
+      mask: '+{7} (000) 000-00-00',
+    });
+
+    return () => {
+      mask.destroy();
+    };
+  }, []);
 
   const leftTopLine = 'absolute left-0 top-0 w-8 h-2.5  border-t border-l border-gray-400 rounded-tl-[8px]';
   const leftBottomLine = 'absolute left-0 bottom-0 w-8 h-2.5 border-b border-l border-gray-400 rounded-bl-[8px]';
@@ -92,6 +107,7 @@ export const ContactForm: React.FC = () => {
             <input
               className={`bg-transparent outline-none font-mono text-lg py-1 h-15 w-full pr-16 ${errors.phone ? 'text-red-error' : 'text-white'}`}
               type="tel"
+              ref={inputRef}
               placeholder={t('contact-form.phone')}
               value={phone}
               onChange={e => setPhone(e.target.value)}

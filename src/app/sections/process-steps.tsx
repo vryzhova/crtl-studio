@@ -58,7 +58,7 @@ export const ProcessSteps = () => {
       const stepLength = 1 / totalSteps;
       trigger = ScrollTrigger.create({
         trigger: section,
-        start: 'top top-=20%',
+        start: 'top top-=10%',
         end: `+=${window.innerHeight * totalSteps * 0.5}`,
         pin: true,
         scrub: true,

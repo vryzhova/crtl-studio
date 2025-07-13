@@ -96,8 +96,8 @@ export const CaseGallery: React.FC = () => {
   ];
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [activeCase, setActiveCase] = useState<Case | null>(null);
@@ -110,6 +110,7 @@ export const CaseGallery: React.FC = () => {
 
     const totalWidth = container.scrollWidth;
     const scrollDistance = totalWidth - window.innerWidth;
+    console.log(scrollDistance);
 
     // Высота wrapper — длина прокрутки + высота окна,
     // чтобы ScrollTrigger мог прокрутить весь горизонтальный контент
