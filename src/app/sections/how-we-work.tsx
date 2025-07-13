@@ -30,7 +30,7 @@ export const HowWeWork = () => {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const { t } = useTranslation();
 
-  const scrollStart = isDesktop ? 'center center+=20%' : 'top center';
+  const scrollStart = isDesktop ? 'center center+=40%' : 'top center';
 
   useEffect(() => {
     if (!sectionRef.current || !circleRef.current) return;
@@ -40,6 +40,7 @@ export const HowWeWork = () => {
       scrollTrigger: {
         trigger: isDesktop ? sectionRef.current : lastElementRef.current,
         scrub: 1,
+        markers: true,
         start: scrollStart,
         end: 'bottom top-=20%',
         anticipatePin: 1,
@@ -74,7 +75,7 @@ export const HowWeWork = () => {
         duration: 1,
         ease: 'power1.out',
       },
-      '-=1'
+      '0'
     );
 
     return () => {

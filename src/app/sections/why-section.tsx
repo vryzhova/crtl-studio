@@ -10,7 +10,7 @@ const PROGRESS_DURATION = 10000; // ms, длительность заполне�
 
 export const WhySection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState<number>();
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const frameIdRef = useRef<number | null>(null);
   const startRef = useRef<number>(0);
@@ -45,33 +45,30 @@ export const WhySection: React.FC = () => {
   );
 
   useEffect(() => {
-    setProgress(10);
-    startRef.current = Date.now();
+    setProgress(0);
+    let progress = 0;
 
-    function animate() {
-      const elapsed = Date.now() - startRef.current;
-      const percent = Math.min(100, (elapsed / PROGRESS_DURATION) * 100);
-      setProgress(percent);
-      if (percent >= 100) {
-        setTimeout(() => {
-          setActiveIndex(prev => (prev === steps.length - 1 ? 0 : prev + 1));
-        }, 100);
-      } else {
-        frameIdRef.current = requestAnimationFrame(animate);
-      }
-    }
+    const interval = setInterval(() => {
+      progress += 100 / (PROGRESS_DURATION / 100);
+      setProgress(Math.min(100, progress));
+    }, 100);
 
-    frameIdRef.current = requestAnimationFrame(animate);
+    const timeout = setTimeout(() => {
+      clearInterval(interval);
+      setActiveIndex(prev => (prev + 1) % steps.length);
+    }, PROGRESS_DURATION);
 
     return () => {
-      if (frameIdRef.current) cancelAnimationFrame(frameIdRef.current);
+      clearInterval(interval);
+      clearTimeout(timeout);
+      setProgress(undefined);
     };
   }, [activeIndex, steps.length]);
 
   const handleManualSwitch = (idx: number) => {
     if (frameIdRef.current) cancelAnimationFrame(frameIdRef.current);
-    setProgress(0);
-    setTimeout(() => setActiveIndex(idx), 0);
+    setProgress(undefined);
+    setActiveIndex(idx);
   };
 
   return (

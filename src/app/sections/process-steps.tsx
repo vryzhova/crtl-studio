@@ -73,7 +73,7 @@ export const ProcessSteps = () => {
     return () => {
       trigger?.kill();
     };
-  }, [steps.length]);
+  }, [isMobile, steps.length]);
 
   // Синхронизация вертикального скролла с горизонтальным на мобильных
   useEffect(() => {

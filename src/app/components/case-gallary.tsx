@@ -125,7 +125,6 @@ export const CaseGallery: React.FC = () => {
           end: () => `+=${scrollDistance}`,
           scrub: true,
           pin: contentRef.current,
-          markers: true,
           anticipatePin: 1,
           onUpdate: self => {
             const viewportCenter = window.innerWidth / 2;
@@ -189,23 +188,28 @@ export const CaseGallery: React.FC = () => {
         </div>
         {/* Горизонтальный контейнер */}
         <div ref={containerRef} className="flex items-center" style={{ width: `${cases.length * 70}vw` }}>
-          {cases.map((item, index) => (
-            <div
-              ref={el => (itemRefs.current[index] = el)}
-              key={item.id}
-              className="w-[70vw] h-[70vh] flex items-center justify-center p-10 cursor-pointer"
-              onClick={() => openGallery(item)}
-            >
-              <Image
-                src={item.cover}
-                alt={item.title}
-                className="rounded-xl shadow-lg object-cover"
-                width={900}
-                height={500}
-                priority={index === 0} // можно префетчить первый для скорости
-              />
-            </div>
-          ))}
+          {cases.map((item, index) => {
+            const getRef = (el: HTMLDivElement) => (itemRefs.current[index] = el);
+
+            return (
+              <div
+                // @ts-ignore
+                ref={getRef}
+                key={item.id}
+                className="w-[70vw] h-[70vh] flex items-center justify-center p-10 cursor-pointer"
+                onClick={() => openGallery(item)}
+              >
+                <Image
+                  src={item.cover}
+                  alt={item.title}
+                  className="rounded-xl shadow-lg object-cover"
+                  width={900}
+                  height={500}
+                  priority={index === 0} // можно префетчить первый для скорости
+                />
+              </div>
+            );
+          })}
         </div>
 
         <div
