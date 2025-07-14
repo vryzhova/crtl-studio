@@ -97,6 +97,7 @@ export const WhySection: React.FC = () => {
                     activeIndex={activeIndex}
                     step={step}
                     idx={idx}
+                    isLast={idx === steps.length - 1}
                     onClick={() => handleManualSwitch(idx)}
                   />
                 </motion.div>
@@ -106,6 +107,7 @@ export const WhySection: React.FC = () => {
                     activeIndex={activeIndex}
                     step={step}
                     idx={idx}
+                    isLast={idx === steps.length - 1}
                     onClick={() => handleManualSwitch(idx)}
                   />
                 </div>

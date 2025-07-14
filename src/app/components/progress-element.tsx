@@ -8,9 +8,10 @@ type TProps = {
   activeIndex: number;
   progress?: number;
   onClick?: (idx: number) => void;
+  isLast: boolean;
 };
 
-export const ProgressElement: React.FC<TProps> = ({ step, idx, activeIndex, progress = 0, onClick }) => {
+export const ProgressElement: React.FC<TProps> = ({ step, idx, activeIndex, progress = 0, onClick, isLast }) => {
   const isActive = idx === activeIndex;
 
   return isActive ? (
@@ -36,7 +37,7 @@ export const ProgressElement: React.FC<TProps> = ({ step, idx, activeIndex, prog
     </div>
   ) : (
     <div
-      className="text-gray-elements font-inter font-medium transition-all duration-300 overflow-hidden relative border-b border-gray-elements cursor-pointer"
+      className={`text-gray-elements font-inter font-medium transition-all duration-300 overflow-hidden relative ${isLast ? '' : 'border-b border-gray-elements'} cursor-pointer`}
       style={{ minHeight: '53px' }}
       onClick={() => onClick?.(idx)}
       tabIndex={0}
