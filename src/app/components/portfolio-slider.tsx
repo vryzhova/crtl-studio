@@ -7,7 +7,9 @@ type Case = {
   year: string;
   cover: string;
   images: string[];
-  description: string;
+  task?: string;
+  taskTitle?: string;
+  description: string[];
   tags: string[];
 };
 
