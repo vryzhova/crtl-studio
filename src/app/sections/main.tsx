@@ -37,13 +37,6 @@ export const MainSection: React.FC = () => {
             >
               {t('contact-btn')}
             </Button>
-
-            {/*<a*/}
-            {/*  href="#contact"*/}
-            {/*  className="inline-block bg-lime-default hover:bg-lime-active active:bg-lime-active active:border-white text-black px-6 py-3 rounded font-medium transition"*/}
-            {/*>*/}
-            {/*  {t('contact-btn')}*/}
-            {/*</a>*/}
           </div>
         </div>
       </div>

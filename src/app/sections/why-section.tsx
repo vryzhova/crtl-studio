@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { GlitchTypewriterText, SectionTitle } from '../components';
 import { ProgressElement } from '@/app/components/progress-element';
 import { useTranslation } from 'react-i18next';
@@ -11,9 +11,7 @@ const PROGRESS_DURATION = 10000; // ms, длительность заполне�
 export const WhySection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState<number>();
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
   const frameIdRef = useRef<number | null>(null);
-  const startRef = useRef<number>(0);
   const { t } = useTranslation();
 
   const steps = [

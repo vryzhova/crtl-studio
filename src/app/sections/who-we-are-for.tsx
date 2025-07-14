@@ -55,7 +55,7 @@ export const WhoWeAreFor = () => {
       <SectionTitle title={t('who-we-are-for.tag')} position="center" />
 
       <div className="container mx-auto px-4 mt-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {cards.map((card, index) => (
             <Card key={index} icon={card.icon} title={card.title} description={card.description} />
           ))}

@@ -46,10 +46,20 @@ export const GlitchOverlay = ({ imageSrc, intensity = 12, className }: Props) =>
 
     const drawGlitch = () => {
       if (!ctx) return;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.filter = 'grayscale(100%)';
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
+      // Safari-friendly grayscale: вручную обесцвечиваем изображение
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+      for (let i = 0; i < data.length; i += 4) {
+        const avg = 0.3 * data[i] + 0.59 * data[i + 1] + 0.11 * data[i + 2];
+        data[i] = data[i + 1] = data[i + 2] = avg;
+      }
+      ctx.putImageData(imageData, 0, 0);
+
+      // Глитч-эффект
       for (let i = 0; i < intensity; i++) {
         const y = Math.random() * canvas.height;
         const h = Math.random() * 20 + 2;
@@ -57,11 +67,9 @@ export const GlitchOverlay = ({ imageSrc, intensity = 12, className }: Props) =>
 
         ctx.drawImage(canvas, 0, y, canvas.width, h, dx, y, canvas.width, h);
       }
-      ctx.filter = 'none';
     };
 
-    // Ждём загрузки изображения перед началом анимации
-    image.onload = () => {
+    const startAnimation = () => {
       drawGlitch();
 
       const tl = gsap.timeline({ repeat: -1, repeatDelay: 2 });
@@ -74,16 +82,22 @@ export const GlitchOverlay = ({ imageSrc, intensity = 12, className }: Props) =>
         }
       );
 
-      // Очистка при размонтировании
       return () => {
         tl.kill();
       };
     };
+
+    // Гарантируем запуск анимации даже при кэшированном изображении
+    if (image.complete) {
+      startAnimation();
+    } else {
+      image.onload = startAnimation;
+    }
   }, [imageSrc, intensity, dimensions]);
 
   return (
     <div ref={containerRef} className={`relative w-full h-full ${className ?? ''}`}>
-      {/* Скрываем оригинальное изображение, чтобы канвас был видим */}
+      {/* Скрываем оригинальное изображение */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={imageSrc} alt="glitched" className="w-full h-full object-cover invisible" />
       <canvas ref={canvasRef} className="absolute top-0 left-0 z-10 pointer-events-none rounded-xl" />
