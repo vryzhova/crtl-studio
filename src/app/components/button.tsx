@@ -73,7 +73,7 @@ const getCornerSVG = (cornerOffset: number, cornerLength: number, cornerRadius: 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ children, disabled, className = '', variant, ...props }, ref) => {
     const base =
-      'relative flex items-center justify-center w-full min-w-[180px] h-[60px] py-2 px-5 rounded-md text-black text-base xl:text-lg font-medium transition-all duration-200 outline-none group';
+      'relative flex items-center justify-center w-[320px] lg:w-[244px] 2xl:w-[300px]  h-[60px] py-2 px-5 rounded-md text-black text-base xl:text-lg font-medium transition-all duration-200 outline-none group';
 
     const enabled = 'bg-lime-default hover:bg-lime-active focus:bg-lime-active focus:border-2 focus:border-white';
     const disabledStyle = 'bg-[#B9B9B9] cursor-not-allowed';

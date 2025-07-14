@@ -16,14 +16,14 @@ export const ContactSection: React.FC = () => {
         <div className="flex flex-col h-full md:flex-row lg:flex-col justify-center md:bg-[url('/ctrl-btn-bg.svg')] bg-right lg:bg-center md:bg-auto bg-no-repeat lg:pl-12 bg">
           <div className="flex flex-col items-start">
             <GlitchTypewriterText
-              lineClassName="md:text-4xl lg:text-4xl font-bold leading-tight bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
+              lineClassName="md:text-4xl lg:text-4xl text-3xl font-bold leading-tight bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
               text={t('contact-form.title')}
             />
             <div className="space-y-4 text-base text-gray-300 mt-6">
               <p>{t('contact-form.subtitle')}</p>
             </div>
           </div>
-          <div className="justify-self-end hidden md:block">
+          <div className="justify-self-end hidden md:flex">
             <Image
               src="/ctrl-btn.svg"
               alt="ctrl"
