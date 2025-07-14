@@ -81,8 +81,8 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           </button>
           {/* Кнопка закрытия для desktop — поверх фото, справа сверху, отступ 30px */}
           <button
-            className="hidden sm:block absolute z-20 bg-white text-black border-black rounded-md p-2"
-            style={{ top: 20, right: 100, width: 40, height: 40 }}
+            className="hidden sm:block right-5 lg:right-25 absolute z-20 bg-white text-black border-black rounded-md p-2"
+            style={{ top: 20, width: 40, height: 40 }}
             onClick={onClose}
             aria-label="Закрыть"
           >
