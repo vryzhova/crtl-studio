@@ -30,17 +30,19 @@
     animation: fade-in 0.6s ease-out both;
 }
 
-@keyframes levitate {
+.levitate {
+    opacity: 1;
+    transform: translateY(0);
+    animation: levitateAnim 3s ease-in-out infinite;
+}
+
+@keyframes levitateAnim {
     0%, 100% {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-20px);
+        transform: translateY(-10px);
     }
-}
-
-.levitate {
-    animation: levitate 2s ease-in-out infinite;
 }
 
 @theme inline {

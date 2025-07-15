@@ -81,8 +81,6 @@ export const Cases = () => {
 
   const [activeCase, setActiveCase] = useState<Case | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [containerAnimationDone, setContainerAnimationDone] = useState(false);
-  const animationPlayedRef = useRef(false);
   const lang = i18n.language;
 
   const cases = useMemo(() => getCases(t, lang), [t, lang]);
@@ -91,12 +89,23 @@ export const Cases = () => {
     'text-center md:text-left text-2xl md:text-4xl px-5 lg:px-0 lg:text-end font-bold bg-gradient-to-b from-white lg:from-black to-gray-gradient bg-clip-text text-transparent';
 
   useEffect(() => {
-    if (!containerRef.current || containerAnimationDone || !contentRef.current) return;
+    if (!containerRef.current || !wrapperRef.current) return;
+
+    const container = containerRef.current;
+    const introText = initialTextRef.current;
+    const rightPanel = rightPanelRef.current;
+    const introTextContainer = initialTextContainerRef.current;
+    const content = contentRef.current;
+    const wrapper = wrapperRef.current;
+
+    const scrollDistance = wrapper.scrollWidth - window.innerWidth + window.innerHeight / 2;
+    container.style.height = `${scrollDistance + 1.5 * window.innerHeight}px`;
 
     if (isDesktop) {
-      gsap.set(initialTextRef.current, { opacity: 1 });
-      gsap.set(contentRef.current, { opacity: 0 });
-      gsap.set(rightPanelRef.current, { opacity: 1, x: '100%' });
+      gsap.set([introText, rightPanel, content], { clearProps: 'all' });
+      gsap.set(introText, { opacity: 1, x: 0 });
+      gsap.set(rightPanel, { opacity: 1, x: '100%' });
+      gsap.set(content, { opacity: 0 });
     } else {
       gsap.set(contentRef.current, { opacity: 1 });
       gsap.set(wrapperRef.current, { opacity: 0 });
@@ -104,135 +113,76 @@ export const Cases = () => {
       gsap.set(caseNumbersRef.current, { opacity: 0 });
     }
 
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !animationPlayedRef.current) {
-            animationPlayedRef.current = true;
-            playAnimation();
-          }
-        });
-      },
-      {
-        threshold: 0.8, // Срабатывает когда 80% элемента видно
-      }
-    );
+    const tlIntro = gsap.timeline({
+      scrollTrigger: {
+        trigger: container,
+        pin: container,
+        start: 'top top',
+        end: `+=${scrollDistance}`,
+        scrub: true,
+        anticipatePin: 1,
+        onUpdate: self => {
+          const center = window.innerWidth / 2;
+          let closestIdx = 0;
+          let minDist = Infinity;
 
-    observer.observe(containerRef.current);
+          itemRefs.current.forEach((ref, idx) => {
+            if (!ref) return;
+            const rect = ref.getBoundingClientRect();
+            const itemCenter = rect.left + rect.width / 2;
+            const dist = Math.abs(center - itemCenter);
 
-    const playAnimation = () => {
-      const timeline = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
-
-      if (isDesktop) {
-        timeline
-          .to({}, { duration: 2 })
-          .to(containerRef.current, { duration: 1 })
-          .to(initialTextRef.current, { x: -350, duration: 1 }, '-=0.8')
-          .to(rightPanelRef.current, { opacity: 1, x: '0%', duration: 0.8 }, '-=0.8')
-          .to(initialTextRef.current, { opacity: 0, duration: 1 })
-          .to(rightPanelRef.current, { opacity: 0, duration: 0.8 })
-          .add('simultaneous')
-          .to(initialTextRef.current, { display: 'none', duration: 0.5 }, 'simultaneous')
-          .to(rightPanelRef.current, { display: 'none', duration: 0.5 }, 'simultaneous')
-          .to(initialTextContainerRef.current, { display: 'none', duration: 0.5 }, 'simultaneous')
-          .to(contentRef.current, { opacity: 1, duration: 0.8 });
-
-        setContainerAnimationDone(true);
-      } else {
-        timeline
-          .to({}, { duration: 1 })
-          .to(caseNumbersRef.current, { opacity: 1, duration: 1 })
-          .add('simultaneous')
-          .to(wrapperRef.current, { opacity: 1, duration: 0.8 }, 'simultaneous')
-          .to(caseInfoRef.current, { opacity: 1, duration: 0.8 }, 'simultaneous');
-
-        setContainerAnimationDone(true);
-      }
-    };
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [containerAnimationDone, isDesktop]);
-
-  // ScrollTrigger после вступительной анимации
-  useEffect(() => {
-    if (!containerAnimationDone) return;
-
-    const container = containerRef.current;
-    const wrapper = wrapperRef.current;
-
-    if (!container || !wrapper) return;
-
-    const totalWidth = wrapper.scrollWidth;
-    const scrollDistance = totalWidth - window.innerWidth;
-    const start = isDesktop ? 'top top+=10%' : 'top top';
-
-    // Высота wrapper — длина прокрутки + высота окна,
-    // чтобы ScrollTrigger мог прокрутить весь горизонтальный контент
-    container.style.height = `${scrollDistance + window.innerHeight}px`;
-
-    const ctx = gsap.context(() => {
-      gsap.to(wrapper, {
-        x: () => `-${scrollDistance}px`,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: container,
-          start: start,
-          end: () => `+=${scrollDistance}`,
-          scrub: true,
-          pin: contentRef.current,
-          anticipatePin: 1,
-          onUpdate: self => {
-            const viewportCenter = window.innerWidth / 2;
-            let closestIdx = 0;
-            let minDistance = Infinity;
-
-            itemRefs.current.forEach((ref, idx) => {
-              if (!ref) return;
-              const rect = ref.getBoundingClientRect();
-              const elementCenter = rect.left + rect.width / 2;
-              const distanceToCenter = Math.abs(viewportCenter - elementCenter);
-
-              // Найти ближайший элемент
-              if (distanceToCenter < minDistance) {
-                minDistance = distanceToCenter;
-                closestIdx = idx;
-              }
-              const maxScale = 1;
-              const minScale = 0.8;
-              const maxDistance = window.innerWidth / 2;
-
-              const scale = maxScale - (distanceToCenter / maxDistance) * (maxScale - minScale);
-
-              gsap.to(ref, {
-                scale: Math.max(minScale, Math.min(maxScale, scale)),
-                duration: 0.2,
-                ease: 'power2.out',
-              });
-            });
-
-            setActiveIndex(closestIdx);
-            // 🔥 Сбросить wrapper высоту, если достигли конца
-            if (self.progress === 1 || self.progress === 0) {
-              container.style.height = '';
+            if (dist < minDist) {
+              minDist = dist;
+              closestIdx = idx;
             }
-          },
-          onLeave: () => {
-            container.style.height = '';
-          },
-          onLeaveBack: () => {
-            container.style.height = '';
-          },
+
+            const max = 1;
+            const min = 0.8;
+            const maxDist = window.innerWidth / 2;
+
+            const scale = max - (dist / maxDist) * (max - min);
+
+            gsap.to(ref, {
+              scale: Math.max(min, Math.min(max, scale)),
+              duration: 0.2,
+              ease: 'power2.out',
+            });
+          });
+
+          setActiveIndex(closestIdx);
         },
-      });
-    }, container);
+        onLeave: () => {
+          container.style.height = '';
+        },
+        onLeaveBack: () => {
+          container.style.height = '';
+        },
+      },
+    });
+
+    if (isDesktop) {
+      tlIntro
+        .to(introText, { x: -350, duration: 1, ease: 'power3.inOut' })
+        .to(rightPanel, { x: '0%', duration: 1, ease: 'power3.inOut' }, '<')
+        .to([introText, rightPanel], { opacity: 0, duration: 1, ease: 'power3.out' }, '+=0.2')
+        .set([introTextContainer, rightPanel], { display: 'none' })
+        .to(content, { opacity: 1, duration: 1 })
+        .to(wrapper, { x: () => `-${wrapper.scrollWidth - window.innerWidth}px`, ease: 'none' });
+    } else {
+      tlIntro
+        .to(caseNumbersRef.current, { opacity: 1, duration: 1 })
+        .add('simultaneous')
+        .to(wrapperRef.current, { opacity: 1, duration: 0.8 }, 'simultaneous')
+        .to(caseInfoRef.current, { opacity: 1, duration: 0.8 }, 'simultaneous')
+        .to(wrapper, { x: () => `-${wrapper.scrollWidth - window.innerWidth}px`, ease: 'none' });
+    }
 
     return () => {
-      ctx.revert();
-      if (container) container.style.height = '';
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      container.style.height = '';
     };
-  }, [containerAnimationDone, isDesktop]);
+  }, [cases.length, isDesktop]);
 
   const openGallery = (caseItem: Case) => setActiveCase(caseItem);
   const closeGallery = () => setActiveCase(null);
@@ -282,7 +232,11 @@ export const Cases = () => {
         </div>
 
         {/* Horizontal scroll */}
-        <div ref={wrapperRef} className="flex lg:mt-0 mt-30 items-center" style={{ width: `${cases.length * 60}vw` }}>
+        <div
+          ref={wrapperRef}
+          className="flex lg:mt-0 mt-30 justify-center items-center"
+          style={{ width: `${cases.length * 60}vw` }}
+        >
           {cases.map((item, index) => {
             const setRef = (el: HTMLDivElement) => (itemRefs.current[index] = el);
             return (
