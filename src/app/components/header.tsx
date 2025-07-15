@@ -133,7 +133,7 @@ export const Header = () => {
               <div className="flex items-center justify-between">
                 <Link
                   href="/"
-                  className="flex items-center gap-2 text-lg font-semibold hover:bg-lime-default active:bg-lime-active"
+                  className="flex items-center gap-2 text-lg font-semibold"
                   onClick={() => setMenuOpen(false)}
                 >
                   <Image src="./logo.svg" alt="header-logo" width={180} height={30} />
@@ -157,7 +157,7 @@ export const Header = () => {
                       key={item.href}
                       href={item.href}
                       onClick={() => setMenuOpen(false)}
-                      className="hover:bg-lime-default active:bg-lime-active transition text-left"
+                      className="hover:text-lime-default active:text-lime-active transition text-left"
                     >
                       {item.label}
                     </Link>

@@ -28,7 +28,7 @@ export const Footer = () => {
           {/* Ссылки и документы в одну строку */}
           <div className="flex flex-row w-full justify-between md:justify-start md:gap-5 gap-x-8">
             <div className="min-w-0">
-              <h3 className="text-gray-elements text-md font-semibold mb-2 whitespace-nowrap">Ссылки</h3>
+              <h3 className="text-gray-elements text-md font-semibold mb-2 whitespace-nowrap">{t('footer.links')}</h3>
               <ul className="space-y-2">
                 {links.map((item, idx) => (
                   <li key={idx}>
@@ -43,7 +43,9 @@ export const Footer = () => {
               </ul>
             </div>
             <div className="min-w-0">
-              <h3 className="text-gray-400 text-md font-semibold mb-2 whitespace-nowrap">Документы</h3>
+              <h3 className="text-gray-elements text-md font-semibold mb-2 whitespace-nowrap">
+                {t('footer.documents')}
+              </h3>
               <ul className="space-y-2">
                 {docs.map((item, idx) => (
                   <li key={idx}>

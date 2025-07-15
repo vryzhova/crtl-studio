@@ -75,68 +75,83 @@ export const ProcessSteps = () => {
     };
   }, [isMobile, steps.length]);
 
-  // Синхронизация вертикального скролла с горизонтальным на мобильных
   useEffect(() => {
-    if (typeof window === 'undefined' || window.innerWidth >= 768) return;
-    let lastScrollY = window.scrollY;
-    const container = mobileStepsRef.current;
-    if (!container) return;
-    const onScroll = () => {
-      const deltaY = window.scrollY - lastScrollY;
-      lastScrollY = window.scrollY;
-      // Скроллим вправо при прокрутке вниз, влево при прокрутке вверх
-      container.scrollLeft += deltaY;
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
+    const wrapper = mobileStepsRef.current;
+    const section = sectionRef.current;
+    if (!wrapper || !section) return;
+
+    let ctx: gsap.Context | null = null;
+
+    const totalWidth = wrapper.scrollWidth;
+    const scrollDistance = totalWidth - window.innerWidth;
+    if (isMobile) {
+      section.style.height = `${scrollDistance + window.innerHeight}px`;
+      const totalSteps = steps.length;
+      const stepLength = 1 / totalSteps;
+
+      ctx = gsap.context(() => {
+        gsap.to(wrapper, {
+          x: () => `-${scrollDistance}px`,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: () => `+=${scrollDistance}`,
+            scrub: true,
+            pin: sectionRef.current,
+            anticipatePin: 1,
+            onUpdate: self => {
+              const progress = self.progress;
+              const currentStep = Math.floor(progress / stepLength);
+              setActive(Math.min(currentStep, totalSteps - 1));
+              if (self.progress === 1 || self.progress === 0) {
+                section.style.height = '';
+              }
+            },
+            onLeave: () => {
+              section.style.height = '';
+            },
+            onLeaveBack: () => {
+              section.style.height = '';
+            },
+          },
+        });
+      }, section);
+    }
+
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      ctx?.revert();
     };
-  }, []);
+  }, [isMobile, steps.length]);
 
   return (
     <section
       id="how"
       ref={sectionRef}
-      className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden lg:py-20"
+      className="relative bg-black text-white flex flex-col sm:items-center sm:justify-center overflow-hidden sm:py-20 bg-[url('/mountain-bg.svg')] bg-cover bg-center bg-no-repeat pointer-events-none"
     >
       {/* Фоновое изображение — только фон, прозрачность не влияет на контент */}
-      <div className="absolute inset-0 w-full h-full bg-[url('/mountain-bg.svg')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" />
+      {/*<div className="absolute inset-0 w-full h-full bg-[url('/mountain-bg.svg')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" />*/}
       <SectionTitle title={t('how-we-work.tag')} position="center" />
       {/* Ваша прежняя верстка этапов — не меняю! */}
       <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center mt-16">
         {/* Mobile: горизонтальный таймлайн без карточек */}
-        <div className="block md:hidden w-full relative py-8">
+        <div className="block sm:hidden w-full relative py-8">
           {/* Горизонтальная линия */}
           <div
-            className="absolute top-8 left-0 right-0 h-0.5 from-gray-elements/70 via-gray-elements to-gray-elements/70 z-0"
+            className="absolute top-8 left-0 right-0 h-1 from-gray-elements via-gray-elements to-gray-elements/70 z-0"
             style={{ minWidth: '600px' }}
           />
           {/* Этапы */}
           <div
             ref={mobileStepsRef}
             className="flex flex-row gap-10 overflow-x-auto no-scrollbar px-4 relative z-10 w-full scroll-smooth"
-            style={{ scrollSnapType: 'x mandatory' }}
-            onScroll={e => {
-              const container = e.currentTarget;
-              const children = Array.from(container.children);
-              const containerRect = container.getBoundingClientRect();
-              let minDiff = Infinity;
-              let activeIdx = 0;
-              children.forEach((child, idx) => {
-                const rect = child.getBoundingClientRect();
-                const diff = Math.abs(rect.left + rect.width / 2 - (containerRect.left + containerRect.width / 2));
-                if (diff < minDiff) {
-                  minDiff = diff;
-                  activeIdx = idx;
-                }
-              });
-              setActive(activeIdx);
-            }}
+            style={{ width: `${steps.length * 80}vw` }}
           >
             {steps.map((step, idx) => (
               <div
                 key={idx}
-                className="process-mobile-step flex flex-col items-center min-w-[80vw] max-w-[380px] snap-center"
+                className="process-mobile-step flex flex-col items-center w-80vw snap-center"
                 style={{ scrollSnapAlign: 'center' }}
               >
                 {/* Кружок-номер на линии */}
@@ -171,7 +186,7 @@ export const ProcessSteps = () => {
           </div>
         </div>
         {/* Desktop: вертикальный таймлайн */}
-        <div className="hidden md:block w-full">
+        <div className="hidden sm:block w-full">
           <TimelineLineSvg
             className="absolute lg:left-1/2 left-20 top-0 -translate-x-1/2 z-0 select-none pointer-events-none"
             height={640}

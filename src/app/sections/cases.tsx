@@ -161,7 +161,6 @@ export const Cases = () => {
     const container = containerRef.current;
     const wrapper = wrapperRef.current;
 
-    console.log(!container || !wrapper);
     if (!container || !wrapper) return;
 
     const totalWidth = wrapper.scrollWidth;
@@ -239,9 +238,6 @@ export const Cases = () => {
 
   return (
     <section id="cases" ref={containerRef} className="relative overflow-hidden bg-black z-10">
-      {/* Initial title */}
-      {/*<div className="relative h-screen w-full" ref={initialTextContainerRef}>*/}
-
       <div
         ref={initialTextContainerRef}
         className="hidden lg:flex absolute w-screen h-screen flex-col items-center justify-center z-20"

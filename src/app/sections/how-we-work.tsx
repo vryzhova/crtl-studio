@@ -30,7 +30,7 @@ export const HowWeWork = () => {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const { t } = useTranslation();
 
-  const scrollStart = isDesktop ? 'center center+=40%' : 'top center';
+  const scrollStart = isDesktop ? 'center center+=30%' : 'top center';
 
   useEffect(() => {
     if (!sectionRef.current || !circleRef.current) return;
@@ -39,7 +39,7 @@ export const HowWeWork = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: isDesktop ? sectionRef.current : lastElementRef.current,
-        scrub: 1,
+        scrub: 2,
         start: scrollStart,
         end: 'bottom top-=20%',
         anticipatePin: 1,
@@ -107,7 +107,7 @@ export const HowWeWork = () => {
           <div className="hidden lg:block absolute top-1/2 right-0 w-[calc(48%-48px)] h-px bg-gray-elements -translate-y-1/2" />
 
           {/* Верхний левый */}
-          <div className="flex flex-col items-center justify-center ">
+          <div className="flex flex-col items-center justify-center">
             <div className="text-center w-full mx-auto">
               <h3 className="font-inter font-bold mb-2 text-center text-base lg:text-lg">
                 {t('inside-focus.creative_title')}
