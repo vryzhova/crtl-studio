@@ -23,7 +23,7 @@ export const ContactSection: React.FC = () => {
               <p>{t('contact-form.subtitle')}</p>
             </div>
           </div>
-          <div className="justify-self-end hidden md:flex">
+          <div className="justify-center hidden md:flex">
             <Image
               src="/ctrl-btn.svg"
               alt="ctrl"
