@@ -30,7 +30,7 @@ export const HowWeWork = () => {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const { t } = useTranslation();
 
-  const scrollStart = isDesktop ? 'center center+=30%' : 'top center';
+  const scrollStart = isDesktop ? 'center center+=30%' : 'top center-=20%';
 
   useEffect(() => {
     if (!sectionRef.current || !circleRef.current) return;
@@ -39,7 +39,7 @@ export const HowWeWork = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: isDesktop ? sectionRef.current : lastElementRef.current,
-        scrub: 2,
+        scrub: 3,
         start: scrollStart,
         end: 'bottom top-=20%',
         anticipatePin: 1,
@@ -50,9 +50,9 @@ export const HowWeWork = () => {
     tl.to(
       circleRef.current,
       {
-        scale: 2000,
-        duration: 5,
-        transformOrigin: '50% 50%',
+        width: 4000,
+        height: 4000,
+        scale: 10,
         ease: 'power3.inOut',
       },
       0
@@ -67,7 +67,7 @@ export const HowWeWork = () => {
     <section
       ref={sectionRef}
       id="how-we-work"
-      className="relative h-full lg:h-[150vh] text-black overflow-hidden w-full"
+      className="relative h-full lg:h-screen text-black overflow-hidden w-full"
     >
       {/* Ваш контент */}
       <div ref={contentRef} className="container mx-auto px-4 relative z-10">
@@ -138,15 +138,14 @@ export const HowWeWork = () => {
             <div
               ref={circleRef}
               className="hidden lg:block absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2"
+              style={{ width: 88, height: 88, borderRadius: '50%', overflow: 'hidden' }}
             >
-              <div className="relative w-22 h-22 flex items-center justify-center">
-                <Image
-                  fill
-                  src="/circle.svg"
-                  alt="avatar"
-                  className="z-20 w-10 h-10 rounded-full border-2 absolute -bottom-2 -right-2"
-                />
-              </div>
+              <Image
+                fill
+                src="/circle.svg"
+                alt="avatar"
+                className="z-20 w-full h-full rounded-full border-2 absolute -bottom-2 -right-2"
+              />
             </div>
           )}
         </div>
@@ -196,13 +195,27 @@ export const HowWeWork = () => {
         </div>
         {/*Круг с аватаркой для mobile, внизу, только на мобильных */}
         {!isDesktop && (
-          <div ref={circleRef} className="z-20 flex lg:hidden w-full justify-center mt-8">
-            <div className="relative w-22 h-22 flex items-center justify-center">
+          <div className="relative w-full h-[120px]">
+            <div
+              ref={circleRef}
+              className="z-20 flex lg:hidden"
+              style={{
+                position: 'absolute',
+                left: '50%',
+                bottom: 2,
+                transform: 'translateX(-50%)',
+                width: 88,
+                height: 88,
+                borderRadius: '50%',
+                overflow: 'hidden',
+              }}
+            >
               <Image
                 fill
                 src="/circle.svg"
                 alt="avatar"
-                className="z-20 w-10 h-10 rounded-full border-2  absolute -bottom-2 -right-2"
+                className="w-full h-full object-cover"
+                style={{ borderRadius: '50%' }}
               />
             </div>
           </div>

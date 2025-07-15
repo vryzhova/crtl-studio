@@ -61,7 +61,7 @@ export const ProcessSteps = () => {
         trigger: section,
         start: 'top top-=10%',
         end: `+=${window.innerHeight * totalSteps * 0.5}`,
-        pin: true,
+        pin: sectionRef.current,
         scrub: true,
         onUpdate: self => {
           const progress = self.progress;
@@ -129,15 +129,15 @@ export const ProcessSteps = () => {
     <section
       id="how"
       ref={sectionRef}
-      className="relative bg-black text-white flex flex-col sm:items-center sm:justify-center overflow-hidden sm:py-20 bg-[url('/mountain-bg.svg')] bg-cover bg-center bg-no-repeat pointer-events-none"
+      className="relative bg-black text-white flex flex-col sm:items-center sm:justify-center overflow-hidden sm:py-20 pointer-events-none"
     >
       {/* Фоновое изображение — только фон, прозрачность не влияет на контент */}
-      {/*<div className="absolute inset-0 w-full h-full bg-[url('/mountain-bg.svg')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" />*/}
+      <div className="absolute inset-0 w-full h-full bg-[url('/mountain-bg.svg')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" />
       <SectionTitle title={t('how-we-work.tag')} position="center" />
       {/* Ваша прежняя верстка этапов — не меняю! */}
       <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center mt-16">
         {/* Mobile: горизонтальный таймлайн без карточек */}
-        <div className="block sm:hidden w-full relative py-8">
+        <div className="block md:hidden w-full relative py-8">
           {/* Горизонтальная линия */}
           <TimelineLineHorizontalSvg className="absolute top-10 left-0 right-0 z-0" style={{ minWidth: '600px' }} />
           {/* Этапы */}
@@ -189,7 +189,7 @@ export const ProcessSteps = () => {
           </div>
         </div>
         {/* Desktop: вертикальный таймлайн */}
-        <div className="hidden sm:block w-full">
+        <div className="hidden md:block w-full">
           <TimelineLineSvg
             className="absolute lg:left-1/2 left-20 top-0 -translate-x-1/2 z-0 select-none pointer-events-none"
             height={640}
