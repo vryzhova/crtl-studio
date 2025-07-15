@@ -4,7 +4,6 @@ export function useBreakpoints() {
   const [breakpoints, setBreakpoints] = useState({
     isMobile: false,
     isTablet: false,
-    isLaptop: false,
     isDesktop: false,
   });
 
@@ -14,15 +13,13 @@ export function useBreakpoints() {
     const queries = {
       isMobile: window.matchMedia('(max-width: 639px)'),
       isTablet: window.matchMedia('(min-width: 640px) and (max-width: 1023px)'),
-      isLaptop: window.matchMedia('(min-width: 1024px) and (max-width: 1279px)'),
-      isDesktop: window.matchMedia('(min-width: 1280px)'),
+      isDesktop: window.matchMedia('(min-width: 1024px)'),
     };
 
     const update = () => {
       setBreakpoints({
         isMobile: queries.isMobile.matches,
         isTablet: queries.isTablet.matches,
-        isLaptop: queries.isLaptop.matches,
         isDesktop: queries.isDesktop.matches,
       });
     };

@@ -7,6 +7,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslation } from 'react-i18next';
 import TimelineLineSvg from '../components/TimelineLineSvg';
+import TimelineLineHorizontalSvg from '../components/TimelineLineHorizontalSvg';
 import { useBreakpoints } from '@/app/hooks/use-break-points';
 
 // Регистрируем плагин ScrollTrigger
@@ -138,25 +139,27 @@ export const ProcessSteps = () => {
         {/* Mobile: горизонтальный таймлайн без карточек */}
         <div className="block sm:hidden w-full relative py-8">
           {/* Горизонтальная линия */}
-          <div
-            className="absolute top-8 left-0 right-0 h-1 from-gray-elements via-gray-elements to-gray-elements/70 z-0"
-            style={{ minWidth: '600px' }}
-          />
+          <TimelineLineHorizontalSvg className="absolute top-10 left-0 right-0 z-0" style={{ minWidth: '600px' }} />
           {/* Этапы */}
           <div
             ref={mobileStepsRef}
-            className="flex flex-row gap-10 overflow-x-auto no-scrollbar px-4 relative z-10 w-full scroll-smooth"
-            style={{ width: `${steps.length * 80}vw` }}
+            className="flex flex-row gap-8 px-4 relative z-10 w-full scroll-smooth"
+            style={{ width: `${steps.length * 70}vw` }}
           >
             {steps.map((step, idx) => (
               <div
                 key={idx}
-                className="process-mobile-step flex flex-col items-center w-80vw snap-center"
+                className="process-mobile-step flex flex-col w-70vw snap-center"
                 style={{ scrollSnapAlign: 'center' }}
               >
                 {/* Кружок-номер на линии */}
                 <span
-                  className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-base mb-2 shadow transition-all duration-300 ${active === idx ? 'bg-lime-default text-black scale-110' : 'bg-gray-elements text-black opacity-60'}`}
+                  className={clsx(
+                    'z-10 rounded-full flex items-center justify-center border-2 transition',
+                    active === idx
+                      ? 'bg-lime-default border-lime-default w-8 h-8 text-black scale-110 shadow-lg'
+                      : 'bg-gray-elements border-gray-elements  w-4 h-4 text-lime-default'
+                  )}
                   onClick={() => {
                     // Прокрутка к этапу по клику
                     const container = mobileStepsRef.current;
@@ -167,17 +170,17 @@ export const ProcessSteps = () => {
                     }
                   }}
                 >
-                  {idx + 1}
+                  {active === idx && <span className="font-mono text-lg">{idx + 1}</span>}
                 </span>
                 {/* Заголовок */}
                 <span
-                  className={`text-center font-bold text-sm mb-2 transition-colors duration-300 ${active === idx ? 'text-lime-default' : 'text-gray-elements'}`}
+                  className={`text-start font-bold text-sm my-2 transition-colors duration-300 ${active === idx ? 'text-lime-default' : 'text-gray-elements'}`}
                 >
                   {t(`how-we-work.step_${idx + 1}_title`)}
                 </span>
                 {/* Текст */}
                 <span
-                  className={`text-white text-xs text-center whitespace-pre-line transition-opacity duration-300 ${active === idx ? 'opacity-100' : 'opacity-60'}`}
+                  className={`text-white text-xs text-start whitespace-pre-line transition-opacity duration-300 ${active === idx ? 'opacity-100' : 'opacity-60'}`}
                 >
                   {t(`how-we-work.step_${idx + 1}_text`)}
                 </span>

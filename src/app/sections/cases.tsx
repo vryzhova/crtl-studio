@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { GlitchOverlay } from '../components/glitched-image';
+import { useBreakpoints } from '@/app/hooks/use-break-points';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,7 +86,7 @@ export const Cases = () => {
   const lang = i18n.language;
 
   const cases = useMemo(() => getCases(t, lang), [t, lang]);
-  const isDesktop = typeof window !== 'undefined' && window.innerWidth > 1024;
+  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
   const textStyle =
     'text-center md:text-left text-2xl md:text-4xl px-5 lg:px-0 lg:text-end font-bold bg-gradient-to-b from-white lg:from-black to-gray-gradient bg-clip-text text-transparent';
 

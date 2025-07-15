@@ -36,7 +36,7 @@ export const Preloader = ({ onDone }: { onDone: () => void }) => {
           className="fixed inset-0 px-10 bg-black flex flex-col items-center justify-center z-50"
         >
           <div className="flex flex-col items-center justify-center">
-            <div className="mx-auto w-[64px] sm:w-[96px] md:w-[120px] lg:w-[160px] xl:w-[200px] h-[64px] sm:h-[96px] md:h-[120px] lg:h-[160px] xl:h-[200px] flex items-center justify-center relative">
+            <div className="mx-auto w-[130px] md:w-[120px] lg:w-[270px] xl:w-[300px] h-[64px] sm:h-[96px] md:h-[200px] lg:h-[160px] xl:h-[200px] flex items-center justify-center relative">
               <Image src="/logo.svg" alt="logo icon" fill className="object-contain" priority />
             </div>
           </div>

@@ -58,32 +58,17 @@ export const HowWeWork = () => {
       0
     );
 
-    // Анимация исчезновения контента
-    tl.to(
-      sectionRef.current,
-      {
-        backgroundColor: '#141414',
-        duration: 1,
-        ease: 'power3.inOut',
-      },
-      '0'
-    ).to(
-      contentRef.current,
-      {
-        opacity: 0,
-        duration: 1,
-        ease: 'power1.out',
-      },
-      '0'
-    );
-
     return () => {
       tl.kill();
     };
   }, [isDesktop, scrollStart]);
 
   return (
-    <section ref={sectionRef} id="main" className="relative h-full lg:h-[150vh] text-black overflow-hidden w-full">
+    <section
+      ref={sectionRef}
+      id="how-we-work"
+      className="relative h-full lg:h-[150vh] text-black overflow-hidden w-full"
+    >
       {/* Ваш контент */}
       <div ref={contentRef} className="container mx-auto px-4 relative z-10">
         {/* Чип */}
