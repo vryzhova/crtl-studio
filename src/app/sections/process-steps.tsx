@@ -7,7 +7,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslation } from 'react-i18next';
 import TimelineLineSvg from '../components/TimelineLineSvg';
-import TimelineLineHorizontalSvg from '../components/TimelineLineHorizontalSvg';
+import { AutoWidthTimelineLine } from '../components/TimelineLineHorizontalSvg';
 import { useBreakpoints } from '@/app/hooks/use-break-points';
 
 // Регистрируем плагин ScrollTrigger
@@ -19,6 +19,7 @@ export const ProcessSteps = () => {
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const mobileStepsRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
   const { isMobile, isTablet } = useBreakpoints();
 
   const steps = [
@@ -47,6 +48,12 @@ export const ProcessSteps = () => {
       description: t('how-we-work.step_4_text'),
     },
   ];
+
+  useEffect(() => {
+    if (mobileStepsRef.current && svgRef.current) {
+      svgRef.current.style.width = `${mobileStepsRef.current.scrollWidth}px`;
+    }
+  }, [steps.length]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -139,13 +146,13 @@ export const ProcessSteps = () => {
         {/* Mobile: горизонтальный таймлайн без карточек */}
         <div className="block md:hidden w-full relative py-8 px-5">
           {/* Горизонтальная линия */}
-          <TimelineLineHorizontalSvg className="absolute top-10 left-0 right-0 z-0" style={{ minWidth: '470px' }} />
           {/* Этапы */}
           <div
             ref={mobileStepsRef}
             className="flex flex-row gap-8 relative z-10 w-full scroll-smooth"
             style={{ width: `${steps.length * 60}vw` }}
           >
+            <AutoWidthTimelineLine targetRef={mobileStepsRef} top={8} />
             {steps.map((step, idx) => (
               <div
                 key={idx}

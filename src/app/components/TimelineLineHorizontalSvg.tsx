@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 
 /**
  * Тонкая длинная горизонтальная линия с градиентом и закруглёнными концами для таймлайна.
@@ -54,3 +56,40 @@ export const TimelineLineHorizontalSvg: React.FC<TimelineLineHorizontalSvgProps>
 );
 
 export default TimelineLineHorizontalSvg;
+
+type Props = {
+  targetRef: React.RefObject<HTMLDivElement | null>;
+  className?: string;
+  top?: number | string;
+};
+
+export const AutoWidthTimelineLine = ({ targetRef, className, top = 40 }: Props) => {
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    if (!targetRef.current) return;
+    const update = () => {
+      setWidth(targetRef.current!.scrollWidth);
+    };
+
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, [targetRef]);
+
+  return (
+    <div
+      className={className}
+      style={{
+        position: 'absolute',
+        top,
+        left: 0,
+        zIndex: 0,
+        width,
+        pointerEvents: 'none',
+      }}
+    >
+      <TimelineLineHorizontalSvg width={width} height={2} />
+    </div>
+  );
+};

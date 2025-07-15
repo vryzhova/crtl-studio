@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Roboto_Mono, Inter_Tight } from 'next/font/google';
 import { I18nProvider } from './i18n-provider';
+import SmoothScrollWrapper from './smooth-scroll-wrapper';
 import './globals.css';
 
 const inter = Inter({
@@ -34,7 +35,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={` ${inter.variable} ${robotoMono.variable} ${interTight.variable} antialiased`}>
-        <I18nProvider>{children}</I18nProvider>
+        <I18nProvider>
+          <SmoothScrollWrapper>{children}</SmoothScrollWrapper>
+        </I18nProvider>
         <div id="modal-root" />
       </body>
     </html>
