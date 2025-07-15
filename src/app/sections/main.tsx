@@ -8,6 +8,12 @@ export const MainSection: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section className="relative w-full min-h-screen text-white overflow-hidden">
+      <div className="absolute inset-0 w-full h-full bg-black z-0 flex items-center justify-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/main-bg.png" alt="Loading..." className="object-cover w-full h-full" />
+        {/* Или просто фон */}
+        {/* <div className="bg-gradient-to-b from-black to-transparent w-full h-full" /> */}
+      </div>
       {/* Видео на фоне */}
       <video className="absolute inset-0 w-full h-full object-cover z-0 scale-150" autoPlay muted loop playsInline>
         <source src="/bg-video.mp4" type="video/mp4" />

@@ -160,7 +160,7 @@ export const ContactForm: React.FC = () => {
         </div>
 
         {/* Бюджет — блок с input и range */}
-        <div className="flex flex-col gap-2 mt-4">
+        <div className="flex flex-col gap-2 mt-4 px-4">
           <label className="text-base font-mono tracking-widest text-gray-elements bg-transparent mb-2">
             {t('contact-form.budget')}
           </label>

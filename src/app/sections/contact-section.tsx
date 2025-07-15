@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 export const ContactSection: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <section id="contact" className="relative min-h-screen w-full bg-black text-white overflow-hidden px-4">
+    <section id="contact" className="relative min-h-screen w-full bg-black text-white overflow-hidden px-6">
       <SectionTitle title={t('contact-form.tag')} />
       <div className="container pb-20 grid grid-cols-1 lg:grid-cols-2 gap-8 w-full max-w-7xl mx-auto items-center">
         {/* Левая колонка: заголовок, текст, картинка */}
