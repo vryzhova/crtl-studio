@@ -8,7 +8,6 @@ import dynamic from 'next/dynamic';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { GlitchOverlay } from '../components/glitched-image';
-import { useBreakpoints } from '@/app/hooks/use-break-points';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,7 +27,7 @@ export const GlitchImageSwitch = ({ imageSrc, alt, active, priority = false, cla
       {/* Glitch Layer (по умолчанию) */}
       <div
         className={clsx(
-          'absolute inset-0 transition-opacity duration-700 ease-in-out w-[60vw] sm:h-[55vh] h-[20vh]',
+          'absolute inset-0 transition-opacity duration-700 ease-in-out w-[70vw] sm:h-[60vh] h-[30vh]',
           !active ? 'opacity-100 z-10' : 'opacity-0 z-0'
         )}
       >
@@ -38,7 +37,7 @@ export const GlitchImageSwitch = ({ imageSrc, alt, active, priority = false, cla
       {/* Clean Image (при активном состоянии) */}
       <div
         className={clsx(
-          'absolute inset-0 transition-opacity duration-700 ease-in-out w-[60vw] sm:h-[55vh] h-[20vh]',
+          'absolute inset-0 transition-opacity duration-700 ease-in-out w-[70vw] sm:h-[60vh] h-[30vh]',
           active ? 'opacity-100 z-10' : 'opacity-0 z-0'
         )}
       >
@@ -98,9 +97,6 @@ export const Cases = () => {
     const content = contentRef.current;
     const wrapper = wrapperRef.current;
 
-    const scrollDistance = wrapper.scrollWidth - window.innerWidth + window.innerHeight / 2;
-    container.style.height = `${scrollDistance + 1.5 * window.innerHeight}px`;
-
     if (isDesktop) {
       gsap.set([introText, rightPanel, content], { clearProps: 'all' });
       gsap.set(introText, { opacity: 1, x: 0 });
@@ -116,10 +112,10 @@ export const Cases = () => {
     const tlIntro = gsap.timeline({
       scrollTrigger: {
         trigger: container,
-        pin: container,
+        pin: true,
         start: 'top top',
-        end: `+=${scrollDistance}`,
-        scrub: true,
+        end: `bottom+=20%`,
+        scrub: 1,
         anticipatePin: 1,
         onUpdate: self => {
           const center = window.innerWidth / 2;
@@ -152,22 +148,16 @@ export const Cases = () => {
 
           setActiveIndex(closestIdx);
         },
-        onLeave: () => {
-          container.style.height = '';
-        },
-        onLeaveBack: () => {
-          container.style.height = '';
-        },
       },
     });
 
     if (isDesktop) {
       tlIntro
-        .to(introText, { x: -350, duration: 1, ease: 'power3.inOut' })
-        .to(rightPanel, { x: '0%', duration: 1, ease: 'power3.inOut' }, '<')
+        .to(introText, { x: -350, duration: 2, ease: 'power3.inOut' })
+        .to(rightPanel, { x: '0%', duration: 2, ease: 'power3.inOut' }, '<')
         .to([introText, rightPanel], { opacity: 0, duration: 1, ease: 'power3.out' }, '+=0.2')
         .set([introTextContainer, rightPanel], { display: 'none' })
-        .to(content, { opacity: 1, duration: 1 })
+        .to(content, { opacity: 1, duration: 2 })
         .to(wrapper, { x: () => `-${wrapper.scrollWidth - window.innerWidth}px`, ease: 'none' });
     } else {
       tlIntro
@@ -180,7 +170,7 @@ export const Cases = () => {
 
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      container.style.height = '';
+      // container.style.height = '';
     };
   }, [cases.length, isDesktop]);
 
@@ -214,17 +204,17 @@ export const Cases = () => {
       <div
         id="gallery"
         ref={contentRef}
-        className="relative h-screen overflow-hidden z-10 flex flex-col justify-center"
+        className="relative h-screen overflow-hidden z-10 flex flex-col lg:justify-center "
       >
         {/* Header */}
-        <div className="absolute top-[-30px] left-0 w-full flex lg:justify-between flex-col lg:flex-row items-start lg:px-25 px-4 gap-5 pt-12 z-20 pointer-events-none">
-          <h2 className="text-[28px] sm:text-[44px] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent">
+        <div className="w-full flex lg:justify-between flex-col lg:flex-row items-start lg:px-25 px-4 gap-5 pt-12 z-20 pointer-events-none">
+          <h2 className="text-[28px] leading-[100%] sm:text-[44px] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent">
             {t('cases.title')}
           </h2>
           <div className="lg:text-right">
             <span
               ref={caseNumbersRef}
-              className="whitespace-pre-line sm:text-[44px] text-[28px] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
+              className="whitespace-pre-line leading-[100%] sm:text-[44px] text-[28px] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
             >
               {t('cases.subtitle')}
             </span>
@@ -235,7 +225,7 @@ export const Cases = () => {
         <div
           ref={wrapperRef}
           className="flex lg:mt-0 mt-30 justify-center items-center"
-          style={{ width: `${cases.length * 60}vw` }}
+          style={{ width: `${cases.length * 70}vw` }}
         >
           {cases.map((item, index) => {
             const setRef = (el: HTMLDivElement) => (itemRefs.current[index] = el);
@@ -244,7 +234,7 @@ export const Cases = () => {
                 key={item.id}
                 // @ts-ignore
                 ref={setRef}
-                className="w-[60vw] sm:h-[55vh] h-[20vh] flex items-center justify-center p-2.5 cursor-pointer"
+                className="w-[70vw] sm:h-[60vh] h-[30vh] flex items-center justify-center cursor-pointer"
                 onClick={() => openGallery(item)}
               >
                 <GlitchImageSwitch
@@ -262,7 +252,7 @@ export const Cases = () => {
         {/* Case info + arrow */}
         <div
           ref={caseInfoRef}
-          className="sticky mt-6.5 lg:right-20 flex gap-2 h-[70px] z-30"
+          className="sticky mt-6.5 lg:right-20 bottom-20 flex gap-2 h-[70px] z-30"
           style={{ position: 'sticky', marginLeft: 'auto', width: 'fit-content' }}
         >
           <div className="p-6 flex items-center justify-between bg-lime-default rounded-md lg:w-[540px] w-[250px] cursor-default select-none">

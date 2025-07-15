@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 
 type Case = {
@@ -32,11 +33,14 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
   const thumbWidth = 120;
   const thumbHeight = 84;
 
-  return (
+  const portalRoot = document.getElementById('modal-root');
+  if (!portalRoot) return null;
+
+  return createPortal(
     <div className="fixed h-full w-full inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center p-2 sm:p-4">
       <div className="relative text-black w-full max-w-6xl max-h-[95vh] rounded-lg overflow-auto shadow-lg p-2 sm:p-6 flex flex-col items-center">
         {/* Мобильная шапка с тайтлом и кнопкой закрытия */}
-        <div className="sm:hidden flex justify-between w-full">
+        <div className="sm:hidden flex justify-between w-full pb-4">
           <span className="text-2xl font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent text-left mb-2 mt-2">
             {caseData.title}
           </span>
@@ -146,6 +150,7 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    portalRoot
   );
 };

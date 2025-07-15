@@ -92,7 +92,7 @@ export const ProcessSteps = () => {
 
       ctx = gsap.context(() => {
         gsap.to(wrapper, {
-          x: () => `-${scrollDistance}px`,
+          x: () => `-${scrollDistance + 0.3 * window.innerWidth}px`,
           ease: 'none',
           scrollTrigger: {
             trigger: section,
@@ -135,21 +135,21 @@ export const ProcessSteps = () => {
       <div className="absolute inset-0 w-full h-full bg-[url('/mountain-bg.svg')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" />
       <SectionTitle title={t('how-we-work.tag')} position="center" />
       {/* Ваша прежняя верстка этапов — не меняю! */}
-      <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center mt-16">
+      <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center mt-16">
         {/* Mobile: горизонтальный таймлайн без карточек */}
-        <div className="block md:hidden w-full relative py-8">
+        <div className="block md:hidden w-full relative py-8 px-5">
           {/* Горизонтальная линия */}
-          <TimelineLineHorizontalSvg className="absolute top-10 left-0 right-0 z-0" style={{ minWidth: '600px' }} />
+          <TimelineLineHorizontalSvg className="absolute top-10 left-0 right-0 z-0" style={{ minWidth: '470px' }} />
           {/* Этапы */}
           <div
             ref={mobileStepsRef}
-            className="flex flex-row gap-8 px-4 relative z-10 w-full scroll-smooth"
-            style={{ width: `${steps.length * 70}vw` }}
+            className="flex flex-row gap-8 relative z-10 w-full scroll-smooth"
+            style={{ width: `${steps.length * 60}vw` }}
           >
             {steps.map((step, idx) => (
               <div
                 key={idx}
-                className="process-mobile-step flex flex-col w-70vw snap-center"
+                className="process-mobile-step flex flex-col w-60vw snap-center"
                 style={{ scrollSnapAlign: 'center' }}
               >
                 {/* Кружок-номер на линии */}
@@ -180,7 +180,7 @@ export const ProcessSteps = () => {
                 </span>
                 {/* Текст */}
                 <span
-                  className={`text-white text-xs text-start whitespace-pre-line transition-opacity duration-300 ${active === idx ? 'opacity-100' : 'opacity-60'}`}
+                  className={`text-white text-xs text-start transition-opacity duration-300 ${active === idx ? 'opacity-100' : 'opacity-60'}`}
                 >
                   {t(`how-we-work.step_${idx + 1}_text`)}
                 </span>

@@ -35,6 +35,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={` ${inter.variable} ${robotoMono.variable} ${interTight.variable} antialiased`}>
         <I18nProvider>{children}</I18nProvider>
+        <div id="modal-root" />
       </body>
     </html>
   );
