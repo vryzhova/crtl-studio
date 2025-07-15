@@ -11,7 +11,12 @@ export type TimelineLineHorizontalSvgProps = {
   style?: React.CSSProperties;
 };
 
-export const TimelineLineHorizontalSvg: React.FC<TimelineLineHorizontalSvgProps> = ({ width = 640, height = 2, className = '', style }) => (
+export const TimelineLineHorizontalSvg: React.FC<TimelineLineHorizontalSvgProps> = ({
+  width = 640,
+  height = 2,
+  className = '',
+  style,
+}) => (
   <svg
     className={className}
     width={width}
