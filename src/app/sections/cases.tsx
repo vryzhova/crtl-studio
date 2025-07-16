@@ -114,7 +114,7 @@ export const Cases = () => {
         trigger: container,
         pin: true,
         start: 'top top',
-        end: `bottom+=1000%`,
+        end: `bottom+=2000%`,
         scrub: 2,
         anticipatePin: 1,
         onUpdate: self => {
