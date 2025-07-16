@@ -12,8 +12,9 @@ export default function SmoothScrollWrapper({ children }: { children: React.Reac
     if (typeof window === 'undefined') return;
 
     lenisRef.current = new Lenis({
-      duration: 1.8,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      // duration: 1.8,
+      // easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      wheelMultiplier: 0.2,
     });
 
     const animate = (time: number) => {
