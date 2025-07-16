@@ -16,8 +16,7 @@ export const ProgressElement: React.FC<TProps> = ({ step, idx, activeIndex, prog
 
   return isActive ? (
     <div
-      className={`rounded-xl p-6 bg-black transition-all duration-300 overflow-hidden relative shadow-2xl scale-105 z-10`}
-      style={{ minHeight: '88px' }}
+      className={`rounded-xl p-6 bg-black transition-all duration-300 overflow-hidden relative shadow-2xl scale-105 z-10 h-[250px] lg:h-full`}
       onClick={() => !isActive && onClick?.(idx)}
       tabIndex={0}
       role="button"

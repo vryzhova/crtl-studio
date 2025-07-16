@@ -66,9 +66,9 @@ export const ProcessSteps = () => {
       const stepLength = 1 / totalSteps;
       trigger = ScrollTrigger.create({
         trigger: section,
-        start: 'top top-=10%',
+        start: 'top top',
         end: `+=${window.innerHeight * totalSteps * 0.5}`,
-        pin: true,
+        pin: section,
         scrub: true,
         onUpdate: self => {
           const progress = self.progress;
@@ -93,7 +93,7 @@ export const ProcessSteps = () => {
     const totalWidth = wrapper.scrollWidth;
     const scrollDistance = totalWidth - window.innerWidth;
     if (isMobile) {
-      section.style.height = `${scrollDistance + window.innerHeight}px`;
+      section.style.height = `${scrollDistance}px`;
       const totalSteps = steps.length;
       const stepLength = 1 / totalSteps;
 
@@ -106,7 +106,7 @@ export const ProcessSteps = () => {
             start: 'top top',
             end: () => `+=${scrollDistance * 2}`,
             scrub: true,
-            pin: sectionRef.current,
+            pin: true,
             anticipatePin: 1,
             onUpdate: self => {
               const progress = self.progress;
@@ -136,7 +136,7 @@ export const ProcessSteps = () => {
     <section
       id="how"
       ref={sectionRef}
-      className="relative bg-black text-white flex flex-col sm:items-center sm:justify-center overflow-hidden sm:py-20 pointer-events-none"
+      className="relative bg-black text-white flex flex-col sm:items-center sm:justify-center overflow-hidden sm:py-20 pointer-events-none min-h-screen lg:h-screen"
     >
       {/* Фоновое изображение — только фон, прозрачность не влияет на контент */}
       <div className="absolute inset-0 w-full h-full bg-[url('/mountain-bg.svg')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" />

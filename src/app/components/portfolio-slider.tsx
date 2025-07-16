@@ -51,7 +51,17 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
             ✕
           </button>
         </div>
-        {/* Крупное фото + стрелки */}
+        <div className="hidden md:flex md:flex-row gap-2 w-full md:w-auto md:m-5 items-center md:items-start lg:hidden">
+          {caseData.tags.map((tag, i) => (
+            <div
+              key={i}
+              className="bg-black px-3 flex justify-center items-center py-1 text-sm rounded-full h-[44px]  text-lime-default border border-lime-default"
+              style={{ minWidth: 160, textAlign: 'center' }}
+            >
+              {tag}
+            </div>
+          ))}
+        </div>
         <div
           className="relative w-full flex items-center justify-center bg-black/90 rounded-md min-h-[180px] sm:min-h-[320px] lg:min-h-[480px]"
           style={{ maxHeight: '70vh' }}
@@ -85,7 +95,7 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           </button>
           {/* Кнопка закрытия для desktop — поверх фото, справа сверху, отступ 30px */}
           <button
-            className="hidden sm:block right-5 lg:right-25 absolute z-20 bg-white text-black border-black rounded-md p-2"
+            className="hidden sm:block right-5 lg:right-25 absolute z-20 bg-white text-black border border-black rounded-md p-2"
             style={{ top: 20, width: 40, height: 40 }}
             onClick={onClose}
             aria-label="Закрыть"
@@ -94,23 +104,28 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           </button>
         </div>
         {/* Стрелки снизу — только на мобильных и tablet до 1024px */}
-        <div className="flex lg:hidden w-full justify-center gap-2.5 mt-4">
-          <button
-            onClick={prev}
-            className="bg-white bg-opacity-70 p-2 rounded-md shadow text-black"
-            style={{ width: 40, height: 40 }}
-            aria-label="Предыдущий слайд"
-          >
-            ←
-          </button>
-          <button
-            onClick={next}
-            className="bg-white bg-opacity-70 p-2 rounded-md shadow text-black"
-            style={{ width: 40, height: 40 }}
-            aria-label="Следующий слайд"
-          >
-            →
-          </button>
+        <div className="lg:hidden flex flex-row justify-between items-center w-full">
+          <span className="text-2xl font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent hidden md:block">
+            {caseData.title}
+          </span>
+          <div className="flex w-full md:w-auto justify-center gap-2.5 mt-4">
+            <button
+              onClick={prev}
+              className="bg-white bg-opacity-70 p-2 rounded-md shadow text-black"
+              style={{ width: 40, height: 40 }}
+              aria-label="Предыдущий слайд"
+            >
+              ←
+            </button>
+            <button
+              onClick={next}
+              className="bg-white bg-opacity-70 p-2 rounded-md shadow text-black"
+              style={{ width: 40, height: 40 }}
+              aria-label="Следующий слайд"
+            >
+              →
+            </button>
+          </div>
         </div>
         {/* Превью только на desktop >=1024px (lg) */}
         <div className="hidden lg:flex flex-row gap-2 justify-center items-center w-full overflow-x-auto mt-4 pb-2">
@@ -133,19 +148,19 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           ))}
         </div>
         {/* Теги и тайтл (desktop) */}
-        <div className="flex justify-between flex-wrap gap-3 w-full mt-10 sm:mt-4">
+        <div className="md:hidden lg:flex flex justify-between flex-wrap gap-3 w-full mt-10 sm:mt-4">
           <span className="text-2xl font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent hidden md:block">
             {caseData.title}
           </span>
-          <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto items-center md:items-start">
+          <div className="flex flex-col lg:flex-row gap-2 w-full md:w-auto items-center md:items-start">
             {caseData.tags.map((tag, i) => (
-              <span
+              <div
                 key={i}
-                className="bg-black px-3 py-1 text-sm rounded-full text-lime-default border border-lime-default"
+                className="bg-black flex justify-center items-center px-3 py-1 text-sm rounded-full text-lime-default border border-lime-default"
                 style={{ minWidth: 160, textAlign: 'center' }}
               >
                 {tag}
-              </span>
+              </div>
             ))}
           </div>
         </div>

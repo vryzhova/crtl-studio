@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { GlitchTypewriterText, SectionTitle } from '../components';
 import { ProgressElement } from '@/app/components/progress-element';
 import { useTranslation } from 'react-i18next';
@@ -79,7 +79,7 @@ export const WhySection: React.FC = () => {
   };
 
   return (
-    <section id="why" className="relative h-300vh w-full text-white overflow-hidden flex flex-col items-center">
+    <section id="why" className="relative w-full text-white overflow-hidden flex flex-col items-center">
       <SectionTitle title={t('why-us.title')} />
       <div className="container mx-auto px-4 pb-20 relative z-10">
         {/* Заголовок и описание секции */}
@@ -123,17 +123,27 @@ export const WhySection: React.FC = () => {
           </div>
           {/* Правая колонка — динамичная картинка */}
           <div className="w-full max-w-x">
-            <div className="flex justify-center items-center w-full h-full min-h-[320px]">
-              <Image
-                key={steps[activeIndex].title}
-                src={steps[activeIndex].image}
-                alt={steps[activeIndex].title}
-                width={400}
-                height={400}
-                className="object-contain transition-all duration-500"
-                priority
-                loading="eager"
-              />
+            <div className="flex justify-center items-center w-full h-[500px] relative">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={steps[activeIndex].image}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="absolute inset-0 flex justify-center items-center"
+                >
+                  <Image
+                    src={steps[activeIndex].image}
+                    alt={steps[activeIndex].title}
+                    width={400}
+                    height={400}
+                    className="object-contain"
+                    priority
+                    loading="eager"
+                  />
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </div>
