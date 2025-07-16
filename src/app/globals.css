@@ -117,3 +117,10 @@ body {
     font-family: 'Inter Tight', sans-serif;
     font-weight: 700;
 }
+
+.bg-cube-pattern {
+    background-image: url('/cube-bg.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}

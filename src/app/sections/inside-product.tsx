@@ -13,7 +13,7 @@ export const InsideProduct = () => {
 
       {/* Background pattern */}
       <div className="absolute bottom-[-300px] right-0 lg:right-[-100px] lg:top-[-40px] w-[370px] lg:w-[970px] h-full pointer-events-none z-0">
-        <div className="w-full h-full bg-[url('/cube-bg.svg')] bg-center bg-no-repeat bg-contain" />
+        <div className="w-full h-full bg-cube-pattern" />
       </div>
 
       <div className="container mx-auto px-4 lg:pb-20 relative z-10">

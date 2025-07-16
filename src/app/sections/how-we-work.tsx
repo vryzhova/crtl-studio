@@ -30,7 +30,7 @@ export const HowWeWork = () => {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const { t } = useTranslation();
 
-  const scrollStart = isDesktop ? 'top center+=40%' : 'top center';
+  const scrollStart = isDesktop ? 'top top+=20%' : 'top center';
 
   useEffect(() => {
     if (!sectionRef.current || !circleRef.current) return;

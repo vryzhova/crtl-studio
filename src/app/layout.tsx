@@ -34,6 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preload" href="/cube-bg.svg" as="image" type="image/svg+xml" />
+      </head>
       <body className={` ${inter.variable} ${robotoMono.variable} ${interTight.variable} antialiased`}>
         <I18nProvider>
           <SmoothScrollWrapper>{children}</SmoothScrollWrapper>
