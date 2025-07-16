@@ -1,17 +1,14 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 type Props = {
-  text: string; // передаём обычную строку с \n
+  text: string;
   className?: string;
   lineClassName?: string;
-  glitchChars?: string; // Символы для глитча
-  glitchDuration?: number; // Время глитча для каждой буквы (мс)
+  glitchChars?: string;
+  glitchDuration?: number;
   delayPerChar?: number;
 };
 
@@ -24,7 +21,17 @@ export const GlitchTypewriterText: React.FC<Props> = ({
   delayPerChar = 50,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const ghostRef = useRef<HTMLDivElement>(null);
+  const [reservedHeight, setReservedHeight] = useState<number | undefined>(undefined);
 
+  // 📏 Высота до запуска анимации
+  useEffect(() => {
+    if (ghostRef.current) {
+      setReservedHeight(ghostRef.current.offsetHeight);
+    }
+  }, [text]);
+
+  // 🎞️ Глитч-анимация
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -54,12 +61,10 @@ export const GlitchTypewriterText: React.FC<Props> = ({
 
       spans.forEach((span, charIndex) => {
         gsap.delayedCall(totalDelay / 1000, () => {
-          // Начинаем глитч - быстро меняем символы
           const glitchInterval = setInterval(() => {
             span.textContent = glitchChars[Math.floor(Math.random() * glitchChars.length)];
           }, 20);
 
-          // Через glitchDuration мс ставим финальный символ
           setTimeout(() => {
             clearInterval(glitchInterval);
             span.textContent = chars[charIndex];
@@ -71,5 +76,26 @@ export const GlitchTypewriterText: React.FC<Props> = ({
     });
   }, [text, glitchChars, glitchDuration, delayPerChar, lineClassName]);
 
-  return <div ref={containerRef} className={className} />;
+  return (
+    <>
+      {/* Видимый контейнер с глитчем */}
+      <div ref={containerRef} className={className} style={{ minHeight: reservedHeight }} />
+
+      {/* Призрачный (невидимый) контейнер для расчёта высоты */}
+      <div
+        ref={ghostRef}
+        className={className}
+        style={{
+          visibility: 'hidden',
+          position: 'absolute',
+          pointerEvents: 'none',
+          zIndex: -1,
+          whiteSpace: 'pre-line',
+        }}
+        aria-hidden
+      >
+        {text}
+      </div>
+    </>
+  );
 };

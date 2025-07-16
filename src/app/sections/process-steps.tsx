@@ -144,19 +144,19 @@ export const ProcessSteps = () => {
       {/* Ваша прежняя верстка этапов — не меняю! */}
       <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center mt-16">
         {/* Mobile: горизонтальный таймлайн без карточек */}
-        <div className="block sm:hidden w-full relative py-8 px-5">
+        <div className="block sm:hidden w-full relative py-8">
           {/* Горизонтальная линия */}
           {/* Этапы */}
           <div
             ref={mobileStepsRef}
-            className="flex flex-row gap-8 relative z-10 w-full scroll-smooth"
-            style={{ width: `${steps.length * 60}vw` }}
+            className="flex flex-row relative z-10 scroll-smooth"
+            style={{ width: `${steps.length * 81}vw` }}
           >
             <AutoWidthTimelineLine targetRef={mobileStepsRef} top={8} />
             {steps.map((step, idx) => (
               <div
                 key={idx}
-                className="process-mobile-step flex flex-col w-60vw snap-center"
+                className="process-mobile-step flex flex-col w-80vw snap-center px-2.5 box-border"
                 style={{ scrollSnapAlign: 'center' }}
               >
                 {/* Кружок-номер на линии */}
