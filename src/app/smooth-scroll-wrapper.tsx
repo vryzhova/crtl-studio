@@ -12,10 +12,11 @@ export default function SmoothScrollWrapper({ children }: { children: React.Reac
     if (typeof window === 'undefined') return;
 
     lenisRef.current = new Lenis({
-      duration: 0.8,
-      wheelMultiplier: 0.4,
-      touchMultiplier: 1,
-      infinite: false, // Отключаем бесконечный скролл
+      duration: 1,
+      wheelMultiplier: 0.6,
+      // easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      touchMultiplier: 0.8,
+      // infinite: false, // Отключаем бесконечный скролл
       gestureOrientation: 'vertical', // Ограничиваем скролл только по вертикали
       smoothWheel: true, // Оставляем плавность
       syncTouch: true,

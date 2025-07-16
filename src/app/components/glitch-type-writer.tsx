@@ -2,19 +2,22 @@
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Props = {
-  text: string;
+  text: string; // передаём обычную строку с \n
   className?: string;
   lineClassName?: string;
-  glitchChars?: string;
-  glitchDuration?: number;
+  glitchChars?: string; // Символы для глитча
+  glitchDuration?: number; // Время глитча для каждой буквы (мс)
   delayPerChar?: number;
 };
 
 export const GlitchTypewriterText: React.FC<Props> = ({
   text,
-  className = 'text-white',
+  className = 'text-2xl font-mono text-white space-y-2',
   lineClassName = '',
   glitchChars = '/|\\',
   glitchDuration = 80,
@@ -29,33 +32,20 @@ export const GlitchTypewriterText: React.FC<Props> = ({
     container.innerHTML = '';
 
     const lines = text.split('\n');
-    const glitchSet = glitchChars.length ? glitchChars : '/|\\';
-    const activeIntervals: NodeJS.Timeout[] = [];
 
-    lines.forEach((line, lineIndex) => {
+    lines.forEach(line => {
       const lineEl = document.createElement('div');
       lineEl.className = lineClassName;
-
-      [...line].forEach(char => {
+      [...line].forEach(() => {
         const span = document.createElement('span');
-
-        if (char === ' ') {
-          span.innerHTML = '&nbsp;'; // сохрани пробел в визуальном виде
-          span.style.display = 'inline-block';
-          lineEl.appendChild(span);
-          return;
-        }
-
-        span.textContent = ''; // начальное состояние
-        span.style.opacity = '1';
-        span.style.display = 'inline-block';
+        span.textContent = '';
         lineEl.appendChild(span);
       });
-
       container.appendChild(lineEl);
     });
 
     const lineEls = Array.from(container.children) as HTMLElement[];
+
     let totalDelay = 0;
 
     lineEls.forEach((lineEl, lineIndex) => {
@@ -63,37 +53,22 @@ export const GlitchTypewriterText: React.FC<Props> = ({
       const spans = Array.from(lineEl.children) as HTMLElement[];
 
       spans.forEach((span, charIndex) => {
-        const finalChar = chars[charIndex];
-
-        if (finalChar === ' ') {
-          // Пробелы не анимируются
-          return;
-        }
-
         gsap.delayedCall(totalDelay / 1000, () => {
-          let glitchCount = 0;
-          const maxGlitches = Math.ceil(glitchDuration / 20);
-
-          const interval = setInterval(() => {
-            if (glitchCount >= maxGlitches) {
-              clearInterval(interval);
-              span.textContent = finalChar;
-            } else {
-              span.textContent = glitchSet[Math.floor(Math.random() * glitchSet.length)];
-              glitchCount++;
-            }
+          // Начинаем глитч - быстро меняем символы
+          const glitchInterval = setInterval(() => {
+            span.textContent = glitchChars[Math.floor(Math.random() * glitchChars.length)];
           }, 20);
 
-          activeIntervals.push(interval);
+          // Через glitchDuration мс ставим финальный символ
+          setTimeout(() => {
+            clearInterval(glitchInterval);
+            span.textContent = chars[charIndex];
+          }, glitchDuration);
         });
 
         totalDelay += delayPerChar;
       });
     });
-
-    return () => {
-      activeIntervals.forEach(clearInterval);
-    };
   }, [text, glitchChars, glitchDuration, delayPerChar, lineClassName]);
 
   return <div ref={containerRef} className={className} />;

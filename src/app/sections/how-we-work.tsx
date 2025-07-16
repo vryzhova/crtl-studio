@@ -30,7 +30,7 @@ export const HowWeWork = () => {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const { t } = useTranslation();
 
-  const scrollStart = isDesktop ? 'top top' : 'top center+=20%';
+  const scrollStart = isDesktop ? 'top top' : 'top center';
 
   useEffect(() => {
     if (!sectionRef.current || !circleRef.current) return;
@@ -39,7 +39,7 @@ export const HowWeWork = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: isDesktop ? sectionRef.current : lastElementRef.current,
-        pin: sectionRef.current,
+        // pin: sectionRef.current,
         scrub: true,
         start: scrollStart,
         end: '+=1000',

@@ -133,8 +133,8 @@ export const Cases = () => {
       introTimeline
         .to(caseNumbersRef.current, { opacity: 1, duration: 1 })
         .add('simultaneous')
-        .to(wrapper, { opacity: 1, duration: 0.8 }, 'simultaneous')
-        .to(caseInfoRef.current, { opacity: 1, duration: 0.8 }, 'simultaneous');
+        .to(wrapper, { opacity: 1, duration: 1 }, 'simultaneous')
+        .to(caseInfoRef.current, { opacity: 1, duration: 1 }, 'simultaneous');
     }
 
     // Запускаем introTimeline только при прокрутке вниз
@@ -151,7 +151,7 @@ export const Cases = () => {
         trigger: container,
         pin: true,
         start: 'top top',
-        end: `bottom+=1000%`,
+        end: `bottom+=500%`,
         scrub: 1,
         anticipatePin: 1,
         onUpdate: self => {

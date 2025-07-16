@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { GlitchTypewriterText, SectionTitle } from '../components';
@@ -13,6 +13,15 @@ export const WhySection: React.FC = () => {
   const [progress, setProgress] = useState<number>();
   const frameIdRef = useRef<number | null>(null);
   const { t } = useTranslation();
+  const elementWrapperRef = useRef<HTMLDivElement>(null);
+  const [minHeight, setMinHeight] = useState<number | undefined>(undefined);
+
+  useLayoutEffect(() => {
+    if (elementWrapperRef.current) {
+      const height = elementWrapperRef.current.offsetHeight;
+      setMinHeight(height);
+    }
+  }, [activeIndex]);
 
   const steps = [
     {
@@ -70,7 +79,7 @@ export const WhySection: React.FC = () => {
   };
 
   return (
-    <section id="why" className="relative min-h-screen text-white overflow-hidden flex flex-col items-center h-full">
+    <section id="why" className="relative min-h-screen w-full text-white overflow-hidden flex flex-col items-center">
       <SectionTitle title={t('why-us.title')} />
       <div className="container mx-auto px-4 pb-20 relative z-10">
         {/* Заголовок и описание секции */}

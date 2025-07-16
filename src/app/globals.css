@@ -84,11 +84,12 @@
     }
 }
 
+
 body {
     background: var(--background);
     color: var(--foreground);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    overflow-x: hidden;
+    -webkit-overflow-scrolling: auto; /* отключает инерцию */
 }
 
 /* 3D Cube Styles */
@@ -107,6 +108,7 @@ body {
     height: 2px; /* ← толщина трека для Firefox */
 
 }
+
 
 .title {
     font-family: 'Inter Tight', sans-serif;

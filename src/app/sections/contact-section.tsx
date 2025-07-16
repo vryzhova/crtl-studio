@@ -45,6 +45,7 @@ export const ContactSection: React.FC = () => {
             alt="ctrl"
             className="w-40 h-40 mt-10 select-none levitate justify-self-end"
             draggable={false}
+            loading="eager"
             width={218}
             height={260}
           />
