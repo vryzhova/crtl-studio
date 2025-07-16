@@ -114,8 +114,8 @@ export const Cases = () => {
         trigger: container,
         pin: true,
         start: 'top top',
-        end: `bottom+=20%`,
-        scrub: 1,
+        end: `bottom+=1000%`,
+        scrub: 2,
         anticipatePin: 1,
         onUpdate: self => {
           const center = window.innerWidth / 2;
@@ -157,7 +157,7 @@ export const Cases = () => {
         .to(rightPanel, { x: '0%', duration: 2, ease: 'power3.inOut' }, '<')
         .to([introText, rightPanel], { opacity: 0, duration: 1, ease: 'power3.out' }, '+=0.2')
         .set([introTextContainer, rightPanel], { display: 'none' })
-        .to(content, { opacity: 1, duration: 2 })
+        .to(content, { opacity: 1, duration: 1 })
         .to(wrapper, { x: () => `-${wrapper.scrollWidth - window.innerWidth}px`, ease: 'none' });
     } else {
       tlIntro

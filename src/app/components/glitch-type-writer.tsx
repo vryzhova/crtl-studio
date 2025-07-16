@@ -8,8 +8,8 @@ type Props = {
   className?: string;
   lineClassName?: string;
   glitchChars?: string;
-  glitchDuration?: number; // общее время глича на символ
-  delayPerChar?: number; // задержка между символами
+  glitchDuration?: number;
+  delayPerChar?: number;
 };
 
 export const GlitchTypewriterText: React.FC<Props> = ({
@@ -26,30 +26,35 @@ export const GlitchTypewriterText: React.FC<Props> = ({
     const container = containerRef.current;
     if (!container) return;
 
-    // Очистка контейнера
     container.innerHTML = '';
 
     const lines = text.split('\n');
     const glitchSet = glitchChars.length ? glitchChars : '/|\\';
     const activeIntervals: NodeJS.Timeout[] = [];
 
-    // Создание DOM-элементов
     lines.forEach((line, lineIndex) => {
       const lineEl = document.createElement('div');
       lineEl.className = lineClassName;
 
-      [...line].forEach(() => {
+      [...line].forEach(char => {
         const span = document.createElement('span');
-        span.textContent = ''; // начально пустой
+
+        if (char === ' ') {
+          span.innerHTML = '&nbsp;'; // сохрани пробел в визуальном виде
+          span.style.display = 'inline-block';
+          lineEl.appendChild(span);
+          return;
+        }
+
+        span.textContent = ''; // начальное состояние
         span.style.opacity = '1';
-        span.style.display = 'inline-block'; // чтобы не прыгал текст
+        span.style.display = 'inline-block';
         lineEl.appendChild(span);
       });
 
       container.appendChild(lineEl);
     });
 
-    // Анимация появления
     const lineEls = Array.from(container.children) as HTMLElement[];
     let totalDelay = 0;
 
@@ -60,7 +65,11 @@ export const GlitchTypewriterText: React.FC<Props> = ({
       spans.forEach((span, charIndex) => {
         const finalChar = chars[charIndex];
 
-        // Запускаем с задержкой через gsap
+        if (finalChar === ' ') {
+          // Пробелы не анимируются
+          return;
+        }
+
         gsap.delayedCall(totalDelay / 1000, () => {
           let glitchCount = 0;
           const maxGlitches = Math.ceil(glitchDuration / 20);
@@ -83,7 +92,7 @@ export const GlitchTypewriterText: React.FC<Props> = ({
     });
 
     return () => {
-      activeIntervals.forEach(interval => clearInterval(interval));
+      activeIntervals.forEach(clearInterval);
     };
   }, [text, glitchChars, glitchDuration, delayPerChar, lineClassName]);
 
