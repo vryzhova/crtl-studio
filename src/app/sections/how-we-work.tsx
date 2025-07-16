@@ -68,7 +68,7 @@ export const HowWeWork = () => {
     <section
       ref={sectionRef}
       id="how-we-work"
-      className="relative h-full lg:h-screen text-black overflow-hidden w-full"
+      className="relative h-full lg:h-screen text-black bg-white overflow-hidden w-full lg:pb-20"
     >
       {/* Ваш контент */}
       <div ref={contentRef} className="container mx-auto px-4 relative z-10">
@@ -83,7 +83,7 @@ export const HowWeWork = () => {
         />
 
         {/* Сетка из 4 блоков desktop */}
-        <div className="hidden lg:grid relative w-full grid-cols-2 gap-x-60 gap-y-50">
+        <div className="hidden lg:grid relative w-full grid-cols-2 gap-x-40 gap-y-40">
           {/* Вертикальная линия (desktop only) */}
           <div className="hidden lg:block absolute left-1/2 top-[-40px] h-[calc(48%-20px)] w-px bg-gray-elements -translate-x-1/2" />
           <div className="hidden lg:block absolute left-1/2 bottom-[-40px] h-[calc(48%-20px)] w-px bg-gray-elements -translate-x-1/2" />
