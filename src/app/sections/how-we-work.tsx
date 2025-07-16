@@ -30,7 +30,7 @@ export const HowWeWork = () => {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const { t } = useTranslation();
 
-  const scrollStart = isDesktop ? 'top top+=20%' : 'top center';
+  const scrollStart = isDesktop ? 'top top' : 'top center+=20%';
 
   useEffect(() => {
     if (!sectionRef.current || !circleRef.current) return;
@@ -39,9 +39,10 @@ export const HowWeWork = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: isDesktop ? sectionRef.current : lastElementRef.current,
-        scrub: 3,
+        pin: sectionRef.current,
+        scrub: true,
         start: scrollStart,
-        end: 'bottom top-=20%',
+        end: '+=1000',
         anticipatePin: 1,
       },
     });
@@ -174,7 +175,7 @@ export const HowWeWork = () => {
           </div>
 
           {/* Нижний левый */}
-          <div ref={lastElementRef} className="flex flex-col items-center justify-center w-full">
+          <div className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-full">
               <h3 className="font-inter text-center mb-2 text-base lg:text-lg">{t('inside-focus.ux_title')}</h3>
               <p className="text-sm lg:text-base text-black leading-relaxed text-center">{t('inside-focus.ux_text')}</p>
@@ -184,7 +185,7 @@ export const HowWeWork = () => {
           </div>
 
           {/* Нижний правый */}
-          <div className="flex flex-col items-center justify-center w-full">
+          <div ref={lastElementRef} className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-full">
               <h3 className="font-inter mb-2 text-base lg:text-lg">{t('inside-focus.blockchain_title')}</h3>
               <p className="text-sm lg:text-base text-black leading-relaxed text-center">

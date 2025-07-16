@@ -12,7 +12,10 @@ export const InsideProduct = () => {
       <SectionTitle title={t('inside-product.ai_inside_product')} />
 
       {/* Background pattern */}
-      <div className="absolute bottom-[-300px] right-0 lg:right-[-100px] lg:top-[-40px] w-[370px] lg:w-[970px] h-full pointer-events-none z-0">
+      <div
+        className="absolute bottom-[-300px] right-0 lg:right-[-100px] lg:top-[-40px] w-[370px] lg:w-[970px] h-full pointer-events-none z-0"
+        style={{ transform: 'translateZ(0)' }}
+      >
         <div className="w-full h-full bg-cube-pattern" />
       </div>
 

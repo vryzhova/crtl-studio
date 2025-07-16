@@ -1,24 +1,32 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
 
 export default function SmoothScrollWrapper({ children }: { children: React.ReactNode }) {
+  const lenisRef = useRef<Lenis | null>(null);
+  const rafRef = useRef<number>(null);
+
   useEffect(() => {
-    const lenis = new Lenis({
+    // SSR guard
+    if (typeof window === 'undefined') return;
+
+    lenisRef.current = new Lenis({
       duration: 1.8,
-      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
 
-    const raf = (time: number) => {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+    const animate = (time: number) => {
+      lenisRef.current?.raf(time);
+      rafRef.current = requestAnimationFrame(animate);
     };
 
-    requestAnimationFrame(raf);
+    rafRef.current = requestAnimationFrame(animate);
 
     return () => {
-      lenis.destroy();
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      lenisRef.current?.destroy();
+      lenisRef.current = null;
     };
   }, []);
 

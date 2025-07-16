@@ -68,7 +68,7 @@ export const ProcessSteps = () => {
         trigger: section,
         start: 'top top-=10%',
         end: `+=${window.innerHeight * totalSteps * 0.5}`,
-        pin: sectionRef.current,
+        pin: true,
         scrub: true,
         onUpdate: self => {
           const progress = self.progress;
@@ -104,7 +104,7 @@ export const ProcessSteps = () => {
           scrollTrigger: {
             trigger: section,
             start: 'top top',
-            end: () => `+=${scrollDistance}`,
+            end: () => `+=${scrollDistance * 2}`,
             scrub: true,
             pin: sectionRef.current,
             anticipatePin: 1,
@@ -144,7 +144,7 @@ export const ProcessSteps = () => {
       {/* Ваша прежняя верстка этапов — не меняю! */}
       <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center mt-16">
         {/* Mobile: горизонтальный таймлайн без карточек */}
-        <div className="block md:hidden w-full relative py-8 px-5">
+        <div className="block sm:hidden w-full relative py-8 px-5">
           {/* Горизонтальная линия */}
           {/* Этапы */}
           <div
@@ -196,7 +196,7 @@ export const ProcessSteps = () => {
           </div>
         </div>
         {/* Desktop: вертикальный таймлайн */}
-        <div className="hidden md:block w-full">
+        <div className="hidden sm:block w-full">
           <TimelineLineSvg
             className="absolute lg:left-1/2 left-20 top-0 -translate-x-1/2 z-0 select-none pointer-events-none"
             height={640}

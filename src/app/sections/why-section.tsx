@@ -123,6 +123,7 @@ export const WhySection: React.FC = () => {
                 height={400}
                 className="object-contain transition-all duration-500"
                 priority
+                loading="eager"
               />
             </div>
           </div>

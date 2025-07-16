@@ -88,34 +88,71 @@ export const Cases = () => {
     'text-center md:text-left text-2xl md:text-4xl px-5 lg:px-0 lg:text-end font-bold bg-gradient-to-b from-white lg:from-black to-gray-gradient bg-clip-text text-transparent';
 
   useEffect(() => {
-    if (!containerRef.current || !wrapperRef.current) return;
+    if (
+      !containerRef.current ||
+      !wrapperRef.current ||
+      !contentRef.current ||
+      !initialTextRef.current ||
+      !initialTextContainerRef.current ||
+      !rightPanelRef.current
+    )
+      return;
 
     const container = containerRef.current;
-    const introText = initialTextRef.current;
-    const rightPanel = rightPanelRef.current;
-    const introTextContainer = initialTextContainerRef.current;
-    const content = contentRef.current;
     const wrapper = wrapperRef.current;
+    const content = contentRef.current;
+    const introText = initialTextRef.current;
+    const introTextContainer = initialTextContainerRef.current;
+    const rightPanel = rightPanelRef.current;
+
+    // Сброс всех свойств перед анимацией
+    gsap.set([introText, rightPanel, content], { clearProps: 'all' });
 
     if (isDesktop) {
-      gsap.set([introText, rightPanel, content], { clearProps: 'all' });
       gsap.set(introText, { opacity: 1, x: 0 });
       gsap.set(rightPanel, { opacity: 1, x: '100%' });
       gsap.set(content, { opacity: 0 });
     } else {
-      gsap.set(contentRef.current, { opacity: 1 });
-      gsap.set(wrapperRef.current, { opacity: 0 });
+      gsap.set(content, { opacity: 1 });
+      gsap.set(wrapper, { opacity: 0 });
       gsap.set(caseInfoRef.current, { opacity: 0 });
       gsap.set(caseNumbersRef.current, { opacity: 0 });
     }
 
-    const tlIntro = gsap.timeline({
+    // === 1. Intro Timeline (без scrub) ===
+    const introTimeline = gsap.timeline({ paused: true });
+
+    if (isDesktop) {
+      introTimeline
+        .to(introText, { x: -350, duration: 2, ease: 'power3.inOut' })
+        .to(rightPanel, { x: '0%', duration: 2, ease: 'power3.inOut' }, '<')
+        .to([introText, rightPanel], { opacity: 0, duration: 1, ease: 'power3.out' }, '+=0.2')
+        .set([introTextContainer, rightPanel], { display: 'none' })
+        .to(content, { opacity: 1, duration: 1 });
+    } else {
+      introTimeline
+        .to(caseNumbersRef.current, { opacity: 1, duration: 1 })
+        .add('simultaneous')
+        .to(wrapper, { opacity: 1, duration: 0.8 }, 'simultaneous')
+        .to(caseInfoRef.current, { opacity: 1, duration: 0.8 }, 'simultaneous');
+    }
+
+    // Запускаем introTimeline только при прокрутке вниз
+    ScrollTrigger.create({
+      trigger: container,
+      start: 'top top',
+      end: '+=300',
+      onEnter: () => introTimeline.play(),
+    });
+
+    // === 2. Scroll Timeline (горизонтальный scroll + масштаб) ===
+    const scrollTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: container,
         pin: true,
         start: 'top top',
-        end: `bottom+=2000%`,
-        scrub: 2,
+        end: `bottom+=1000%`,
+        scrub: 1,
         anticipatePin: 1,
         onUpdate: self => {
           const center = window.innerWidth / 2;
@@ -136,7 +173,6 @@ export const Cases = () => {
             const max = 1;
             const min = 0.8;
             const maxDist = window.innerWidth / 2;
-
             const scale = max - (dist / maxDist) * (max - min);
 
             gsap.to(ref, {
@@ -151,26 +187,14 @@ export const Cases = () => {
       },
     });
 
-    if (isDesktop) {
-      tlIntro
-        .to(introText, { x: -350, duration: 2, ease: 'power3.inOut' })
-        .to(rightPanel, { x: '0%', duration: 2, ease: 'power3.inOut' }, '<')
-        .to([introText, rightPanel], { opacity: 0, duration: 1, ease: 'power3.out' }, '+=0.2')
-        .set([introTextContainer, rightPanel], { display: 'none' })
-        .to(content, { opacity: 1, duration: 1 })
-        .to(wrapper, { x: () => `-${wrapper.scrollWidth - window.innerWidth}px`, ease: 'none' });
-    } else {
-      tlIntro
-        .to(caseNumbersRef.current, { opacity: 1, duration: 1 })
-        .add('simultaneous')
-        .to(wrapperRef.current, { opacity: 1, duration: 0.8 }, 'simultaneous')
-        .to(caseInfoRef.current, { opacity: 1, duration: 0.8 }, 'simultaneous')
-        .to(wrapper, { x: () => `-${wrapper.scrollWidth - window.innerWidth}px`, ease: 'none' });
-    }
+    // Перемещаем wrapper влево
+    scrollTimeline.to(wrapper, {
+      x: () => `-${wrapper.scrollWidth - window.innerWidth}px`,
+      ease: 'none',
+    });
 
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      // container.style.height = '';
     };
   }, [cases.length, isDesktop]);
 
