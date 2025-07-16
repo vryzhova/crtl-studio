@@ -32,7 +32,7 @@ export const Preloader = ({ onDone }: { onDone: () => void }) => {
           initial={{ opacity: 1 }}
           animate={{ opacity: isVisible ? 1 : 0 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.7, ease: 'easeInOut' }}
+          transition={{ duration: 1, ease: 'easeInOut' }}
           className="fixed inset-0 px-10 bg-black flex flex-col items-center justify-center z-50"
         >
           <div className="flex flex-col items-center justify-center">
