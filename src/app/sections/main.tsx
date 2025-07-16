@@ -14,7 +14,7 @@ export const MainSection: React.FC = () => {
       </div>
       {/* Видео на фоне */}
       <video
-        className="absolute inset-0 w-full h-full object-cover z-0 scale-110"
+        className="absolute inset-0 w-full h-full object-cover z-0 scale-150 md:scale-110"
         autoPlay
         muted
         loop
