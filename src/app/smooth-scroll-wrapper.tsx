@@ -19,7 +19,7 @@ export default function SmoothScrollWrapper({ children }: { children: React.Reac
       // infinite: false, // Отключаем бесконечный скролл
       gestureOrientation: 'vertical', // Ограничиваем скролл только по вертикали
       smoothWheel: true, // Оставляем плавность
-      syncTouch: true,
+      // syncTouch: true,
     });
 
     const animate = (time: number) => {
