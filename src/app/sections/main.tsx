@@ -15,7 +15,13 @@ export const MainSection: React.FC = () => {
         {/* <div className="bg-gradient-to-b from-black to-transparent w-full h-full" /> */}
       </div>
       {/* Видео на фоне */}
-      <video className="absolute inset-0 w-full h-full object-cover z-0 scale-150" autoPlay muted loop playsInline>
+      <video
+        className="absolute inset-0 w-full h-full object-cover z-0 scale-150 bg-[url('/main-bg.svg')] bg-center bg-no-repeat bg-cover "
+        autoPlay
+        muted
+        loop
+        playsInline
+      >
         <source src="/bg-video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
