@@ -99,9 +99,9 @@ export const Header = () => {
           aria-label="Открыть меню"
         >
           <svg width="44" height="44" viewBox="0 0 64 64" fill="none">
-            <circle cx="32" cy="32" r="28" stroke="#E5E5E5" strokeWidth="4" />
-            <line x1="22" y1="26" x2="42" y2="26" stroke="#E5E5E5" strokeWidth="4" strokeLinecap="round" />
-            <line x1="22" y1="34" x2="42" y2="34" stroke="#E5E5E5" strokeWidth="4" strokeLinecap="round" />
+            <circle cx="32" cy="32" r="28" stroke="#E5E5E5" stroke-width="4" />
+            <line x1="22" y1="28" x2="42" y2="28" stroke="#E5E5E5" stroke-width="4" stroke-linecap="round" />
+            <line x1="22" y1="36" x2="42" y2="36" stroke="#E5E5E5" stroke-width="4" stroke-linecap="round" />
           </svg>
         </button>
       </div>
@@ -127,7 +127,7 @@ export const Header = () => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -40, opacity: 0 }}
               transition={{ type: 'tween', duration: 0.38, ease: 'easeInOut' }}
-              className="fixed left-0 top-0 z-50 w-full max-w-[1024px] bg-black border border-gray-elements shadow-2xl px-5 pt-5 pb-8  flex flex-col lg:hidden"
+              className="fixed rounded-md left-0 top-0 z-50 w-full max-w-[1024px] bg-black border border-gray-elements shadow-2xl px-5 pt-5 pb-8  flex flex-col lg:hidden"
               style={{ minHeight: 'auto' }}
             >
               <div className="flex items-center justify-between">
@@ -143,15 +143,15 @@ export const Header = () => {
                   aria-label="Закрыть меню"
                   className="ml-2 flex items-center justify-center w-16 h-16"
                 >
-                  <svg width="44" height="44" viewBox="0 0 64 64" fill="none">
+                  <svg width="40" height="40" viewBox="0 0 64 64" fill="none">
                     <circle cx="32" cy="32" r="28" stroke="#E5E5E5" strokeWidth="4" />
                     <line x1="21" y1="21" x2="43" y2="43" stroke="#E5E5E5" strokeWidth="4" strokeLinecap="round" />
                     <line x1="43" y1="21" x2="21" y2="43" stroke="#E5E5E5" strokeWidth="4" strokeLinecap="round" />
                   </svg>
                 </button>
               </div>
-              <div className="flex flex-col lg:flex-row gap-6 w-full">
-                <nav className="flex flex-col gap-4 text-base font-medium mb-6 lg:mb-0 lg:flex-1">
+              <div className="flex justify-between w-full">
+                <nav className="flex flex-col gap-4 text-base font-medium mb-6 md:mb-0 lg:flex-1">
                   {navItems.map(item => (
                     <Link
                       key={item.href}
@@ -163,7 +163,7 @@ export const Header = () => {
                     </Link>
                   ))}
                 </nav>
-                <div className="flex flex-col items-start lg:items-end justify-center gap-4 lg:gap-6">
+                <div className="flex flex-col items-end justify-between">
                   <div className="flex gap-3">
                     <button
                       className={clsx('px-4 py-2 border border-white/30 rounded text-sm', {
@@ -186,13 +186,20 @@ export const Header = () => {
                   </div>
                   <Link
                     href="#contact"
-                    className="border border-white rounded px-6 py-2 text-sm text-center hover:bg-white hover:text-black transition self-stretch lg:self-start"
+                    className="hidden md:block border border-white rounded px-6 py-2 text-sm text-center hover:bg-white hover:text-black transition self-stretch lg:self-start"
                     onClick={() => setMenuOpen(false)}
                   >
                     {t('contact-us')}
                   </Link>
                 </div>
               </div>
+              <Link
+                href="#contact"
+                className=" md:hidden border border-white rounded px-6 py-2 text-sm text-center hover:bg-white hover:text-black transition self-stretch lg:self-start"
+                onClick={() => setMenuOpen(false)}
+              >
+                {t('contact-us')}
+              </Link>
             </motion.div>
           </>
         )}

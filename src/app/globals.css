@@ -109,13 +109,12 @@ body {
 
 }
 
-
-.title {
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 700;
+.font-inter-tight {
+    font-family: var(--font-inter-tight), sans-serif;
 }
 
-.subtitle {
+
+.title {
     font-family: 'Inter Tight', sans-serif;
     font-weight: 700;
 }
@@ -125,4 +124,13 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+.subtitle {
+    font-family: var(--font-inter-tight), 'Inter Tight', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
 }

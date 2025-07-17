@@ -26,7 +26,7 @@ export const MainSection: React.FC = () => {
               lineClassName="title text-4xl md:text-6xl font-bold"
             />
 
-            <p className="text-base md:text-lg text-white mt-4 mb-[30px] sm:mt-15 lg:mb-9 font-inter">
+            <p className="text-base md:text-lg text-white mt-4 mb-[30px] sm:mt-15 lg:mb-9 font-inter max-w-[470px]">
               {t('main.description')}
             </p>
 

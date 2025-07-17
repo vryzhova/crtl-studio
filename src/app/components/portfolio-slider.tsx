@@ -45,10 +45,13 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
             {caseData.title}
           </span>
           <button
-            className="absolute h-10 w-10 top-4 right-4 text-white border border-white z-20 rounded-md p-2 hover:bg-lime-default active:bg-lime-active"
+            className="absolute h-10 w-10 right-4 text-white border border-white z-20 rounded-md p-2 hover:bg-lime-default active:bg-lime-active flex items-center justify-center"
             onClick={onClose}
           >
-            ✕
+            <svg width="26.43" height="26.43" viewBox="0 0 26.43 26.43" fill="none">
+              <line x1="4" y1="4" x2="22.43" y2="22.43" stroke="#fff" stroke-width="3.5" stroke-linecap="round" />
+              <line x1="22.43" y1="4" x2="4" y2="22.43" stroke="#fff" stroke-width="3.5" stroke-linecap="round" />
+            </svg>
           </button>
         </div>
         <div className="hidden md:flex md:flex-row gap-2 w-full md:w-auto md:m-5 items-center md:items-start lg:hidden">
@@ -95,12 +98,15 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           </button>
           {/* Кнопка закрытия для desktop — поверх фото, справа сверху, отступ 30px */}
           <button
-            className="hidden sm:block right-5 lg:right-25 absolute z-20 bg-white text-black border border-black rounded-md p-2"
+            className="hidden sm:flex items-center justify-center right-5 lg:right-25 absolute z-20 bg-white text-black border border-black rounded-md p-2"
             style={{ top: 20, width: 40, height: 40 }}
             onClick={onClose}
             aria-label="Закрыть"
           >
-            ✕
+            <svg width="26.43" height="26.43" viewBox="0 0 26.43 26.43" fill="none">
+              <line x1="4" y1="4" x2="22.43" y2="22.43" stroke="#141414" stroke-width="3.5" stroke-linecap="round" />
+              <line x1="22.43" y1="4" x2="4" y2="22.43" stroke="#141414" stroke-width="3.5" stroke-linecap="round" />
+            </svg>
           </button>
         </div>
         {/* Стрелки снизу — только на мобильных и tablet до 1024px */}
