@@ -49,7 +49,7 @@ export const InsideProduct = () => {
           <div className="relative h-96 lg:h-[32rem] w-full mt-6 lg:mt-0">
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="relative lg:w-140 lg:h-140">
-                <Image src="./cube.svg" className="levitate" alt="cube" width={500} height={500} loading="eager" />
+                <Image src="/cube.png" className="levitate" alt="cube" width={500} height={500} loading="eager" />
               </div>
             </div>
           </div>

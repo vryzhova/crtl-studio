@@ -51,8 +51,9 @@ export const HowWeWork = () => {
     tl.to(
       circleRef.current,
       {
-        scale: 1,
-        ease: 'sine.inOut',
+        width: 2000,
+        height: 2000,
+        // ease: 'sine.inOut',
       },
       0
     );
@@ -137,14 +138,7 @@ export const HowWeWork = () => {
             <div
               ref={circleRef}
               className="hidden lg:block absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2"
-              style={{
-                width: 88,
-                height: 88,
-                borderRadius: '50%',
-                transform: 'translate(50%, 50%), scale(0.2)',
-                overflow: 'hidden',
-                willChange: 'transform',
-              }}
+              style={{ width: 88, height: 88, borderRadius: '50%', overflow: 'hidden' }}
             >
               <Image
                 fill
@@ -209,13 +203,12 @@ export const HowWeWork = () => {
                 position: 'absolute',
                 left: '50%',
                 bottom: 2,
-                transform: 'translate(-50%, 10%), scale(0.2)',
-                zIndex: 20,
+                transform: 'translate(-50%, 10%)',
                 width: 88,
                 height: 88,
                 borderRadius: '50%',
                 overflow: 'hidden',
-                willChange: 'transform',
+                willChange: 'width, height, transform',
               }}
             >
               <Image

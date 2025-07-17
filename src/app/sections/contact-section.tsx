@@ -25,7 +25,7 @@ export const ContactSection: React.FC = () => {
           </div>
           <div className="justify-center hidden md:flex">
             <Image
-              src="/ctrl-btn.svg"
+              src="/ctrl-btn.png"
               alt="ctrl"
               className="w-40 h-40 mt-10 select-none levitate justify-self-center"
               draggable={false}
@@ -41,11 +41,10 @@ export const ContactSection: React.FC = () => {
 
         <div className="md:hidden bg-[url('/ctrl-btn-bg.svg')] bg-contain bg-center bg-no-repeat bg">
           <Image
-            src="/ctrl-btn.svg"
+            src="/ctrl-btn.png"
             alt="ctrl"
             className="w-40 h-40 mt-10 select-none levitate justify-self-end"
             draggable={false}
-            loading="eager"
             width={218}
             height={260}
           />

@@ -5,9 +5,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { getCases } from '../sections/helpers';
 import { useTranslation } from 'react-i18next';
 import dynamic from 'next/dynamic';
-import clsx from 'clsx';
-import Image from 'next/image';
-import { GlitchOverlay } from '../components/glitched-image';
+
+const GlitchImageSwitch = dynamic(
+  () => import('../components/glitch-image-switch').then(mod => mod.GlitchImageSwitch),
+  {
+    ssr: false,
+  }
+);
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,32 +23,6 @@ type Props = {
   width?: number;
   height?: number;
   className?: string;
-};
-
-export const GlitchImageSwitch = ({ imageSrc, alt, active, priority = false, className = '' }: Props) => {
-  return (
-    <div className={clsx('relative overflow-hidden w-full h-full', className)}>
-      {/* Glitch Layer (по умолчанию) */}
-      <div
-        className={clsx(
-          'absolute inset-0 transition-opacity duration-700 ease-in-out w-[70vw] sm:h-[60vh] h-[30vh]',
-          !active ? 'opacity-100 z-10' : 'opacity-0 z-0'
-        )}
-      >
-        <GlitchOverlay imageSrc={imageSrc} />
-      </div>
-
-      {/* Clean Image (при активном состоянии) */}
-      <div
-        className={clsx(
-          'absolute inset-0 transition-opacity duration-700 ease-in-out w-[70vw] sm:h-[60vh] h-[30vh]',
-          active ? 'opacity-100 z-10' : 'opacity-0 z-0'
-        )}
-      >
-        <Image src={imageSrc} alt={alt} fill priority={priority} className="object-cover rounded-xl shadow-md" />
-      </div>
-    </div>
-  );
 };
 
 const CaseCarousel = dynamic(() => import('../components/portfolio-slider').then(mod => mod.CaseCarousel), {
