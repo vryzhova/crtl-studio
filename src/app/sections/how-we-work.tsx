@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SectionTitle, GlitchTypewriterText } from '../components';
 import Image from 'next/image';
-import { useIsWebView } from '@/app/hooks';
 
 function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
@@ -30,12 +29,11 @@ export const HowWeWork = () => {
   const lastElementRef = useRef<HTMLDivElement>(null);
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const { t } = useTranslation();
-  const isWeb = useIsWebView();
 
   const scrollStart = isDesktop ? 'top top' : 'top top';
 
   useEffect(() => {
-    if (!sectionRef.current || !circleRef.current || isWeb) return;
+    if (!sectionRef.current || !circleRef.current) return;
 
     // Создаем временную шкалу для анимации
     const tl = gsap.timeline({
@@ -43,7 +41,7 @@ export const HowWeWork = () => {
         trigger: isDesktop ? sectionRef.current : lastElementRef.current,
         // pin: sectionRef.current,
         scrub: true,
-        start: scrollStart,
+        start: 'top top',
         end: '+=1000',
         anticipatePin: 1,
       },
@@ -160,7 +158,7 @@ export const HowWeWork = () => {
           </div>
 
           {/* Верхний правый */}
-          <div ref={lastElementRef} className="flex flex-col items-center justify-center w-full">
+          <div className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-[80vw]">
               <h3 className="subtitle mb-2 text-center text-base lg:text-lg">{t('inside-focus.ai_title')}</h3>
               <p className="text-sm lg:text-base text-black leading-relaxed text-center">{t('inside-focus.ai_text')}</p>
@@ -170,7 +168,7 @@ export const HowWeWork = () => {
           </div>
 
           {/* Нижний левый */}
-          <div className="flex flex-col items-center justify-center w-full">
+          <div ref={lastElementRef} className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-[80vw]">
               <h3 className="subtitle text-center mb-2 text-base lg:text-lg">{t('inside-focus.ux_title')}</h3>
               <p className="text-sm lg:text-base text-black leading-relaxed text-center">{t('inside-focus.ux_text')}</p>

@@ -39,10 +39,10 @@ export const ThankYouModal: React.FC<ThankYouModalProps> = ({ open, onClose, tit
             </div>
           </div>
           <div
-            className="whitespace-pre-line text-center font-bold text-[2.2rem] leading-tight bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent  mt-2 mb-1"
+            className="whitespace-pre-line h-full flex items-center justify-center font-bold text-[2.2rem] leading-tight bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent  mt-2 mb-1"
             style={{ letterSpacing: '-0.02em' }}
           >
-            <span>{description}</span>
+            <div className="text-center">{description}</div>
           </div>
         </motion.div>
       </motion.div>

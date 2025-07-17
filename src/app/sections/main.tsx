@@ -21,7 +21,7 @@ export const MainSection: React.FC = () => {
         <div className="container mx-auto flex flex-1 justify-center items-center pt-[160px] pb-[120px] lg:pt-20 lg:pb-0">
           <div className="relative z-10 text-center px-6 max-w-3xl mx-auto flex flex-col justify-center items-center ">
             <GlitchTypewriterText
-              className="h-[150px] pt-[30px] lg:pt-0"
+              className="h-[200px] pt-[30px] lg:pt-0"
               text={t('main.title')}
               lineClassName="title text-4xl md:text-6xl font-bold"
             />

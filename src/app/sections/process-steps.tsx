@@ -99,7 +99,7 @@ export const ProcessSteps = () => {
 
       ctx = gsap.context(() => {
         gsap.to(wrapper, {
-          x: () => `-${scrollDistance + 0.3 * window.innerWidth}px`,
+          x: () => `-${scrollDistance}px`,
           ease: 'none',
           scrollTrigger: {
             trigger: section,
@@ -149,14 +149,14 @@ export const ProcessSteps = () => {
           {/* Этапы */}
           <div
             ref={mobileStepsRef}
-            className="flex flex-row relative z-10 scroll-smooth"
-            style={{ width: `${steps.length * 81}vw` }}
+            className="flex flex-row relative z-10 px-2.5 scroll-smooth"
+            style={{ width: `${steps.length * 80}vw` }}
           >
             <AutoWidthTimelineLine targetRef={mobileStepsRef} top={8} />
             {steps.map((step, idx) => (
               <div
                 key={idx}
-                className="process-mobile-step flex flex-col w-80vw snap-center px-2.5 box-border"
+                className="process-mobile-step flex flex-col w-[80vw] snap-center box-border"
                 style={{ scrollSnapAlign: 'center' }}
               >
                 {/* Кружок-номер на линии */}
@@ -187,7 +187,7 @@ export const ProcessSteps = () => {
                 </span>
                 {/* Текст */}
                 <span
-                  className={`text-white text-xs text-start transition-opacity duration-300 ${active === idx ? 'opacity-100' : 'opacity-60'}`}
+                  className={`text-white w-[188px] text-xs text-start transition-opacity duration-300 ${active === idx ? 'opacity-100' : 'opacity-60'}`}
                 >
                   {t(`how-we-work.step_${idx + 1}_text`)}
                 </span>
