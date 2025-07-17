@@ -7,32 +7,26 @@ import { Header, Button, GlitchTypewriterText } from '../components';
 export const MainSection: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <section className="relative w-full min-h-screen text-white overflow-hidden">
-      <div className="absolute inset-0 w-full h-full bg-black z-0 flex items-center justify-center">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/main-bg.png" alt="Loading..." className="object-cover w-full h-full" />
-      </div>
-      {/* Видео на фоне */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover z-0 scale-150 md:scale-110"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster="/main-bg.png"
+    <section className="relative w-full text-white overflow-hidden">
+      <div
+        className="absolute inset-0 w-full h-full bg-black z-0 flex items-center justify-center bg-cover bg-center"
+        style={{ backgroundImage: 'url("/bg-image.jpg")' }}
       >
-        <source src="/bg-video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/bg-video.webp" alt="Animated background" className="object-cover w-full h-full" />
+      </div>
       {/* Content */}
-      <div className="relative flex flex-col min-h-screen">
+      <div className="relative flex flex-col lg:min-h-screen">
         <Header />
-        <div className="container mx-auto flex flex-1 justify-center items-center">
+        <div className="container mx-auto flex flex-1 justify-center items-center pt-[160px] pb-[120px] lg:pt-20 lg:pb-0">
           <div className="relative z-10 text-center px-6 max-w-3xl mx-auto flex flex-col justify-center items-center ">
-            <GlitchTypewriterText text={t('main.title')} lineClassName="title text-4xl md:text-6xl font-bold" />
+            <GlitchTypewriterText
+              className="h-[150px] pt-[30px] lg:pt-0"
+              text={t('main.title')}
+              lineClassName="title text-4xl md:text-6xl font-bold"
+            />
 
-            <p className="text-base md:text-lg text-white mt-4 mb-[30px] lg:mt-5 lg:mb-9 font-inter">
+            <p className="text-base md:text-lg text-white mt-2 mb-[30px] lg:mt-5 lg:mb-9 font-inter">
               {t('main.description')}
             </p>
 
