@@ -13,6 +13,10 @@ const GlitchImageSwitch = dynamic(
   }
 );
 
+const CaseCarousel = dynamic(() => import('../components/portfolio-slider').then(mod => mod.CaseCarousel), {
+  ssr: false,
+});
+
 gsap.registerPlugin(ScrollTrigger);
 
 type Props = {
@@ -24,10 +28,6 @@ type Props = {
   height?: number;
   className?: string;
 };
-
-const CaseCarousel = dynamic(() => import('../components/portfolio-slider').then(mod => mod.CaseCarousel), {
-  ssr: false,
-});
 
 type Case = {
   id: string;
@@ -227,7 +227,7 @@ export const Cases = () => {
         <div
           ref={wrapperRef}
           className="flex lg:mt-0 mt-30 justify-center items-center"
-          style={{ width: `${cases.length * 70}vw` }}
+          style={{ width: `${cases.length * 80}vw` }}
         >
           {cases.map((item, index) => {
             const setRef = (el: HTMLDivElement) => (itemRefs.current[index] = el);
@@ -236,7 +236,7 @@ export const Cases = () => {
                 key={item.id}
                 // @ts-ignore
                 ref={setRef}
-                className="w-[70vw] sm:h-[60vh] h-[30vh] flex items-center justify-center cursor-pointer"
+                className="w-[80vw] sm:h-[60vh] h-[30vh] flex items-center justify-center cursor-pointer"
                 onClick={() => openGallery(item)}
               >
                 <GlitchImageSwitch
@@ -254,10 +254,10 @@ export const Cases = () => {
         {/* Case info + arrow */}
         <div
           ref={caseInfoRef}
-          className="sticky mt-6.5 lg:right-20 bottom-20 flex gap-2 h-[70px] z-30"
+          className="sticky mt-6.5 lg:right-20 bottom-20 flex justify-center gap-2 h-[70px] z-30 mx-auto lg:mx-0"
           style={{ position: 'sticky', marginLeft: 'auto', width: 'fit-content' }}
         >
-          <div className="p-6 flex items-center justify-between bg-lime-default rounded-md lg:w-[540px] w-[250px] cursor-default select-none">
+          <div className="p-6 flex items-center justify-between bg-lime-default rounded-md lg:w-[540px] md:w-[620px] w-[250px] cursor-default select-none">
             <span className="font-bold text-black truncate">{cases[activeIndex]?.title}</span>
             <span className="px-3 text-black">{cases[activeIndex]?.year}</span>
           </div>
