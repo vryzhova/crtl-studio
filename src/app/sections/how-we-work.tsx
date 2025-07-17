@@ -53,7 +53,7 @@ export const HowWeWork = () => {
       {
         width: 2000,
         height: 2000,
-        ease: 'sine.inOut',
+        // ease: 'sine.inOut',
       },
       0
     );
@@ -150,7 +150,7 @@ export const HowWeWork = () => {
           )}
         </div>
 
-        <div ref={lastElementRef} className="relative w-full grid grid-cols-1 gap-8 lg:hidden">
+        <div className="relative w-full grid grid-cols-1 gap-8 lg:hidden">
           {/* Верхний левый */}
           <div className="flex flex-col items-center justify-center ">
             <div className="text-center w-full">
@@ -164,7 +164,7 @@ export const HowWeWork = () => {
           </div>
 
           {/* Верхний правый */}
-          <div className="flex flex-col items-center justify-center w-full">
+          <div ref={lastElementRef} className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-full">
               <h3 className="font-inter mb-2 text-center text-base lg:text-lg">{t('inside-focus.ai_title')}</h3>
               <p className="text-sm lg:text-base text-black leading-relaxed text-center">{t('inside-focus.ai_text')}</p>
