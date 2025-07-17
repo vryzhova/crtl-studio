@@ -16,7 +16,7 @@ export const MainSection: React.FC = () => {
         <img src="/bg-video.webp" alt="Animated background" className="object-cover w-full h-full" />
       </div>
       {/* Content */}
-      <div className="relative flex flex-col lg:min-h-screen">
+      <div className="relative flex flex-col md:min-h-screen">
         <Header />
         <div className="container mx-auto flex flex-1 justify-center items-center pt-[160px] pb-[120px] lg:pt-20 lg:pb-0">
           <div className="relative z-10 text-center px-6 max-w-3xl mx-auto flex flex-col justify-center items-center ">
@@ -26,7 +26,7 @@ export const MainSection: React.FC = () => {
               lineClassName="title text-4xl md:text-6xl font-bold"
             />
 
-            <p className="text-base md:text-lg text-white mt-2 mb-[30px] lg:mt-5 lg:mb-9 font-inter">
+            <p className="text-base md:text-lg text-white mt-4 mb-[30px] sm:mt-15 lg:mb-9 font-inter">
               {t('main.description')}
             </p>
 

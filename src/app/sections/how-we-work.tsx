@@ -30,7 +30,7 @@ export const HowWeWork = () => {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const { t } = useTranslation();
 
-  const scrollStart = isDesktop ? 'top top' : 'top center';
+  const scrollStart = isDesktop ? 'top top' : 'top top';
 
   useEffect(() => {
     if (!sectionRef.current || !circleRef.current) return;
@@ -51,10 +51,9 @@ export const HowWeWork = () => {
     tl.to(
       circleRef.current,
       {
-        width: 4000,
-        height: 4000,
-        scale: 10,
-        ease: 'power3.inOut',
+        width: 2000,
+        height: 2000,
+        ease: 'sine.inOut',
       },
       0
     );
@@ -68,7 +67,7 @@ export const HowWeWork = () => {
     <section
       ref={sectionRef}
       id="how-we-work"
-      className="relative h-full lg:h-screen text-black bg-white overflow-hidden w-full lg:pb-20"
+      className="relative h-full lg:h-screen text-black bg-white overflow-hidden w-full mb-[100px] lg:mb-0 lg:pb-20"
     >
       {/* Ваш контент */}
       <div ref={contentRef} className="container mx-auto px-4 relative z-10">
@@ -151,7 +150,7 @@ export const HowWeWork = () => {
           )}
         </div>
 
-        <div className="relative w-full grid grid-cols-1 gap-8 lg:hidden">
+        <div ref={lastElementRef} className="relative w-full grid grid-cols-1 gap-8 lg:hidden">
           {/* Верхний левый */}
           <div className="flex flex-col items-center justify-center ">
             <div className="text-center w-full">
@@ -185,7 +184,7 @@ export const HowWeWork = () => {
           </div>
 
           {/* Нижний правый */}
-          <div ref={lastElementRef} className="flex flex-col items-center justify-center w-full">
+          <div className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-full">
               <h3 className="font-inter mb-2 text-base lg:text-lg">{t('inside-focus.blockchain_title')}</h3>
               <p className="text-sm lg:text-base text-black leading-relaxed text-center">
@@ -204,11 +203,12 @@ export const HowWeWork = () => {
                 position: 'absolute',
                 left: '50%',
                 bottom: 2,
-                transform: 'translateX(-50%)',
+                transform: 'translate(-50%, 10%)',
                 width: 88,
                 height: 88,
                 borderRadius: '50%',
                 overflow: 'hidden',
+                willChange: 'width, height, transform',
               }}
             >
               <Image
