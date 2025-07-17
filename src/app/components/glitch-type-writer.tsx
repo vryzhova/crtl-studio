@@ -35,26 +35,30 @@ export const GlitchTypewriterText: React.FC<Props> = ({
     lines.forEach((line, i) => {
       Array.from(line).forEach((char, j) => {
         // Сначала глитч
-        timeouts.current.push(window.setTimeout(() => {
-          setGlitching(prev => {
-            const arr = prev.map(row => [...row]);
-            arr[i][j] = true;
-            return arr;
-          });
-        }, globalDelay));
+        timeouts.current.push(
+          window.setTimeout(() => {
+            setGlitching(prev => {
+              const arr = prev.map(row => [...row]);
+              arr[i][j] = true;
+              return arr;
+            });
+          }, globalDelay)
+        );
         // Потом показываем букву
-        timeouts.current.push(window.setTimeout(() => {
-          setDisplayed(prev => {
-            const arr = prev.map(row => [...row]);
-            arr[i][j] = char;
-            return arr;
-          });
-          setGlitching(prev => {
-            const arr = prev.map(row => [...row]);
-            arr[i][j] = false;
-            return arr;
-          });
-        }, globalDelay + glitchDuration));
+        timeouts.current.push(
+          window.setTimeout(() => {
+            setDisplayed(prev => {
+              const arr = prev.map(row => [...row]);
+              arr[i][j] = char;
+              return arr;
+            });
+            setGlitching(prev => {
+              const arr = prev.map(row => [...row]);
+              arr[i][j] = false;
+              return arr;
+            });
+          }, globalDelay + glitchDuration)
+        );
         globalDelay += delayPerChar;
       });
     });
@@ -69,9 +73,7 @@ export const GlitchTypewriterText: React.FC<Props> = ({
         <div key={i} className={lineClassName}>
           {line.map((char, j) => (
             <span key={j}>
-              {glitching[i]?.[j]
-                ? glitchChars[Math.floor(Math.random() * glitchChars.length)]
-                : char}
+              {glitching[i]?.[j] ? glitchChars[Math.floor(Math.random() * glitchChars.length)] : char}
             </span>
           ))}
         </div>
