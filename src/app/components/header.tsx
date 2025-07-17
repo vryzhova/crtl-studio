@@ -99,9 +99,9 @@ export const Header = () => {
           aria-label="Открыть меню"
         >
           <svg width="44" height="44" viewBox="0 0 64 64" fill="none">
-            <circle cx="32" cy="32" r="28" stroke="#E5E5E5" stroke-width="4" />
-            <line x1="22" y1="28" x2="42" y2="28" stroke="#E5E5E5" stroke-width="4" stroke-linecap="round" />
-            <line x1="22" y1="36" x2="42" y2="36" stroke="#E5E5E5" stroke-width="4" stroke-linecap="round" />
+            <circle cx="32" cy="32" r="28" stroke="#E5E5E5" strokeWidth="4" />
+            <line x1="22" y1="28" x2="42" y2="28" stroke="#E5E5E5" strokeWidth="4" strokeLinecap="round" />
+            <line x1="22" y1="36" x2="42" y2="36" stroke="#E5E5E5" strokeWidth="4" strokeLinecap="round" />
           </svg>
         </button>
       </div>
