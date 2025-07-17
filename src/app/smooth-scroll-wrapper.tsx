@@ -15,7 +15,7 @@ export default function SmoothScrollWrapper({ children }: { children: React.Reac
       duration: 1,
       wheelMultiplier: 0.6,
       // easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 0.9,
+      touchMultiplier: 0.8,
       // infinite: false, // Отключаем бесконечный скролл
       gestureOrientation: 'vertical', // Ограничиваем скролл только по вертикали
       smoothWheel: true, // Оставляем плавность

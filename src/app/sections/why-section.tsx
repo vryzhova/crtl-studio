@@ -27,17 +27,17 @@ export const WhySection: React.FC = () => {
     {
       title: t('why-us.card-title'),
       description: t('why-us.card-description'),
-      image: '/why-1.svg',
+      image: '/why-1.webp',
     },
     {
       title: t('why-us.card-title2'),
       description: t('why-us.card-description2'),
-      image: '/why-2.svg',
+      image: '/why-2.webp',
     },
     {
       title: t('why-us.card-title3'),
       description: t('why-us.card-description3'),
-      image: '/why-3.svg',
+      image: '/why-3.webp',
     },
   ];
 

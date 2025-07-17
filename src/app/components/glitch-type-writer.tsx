@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
 
 type Props = {
   text: string;
@@ -20,82 +19,63 @@ export const GlitchTypewriterText: React.FC<Props> = ({
   glitchDuration = 80,
   delayPerChar = 50,
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const ghostRef = useRef<HTMLDivElement>(null);
-  const [reservedHeight, setReservedHeight] = useState<number | undefined>(undefined);
+  const [displayed, setDisplayed] = useState<string[][]>([]);
+  const [glitching, setGlitching] = useState<boolean[][]>([]);
+  const timeouts = useRef<number[]>([]);
 
-  // 📏 Высота до запуска анимации
   useEffect(() => {
-    if (ghostRef.current) {
-      setReservedHeight(ghostRef.current.offsetHeight);
-    }
-  }, [text]);
-
-  // 🎞️ Глитч-анимация
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    container.innerHTML = '';
+    // Сброс
+    setDisplayed(text.split('\n').map(line => Array(line.length).fill('')));
+    setGlitching(text.split('\n').map(line => Array(line.length).fill(false)));
+    timeouts.current.forEach(clearTimeout);
+    timeouts.current = [];
 
     const lines = text.split('\n');
-
-    lines.forEach(line => {
-      const lineEl = document.createElement('div');
-      lineEl.className = lineClassName;
-      [...line].forEach(() => {
-        const span = document.createElement('span');
-        span.textContent = '';
-        lineEl.appendChild(span);
-      });
-      container.appendChild(lineEl);
-    });
-
-    const lineEls = Array.from(container.children) as HTMLElement[];
-
-    let totalDelay = 0;
-
-    lineEls.forEach((lineEl, lineIndex) => {
-      const chars = lines[lineIndex];
-      const spans = Array.from(lineEl.children) as HTMLElement[];
-
-      spans.forEach((span, charIndex) => {
-        gsap.delayedCall(totalDelay / 1000, () => {
-          const glitchInterval = setInterval(() => {
-            span.textContent = glitchChars[Math.floor(Math.random() * glitchChars.length)];
-          }, 20);
-
-          setTimeout(() => {
-            clearInterval(glitchInterval);
-            span.textContent = chars[charIndex];
-          }, glitchDuration);
-        });
-
-        totalDelay += delayPerChar;
+    let globalDelay = 0;
+    lines.forEach((line, i) => {
+      Array.from(line).forEach((char, j) => {
+        // Сначала глитч
+        timeouts.current.push(window.setTimeout(() => {
+          setGlitching(prev => {
+            const arr = prev.map(row => [...row]);
+            arr[i][j] = true;
+            return arr;
+          });
+        }, globalDelay));
+        // Потом показываем букву
+        timeouts.current.push(window.setTimeout(() => {
+          setDisplayed(prev => {
+            const arr = prev.map(row => [...row]);
+            arr[i][j] = char;
+            return arr;
+          });
+          setGlitching(prev => {
+            const arr = prev.map(row => [...row]);
+            arr[i][j] = false;
+            return arr;
+          });
+        }, globalDelay + glitchDuration));
+        globalDelay += delayPerChar;
       });
     });
-  }, [text, glitchChars, glitchDuration, delayPerChar, lineClassName]);
+    return () => {
+      timeouts.current.forEach(clearTimeout);
+    };
+  }, [text, glitchDuration, delayPerChar]);
 
   return (
-    <>
-      {/* Видимый контейнер с глитчем */}
-      <div ref={containerRef} className={className} style={{ minHeight: reservedHeight }} />
-
-      {/* Призрачный (невидимый) контейнер для расчёта высоты */}
-      <div
-        ref={ghostRef}
-        className={className}
-        style={{
-          visibility: 'hidden',
-          position: 'absolute',
-          pointerEvents: 'none',
-          zIndex: -1,
-          whiteSpace: 'pre-line',
-        }}
-        aria-hidden
-      >
-        {text}
-      </div>
-    </>
+    <div className={className}>
+      {displayed.map((line, i) => (
+        <div key={i} className={lineClassName}>
+          {line.map((char, j) => (
+            <span key={j}>
+              {glitching[i]?.[j]
+                ? glitchChars[Math.floor(Math.random() * glitchChars.length)]
+                : char}
+            </span>
+          ))}
+        </div>
+      ))}
+    </div>
   );
 };
