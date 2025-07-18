@@ -28,7 +28,7 @@
   },
   "inside-product": {
     "ai_inside_product": "// AI INSIDE THE PRODUCT",
-    "title": "We use and implement AI\nconsciously — focused on benefits,\nnot just trends",
+    "title": "We use and implement AI\nconsciously —\nfocused on benefits,\nnot just trends",
     "main_subtitle": "We integrate AI where it adds real value — improves experience and speeds up processes.",
     "main_subtitle2": "We create clear interfaces, automate repetitive tasks, apply generative AI,\nand make complex things visual.\nAll within the scope of business goals and logic.",
     "main_cta": "Submit an application"
@@ -129,7 +129,8 @@
     "links": "Links",
     "documents": "Documents",
     "contact_us": "Contact us",
-    "made_by": "Site made by {{company}}",
-    "copyright": "© {{year}} CTRL Studio. All rights reserved."
+    "made_by": "Site made by",
+    "copyright": "© {{year}} CTRL Studio. All rights reserved.",
+    "rights": "All rights reserved."
   }
 }

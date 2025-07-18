@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SecondaryButton } from '@/app/components';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
 export const Header = () => {
   const [locale, setLocale] = useState<'ru' | 'en'>('ru');
@@ -17,6 +18,11 @@ export const Header = () => {
     console.log(lang);
     setLocale(lang);
     i18n.changeLanguage(lang);
+    i18n.changeLanguage(lang).then(() => {
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 100); // дать время на изменение текста и перерендер
+    });
   };
 
   const navItems = [

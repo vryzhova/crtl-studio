@@ -10,7 +10,28 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { t } = useTranslation();
 
-  const links = [t('header.about'), t('header.services'), t('header.cases'), t('header.clients'), t('header.how')];
+  const links = [
+    {
+      title: t('header.about'),
+      link: '#why',
+    },
+    {
+      title: t('header.services'),
+      link: '#how-we-work',
+    },
+    {
+      title: t('header.cases'),
+      link: '#cases',
+    },
+    {
+      title: t('header.clients'),
+      link: '#clients',
+    },
+    {
+      title: t('header.how'),
+      link: '#how',
+    },
+  ];
   const docs = ['Документ 1', 'Документ 2'];
 
   return (
@@ -33,10 +54,10 @@ export const Footer = () => {
                 {links.map((item, idx) => (
                   <li key={idx}>
                     <Link
-                      href="#"
+                      href={item.link}
                       className="hover:text-lime-default active:text-lime-active transition-colors text-base font-normal whitespace-nowrap"
                     >
-                      {item}
+                      {item.title}
                     </Link>
                   </li>
                 ))}
@@ -63,12 +84,12 @@ export const Footer = () => {
           {/* Копирайт */}
           <div className="text-left text-white text-base leading-tight mt-2 md:mt-8">
             <p>
-              Сайт сделан <span className="font-semibold">Business Art</span>
+              {t('footer.made_by')} <span className="font-semibold">Business Art</span>
             </p>
             <p className="mt-1">
               {currentYear} © CTRL Studio.
               <br />
-              Все права защищены.
+              {t('footer.rights')}
             </p>
           </div>
         </div>
