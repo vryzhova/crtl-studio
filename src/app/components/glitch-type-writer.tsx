@@ -19,61 +19,84 @@ export const GlitchTypewriterText: React.FC<Props> = ({
   glitchDuration = 80,
   delayPerChar = 50,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [displayed, setDisplayed] = useState<string[][]>([]);
   const [glitching, setGlitching] = useState<boolean[][]>([]);
+  const [containerHeight, setContainerHeight] = useState<number>(0);
   const timeouts = useRef<number[]>([]);
 
+  // Рассчитываем высоту контейнера на основе количества строк
   useEffect(() => {
-    // Сброс
-    setDisplayed(text.split('\n').map(line => Array(line.length).fill('')));
-    setGlitching(text.split('\n').map(line => Array(line.length).fill(false)));
+    if (!containerRef.current) return;
+
+    const linesCount = text.split('\n').length;
+    const lineHeight = parseFloat(getComputedStyle(containerRef.current).lineHeight) || 24; // fallback 24px
+    const spaceY = parseFloat(className.match(/space-y-(\d+)/)?.[1] || '2') * 4; // преобразуем tailwind space-y-2 в px
+
+    const calculatedHeight = linesCount * lineHeight + (linesCount - 1) * spaceY;
+    setContainerHeight(calculatedHeight);
+  }, [text, className]);
+
+  useEffect(() => {
+    // Инициализация с пустыми массивами
+    const lines = text.split('\n');
+    setDisplayed(lines.map(line => Array(line.length).fill('')));
+    setGlitching(lines.map(line => Array(line.length).fill(false)));
+
+    // Очистка предыдущих таймаутов
     timeouts.current.forEach(clearTimeout);
     timeouts.current = [];
 
-    const lines = text.split('\n');
     let globalDelay = 0;
     lines.forEach((line, i) => {
       Array.from(line).forEach((char, j) => {
-        // Сначала глитч
+        // Анимация глитча
         timeouts.current.push(
           window.setTimeout(() => {
             setGlitching(prev => {
-              const arr = prev.map(row => [...row]);
-              arr[i][j] = true;
-              return arr;
+              const newGlitching = prev.map(row => [...row]);
+              newGlitching[i][j] = true;
+              return newGlitching;
             });
           }, globalDelay)
         );
-        // Потом показываем букву
+
+        // Показ финального символа
         timeouts.current.push(
           window.setTimeout(() => {
             setDisplayed(prev => {
-              const arr = prev.map(row => [...row]);
-              arr[i][j] = char;
-              return arr;
+              const newDisplayed = prev.map(row => [...row]);
+              newDisplayed[i][j] = char;
+              return newDisplayed;
             });
             setGlitching(prev => {
-              const arr = prev.map(row => [...row]);
-              arr[i][j] = false;
-              return arr;
+              const newGlitching = prev.map(row => [...row]);
+              newGlitching[i][j] = false;
+              return newGlitching;
             });
           }, globalDelay + glitchDuration)
         );
+
         globalDelay += delayPerChar;
       });
     });
+
     return () => {
       timeouts.current.forEach(clearTimeout);
     };
   }, [text, glitchDuration, delayPerChar]);
 
   return (
-    <div className={className}>
+    <div ref={containerRef} className={`${className} relative`} style={{ minHeight: `${containerHeight}px` }}>
       {displayed.map((line, i) => (
-        <div key={i} className={lineClassName}>
+        <div key={i} className={`${lineClassName} whitespace-pre`}>
           {line.map((char, j) => (
-            <span key={j}>
-              {glitching[i]?.[j] ? glitchChars[Math.floor(Math.random() * glitchChars.length)] : char}
+            <span key={j} className="inline-block">
+              {glitching[i]?.[j] ? (
+                <span className="opacity-80">{glitchChars[Math.floor(Math.random() * glitchChars.length)]}</span>
+              ) : (
+                char
+              )}
             </span>
           ))}
         </div>

@@ -49,8 +49,8 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
             onClick={onClose}
           >
             <svg width="26.43" height="26.43" viewBox="0 0 26.43 26.43" fill="none">
-              <line x1="4" y1="4" x2="22.43" y2="22.43" stroke="#fff" stroke-width="3.5" stroke-linecap="round" />
-              <line x1="22.43" y1="4" x2="4" y2="22.43" stroke="#fff" stroke-width="3.5" stroke-linecap="round" />
+              <line x1="4" y1="4" x2="22.43" y2="22.43" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" />
+              <line x1="22.43" y1="4" x2="4" y2="22.43" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" />
             </svg>
           </button>
         </div>
@@ -104,8 +104,8 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
             aria-label="Закрыть"
           >
             <svg width="26.43" height="26.43" viewBox="0 0 26.43 26.43" fill="none">
-              <line x1="4" y1="4" x2="22.43" y2="22.43" stroke="#141414" stroke-width="3.5" stroke-linecap="round" />
-              <line x1="22.43" y1="4" x2="4" y2="22.43" stroke="#141414" stroke-width="3.5" stroke-linecap="round" />
+              <line x1="4" y1="4" x2="22.43" y2="22.43" stroke="#141414" strokeWidth="3.5" strokeLinecap="round" />
+              <line x1="22.43" y1="4" x2="4" y2="22.43" stroke="#141414" strokeWidth="3.5" strokeLinecap="round" />
             </svg>
           </button>
         </div>

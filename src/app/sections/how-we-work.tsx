@@ -20,9 +20,6 @@ function useMediaQuery(query: string) {
   return matches;
 }
 
-// Регистрируем плагин ScrollTrigger
-gsap.registerPlugin(ScrollTrigger);
-
 export const HowWeWork = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
@@ -60,6 +57,7 @@ export const HowWeWork = () => {
 
     return () => {
       tl.kill();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, [isDesktop, isTelegram]);
 

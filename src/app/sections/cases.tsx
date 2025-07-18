@@ -17,18 +17,6 @@ const CaseCarousel = dynamic(() => import('../components/portfolio-slider').then
   ssr: false,
 });
 
-gsap.registerPlugin(ScrollTrigger);
-
-type Props = {
-  imageSrc: string;
-  alt: string;
-  active: boolean;
-  priority?: boolean;
-  width?: number;
-  height?: number;
-  className?: string;
-};
-
 type Case = {
   id: string;
   title: string;
@@ -129,8 +117,9 @@ export const Cases = () => {
         trigger: container,
         pin: true,
         start: 'top top',
-        end: `bottom+=500%`,
-        scrub: true,
+        end: `bottom`,
+        scrub: 1,
+        markers: true,
         anticipatePin: 1,
         onUpdate: self => {
           const center = window.innerWidth / 2;

@@ -2,8 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MainSection, WhySection, InsideProduct, HowWeWork, WhoWeAreFor, Cases, ContactSection } from './sections';
 import { Footer, Preloader } from './components';
+import gsap from 'gsap';
+
+gsap.registerPlugin(ScrollTrigger);
+
+ScrollTrigger.normalizeScroll(true);
 
 const ProcessSteps = dynamic(() => import('./sections/process-steps').then(mod => mod.ProcessSteps), {
   ssr: false,

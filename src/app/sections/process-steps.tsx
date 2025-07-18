@@ -10,9 +10,6 @@ import TimelineLineSvg from '../components/TimelineLineSvg';
 import { AutoWidthTimelineLine } from '../components/TimelineLineHorizontalSvg';
 import { useBreakpoints } from '@/app/hooks/use-break-points';
 
-// Регистрируем плагин ScrollTrigger
-gsap.registerPlugin(ScrollTrigger);
-
 export const ProcessSteps = () => {
   const [active, setActive] = useState(0); // default: первый этап
   const { t } = useTranslation();
