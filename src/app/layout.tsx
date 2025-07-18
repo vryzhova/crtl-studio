@@ -36,6 +36,11 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preload" href="/cube-bg.svg" as="image" type="image/svg+xml" />
+        <link rel="preload" href="/cube.png" as="image" />
+        <link rel="preload" href="/why-1.webp" as="image" />
+        <link rel="preload" href="/why-2.webp" as="image" />
+        <link rel="preload" href="/why-3.webp" as="image" />
+        <link rel="preload" href="/bg-video.webp" as="script" />
       </head>
       <body className={` ${inter.variable} ${robotoMono.variable} ${interTight.variable} antialiased`}>
         <I18nProvider>

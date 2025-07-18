@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SectionTitle, GlitchTypewriterText } from '../components';
 import Image from 'next/image';
+import { useIsWebView } from '@/app/hooks';
 
 function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
@@ -29,11 +30,10 @@ export const HowWeWork = () => {
   const lastElementRef = useRef<HTMLDivElement>(null);
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const { t } = useTranslation();
-
-  const scrollStart = isDesktop ? 'top top' : 'top top';
+  const isTelegram = useIsWebView();
 
   useEffect(() => {
-    if (!sectionRef.current || !circleRef.current) return;
+    if (!sectionRef.current || !circleRef.current || isTelegram) return;
 
     // Создаем временную шкалу для анимации
     const tl = gsap.timeline({
@@ -61,7 +61,7 @@ export const HowWeWork = () => {
     return () => {
       tl.kill();
     };
-  }, [isDesktop, scrollStart]);
+  }, [isDesktop, isTelegram]);
 
   return (
     <section

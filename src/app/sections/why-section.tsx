@@ -140,7 +140,6 @@ export const WhySection: React.FC = () => {
                     height={400}
                     className="object-contain"
                     priority
-                    loading="eager"
                   />
                 </motion.div>
               </AnimatePresence>
