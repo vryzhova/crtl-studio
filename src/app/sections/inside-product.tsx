@@ -13,14 +13,14 @@ export const InsideProduct = () => {
 
       {/* Background pattern */}
       <div
-        className="absolute bottom-[-300px] right-0 lg:right-[-100px] lg:top-[-40px] w-[370px] lg:w-[970px] h-full pointer-events-none z-0"
+        className="absolute hidden lg:block lg:right-[-100px] lg:top-[-40px] w-[370px] lg:w-[970px] h-full pointer-events-none z-0"
         style={{ transform: 'translateZ(0)' }}
       >
         <div className="w-full h-full bg-cube-pattern" />
       </div>
 
-      <div className="container mx-auto px-4 lg:pb-20 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="container h-full mx-auto px-4 lg:pb-20 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 gap-6 md:gap-8.5 items-center">
           {/* Left side - Text content */}
           <div className="space-y-6">
             <GlitchTypewriterText
@@ -46,15 +46,15 @@ export const InsideProduct = () => {
           </div>
 
           {/* Right side - 3D Cube */}
-          <div className="relative h-96 lg:h-[32rem] w-full mt-6 lg:mt-0">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative lg:w-140 lg:h-140">
-                <Image src="/cube.png" className="levitate" alt="cube" width={500} height={500} loading="eager" />
-              </div>
-            </div>
+          <div className="relative h-90 lg:h-[32rem] w-full flex items-center justify-center">
+            {/*<div className="relative lg:w-140 lg:h-140">*/}
+            <Image src="/cube.png" className="levitate" alt="cube" width={500} height={500} loading="eager" />
+            {/*</div>*/}
           </div>
         </div>
       </div>
+
+      <div className="absolute bottom-[0] lg:hidden h-full w-[100vw] pointer-events-none z-0 bg-[url('/cube-bg-mobile.svg')] bg-bottom bg-[length:120%] md:bg-[length:130%] bg-no-repeat" />
     </section>
   );
 };
