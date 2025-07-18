@@ -24,7 +24,7 @@ export const InsideProduct = () => {
           {/* Left side - Text content */}
           <div className="space-y-6">
             <GlitchTypewriterText
-              className="h-[200px] pt-[30px] lg:pt-0"
+              className="h-[200px] pt-[30px] lg:pt-0 max-w-[100vw]"
               text={t('inside-product.title')}
               gradient="bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
               lineClassName="title lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px]"

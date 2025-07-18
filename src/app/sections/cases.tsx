@@ -80,7 +80,7 @@ export const Cases = () => {
       gsap.set(content, { opacity: 0 });
     } else {
       gsap.set(content, { opacity: 1 });
-      gsap.set(wrapper, { opacity: 0 });
+      gsap.set(wrapper, { opacity: 0, display: 'none' });
       gsap.set(caseInfoRef.current, { opacity: 0 });
       gsap.set(caseNumbersRef.current, { opacity: 0 });
     }
@@ -117,8 +117,9 @@ export const Cases = () => {
         trigger: container,
         pin: true,
         start: 'top top',
-        end: `bottom`,
-        scrub: 1,
+        end: `bottom+=500%`,
+        scrub: true,
+        markers: true,
         anticipatePin: 1,
         onUpdate: self => {
           const center = window.innerWidth / 2;

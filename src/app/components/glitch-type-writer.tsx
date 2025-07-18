@@ -123,16 +123,16 @@ export const GlitchTypewriterText: React.FC<Props> = ({
   return (
     <div
       ref={containerRef}
-      className={`${className}`}
+      className={`${className} whitespace-pre-wrap break-words`}
       style={{ minHeight: isVisible ? undefined : `${containerHeight}px` }}
     >
       {isVisible
         ? displayed.map((line, i) => (
-            <div key={i} className={`${lineClassName} whitespace-pre`}>
+            <div key={i} className={`${lineClassName} whitespace-pre-wrap break-words`}>
               {line.map((char, j) => (
-                <span key={j} className="inline-block">
+                <span key={j} className={`inline  ${char === ' ' ? 'whitespace-pre' : 'whitespace-nowrap'}`}>
                   {glitching[i]?.[j] ? (
-                    <span className="opacity-80">
+                    <span className="opacity-80 inline-block">
                       {glitchChars[(i + j + Math.floor(performance.now() / 100)) % glitchChars.length]}
                     </span>
                   ) : (
@@ -143,7 +143,7 @@ export const GlitchTypewriterText: React.FC<Props> = ({
             </div>
           ))
         : text.split('\n').map((line, i) => (
-            <div key={i} className={`${lineClassName} whitespace-pre invisible`}>
+            <div key={i} className={`${lineClassName} whitespace-pre-wrap break-words invisible`}>
               {line}
             </div>
           ))}
