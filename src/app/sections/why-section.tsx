@@ -60,7 +60,7 @@ export const WhySection: React.FC = () => {
   };
 
   return (
-    <section id="why" className="relative w-full bg-white text-black overflow-hidden flex flex-col items-center">
+    <section id="why" className="relative w-full bg-white text-white overflow-hidden flex flex-col items-center">
       <SectionTitle title={t('why-us.title')} />
       <div className="container mx-auto px-4 pb-20 relative z-10">
         {/* Заголовок и описание секции */}

@@ -19,7 +19,7 @@ export const GlitchTypewriterText: React.FC<Props> = ({
   lineClassName = '',
   glitchChars = '/|\\',
   glitchDuration = 50,
-  delayPerChar = 50,
+  delayPerChar = 20,
   triggerOnce = true,
   gradient,
 }) => {
@@ -123,7 +123,7 @@ export const GlitchTypewriterText: React.FC<Props> = ({
   return (
     <div
       ref={containerRef}
-      className={`${className} relative`}
+      className={`${className}`}
       style={{ minHeight: isVisible ? undefined : `${containerHeight}px` }}
     >
       {isVisible

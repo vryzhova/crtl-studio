@@ -36,6 +36,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preload" href="/cube-bg.svg" as="image" type="image/svg+xml" />
+        <link rel="preload" href="/cube-bg-mobile.png" as="image" type="image/png" />
         <link rel="preload" href="/cube.png" as="image/png" />
         <link rel="preload" href="/why-1.webp" as="image/webp" />
         <link rel="preload" href="/why-2.webp" as="image/webp" />

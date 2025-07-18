@@ -170,7 +170,7 @@ export const HowWeWork = () => {
           </div>
 
           {/* Нижний левый */}
-          <div ref={lastElementRef} className="flex flex-col items-center justify-center w-full">
+          <div className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-[80vw]">
               <h3 className="subtitle text-center mb-2 text-base lg:text-lg">{t('inside-focus.ux_title')}</h3>
               <p className="text-sm lg:text-base text-black leading-relaxed text-center">{t('inside-focus.ux_text')}</p>
@@ -180,7 +180,7 @@ export const HowWeWork = () => {
           </div>
 
           {/* Нижний правый */}
-          <div className="flex flex-col items-center justify-center w-full">
+          <div ref={lastElementRef} className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-[80vw]">
               <h3 className="subtitle mb-2 text-base lg:text-lg">{t('inside-focus.blockchain_title')}</h3>
               <p className="text-sm lg:text-base text-black leading-relaxed text-center">

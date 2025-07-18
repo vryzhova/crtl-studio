@@ -56,7 +56,7 @@ export const InsideProduct = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-[0] lg:hidden h-full w-[100vw] pointer-events-none z-0 bg-[url('/cube-bg-mobile.svg')] bg-bottom bg-[length:120%] md:bg-[length:130%] bg-no-repeat" />
+      <div className="absolute bottom-[0] lg:hidden h-full w-[100vw] pointer-events-none z-0 bg-[url('/cube-bg-mobile.png')] bg-bottom bg-[length:120%] md:bg-[length:130%] bg-no-repeat" />
     </section>
   );
 };
