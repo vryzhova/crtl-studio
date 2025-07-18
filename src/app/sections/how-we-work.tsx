@@ -68,7 +68,10 @@ export const HowWeWork = () => {
       className="relative h-full lg:h-screen text-black bg-white overflow-hidden w-full mb-[100px] lg:mb-0 lg:pb-20"
     >
       {/* Ваш контент */}
-      <div ref={contentRef} className="container mx-auto px-4 relative z-10">
+      <div
+        ref={contentRef}
+        className="flex flex-col justify-center items-center container h-full mx-auto px-4 relative z-10"
+      >
         {/* Чип */}
         <SectionTitle title={t('inside-focus.tag')} position="center" />
 
@@ -80,10 +83,10 @@ export const HowWeWork = () => {
         />
 
         {/* Сетка из 4 блоков desktop */}
-        <div className="hidden lg:grid relative w-full grid-cols-2 gap-x-40 gap-y-40">
+        <div className="hidden lg:grid relative w-full grid-cols-2 gap-x-40 gap-y-30">
           {/* Вертикальная линия (desktop only) */}
-          <div className="hidden lg:block absolute left-1/2 top-[-40px] h-[calc(48%-20px)] w-px bg-gray-elements -translate-x-1/2" />
-          <div className="hidden lg:block absolute left-1/2 bottom-[-40px] h-[calc(48%-20px)] w-px bg-gray-elements -translate-x-1/2" />
+          <div className="hidden lg:block absolute left-1/2 top-0 h-[calc(50%-48px)] w-px bg-gray-elements -translate-x-1/2" />
+          <div className="hidden lg:block absolute left-1/2 bottom-0 h-[calc(50%-48px)] w-px bg-gray-elements -translate-x-1/2" />
 
           {/* Горизонтальная линия (desktop only) */}
           <div className="hidden lg:block absolute top-1/2 left-0 w-[calc(48%-48px)] h-px bg-gray-elements -translate-y-1/2" />
