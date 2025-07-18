@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import gsap from 'gsap';
 
 type Props = {
@@ -12,30 +12,58 @@ type Props = {
 export const GlitchOverlay = ({ imageSrc, intensity = 12, className }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [dimensions, setDimensions] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
+  const animationRef = useRef<gsap.core.Timeline | null>(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
+  // Оптимизация: мемоизация функции обработки ресайза
+  const handleResize = useCallback((entries: ResizeObserverEntry[]) => {
+    const { width, height } = entries[0].contentRect;
+    setDimensions({ width, height });
+  }, []);
+
+  // Оптимизация: единый эффект для ресайза и загрузки изображения
   useEffect(() => {
-    if (!containerRef.current) return;
+    const container = containerRef.current;
+    if (!container) return;
 
-    const resizeObserver = new ResizeObserver(entries => {
-      for (let entry of entries) {
-        const { width, height } = entry.contentRect;
-        setDimensions({ width, height });
-      }
-    });
-
-    resizeObserver.observe(containerRef.current);
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(container);
 
     return () => {
       resizeObserver.disconnect();
+      animationRef.current?.kill();
     };
-  }, []);
+  }, [handleResize]);
+
+  // Оптимизация: мемоизация функции рисования глитча
+  const drawGlitch = useCallback(
+    (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, image: HTMLImageElement) => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      // Быстрое обесцвечивание через композитный режим
+      ctx.globalCompositeOperation = 'color';
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.globalCompositeOperation = 'source-over';
+
+      // Глитч-эффект с оптимизированными операциями
+      const glitchCount = Math.min(intensity, 20); // Ограничение максимальной интенсивности
+      for (let i = 0; i < glitchCount; i++) {
+        const y = Math.random() * canvas.height;
+        const h = Math.random() * 20 + 2;
+        const dx = (Math.random() - 0.5) * 40;
+
+        ctx.drawImage(canvas, 0, y, canvas.width, h, dx, y, canvas.width, h);
+      }
+    },
+    [intensity]
+  );
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
-    if (!canvas || !ctx) return;
-    if (dimensions.width === 0 || dimensions.height === 0) return;
+    if (!canvas || !ctx || dimensions.width === 0 || dimensions.height === 0) return;
 
     canvas.width = dimensions.width;
     canvas.height = dimensions.height;
@@ -44,63 +72,56 @@ export const GlitchOverlay = ({ imageSrc, intensity = 12, className }: Props) =>
     image.crossOrigin = 'anonymous';
     image.src = imageSrc;
 
-    const drawGlitch = () => {
-      if (!ctx) return;
+    const handleLoad = () => {
+      // Убиваем предыдущую анимацию, если она есть
+      animationRef.current?.kill();
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      const animate = () => {
+        drawGlitch(ctx, canvas, image);
+      };
 
-      // Safari-friendly grayscale: вручную обесцвечиваем изображение
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const data = imageData.data;
-      for (let i = 0; i < data.length; i += 4) {
-        const avg = 0.3 * data[i] + 0.59 * data[i + 1] + 0.11 * data[i + 2];
-        data[i] = data[i + 1] = data[i + 2] = avg;
-      }
-      ctx.putImageData(imageData, 0, 0);
+      // Оптимизация: используем requestAnimationFrame вместо GSAP для простой анимации
+      let lastTime = 0;
+      const interval = 80; // 12 FPS (примерно)
+      let frameId: number;
 
-      // Глитч-эффект
-      for (let i = 0; i < intensity; i++) {
-        const y = Math.random() * canvas.height;
-        const h = Math.random() * 20 + 2;
-        const dx = (Math.random() - 0.5) * 40;
-
-        ctx.drawImage(canvas, 0, y, canvas.width, h, dx, y, canvas.width, h);
-      }
-    };
-
-    const startAnimation = () => {
-      drawGlitch();
-
-      const tl = gsap.timeline({ repeat: -1, repeatDelay: 2 });
-      tl.to(
-        {},
-        {
-          duration: 0.08,
-          onUpdate: drawGlitch,
-          onRepeat: drawGlitch,
+      const loop = (time: number) => {
+        if (time - lastTime > interval) {
+          animate();
+          lastTime = time;
         }
-      );
+        frameId = requestAnimationFrame(loop);
+      };
+
+      frameId = requestAnimationFrame(loop);
 
       return () => {
-        tl.kill();
+        cancelAnimationFrame(frameId);
       };
     };
 
-    // Гарантируем запуск анимации даже при кэшированном изображении
     if (image.complete) {
-      startAnimation();
+      handleLoad();
     } else {
-      image.onload = startAnimation;
+      image.onload = handleLoad;
     }
-  }, [imageSrc, intensity, dimensions]);
+
+    return () => {
+      animationRef.current?.kill();
+    };
+  }, [imageSrc, dimensions, drawGlitch]);
 
   return (
     <div ref={containerRef} className={`relative w-full h-full ${className ?? ''}`}>
-      {/* Скрываем оригинальное изображение */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={imageSrc} alt="glitched" className="w-full h-full object-cover invisible" />
-      <canvas ref={canvasRef} className="absolute top-0 left-0 z-10 pointer-events-none rounded-xl" />
+      {/* Предзагрузка изображения без отображения */}
+      <img
+        src={imageSrc}
+        alt=""
+        className="absolute opacity-0 w-full h-full object-cover"
+        aria-hidden="true"
+        loading="lazy"
+      />
+      <canvas ref={canvasRef} className="absolute top-0 left-0 z-10 pointer-events-none rounded-xl w-full h-full" />
     </div>
   );
 };
