@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GlitchTypewriterText, SectionTitle } from '../components';
@@ -13,15 +13,6 @@ export const WhySection: React.FC = () => {
   const [progress, setProgress] = useState<number>();
   const frameIdRef = useRef<number | null>(null);
   const { t } = useTranslation();
-  const elementWrapperRef = useRef<HTMLDivElement>(null);
-  const [minHeight, setMinHeight] = useState<number | undefined>(undefined);
-
-  useLayoutEffect(() => {
-    if (elementWrapperRef.current) {
-      const height = elementWrapperRef.current.offsetHeight;
-      setMinHeight(height);
-    }
-  }, [activeIndex]);
 
   const steps = [
     {
@@ -40,16 +31,6 @@ export const WhySection: React.FC = () => {
       image: '/why-3.webp',
     },
   ];
-
-  const glitchContent = useMemo(
-    () => (
-      <GlitchTypewriterText
-        lineClassName="title leading-tight lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-black to-gray-elements bg-clip-text text-transparent"
-        text={t('why-us.subtitle')}
-      />
-    ),
-    [t]
-  );
 
   useEffect(() => {
     setProgress(0);
@@ -86,7 +67,13 @@ export const WhySection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center justify-items-center">
           {/* Левая колонка — плашки с прогресс баром */}
           <div className="flex flex-col gap-6 w-full max-w-xl">
-            <div className="mb-12 max-w-[647]">{glitchContent}</div>
+            <div className="mb-12">
+              <GlitchTypewriterText
+                lineClassName="title lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px]"
+                text={t('why-us.subtitle')}
+                gradient="bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent"
+              />
+            </div>
             {steps.map((step, idx) => {
               const isActive = idx === activeIndex;
 

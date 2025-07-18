@@ -9,14 +9,16 @@ import gsap from 'gsap';
 
 gsap.registerPlugin(ScrollTrigger);
 
-ScrollTrigger.normalizeScroll(true);
-
 const ProcessSteps = dynamic(() => import('./sections/process-steps').then(mod => mod.ProcessSteps), {
   ssr: false,
 });
 
 export default function Home() {
   const [showPreloader, setShowPreloader] = useState(true);
+  
+  useEffect(() => {
+    ScrollTrigger.normalizeScroll(true);
+  }, []);
 
   useEffect(() => {
     if (showPreloader) {

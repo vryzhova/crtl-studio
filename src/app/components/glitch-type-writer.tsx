@@ -10,6 +10,7 @@ type Props = {
   glitchDuration?: number;
   delayPerChar?: number;
   triggerOnce?: boolean;
+  gradient?: string;
 };
 
 export const GlitchTypewriterText: React.FC<Props> = ({
@@ -20,6 +21,7 @@ export const GlitchTypewriterText: React.FC<Props> = ({
   glitchDuration = 50,
   delayPerChar = 50,
   triggerOnce = true,
+  gradient,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [displayed, setDisplayed] = useState<string[][]>([]);
@@ -130,16 +132,17 @@ export const GlitchTypewriterText: React.FC<Props> = ({
               {line.map((char, j) => (
                 <span key={j} className="inline-block">
                   {glitching[i]?.[j] ? (
-                    <span className="opacity-80">{glitchChars[Math.floor(Math.random() * glitchChars.length)]}</span>
+                    <span className="opacity-80">
+                      {glitchChars[(i + j + Math.floor(performance.now() / 100)) % glitchChars.length]}
+                    </span>
                   ) : (
-                    char
+                    <span className={`${gradient}`}>{char}</span>
                   )}
                 </span>
               ))}
             </div>
           ))
-        : // Рендерим невидимый текст для сохранения пространства
-          text.split('\n').map((line, i) => (
+        : text.split('\n').map((line, i) => (
             <div key={i} className={`${lineClassName} whitespace-pre invisible`}>
               {line}
             </div>

@@ -22,10 +22,12 @@ export const InsideProduct = () => {
       <div className="container h-full mx-auto px-4 lg:pb-20 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 gap-6 md:gap-8.5 items-center">
           {/* Left side - Text content */}
-          <div className="space-y-6">
+          <div className="relative z-10 space-y-6">
             <GlitchTypewriterText
+              className="h-[200px] pt-[30px] lg:pt-0"
               text={t('inside-product.title')}
-              lineClassName="title leading-tight lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
+              gradient="bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
+              lineClassName="title lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px]"
             />
             <div className="space-y-4 font-inter text-base text-white">
               <p>{t('inside-product.main_subtitle')}</p>

@@ -78,8 +78,9 @@ export const HowWeWork = () => {
         {/* Заголовок */}
         <GlitchTypewriterText
           className="mb-10"
-          lineClassName="text-center title lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent"
+          lineClassName="text-center title lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px]"
           text={t('inside-focus.title')}
+          gradient="bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent"
         />
 
         {/* Сетка из 4 блоков desktop */}
