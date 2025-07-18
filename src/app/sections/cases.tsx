@@ -109,9 +109,9 @@ export const Cases = () => {
         .to(content, { opacity: 1, duration: 1 });
     } else {
       introTimeline
-        .to(caseNumbersRef.current, { opacity: 1, duration: 1 })
+        .to(caseNumbersRef.current, { opacity: 1, duration: 0.5 })
         .add('simultaneous')
-        .to(wrapper, { opacity: 1, duration: 1 }, 'simultaneous')
+        .to(wrapper, { opacity: 1, duration: 0.5 }, 'simultaneous')
         .to(caseInfoRef.current, { opacity: 1, duration: 1 }, 'simultaneous');
     }
 
