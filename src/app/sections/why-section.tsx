@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GlitchTypewriterText, SectionTitle } from '../components';
@@ -60,7 +60,7 @@ export const WhySection: React.FC = () => {
   };
 
   return (
-    <section id="why" className="relative w-full bg-white text-white overflow-hidden flex flex-col items-center">
+    <section id="why" className="relative w-full bg-white text-black overflow-hidden flex flex-col items-center">
       <SectionTitle title={t('why-us.title')} />
       <div className="container mx-auto px-4 pb-20 relative z-10">
         {/* Заголовок и описание секции */}
@@ -69,6 +69,7 @@ export const WhySection: React.FC = () => {
           <div className="flex flex-col gap-6 w-full max-w-xl">
             <div className="mb-12">
               <GlitchTypewriterText
+                className="text-black"
                 lineClassName="title lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px]"
                 text={t('why-us.subtitle')}
                 gradient="bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent"

@@ -119,7 +119,6 @@ export const Cases = () => {
         start: 'top top',
         end: `bottom`,
         scrub: 1,
-        markers: true,
         anticipatePin: 1,
         onUpdate: self => {
           const center = window.innerWidth / 2;

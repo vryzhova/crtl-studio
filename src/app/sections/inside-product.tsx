@@ -22,7 +22,7 @@ export const InsideProduct = () => {
       <div className="container h-full mx-auto px-4 lg:pb-20 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 gap-6 md:gap-8.5 items-center">
           {/* Left side - Text content */}
-          <div className="relative z-10 space-y-6">
+          <div className="space-y-6">
             <GlitchTypewriterText
               className="h-[200px] pt-[30px] lg:pt-0"
               text={t('inside-product.title')}

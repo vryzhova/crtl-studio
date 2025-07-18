@@ -18,7 +18,7 @@ export const ContactSection: React.FC = () => {
             <GlitchTypewriterText
               lineClassName="md:text-4xl lg:text-4xl text-3xl font-bold"
               text={t('contact-form.title')}
-              gradient="bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent"
+              gradient="bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
             />
             <div className="space-y-4 text-base text-gray-300 mt-6">
               <p>{t('contact-form.subtitle')}</p>
