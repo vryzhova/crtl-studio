@@ -15,7 +15,7 @@ type Props = {
 
 export const GlitchTypewriterText: React.FC<Props> = ({
   text,
-  className = 'text-2xl font-mono text-white space-y-2',
+  className = 'text-2xl font-mono text-white',
   lineClassName = '',
   glitchChars = '/|\\',
   glitchDuration = 50,
@@ -37,7 +37,7 @@ export const GlitchTypewriterText: React.FC<Props> = ({
 
     const linesCount = text.split('\n').length;
     const lineHeight = parseFloat(getComputedStyle(containerRef.current).lineHeight) || 24;
-    const spaceY = parseFloat(className.match(/space-y-(\d+)/)?.[1] || '2') * 4;
+    const spaceY = parseFloat(className.match(/space-y-(\d+)/)?.[1] || '1') * 4;
 
     const calculatedHeight = linesCount * lineHeight + (linesCount - 1) * spaceY;
     setContainerHeight(calculatedHeight);

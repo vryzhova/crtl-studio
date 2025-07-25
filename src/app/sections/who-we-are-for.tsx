@@ -52,7 +52,7 @@ export const WhoWeAreFor = () => {
 
   return (
     <section id="clients" className="min-h-screen relative py-20 bg-black text-white">
-      <SectionTitle title={t('who-we-are-for.tag')} position="center" />
+      <SectionTitle title={t('who-we-are-for.tag')} position="center" hasBorder />
 
       <div className="container mx-auto px-4 mt-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">

@@ -65,26 +65,23 @@ export const HowWeWork = () => {
     <section
       ref={sectionRef}
       id="how-we-work"
-      className="relative h-full lg:h-screen text-black bg-white overflow-hidden w-full mb-[100px] lg:mb-0 lg:pb-20"
+      className="relative h-full lg:h-screen text-black bg-white overflow-hidden w-full"
     >
       {/* Ваш контент */}
-      <div
-        ref={contentRef}
-        className="flex flex-col justify-center items-center container h-full mx-auto px-4 relative z-10"
-      >
+      <div ref={contentRef} className="own-container h-full flex flex-col items-center relative z-10">
         {/* Чип */}
         <SectionTitle title={t('inside-focus.tag')} position="center" />
 
         {/* Заголовок */}
         <GlitchTypewriterText
-          className="mb-10"
-          lineClassName="text-center title lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px]"
+          className="mb-10 lg:mb-15 2xl:text-[58px] md:text-[42px] text-[28px] leading-[107%]"
+          lineClassName="text-center title"
           text={t('inside-focus.title')}
           gradient="bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent"
         />
 
         {/* Сетка из 4 блоков desktop */}
-        <div className="hidden lg:grid relative w-full grid-cols-2 gap-x-40 gap-y-30">
+        <div className="hidden grow-2 lg:grid relative w-full grid-cols-2 gap-x-20 gap-y-20">
           {/* Вертикальная линия (desktop only) */}
           <div className="hidden lg:block absolute left-1/2 top-0 h-[calc(50%-48px)] w-px bg-gray-elements -translate-x-1/2" />
           <div className="hidden lg:block absolute left-1/2 bottom-0 h-[calc(50%-48px)] w-px bg-gray-elements -translate-x-1/2" />
@@ -95,9 +92,9 @@ export const HowWeWork = () => {
 
           {/* Верхний левый */}
           <div className="flex flex-col items-center justify-center">
-            <div className="text-center w-full mx-auto">
+            <div className="text-center w-[392px]">
               <h3 className="subtitle font-bold mb-2 text-center text-lg">{t('inside-focus.creative_title')}</h3>
-              <p className="text-sm lg:text-base text-black leading-relaxed text-center">
+              <p className="text-sm font-inter lg:text-base text-black leading-none text-center">
                 {t('inside-focus.creative_text')}
               </p>
             </div>
@@ -105,25 +102,29 @@ export const HowWeWork = () => {
 
           {/* Верхний правый */}
           <div className="flex flex-col items-center justify-center w-full">
-            <div className="text-center w-full">
+            <div className="text-center w-[392px]">
               <h3 className="subtitle mb-2 font-bold text-center text-base lg:text-lg">{t('inside-focus.ai_title')}</h3>
-              <p className="text-sm lg:text-base text-black leading-relaxed text-center">{t('inside-focus.ai_text')}</p>
+              <p className="text-sm font-inter lg:text-base text-black leading-none text-center">
+                {t('inside-focus.ai_text')}
+              </p>
             </div>
           </div>
 
           {/* Нижний левый */}
           <div className="flex flex-col items-center justify-center w-full">
-            <div className="text-center w-full">
+            <div className="text-center w-[392px]">
               <h3 className="subtitle text-center font-bold mb-2 text-base lg:text-lg">{t('inside-focus.ux_title')}</h3>
-              <p className="text-sm lg:text-base text-black leading-relaxed text-center">{t('inside-focus.ux_text')}</p>
+              <p className="text-sm font-inter lg:text-base text-black leading-none text-center">
+                {t('inside-focus.ux_text')}
+              </p>
             </div>
           </div>
 
           {/* Нижний правый */}
           <div className="flex flex-col items-center justify-center w-full">
-            <div className="text-center w-full">
+            <div className="text-center w-[392px]">
               <h3 className="subtitle mb-2 font-bold text-base lg:text-lg">{t('inside-focus.blockchain_title')}</h3>
-              <p className="text-sm lg:text-base text-black leading-relaxed text-center">
+              <p className="text-sm font-inter lg:text-base text-black leading-none text-center">
                 {t('inside-focus.blockchain_text')}
               </p>
             </div>

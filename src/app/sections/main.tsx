@@ -21,12 +21,12 @@ export const MainSection: React.FC = () => {
         <div className="container mx-auto flex flex-1 justify-center items-center pt-[160px] pb-[120px] lg:pt-20 lg:pb-0">
           <div className="relative z-10 text-center px-6 max-w-3xl mx-auto flex flex-col justify-center items-center ">
             <GlitchTypewriterText
-              className="h-[200px] pt-[30px] lg:pt-0"
+              className="lg:pt-0 text-[36px] md:text-[70px] 2xl:text-[80px] leading-[107%]"
               text={t('main.title')}
-              lineClassName="title text-4xl md:text-6xl font-bold"
+              lineClassName="title font-bold"
             />
 
-            <p className="text-base md:text-lg text-white mt-4 mb-[30px] sm:mt-15 lg:mb-9 font-inter max-w-[470px]">
+            <p className="text-base md:text-lg  2xl:text-[22px] text-white mt-4 md:mt-5 mb-[30px] md:mb-[36px]  lg:mb-9 font-inter max-w-[541px]">
               {t('main.description')}
             </p>
 

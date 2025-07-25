@@ -137,7 +137,7 @@ export const ProcessSteps = () => {
     >
       {/* Фоновое изображение — только фон, прозрачность не влияет на контент */}
       <div className="absolute inset-0 w-full h-full bg-[url('/mountain-bg.svg')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" />
-      <SectionTitle title={t('how-we-work.tag')} position="center" />
+      <SectionTitle title={t('how-we-work.tag')} position="center" hasBorder />
       {/* Ваша прежняя верстка этапов — не меняю! */}
       <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center mt-16">
         {/* Mobile: горизонтальный таймлайн без карточек */}

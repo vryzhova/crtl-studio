@@ -15,7 +15,7 @@ const ProcessSteps = dynamic(() => import('./sections/process-steps').then(mod =
 
 export default function Home() {
   const [showPreloader, setShowPreloader] = useState(true);
-  
+
   useEffect(() => {
     ScrollTrigger.normalizeScroll(true);
   }, []);
@@ -37,10 +37,10 @@ export default function Home() {
           <WhySection />
           <InsideProduct />
           <HowWeWork />
-          <Cases />
           <WhoWeAreFor />
           <ProcessSteps />
           <ContactSection />
+          {/*<Cases />*/}
           <Footer />
         </div>
       )}

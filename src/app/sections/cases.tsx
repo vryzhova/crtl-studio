@@ -51,7 +51,7 @@ export const Cases = () => {
   const cases = useMemo(() => getCases(t, lang), [t, lang]);
   const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
   const textStyle =
-    'text-center md:text-left text-2xl md:text-4xl px-5 lg:px-0 lg:text-end font-bold bg-gradient-to-b from-white lg:from-black to-gray-gradient bg-clip-text text-transparent';
+    '2xl:text-[58px] md:text-[42px] text-[28px] text-center md:text-left px-5 lg:px-0 lg:text-end font-bold bg-gradient-to-b from-white lg:from-black to-gray-gradient bg-clip-text text-transparent';
 
   useEffect(() => {
     if (
@@ -174,7 +174,7 @@ export const Cases = () => {
         className="hidden lg:flex absolute w-screen h-screen flex-col items-center justify-center z-20"
       >
         <div ref={initialTextRef} className="flex flex-col lg:items-end justify-center items-center">
-          <h2 className="text-start lg:text-center z-20 font-inter-tight font-bold leading-tight lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px] bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent">
+          <h2 className="text-start lg:text-center z-20 font-inter-tight font-bold leading-none 2xl:text-[58px] md:text-[42px] text-[28px] bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent">
             {t('cases.title')}
           </h2>
         </div>
@@ -198,13 +198,13 @@ export const Cases = () => {
       >
         {/* Header */}
         <div className="w-full flex lg:justify-between flex-col lg:flex-row items-start lg:px-25 px-4 gap-5 pt-12 z-20 pointer-events-none">
-          <h2 className="text-[28px] leading-[100%] sm:text-[44px] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent">
+          <h2 className="2xl:text-[58px] md:text-[42px] text-[28px] leading-[100%] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent">
             {t('cases.title')}
           </h2>
           <div className="lg:text-right">
             <span
               ref={caseNumbersRef}
-              className="whitespace-pre-line leading-[100%] sm:text-[44px] text-[28px] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
+              className="whitespace-pre-line leading-[100%] 2xl:text-[58px] md:text-[42px] text-[28px] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
             >
               {t('cases.subtitle')}
             </span>

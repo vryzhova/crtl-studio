@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { GlitchTypewriterText, SectionTitle } from '../components';
 import { ProgressElement } from '@/app/components/progress-element';
 import { useTranslation } from 'react-i18next';
+import { useBreakpoints } from '@/app/hooks';
 
 const PROGRESS_DURATION = 10000; // ms, длительность заполнения прогресс-бара
 
@@ -13,6 +14,8 @@ export const WhySection: React.FC = () => {
   const [progress, setProgress] = useState<number>();
   const frameIdRef = useRef<number | null>(null);
   const { t } = useTranslation();
+  const { isDesktop } = useBreakpoints();
+  const titlePosition = isDesktop ? 'start' : 'center';
 
   const steps = [
     {
@@ -61,16 +64,16 @@ export const WhySection: React.FC = () => {
 
   return (
     <section id="why" className="relative w-full bg-white text-white overflow-hidden flex flex-col items-center">
-      <SectionTitle title={t('why-us.title')} />
-      <div className="container mx-auto px-4 pb-20 relative z-10">
+      <div className="relative z-10 own-container">
+        <SectionTitle title={t('why-us.title')} position={titlePosition} />
         {/* Заголовок и описание секции */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center justify-items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-[112px]  2xl:gap-[50px]">
           {/* Левая колонка — плашки с прогресс баром */}
           <div className="flex flex-col gap-6 w-full max-w-xl">
             <div className="mb-12">
               <GlitchTypewriterText
-                className="text-black"
-                lineClassName="title lg:text-4xl 2xl:text-6xl md:text-3xl text-[28px]"
+                className="text-black 2xl:text-[58px] md:text-[42px] text-[28px] leading-[107%]"
+                lineClassName="title"
                 text={t('why-us.subtitle')}
                 gradient="bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent"
               />
@@ -111,7 +114,7 @@ export const WhySection: React.FC = () => {
           </div>
           {/* Правая колонка — динамичная картинка */}
           <div className="w-full max-w-x">
-            <div className="flex justify-center items-center w-full h-[500px] relative">
+            <div className="flex justify-center items-center w-full h-[500px] 2xl:h-[800px] 2xl:w-[586px]  lg:h-[630px] lg:w-[512px] relative">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={steps[activeIndex].image}
@@ -124,8 +127,7 @@ export const WhySection: React.FC = () => {
                   <Image
                     src={steps[activeIndex].image}
                     alt={steps[activeIndex].title}
-                    width={400}
-                    height={400}
+                    fill
                     className="object-contain"
                     priority
                   />
