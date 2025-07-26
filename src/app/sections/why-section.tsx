@@ -65,56 +65,56 @@ export const WhySection: React.FC = () => {
   return (
     <section id="why" className="relative w-full bg-white text-white overflow-hidden flex flex-col items-center">
       <div className="relative z-10 own-container">
-        <SectionTitle title={t('why-us.title')} position={titlePosition} />
         {/* Заголовок и описание секции */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-[112px]  2xl:gap-[50px]">
+        <div className="grid grid-cols-1 xl:grid-cols-2 xl:gap-[112px]  3xl:gap-[50px]">
           {/* Левая колонка — плашки с прогресс баром */}
-          <div className="flex flex-col gap-6 w-full max-w-xl">
-            <div className="mb-12">
-              <GlitchTypewriterText
-                className="text-black 2xl:text-[58px] md:text-[42px] text-[28px] leading-[107%]"
-                lineClassName="title"
-                text={t('why-us.subtitle')}
-                gradient="bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent"
-              />
-            </div>
-            {steps.map((step, idx) => {
-              const isActive = idx === activeIndex;
+          <div className="flex flex-col w-full">
+            <SectionTitle title={t('why-us.title')} position={titlePosition} />
+            <GlitchTypewriterText
+              className="text-black mb-6.5 md:mb-12.5 xl:mb-[97px] 3xl:mb-[57px] 3xl:text-[58px]  md:text-[42px] text-[28px] leading-[107%]"
+              lineClassName="title"
+              text={t('why-us.subtitle')}
+              gradient="bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent"
+            />
+            <div className="flex flex-col gap-6">
+              {steps.map((step, idx) => {
+                const isActive = idx === activeIndex;
 
-              return isActive ? (
-                <motion.div
-                  key={step.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                  className="w-full"
-                >
-                  <ProgressElement
-                    progress={progress}
-                    activeIndex={activeIndex}
-                    step={step}
-                    idx={idx}
-                    isLast={idx === steps.length - 1}
-                    onClick={() => handleManualSwitch(idx)}
-                  />
-                </motion.div>
-              ) : (
-                <div key={step.title} className="w-full">
-                  <ProgressElement
-                    activeIndex={activeIndex}
-                    step={step}
-                    idx={idx}
-                    isLast={idx === steps.length - 1}
-                    onClick={() => handleManualSwitch(idx)}
-                  />
-                </div>
-              );
-            })}
+                return isActive ? (
+                  <motion.div
+                    key={step.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-full"
+                  >
+                    <ProgressElement
+                      progress={progress}
+                      activeIndex={activeIndex}
+                      step={step}
+                      idx={idx}
+                      isLast={idx === steps.length - 1}
+                      onClick={() => handleManualSwitch(idx)}
+                    />
+                  </motion.div>
+                ) : (
+                  <div key={step.title} className="w-full">
+                    <ProgressElement
+                      activeIndex={activeIndex}
+                      step={step}
+                      idx={idx}
+                      isLast={idx === steps.length - 1}
+                      onClick={() => handleManualSwitch(idx)}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
           {/* Правая колонка — динамичная картинка */}
           <div className="w-full max-w-x">
-            <div className="flex justify-center items-center w-full h-[500px] 2xl:h-[800px] 2xl:w-[586px]  lg:h-[630px] lg:w-[512px] relative">
+            <div className="flex justify-center items-center w-full h-[500px] 3xl:h-[800px] 3xl:w-[586px]  xl:h-[630px] xl:w-[512px] relative">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={steps[activeIndex].image}

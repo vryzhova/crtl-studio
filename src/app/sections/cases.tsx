@@ -5,6 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { getCases } from '../sections/helpers';
 import { useTranslation } from 'react-i18next';
 import dynamic from 'next/dynamic';
+import { useLenis } from '../lenis-context';
+import { useBreakpoints } from '../hooks/use-break-points';
 
 const GlitchImageSwitch = dynamic(
   () => import('../components/glitch-image-switch').then(mod => mod.GlitchImageSwitch),
@@ -43,15 +45,38 @@ export const Cases = () => {
   const caseNumbersRef = useRef<HTMLHeadingElement>(null);
   const businessesTextRef = useRef<HTMLHeadingElement>(null);
   const caseInfoRef = useRef<HTMLDivElement>(null);
+  const { isDesktop } = useBreakpoints();
 
   const [activeCase, setActiveCase] = useState<Case | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const lang = i18n.language;
 
   const cases = useMemo(() => getCases(t, lang), [t, lang]);
-  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
+  const isDesktopDefine = typeof window !== 'undefined' && isDesktop;
   const textStyle =
-    '2xl:text-[58px] md:text-[42px] text-[28px] text-center md:text-left px-5 lg:px-0 lg:text-end font-bold bg-gradient-to-b from-white lg:from-black to-gray-gradient bg-clip-text text-transparent';
+    '3xl:text-[58px] md:text-[42px] text-[28px] text-center md:text-left px-5 xl:px-0 xl:text-end font-bold bg-gradient-to-b from-white xl:from-black to-gray-gradient bg-clip-text text-transparent';
+
+  const lenisRef = useLenis();
+
+  useEffect(() => {
+    if (!lenisRef) return;
+    if (activeCase) {
+      // @ts-ignore
+      lenisRef?.stop();
+    } else {
+      // @ts-ignore
+      // lenisRef?.start();
+    }
+  }, [activeCase, lenisRef]);
+
+  useEffect(() => {
+    if (activeCase) {
+      console.log('activeCase');
+      document.documentElement.classList.add('disable-scroll');
+    } else {
+      document.documentElement.classList.remove('disable-scroll');
+    }
+  }, [activeCase]);
 
   useEffect(() => {
     if (
@@ -74,7 +99,7 @@ export const Cases = () => {
     // Сброс всех свойств перед анимацией
     gsap.set([introText, rightPanel, content], { clearProps: 'all' });
 
-    if (isDesktop) {
+    if (isDesktopDefine) {
       gsap.set(introText, { opacity: 1, x: 0 });
       gsap.set(rightPanel, { opacity: 1, x: '100%' });
       gsap.set(content, { opacity: 0 });
@@ -88,7 +113,7 @@ export const Cases = () => {
     // === 1. Intro Timeline (без scrub) ===
     const introTimeline = gsap.timeline({ paused: true });
 
-    if (isDesktop) {
+    if (isDesktopDefine) {
       introTimeline
         .to(introText, { x: -350, duration: 2, ease: 'power3.inOut' })
         .to(rightPanel, { x: '0%', duration: 2, ease: 'power3.inOut' }, '<')
@@ -119,6 +144,7 @@ export const Cases = () => {
         start: 'top top',
         end: `bottom+=500%`,
         scrub: true,
+        markers: true,
         anticipatePin: 1,
         onUpdate: self => {
           const center = window.innerWidth / 2;
@@ -162,7 +188,7 @@ export const Cases = () => {
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, [cases.length, isDesktop]);
+  }, [cases.length, isDesktopDefine]);
 
   const openGallery = (caseItem: Case) => setActiveCase(caseItem);
   const closeGallery = () => setActiveCase(null);
@@ -171,10 +197,10 @@ export const Cases = () => {
     <section id="cases" ref={containerRef} className="relative overflow-hidden bg-black z-10">
       <div
         ref={initialTextContainerRef}
-        className="hidden lg:flex absolute w-screen h-screen flex-col items-center justify-center z-20"
+        className="hidden xl:flex absolute w-screen h-screen flex-col items-center justify-center z-20"
       >
-        <div ref={initialTextRef} className="flex flex-col lg:items-end justify-center items-center">
-          <h2 className="text-start lg:text-center z-20 font-inter-tight font-bold leading-none 2xl:text-[58px] md:text-[42px] text-[28px] bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent">
+        <div ref={initialTextRef} className="flex flex-col xl:items-end justify-center items-center">
+          <h2 className="text-start xl:text-center z-20 font-inter-tight font-bold leading-none 3xl:text-[58px] md:text-[42px] text-[28px] bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent">
             {t('cases.title')}
           </h2>
         </div>
@@ -182,9 +208,9 @@ export const Cases = () => {
 
       <div
         ref={rightPanelRef}
-        className="hidden lg:flex absolute w-1/2 h-screen right-0 flex-col items-center justify-center pl-12 bg-white z-20"
+        className="hidden xl:flex absolute w-1/2 h-screen right-0 flex-col items-center justify-center pl-12 bg-white z-20"
       >
-        <div className="flex flex-col lg:items-end items-center">
+        <div className="flex flex-col xl:items-end items-center">
           <h2 ref={businessesTextRef} className={`${textStyle} whitespace-pre-line`}>
             {t('cases.subtitle')}
           </h2>
@@ -194,17 +220,17 @@ export const Cases = () => {
       <div
         id="gallery"
         ref={contentRef}
-        className="relative h-screen overflow-hidden z-10 flex flex-col lg:justify-center "
+        className="relative h-screen overflow-hidden z-10 flex flex-col xl:justify-center "
       >
         {/* Header */}
-        <div className="w-full flex lg:justify-between flex-col lg:flex-row items-start lg:px-25 px-4 gap-5 pt-12 z-20 pointer-events-none">
-          <h2 className="2xl:text-[58px] md:text-[42px] text-[28px] leading-[100%] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent">
+        <div className="w-full flex xl:justify-between flex-col xl:flex-row items-start xl:px-25 px-4 gap-5 pt-12 z-20 pointer-events-none">
+          <h2 className="3xl:text-[58px] md:text-[42px] text-[28px] leading-[100%] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent">
             {t('cases.title')}
           </h2>
-          <div className="lg:text-right">
+          <div className="xl:text-right">
             <span
               ref={caseNumbersRef}
-              className="whitespace-pre-line leading-[100%] 2xl:text-[58px] md:text-[42px] text-[28px] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
+              className="whitespace-pre-line leading-[100%] 3xl:text-[58px] md:text-[42px] text-[28px] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
             >
               {t('cases.subtitle')}
             </span>
@@ -214,7 +240,7 @@ export const Cases = () => {
         {/* Horizontal scroll */}
         <div
           ref={wrapperRef}
-          className="flex lg:mt-0 mt-30 justify-center items-center"
+          className="flex xl:mt-0 mt-30 justify-center items-center"
           style={{ width: `${cases.length * 80}vw` }}
         >
           {cases.map((item, index) => {
@@ -242,10 +268,10 @@ export const Cases = () => {
         {/* Case info + arrow */}
         <div
           ref={caseInfoRef}
-          className="sticky mt-6.5 lg:right-20 bottom-20 flex justify-center gap-2 h-[70px] z-30 mx-auto lg:mx-0"
+          className="sticky mt-6.5 xl:right-20 bottom-20 flex justify-center gap-2 h-[70px] z-30 mx-auto xl:mx-0"
           style={{ position: 'sticky', marginLeft: 'auto', width: 'fit-content' }}
         >
-          <div className="p-6 flex items-center justify-between bg-lime-default rounded-md lg:w-[540px] md:w-[620px] w-[250px] cursor-default select-none">
+          <div className="p-6 flex items-center justify-between bg-lime-default rounded-md xl:w-[540px] md:w-[620px] w-[250px] cursor-default select-none">
             <span className="font-bold text-black truncate">{cases[activeIndex]?.title}</span>
             <span className="px-3 text-black">{cases[activeIndex]?.year}</span>
           </div>

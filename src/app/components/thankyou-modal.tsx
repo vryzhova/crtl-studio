@@ -28,7 +28,7 @@ export const ThankYouModal: React.FC<ThankYouModalProps> = ({ open, onClose, tit
           {/* Кнопка закрытия */}
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center border-2 border-black rounded-md bg-transparent text-black text-2xl transition hover:bg-black/10"
+            className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center border-2 border-black rounded-md bg-transparent text-black text-3xl transition hover:bg-black/10"
             aria-label="Закрыть"
           >
             <span className="pointer-events-none select-none">✕</span>

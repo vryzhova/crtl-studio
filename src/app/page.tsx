@@ -16,10 +16,6 @@ const ProcessSteps = dynamic(() => import('./sections/process-steps').then(mod =
 export default function Home() {
   const [showPreloader, setShowPreloader] = useState(true);
 
-  // useEffect(() => {
-  //   ScrollTrigger.normalizeScroll(true);
-  // }, []);
-
   useEffect(() => {
     if (showPreloader) {
       document.body.style.overflow = 'hidden';
@@ -38,9 +34,9 @@ export default function Home() {
           <InsideProduct />
           <HowWeWork />
           <WhoWeAreFor />
-          <ProcessSteps />
+          {/*<ProcessSteps />*/}
           <ContactSection />
-          {/*<Cases />*/}
+          <Cases />
           <Footer />
         </div>
       )}

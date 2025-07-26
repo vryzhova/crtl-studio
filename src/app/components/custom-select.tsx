@@ -24,10 +24,10 @@ const CustomSelect: React.FC<TProps> = ({ onChange }) => {
   ];
 
   // Стили для линий (замените на ваши реальные классы)
-  const leftTopLine = 'absolute left-0 top-0 w-8 h-2.5  border-t border-l border-gray-400 rounded-tl-[8px]';
-  const leftBottomLine = 'absolute left-0 bottom-0 w-8 h-2.5 border-b border-l border-gray-400 rounded-bl-[8px]';
-  const rightTopLine = 'absolute right-0 top-0 w-8 h-2.5 border-t border-r border-gray-400 rounded-tr-[8px]';
-  const rightBottomLine = 'absolute right-0 bottom-0 w-8 h-2.5  border-b border-r border-gray-400 rounded-br-[8px]';
+  const leftTopLine = 'absolute z-10 left-0 top-0 w-8 h-2.5  border-t border-l border-white rounded-tl-[8px]';
+  const leftBottomLine = 'absolute z-10  left-0 bottom-0 w-8 h-2.5 border-b border-l border-white rounded-bl-[8px]';
+  const rightTopLine = 'absolute z-10 right-0 top-0 w-8 h-2.5 border-t border-r border-white rounded-tr-[8px]';
+  const rightBottomLine = 'absolute z-10 right-0 bottom-0 w-8 h-2.5  border-b border-r border-white rounded-br-[8px]';
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -57,10 +57,7 @@ const CustomSelect: React.FC<TProps> = ({ onChange }) => {
       <div className={rightBottomLine} />
 
       {/* Основной селект */}
-      <div
-        className={`flex-1 flex flex-col gap-2 pl-8 pr-8 w-full cursor-pointer bg-transparent`}
-        onClick={toggleDropdown}
-      >
+      <div className={`flex-1 flex flex-col gap-2 pl-8 pr-8 w-full cursor-pointer bg-black`} onClick={toggleDropdown}>
         <div className="relative py-3 border-e-gray-elements">
           <span className={`text-lg font-mono ${selectedOption ? 'text-white' : 'text-gray-elements'}`}>
             {selectedOption ? selectedOption.label : t('contact-form.contact_method')}

@@ -18,20 +18,20 @@ export const MainSection: React.FC = () => {
       {/* Content */}
       <div className="relative flex flex-col md:min-h-screen">
         <Header />
-        <div className="container mx-auto flex flex-1 justify-center items-center pt-[160px] pb-[120px] lg:pt-20 lg:pb-0">
+        <div className="container mx-auto flex flex-1 justify-center items-center pt-[160px] pb-[120px] xl:pt-20 xl:pb-0">
           <div className="relative z-10 text-center px-6 max-w-3xl mx-auto flex flex-col justify-center items-center ">
             <GlitchTypewriterText
-              className="lg:pt-0 text-[36px] md:text-[70px] 2xl:text-[80px] leading-[107%]"
+              className="xl:pt-0 text-[36px] md:text-[70px] 3xl:text-[80px] leading-[107%]"
               text={t('main.title')}
               lineClassName="title font-bold"
             />
 
-            <p className="text-base md:text-lg  2xl:text-[22px] text-white mt-4 md:mt-5 mb-[30px] md:mb-[36px]  lg:mb-9 font-inter max-w-[541px]">
+            <p className="text-base md:text-lg  3xl:text-[22px] text-white mt-4 md:mt-5 mb-[30px] md:mb-[36px]  xl:mb-9 font-inter max-w-[541px]">
               {t('main.description')}
             </p>
 
             <Button
-              className="w-[320px] lg:w-[244px] 2xl:w-[300px]"
+              className="w-[320px] xl:w-[244px] 3xl:w-[300px]"
               onClick={() => {
                 const el = document.getElementById('contact');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });

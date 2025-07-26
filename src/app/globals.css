@@ -15,6 +15,7 @@
     --color-lime-active: #C0FF2B;
     --color-red-error: #FF0E0E;
     --color-text-grad-dbg: #626262;
+    --breakpoint-3xl: 120rem;
 }
 
 @keyframes fade-in {
@@ -128,7 +129,6 @@ body {
 .subtitle {
     font-family: var(--font-inter-tight), 'Inter Tight', sans-serif;
     font-weight: 700;
-    font-size: 20px;
     line-height: 100%;
     letter-spacing: 0;
     text-align: center;
@@ -161,4 +161,21 @@ body {
         box-sizing: border-box;
         padding: 180px 312px 180px 312px;
     }
+}
+
+html.disable-scroll {
+    overflow: hidden;
+}
+
+#circle {
+    z-index: 999;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 138vmax;
+    height: 138vmax;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    background-color: #141414;
+    overflow-x: hidden;
 }
