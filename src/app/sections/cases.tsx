@@ -5,8 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { getCases } from '../sections/helpers';
 import { useTranslation } from 'react-i18next';
 import dynamic from 'next/dynamic';
-import { useLenis } from '../lenis-context';
-import { useBreakpoints } from '../hooks/use-break-points';
 
 const GlitchImageSwitch = dynamic(
   () => import('../components/glitch-image-switch').then(mod => mod.GlitchImageSwitch),
@@ -166,6 +164,7 @@ export const Cases = () => {
             const min = 0.8;
             const maxDist = window.innerWidth / 2;
             const scale = max - (dist / maxDist) * (max - min);
+            console.log(scale);
 
             gsap.to(ref, {
               scale: Math.max(min, Math.min(max, scale)),
@@ -223,7 +222,7 @@ export const Cases = () => {
         className="relative h-screen overflow-hidden z-10 flex flex-col xl:justify-center "
       >
         {/* Header */}
-        <div className="w-full flex xl:justify-between flex-col xl:flex-row items-start xl:px-25 px-4 gap-5 pt-12 z-20 pointer-events-none">
+        <div className="w-full flex xl:justify-between flex-col xl:flex-row items-start xl:px-25 px-4 gap-5 pt-12 xl:pt-0 pb-12.5 z-20 pointer-events-none">
           <h2 className="3xl:text-[58px] md:text-[42px] text-[28px] leading-[100%] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent">
             {t('cases.title')}
           </h2>
@@ -240,8 +239,8 @@ export const Cases = () => {
         {/* Horizontal scroll */}
         <div
           ref={wrapperRef}
-          className="flex xl:mt-0 mt-30 justify-center items-center"
-          style={{ width: `${cases.length * 80}vw` }}
+          className="flex xl:mt-0  justify-center items-center"
+          style={{ width: `${cases.length * 60}vw` }}
         >
           {cases.map((item, index) => {
             const setRef = (el: HTMLDivElement) => (itemRefs.current[index] = el);
@@ -250,7 +249,7 @@ export const Cases = () => {
                 key={item.id}
                 // @ts-ignore
                 ref={setRef}
-                className="w-[80vw] sm:h-[60vh] h-[30vh] flex items-center justify-center cursor-pointer"
+                className="w-[60vw] lg:h-[60vh] h-[30vh] flex items-center justify-center cursor-pointer"
                 onClick={() => openGallery(item)}
               >
                 <GlitchImageSwitch

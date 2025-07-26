@@ -67,34 +67,33 @@ export const ProcessSteps = () => {
     }
   }, [steps.length]);
 
-  // useEffect(() => {
-  //   const section = sectionRef.current;
-  //   if (!section) return;
-  //
-  //   let trigger: ScrollTrigger | null = null;
-  //
-  //   if (!isMobile) {
-  //     const totalSteps = steps.length;
-  //     const stepLength = 1 / totalSteps;
-  //     trigger = ScrollTrigger.create({
-  //       trigger: section,
-  //       start: 'top top',
-  //       end: `+=${window.innerHeight * totalSteps * 0.5}`,
-  //       pin: section,
-  //       scrub: true,
-  //       onUpdate: self => {
-  //         const progress = self.progress;
-  //         const currentStep = Math.floor(progress / stepLength);
-  //         setActive(Math.min(currentStep, totalSteps - 1));
-  //       },
-  //     });
-  //   }
-  //
-  //   return () => {
-  //     trigger?.kill();
-  //     // ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-  //   };
-  // }, [isMobile, steps.length]);
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let trigger: ScrollTrigger | null = null;
+
+    if (!isMobile) {
+      const totalSteps = steps.length;
+      const stepLength = 1 / totalSteps;
+      trigger = ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        end: `+=${window.innerHeight * totalSteps * 0.5}`,
+        pin: section,
+        scrub: true,
+        onUpdate: self => {
+          const progress = self.progress;
+          const currentStep = Math.floor(progress / stepLength);
+          setActive(Math.min(currentStep, totalSteps - 1));
+        },
+      });
+    }
+
+    return () => {
+      trigger?.kill();
+    };
+  }, [isMobile, steps.length]);
 
   useEffect(() => {
     const wrapper = mobileStepsRef.current;
@@ -142,7 +141,6 @@ export const ProcessSteps = () => {
 
     return () => {
       ctx?.revert();
-      // ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, [isMobile, steps.length]);
 
@@ -153,7 +151,7 @@ export const ProcessSteps = () => {
       className="relative bg-black text-white flex flex-col sm:items-center sm:justify-center overflow-hidden sm:py-20 pointer-events-none min-h-screen xl:h-screen"
     >
       {/* Фоновое изображение — только фон, прозрачность не влияет на контент */}
-      <div className="absolute inset-0 w-full h-full bg-[url('/mountain-bg.svg')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" />
+      <div className="absolute inset-0 w-full h-full bg-[url('/mountain-bg.png')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" />
       {/* Ваша прежняя верстка этапов — не меняю! */}
       <SectionTitle title={t('how-we-work.tag')} position="center" hasBorder />
       <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center">
