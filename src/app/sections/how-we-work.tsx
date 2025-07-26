@@ -94,7 +94,7 @@ export const HowWeWork = () => {
 
     return () => {
       tl.kill();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      // ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, [isDesktop, isTelegram]);
 

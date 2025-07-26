@@ -17,16 +17,27 @@ export function useBreakpoints() {
     };
 
     const update = () => {
-      setBreakpoints({
+      const newBreakpoints = {
         isMobile: queries.isMobile.matches,
         isTablet: queries.isTablet.matches,
         isDesktop: queries.isDesktop.matches,
+      };
+
+      // Обновляем только если изменилось
+      setBreakpoints(prev => {
+        if (
+          prev.isMobile !== newBreakpoints.isMobile ||
+          prev.isTablet !== newBreakpoints.isTablet ||
+          prev.isDesktop !== newBreakpoints.isDesktop
+        ) {
+          return newBreakpoints;
+        }
+        return prev;
       });
     };
 
-    update(); // установить начальные значения
+    update();
 
-    // Добавляем слушателей
     Object.values(queries).forEach(q => q.addEventListener('change', update));
 
     return () => {

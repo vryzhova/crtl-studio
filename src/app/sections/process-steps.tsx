@@ -10,6 +10,19 @@ import TimelineLineSvg from '../components/TimelineLineSvg';
 import { AutoWidthTimelineLine } from '../components/TimelineLineHorizontalSvg';
 import { useBreakpoints } from '@/app/hooks/use-break-points';
 
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    const listener = () => setMatches(media.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, [query]);
+
+  return matches;
+}
+
 export const ProcessSteps = () => {
   const [active, setActive] = useState(0); // default: первый этап
   const { t } = useTranslation();
@@ -17,7 +30,9 @@ export const ProcessSteps = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const mobileStepsRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
-  const { isMobile, isTablet } = useBreakpoints();
+  // const { isMobile, isTablet } = useBreakpoints();
+  const isMobile = useMediaQuery('(max-width: 767px)');
+  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1279px)');
 
   const steps = [
     {
@@ -52,33 +67,34 @@ export const ProcessSteps = () => {
     }
   }, [steps.length]);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    let trigger: ScrollTrigger | null = null;
-
-    if (!isMobile) {
-      const totalSteps = steps.length;
-      const stepLength = 1 / totalSteps;
-      trigger = ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: `+=${window.innerHeight * totalSteps * 0.5}`,
-        pin: section,
-        scrub: true,
-        onUpdate: self => {
-          const progress = self.progress;
-          const currentStep = Math.floor(progress / stepLength);
-          setActive(Math.min(currentStep, totalSteps - 1));
-        },
-      });
-    }
-
-    return () => {
-      trigger?.kill();
-    };
-  }, [isMobile, steps.length]);
+  // useEffect(() => {
+  //   const section = sectionRef.current;
+  //   if (!section) return;
+  //
+  //   let trigger: ScrollTrigger | null = null;
+  //
+  //   if (!isMobile) {
+  //     const totalSteps = steps.length;
+  //     const stepLength = 1 / totalSteps;
+  //     trigger = ScrollTrigger.create({
+  //       trigger: section,
+  //       start: 'top top',
+  //       end: `+=${window.innerHeight * totalSteps * 0.5}`,
+  //       pin: section,
+  //       scrub: true,
+  //       onUpdate: self => {
+  //         const progress = self.progress;
+  //         const currentStep = Math.floor(progress / stepLength);
+  //         setActive(Math.min(currentStep, totalSteps - 1));
+  //       },
+  //     });
+  //   }
+  //
+  //   return () => {
+  //     trigger?.kill();
+  //     // ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+  //   };
+  // }, [isMobile, steps.length]);
 
   useEffect(() => {
     const wrapper = mobileStepsRef.current;
@@ -126,6 +142,7 @@ export const ProcessSteps = () => {
 
     return () => {
       ctx?.revert();
+      // ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, [isMobile, steps.length]);
 
