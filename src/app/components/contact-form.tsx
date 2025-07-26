@@ -164,8 +164,8 @@ export const ContactForm: React.FC = () => {
           <BudgetSlider min={50000} max={1000000} step={10000} value={budget} onChange={value => setBudget(value)} />
         </div>
         {/* Чекбокс с политикой */}
-        <div className="flex items-center gap-3 mt-4">
-          <label className="relative flex items-center cursor-pointer">
+        <div className="flex gap-3 mt-4">
+          <label className="relative flex cursor-pointer">
             <input
               type="checkbox"
               checked={agree}
@@ -191,7 +191,7 @@ export const ContactForm: React.FC = () => {
 
           <span className="text-lg text-white">
             {t('contact-form.agree')}{' '}
-            <a href="/privacy" className="text-lime-default underline">
+            <a href="/privacy" className="text-lime-default">
               {t('contact-form.privacy_policy')}
             </a>
             .

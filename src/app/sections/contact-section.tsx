@@ -12,7 +12,7 @@ export const ContactSection: React.FC = () => {
   const { isDesktop } = useBreakpoints();
   return (
     <section id="contact" className="relative min-h-screen w-full bg-black text-white overflow-hidden">
-      <div className="own-container pb-20 grid grid-cols-1 xl:grid-cols-2 items-center">
+      <div className="inside-container pb-20 grid grid-cols-1 xl:grid-cols-2 items-center">
         {/* Background pattern */}
         <div
           style={{ transform: 'translateZ(0)' }}
@@ -61,11 +61,11 @@ export const ContactSection: React.FC = () => {
           <ContactForm />
         </div>
 
-        <div className="md:hidden bg-[url('/ctrl-btn-bg.svg')] bg-contain bg-center bg-no-repeat bg">
+        <div className="md:hidden flex justify-end mt-12.5 bg-[url('/ctrl-btn-bg.svg')] bg-contain bg-top-left bg-no-repeat pb-20 bg">
           <Image
             src="/ctrl-btn.png"
             alt="ctrl"
-            className="w-43 h-43 mt-10 select-none levitate justify-self-end"
+            className="w-62 h-62 select-none levitate"
             draggable={false}
             width={218}
             height={260}
