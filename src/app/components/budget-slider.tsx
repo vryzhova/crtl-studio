@@ -20,7 +20,7 @@ export const BudgetSlider: React.FC<BudgetSliderProps> = ({
       {/* Tooltip */}
       <div
         className="absolute -top-8 z-10 px-2 py-1 text-sm font-mono text-black bg-white rounded shadow transition-all duration-200"
-        style={{ left: `calc(${percent}% - 40px)` }}
+        style={{ left: `clamp(0%, calc(${percent}% - 40px), calc(100% - 80px))` }}
       >
         {value.toLocaleString()}
       </div>

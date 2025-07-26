@@ -37,25 +37,25 @@ export const ProcessSteps = () => {
   const steps = [
     {
       label: t('how-we-work.step_1_title'),
-      side: 'left',
+      side: 'right',
       title: t('how-we-work.step_1_title'),
       description: t('how-we-work.step_1_text'),
     },
     {
       label: t('how-we-work.step_2_title'),
-      side: 'right',
+      side: 'left',
       title: t('how-we-work.step_2_title'),
       description: t('how-we-work.step_2_text'),
     },
     {
       label: t('how-we-work.step_3_title'),
-      side: 'left',
+      side: 'right',
       title: t('how-we-work.step_3_title'),
       description: t('how-we-work.step_3_text'),
     },
     {
       label: t('how-we-work.step_4_title'),
-      side: 'right',
+      side: 'left',
       title: t('how-we-work.step_4_title'),
       description: t('how-we-work.step_4_text'),
     },
@@ -267,7 +267,7 @@ export const ProcessSteps = () => {
                     </h3>
                     <div
                       className={clsx(
-                        'text-sm leading-snug space-y-1 transition-colors duration-300',
+                        'text-sm leading-snug space-y-1 transition-colors duration-300 max-w-[350px]',
                         isRight ? 'text-left' : 'text-right'
                       )}
                     >
