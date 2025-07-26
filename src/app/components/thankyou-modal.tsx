@@ -13,7 +13,7 @@ export const ThankYouModal: React.FC<ThankYouModalProps> = ({ open, onClose, tit
   <AnimatePresence>
     {open && (
       <motion.div
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black opacity-80"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/95"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}

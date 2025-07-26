@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-
+import { useBreakpoints } from '@/app/hooks';
 import { SecondaryButton } from '@/app/components/secondary-btn';
 
 export const Footer = () => {
@@ -33,15 +33,14 @@ export const Footer = () => {
     },
   ];
   const docs = ['Документ 1', 'Документ 2'];
+  const { isMobile } = useBreakpoints();
+  const backgroundStyle = isMobile ? 'bg-[url("/bg-footer.svg")]' : 'bg-[url(/footer-bg.svg)]';
 
   return (
     <footer className="bg-black text-white relative overflow-hidden mx-5 xl:mx-25 md:border-t md:border-gray-elements">
       {/* Background pattern */}
-      <div className="absolute bottom-0 w-full h-full opacity-20 pointer-events-none z-0">
-        <div
-          className="w-full h-full bg-[url('/footer-bg.svg')]  bg-bottom bg-no-repeat bg-cover"
-          style={{ backgroundSize: '60%' }}
-        />
+      <div className="w-full h-full opacity-20 pointer-events-none z-0 absolute md:bottom-[-30%] xl:bottom-[-10%] bottom-0">
+        <div className={`w-full h-full ${backgroundStyle} bg-contain bg-bottom bg-no-repeat`} />
       </div>
       <div className="relative z-10 flex flex-col md:flex-row md:justify-between py-[110px] w-full gap-8 md:gap-0">
         {/* Левая часть: ссылки и документы + копирайт */}
@@ -88,7 +87,7 @@ export const Footer = () => {
             </p>
             <p className="mt-1">
               {currentYear} © CTRL Studio.
-              <br />
+              {isMobile && <br />}
               {t('footer.rights')}
             </p>
           </div>

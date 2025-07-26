@@ -52,7 +52,7 @@ export const Cases = () => {
   const cases = useMemo(() => getCases(t, lang), [t, lang]);
   const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1280;
   const textStyle =
-    '3xl:text-[58px] md:text-[42px] text-[28px] text-center md:text-left px-5 xl:px-0 xl:text-end font-bold bg-gradient-to-b from-white xl:from-black to-gray-gradient bg-clip-text text-transparent';
+    '3xl:text-[58px] md:text-[42px] text-[28px] leading-[100%] text-center md:text-left px-5 xl:px-0 xl:text-end font-bold bg-gradient-to-b from-white xl:from-black to-gray-gradient bg-clip-text text-transparent';
 
   // const lenisRef = useLenis();
 
@@ -142,7 +142,6 @@ export const Cases = () => {
         start: 'top top',
         end: `bottom+=500%`,
         scrub: true,
-        markers: true,
         anticipatePin: 1,
         onUpdate: self => {
           const center = window.innerWidth / 2;

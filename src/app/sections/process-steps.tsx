@@ -148,7 +148,7 @@ export const ProcessSteps = () => {
     <section
       id="how"
       ref={sectionRef}
-      className="relative bg-black text-white flex flex-col sm:items-center sm:justify-center overflow-hidden sm:py-20 pointer-events-none min-h-screen xl:h-screen"
+      className="relative bg-black text-white flex flex-col items-center justify-center overflow-hidden sm:py-20 pointer-events-none min-h-screen xl:h-screen"
     >
       {/* Фоновое изображение — только фон, прозрачность не влияет на контент */}
       <div className="absolute inset-0 w-full h-full bg-[url('/mountain-bg.png')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" />
@@ -199,7 +199,7 @@ export const ProcessSteps = () => {
                 </span>
                 {/* Текст */}
                 <span
-                  className={`text-white w-[188px] text-xs text-start transition-opacity duration-300 ${active === idx ? 'opacity-100' : 'opacity-60'}`}
+                  className={`text-white w-[200px] h-[100px] text-xs text-start transition-opacity duration-300 ${active === idx ? 'opacity-100' : 'opacity-60'}`}
                 >
                   {t(`how-we-work.step_${idx + 1}_text`)}
                 </span>

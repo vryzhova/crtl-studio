@@ -2,7 +2,6 @@
 import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { useTranslation } from 'react-i18next';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SectionTitle, GlitchTypewriterText } from '../components';
 import Image from 'next/image';
 import { useIsWebView } from '@/app/hooks';
@@ -39,7 +38,6 @@ export const HowWeWork = () => {
       scrollTrigger: {
         trigger: isDesktop ? sectionRef.current : lastElementRef.current,
         pin: true,
-        // pinSpacing: false,
         scrub: 2,
         start: 'top top',
         end: 'bottom top',
@@ -48,9 +46,8 @@ export const HowWeWork = () => {
     });
 
     tl.to(morphElement, {
-      // scale: 1,
       duration: 3,
-      rotation: 50,
+      rotation: 70,
     });
     tl.to(
       circleElement,
@@ -59,42 +56,10 @@ export const HowWeWork = () => {
         duration: 7,
       },
       0
-    );
-
-    // // Создаем временную шкалу для анимации
-    // const tl = gsap.timeline({
-    //   scrollTrigger: {
-    //     trigger: isDesktop ? sectionRef.current : lastElementRef.current,
-    //     // pin: sectionRef.current,
-    //     scrub: true,
-    //     start: 'top top',
-    //     end: '+=1000',
-    //     anticipatePin: 1,
-    //   },
-    // });
-
-    // // Анимация увеличения круга
-    // tl.to(
-    //   circleRef.current,
-    //   {
-    //     rotate: 60,
-    //     duration: 2,
-    //     // ease: 'sine.inOut',
-    //   },
-    //   0
-    // ).to(
-    //   morfRef.current,
-    //   {
-    //     width: 2000,
-    //     height: 2000,
-    //     // ease: 'sine.inOut',
-    //   },
-    //   0
-    // );
+    ).to(sectionRef.current, { background: '#141414' });
 
     return () => {
       tl.kill();
-      // ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, [isDesktop, isTelegram]);
 
@@ -181,31 +146,6 @@ export const HowWeWork = () => {
               />
               <div id="circle" ref={circleRef} className="circle overflow-x-hidden"></div>
             </>
-
-            // <div
-            //   ref={morfRef}
-            //   className="hidden"
-            //   style={{
-            //     position: 'absolute',
-            //     top: '50%',
-            //     left: '50%',
-            //     width: '138vmax',
-            //     height: '138vmax',
-            //     transform: 'translate(-50%, -50%) scale(0)',
-            //     borderRadius: '50%',
-            //     backgroundColor: '#00db67',
-            //     overflowX: 'hidden',
-            //   }}
-            // >
-            //   {/*<Image*/}
-            //   {/*  ref={circleRef}*/}
-            //   {/*  width={88}*/}
-            //   {/*  height={88}*/}
-            //   {/*  src="/circle.svg"*/}
-            //   {/*  alt="avatar"*/}
-            //   {/*  className="z-20 w-full h-full rounded-full border-2 absolute -bottom-2 -right-2"*/}
-            //   {/*/>*/}
-            // </div>
           )}
         </div>
 
@@ -220,7 +160,7 @@ export const HowWeWork = () => {
               </p>
             </div>
             {/* Линия-разделитель для mobile */}
-            <div className="w-full h-px bg-gray-elements my-7.5 xl:hidden" />
+            <div ref={lastElementRef} className="w-full h-px bg-gray-elements my-7.5 xl:hidden" />
           </div>
 
           {/* Верхний правый */}
@@ -230,7 +170,7 @@ export const HowWeWork = () => {
               <p className="text-sm text-black leading-relaxed text-center">{t('inside-focus.ai_text')}</p>
             </div>
             {/* Линия-разделитель для mobile */}
-            <div ref={lastElementRef} className="w-full h-px bg-gray-elements my-7.5 xl:hidden" />
+            <div className="w-full h-px bg-gray-elements my-7.5 xl:hidden" />
           </div>
 
           {/* Нижний левый */}
@@ -256,20 +196,6 @@ export const HowWeWork = () => {
         {!isDesktop && (
           <div className="relative w-full h-[227px] flex items-center justify-center">
             <div id="circle" ref={circleRef} className="circle overflow-x-hidden"></div>
-            {/*<div*/}
-            {/*  ref={morfRef}*/}
-            {/*  className="z-20 flex xl:hidden bg-black"*/}
-            {/*  style={{*/}
-            {/*    position: 'absolute',*/}
-            {/*    left: '50%',*/}
-            {/*    transform: 'translate(-50%, 10%)',*/}
-            {/*    width: 88,*/}
-            {/*    height: 88,*/}
-            {/*    borderRadius: '50%',*/}
-            {/*    overflow: 'hidden',*/}
-            {/*    willChange: 'width, height, transform',*/}
-            {/*  }}*/}
-            {/*>*/}
             <Image
               id="morph"
               width={88}
@@ -279,7 +205,6 @@ export const HowWeWork = () => {
               className="object-contain"
               style={{ borderRadius: '50%' }}
             />
-            {/*</div>*/}
           </div>
         )}
       </div>
