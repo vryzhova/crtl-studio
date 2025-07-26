@@ -112,7 +112,7 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           <div className="flex w-full md:w-auto justify-center gap-2.5 mt-4">
             <button
               onClick={prev}
-              className="bg-white bg-opacity-70 p-2 rounded-md shadow text-black"
+              className="bg-white bg-opacity-70 p-2 rounded-md shadow text-black hover:bg-lime-default active:bg-lime-active"
               style={{ width: 40, height: 40 }}
               aria-label="Предыдущий слайд"
             >
@@ -120,7 +120,7 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
             </button>
             <button
               onClick={next}
-              className="bg-white bg-opacity-70 p-2 rounded-md shadow text-black"
+              className="bg-white bg-opacity-70 p-2 rounded-md shadow text-black hover:bg-lime-default active:bg-lime-active"
               style={{ width: 40, height: 40 }}
               aria-label="Следующий слайд"
             >
