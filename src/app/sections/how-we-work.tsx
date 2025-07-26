@@ -43,6 +43,7 @@ export const HowWeWork = () => {
         scrub: 2,
         start: 'top top',
         end: 'bottom top',
+        markers: true,
       },
     });
 
