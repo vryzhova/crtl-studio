@@ -37,12 +37,12 @@ export const Footer = () => {
   const backgroundStyle = isMobile ? 'bg-[url("/bg-footer.svg")]' : 'bg-[url(/footer-bg.svg)]';
 
   return (
-    <footer className="bg-black text-white relative overflow-hidden mx-5 xl:mx-25 md:border-t md:border-gray-elements">
+    <footer className="bg-black text-white relative overflow-hidden xl:mx-25 md:border-t md:border-gray-elements">
       {/* Background pattern */}
       <div className="w-full h-full opacity-20 pointer-events-none z-0 absolute md:bottom-[-30%] xl:bottom-[-10%] bottom-0">
         <div className={`w-full h-full ${backgroundStyle} bg-contain bg-bottom bg-no-repeat`} />
       </div>
-      <div className="relative z-10 flex flex-col md:flex-row md:justify-between py-[110px] w-full gap-8 md:gap-0">
+      <div className="relative z-10 flex flex-col md:flex-row md:justify-between py-12.5 xl:py-[110px] w-full gap-8 md:gap-0">
         {/* Левая часть: ссылки и документы + копирайт */}
         <div className="flex flex-col gap-8 md:gap-12 md:w-1/2">
           {/* Ссылки и документы в одну строку */}

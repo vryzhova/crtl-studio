@@ -140,9 +140,9 @@ body {
         padding: 80px 20px 80px 20px;
     }
 
-    .carousel-container {
+    .inside-container {
         box-sizing: border-box;
-        padding: 103px 170px 103px 170px;
+        padding: 80px 20px 0px 20px;
     }
 }
 
@@ -152,10 +152,11 @@ body {
         padding: 100px 36px 100px 36px;
     }
 
-    .carousel-container {
+    .inside-container {
         box-sizing: border-box;
-        padding: 80px 20px 80px 20px;
+        padding: 100px 36px 100px 36px;
     }
+
 }
 
 @media (min-width: 1280px) and (max-width: 1919px) {
@@ -164,9 +165,9 @@ body {
         padding: 100px 100px 100px 100px;
     }
 
-    .carousel-container {
+    .inside-container {
         box-sizing: border-box;
-        padding: 103px 170px 103px 170px;
+        padding: 100px 100px 100px 100px;
     }
 }
 
@@ -177,9 +178,9 @@ body {
         padding: 180px 312px 180px 312px;
     }
 
-    .carousel-container {
+    .inside-container {
         box-sizing: border-box;
-        padding: 103px 170px 103px 170px;
+        padding: 180px 312px 180px 312px;
     }
 }
 

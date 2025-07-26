@@ -157,20 +157,38 @@ export const ContactForm: React.FC = () => {
         </div>
 
         {/* Бюджет — блок с input и range */}
-        <div className="flex flex-col gap-2 mt-4 px-4">
-          <label className="text-base font-mono tracking-widest text-gray-elements bg-transparent mb-2">
+        <div className="flex flex-col gap-2 mt-4">
+          <label className="text-base font-mono tracking-widest text-gray-elements bg-transparent mb-2 px-7.5">
             {t('contact-form.budget')}
           </label>
           <BudgetSlider min={50000} max={1000000} step={10000} value={budget} onChange={value => setBudget(value)} />
         </div>
         {/* Чекбокс с политикой */}
         <div className="flex items-center gap-3 mt-4">
-          <input
-            type="checkbox"
-            checked={agree}
-            onChange={e => setAgree(e.target.checked)}
-            className="accent-lime-default w-6 h-6 rounded border-2 border-lime-default"
-          />
+          <label className="relative flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              checked={agree}
+              onChange={e => setAgree(e.target.checked)}
+              className="peer sr-only"
+            />
+            <span
+              className="w-6 h-6 rounded-sm border-1 border-lime-default bg-black
+             peer-checked:after:content-['']
+             relative
+             after:absolute
+             after:inset-1/2
+             after:-translate-x-1/2 after:-translate-y-1/2
+             after:w-[6px] after:h-[12px]
+             after:border-r-2 after:border-b-2
+             after:border-lime-default
+             after:rotate-45
+             after:opacity-0
+             peer-checked:after:opacity-100
+             transition"
+            />
+          </label>
+
           <span className="text-lg text-white">
             {t('contact-form.agree')}{' '}
             <a href="/privacy" className="text-lime-default underline">
@@ -179,6 +197,7 @@ export const ContactForm: React.FC = () => {
             .
           </span>
         </div>
+
         <Button
           onClick={handleSubmit}
           type="submit"

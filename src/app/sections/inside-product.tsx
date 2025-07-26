@@ -19,7 +19,7 @@ export const InsideProduct = () => {
         <div className="w-full h-full bg-cube-pattern" />
       </div>
 
-      <div className="own-container relative z-10 w-full">
+      <div className="inside-container max-sm:pb-0 relative z-10 w-full">
         <SectionTitle
           title={t('inside-product.ai_inside_product')}
           hasBorder

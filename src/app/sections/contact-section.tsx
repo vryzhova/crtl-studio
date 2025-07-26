@@ -18,10 +18,7 @@ export const ContactSection: React.FC = () => {
           style={{ transform: 'translateZ(0)' }}
           className="absolute md:max-xl:block hidden h-full w-full top-30 -right-[150px] pointer-events-none z-0"
         >
-          <div
-            className="bg-[url('/ctrl-btn-bg.svg')] w-full h-full bg-no-repeat bg-top-right"
-            // style={{ backgroundSize: '60%' }}
-          />
+          <div className="bg-[url('/ctrl-btn-bg.svg')] w-full h-full bg-no-repeat bg-top-right" />
         </div>
 
         <SectionTitle
@@ -52,7 +49,7 @@ export const ContactSection: React.FC = () => {
             <Image
               src="/ctrl-btn.png"
               alt="ctrl"
-              className="xl:mt-10 select-none levitate justify-self-center"
+              className="select-none levitate justify-self-center"
               draggable={false}
               width={246}
               height={246}

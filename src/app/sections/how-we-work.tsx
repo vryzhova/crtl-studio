@@ -41,7 +41,6 @@ export const HowWeWork = () => {
         scrub: 2,
         start: 'top top',
         end: 'bottom top',
-        markers: true,
       },
     });
 
@@ -83,7 +82,7 @@ export const HowWeWork = () => {
         />
 
         {/* Сетка из 4 блоков desktop */}
-        <div className="hidden grow-2 xl:grid relative w-full grid-cols-2 gap-x-20 gap-y-20">
+        <div className="hidden grow-2 xl:grid relative w-full grid-cols-2 gap-x-18 gap-y-18">
           {/* Вертикальная линия (desktop only) */}
           <div className="hidden xl:block absolute left-1/2 top-0 h-[calc(50%-48px)] w-px bg-gray-elements -translate-x-1/2" />
           <div className="hidden xl:block absolute left-1/2 bottom-0 h-[calc(50%-48px)] w-px bg-gray-elements -translate-x-1/2" />
