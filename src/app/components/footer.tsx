@@ -32,7 +32,7 @@ export const Footer = () => {
       link: '#how',
     },
   ];
-  const docs = ['Документ 1', 'Документ 2'];
+  const docs = [t('footer.document_1'), t('footer.document_2')];
   const { isMobile } = useBreakpoints();
   const backgroundStyle = isMobile ? 'bg-[url("/bg-footer.svg")]' : 'bg-[url(/footer-bg.svg)]';
 

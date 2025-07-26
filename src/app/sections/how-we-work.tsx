@@ -75,7 +75,7 @@ export const HowWeWork = () => {
 
         {/* Заголовок */}
         <GlitchTypewriterText
-          className="mb-10 xl:mb-15 3xl:text-[58px] md:text-[42px] text-[28px] leading-[107%]"
+          className="max-xl:self-start mb-10 xl:mb-15 3xl:text-[58px] md:text-[42px] text-[28px] leading-[107%]"
           lineClassName="xl:text-center title"
           text={t('inside-focus.title')}
           gradient="bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent"
@@ -164,7 +164,7 @@ export const HowWeWork = () => {
 
           {/* Верхний правый */}
           <div className="flex flex-col items-center justify-center w-full">
-            <div className="text-center w-[70vw]">
+            <div className="text-center w-[60vw]">
               <h4 className="subtitle text-center text-base xl:text-xl mb-4">{t('inside-focus.ai_title')}</h4>
               <p className="text-sm text-black leading-relaxed text-center">{t('inside-focus.ai_text')}</p>
             </div>
