@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { getCases } from '../sections/helpers';
 import { useTranslation } from 'react-i18next';
 import dynamic from 'next/dynamic';
+import { useLenis } from '@/app/lenis-context';
 
 const GlitchImageSwitch = dynamic(
   () => import('../components/glitch-image-switch').then(mod => mod.GlitchImageSwitch),
@@ -54,27 +55,18 @@ export const Cases = () => {
   const textStyle =
     '3xl:text-[58px] md:text-[42px] text-[28px] leading-[100%] text-center md:text-left px-5 xl:px-0 xl:text-end font-bold bg-gradient-to-b from-white xl:from-black to-gray-gradient bg-clip-text text-transparent';
 
-  // const lenisRef = useLenis();
+  const lenisRef = useLenis();
 
-  // useEffect(() => {
-  //   if (!lenisRef) return;
-  //   if (activeCase) {
-  //     // @ts-ignore
-  //     lenisRef?.stop();
-  //   } else {
-  //     // @ts-ignore
-  //     // lenisRef?.start();
-  //   }
-  // }, [activeCase, lenisRef]);
-  //
-  // useEffect(() => {
-  //   if (activeCase) {
-  //     console.log('activeCase');
-  //     document.documentElement.classList.add('disable-scroll');
-  //   } else {
-  //     document.documentElement.classList.remove('disable-scroll');
-  //   }
-  // }, [activeCase]);
+  useEffect(() => {
+    if (!lenisRef) return;
+    if (activeCase) {
+      // @ts-ignore
+      lenisRef.current.stop();
+    } else {
+      // @ts-ignore
+      lenisRef.current.start();
+    }
+  }, [activeCase, lenisRef]);
 
   useEffect(() => {
     if (

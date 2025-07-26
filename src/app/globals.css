@@ -184,7 +184,9 @@ body {
     }
 }
 
-html.disable-scroll {
+body.disable-scroll {
+    overflow: hidden;
+    inset: 0;
     overflow: hidden;
 }
 

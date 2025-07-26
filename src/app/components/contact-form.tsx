@@ -7,6 +7,7 @@ import IMask from 'imask';
 import { BudgetSlider, Button } from '@/app/components';
 import CustomSelect from '@/app/components/custom-select';
 import { ThankYouModal } from './thankyou-modal';
+import { useLenis } from '@/app/lenis-context';
 
 export const ContactForm: React.FC = () => {
   const [budget, setBudget] = useState(120000);
@@ -19,6 +20,19 @@ export const ContactForm: React.FC = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const lenisRef = useLenis();
+
+  useEffect(() => {
+    if (!lenisRef) return;
+    if (isThankYouModalOpen) {
+      // @ts-ignore
+      lenisRef.current.stop();
+    } else {
+      // @ts-ignore
+      lenisRef.current.start();
+    }
+  }, [isThankYouModalOpen, lenisRef]);
 
   const { t } = useTranslation();
 
