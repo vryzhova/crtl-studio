@@ -35,15 +35,15 @@ export const Footer = () => {
   const docs = ['Документ 1', 'Документ 2'];
 
   return (
-    <footer className="bg-black text-white pt-8 pb-6 px-4 relative overflow-hidden">
+    <footer className="bg-black text-white relative overflow-hidden mx-5 xl:mx-25 md:border-t md:border-gray-elements">
       {/* Background pattern */}
-      <div className="absolute inset-0 w-full h-full opacity-20 pointer-events-none z-0">
+      <div className="absolute bottom-0 w-full h-full opacity-20 pointer-events-none z-0">
         <div
-          className="w-full h-full bg-[url('/footer-bg.svg')] bg-center bg-no-repeat bg-cover"
-          style={{ backgroundSize: '80%' }}
+          className="w-full h-full bg-[url('/footer-bg.svg')]  bg-bottom bg-no-repeat bg-cover"
+          style={{ backgroundSize: '60%' }}
         />
       </div>
-      <div className="relative z-10 flex flex-col md:flex-row md:justify-between max-w-7xl mx-auto w-full gap-8 md:gap-0">
+      <div className="relative z-10 flex flex-col md:flex-row md:justify-between py-[110px] w-full gap-8 md:gap-0">
         {/* Левая часть: ссылки и документы + копирайт */}
         <div className="flex flex-col gap-8 md:gap-12 md:w-1/2">
           {/* Ссылки и документы в одну строку */}
@@ -96,7 +96,7 @@ export const Footer = () => {
         {/* Правая часть: кнопка и логотип */}
         <div className="flex flex-col gap-6 items-center md:items-end justify-end md:justify-between w-full md:w-auto mt-6 md:mt-0">
           <SecondaryButton
-            className="w-[320px] lg:w-[163px] 2xl:w-[196px] h-[60px] lg:h-[37px] text-sm 2xl:h-[44px]"
+            className="w-[320px] xl:w-[163px] 3xl:w-[196px] h-[60px] xl:h-[37px] text-sm 3xl:h-[44px]"
             onClick={() => {
               const el = document.getElementById('contact');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -105,7 +105,7 @@ export const Footer = () => {
             {t('contact-us')}
           </SecondaryButton>
           <div className="w-full flex justify-center md:justify-end">
-            <div className="relative w-48 h-14 md:w-60 md:h-16">
+            <div className="relative w-[319px] h-[53px]  md:w-[280px] md:h-[45px]  xl:w-[618px] xl:h-[102px]">
               <Image src="/logo.svg" alt="CTRL Studio Logo" fill className="object-contain" />
             </div>
           </div>

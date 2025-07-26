@@ -62,24 +62,21 @@ export const ContactForm: React.FC = () => {
     };
   }, []);
 
-  const leftTopLine = 'absolute left-0 top-0 w-8 h-2.5  border-t border-l border-gray-400 rounded-tl-[8px]';
-  const leftBottomLine = 'absolute left-0 bottom-0 w-8 h-2.5 border-b border-l border-gray-400 rounded-bl-[8px]';
-  const rightTopLine = 'absolute right-0 top-0 w-8 h-2.5 border-t border-r border-gray-400 rounded-tr-[8px]';
-  const rightBottomLine = 'absolute right-0 bottom-0 w-8 h-2.5  border-b border-r border-gray-400 rounded-br-[8px]';
+  const leftTopLine = 'absolute z-10 left-0 top-0 w-8 h-2.5  border-t border-l border-white rounded-tl-[8px]';
+  const leftBottomLine = 'absolute z-10 left-0 bottom-0 w-8 h-2.5 border-b border-l border-white rounded-bl-[8px]';
+  const rightTopLine = 'absolute z-10 right-0 top-0 w-8 h-2.5 border-t border-r border-white rounded-tr-[8px]';
+  const rightBottomLine = 'absolute z-10 right-0 bottom-0 w-8 h-2.5  border-b border-r border-white rounded-br-[8px]';
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-md flex flex-col gap-2.5 bg-transparent p-0 md:gap-4 md:max-w-lg lg:max-w-xl xl:max-w-2xl"
-      >
+      <form onSubmit={handleSubmit} className="w-full flex flex-col gap-2.5 bg-transparent p-0 md:gap-4">
         {/* Имя */}
         <div className="relative flex flex-col sm:flex-row items-center my-2 gap-0 sm:gap-2">
           <div className={leftTopLine} />
           <div className={leftBottomLine} />
           <div className={rightTopLine} />
           <div className={rightBottomLine} />
-          <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative">
+          <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative bg-black">
             <input
               className={`bg-transparent outline-none font-mono text-lg py-1 h-15 w-full pr-16 ${errors.name ? 'text-red-error' : 'text-white'}`}
               type="text"
@@ -103,7 +100,7 @@ export const ContactForm: React.FC = () => {
           <div className={leftBottomLine} />
           <div className={rightTopLine} />
           <div className={rightBottomLine} />
-          <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative">
+          <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative bg-black">
             <input
               className={`bg-transparent outline-none font-mono text-lg py-1 h-15 w-full pr-16 ${errors.phone ? 'text-red-error' : 'text-white'}`}
               type="tel"
@@ -126,9 +123,9 @@ export const ContactForm: React.FC = () => {
           <div className={leftBottomLine} />
           <div className={rightTopLine} />
           <div className={rightBottomLine} />
-          <div className="flex-1 flex flex-col gap-2 pl-8 pr-8">
+          <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative bg-black">
             <input
-              className="bg-transparent outline-none text-white font-mono text-lg py-1 h-15 w-full"
+              className="bg-transparent outline-none text-white font-mono text-lg py-1 h-15 w-full pr-16"
               type="text"
               placeholder={t('contact-form.telegram')}
               value={telegram}
@@ -143,7 +140,7 @@ export const ContactForm: React.FC = () => {
           <div className={leftBottomLine} />
           <div className={rightTopLine} />
           <div className={rightBottomLine} />
-          <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative">
+          <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative bg-black">
             <input
               className={`bg-transparent outline-none font-mono text-lg py-1 h-15 w-full pr-16 ${errors.email ? 'text-red-error' : 'text-white'}`}
               placeholder={t('contact-form.email')}
@@ -185,7 +182,7 @@ export const ContactForm: React.FC = () => {
         <Button
           onClick={handleSubmit}
           type="submit"
-          className="mt-4 w-[320px] lg:w-[244px] 2xl:w-[300px]"
+          className="mt-4 w-[320px] xl:w-[244px] 3xl:w-[300px]"
           disabled={!agree}
         >
           {t('contact-form.submit')}

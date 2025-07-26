@@ -133,13 +133,13 @@ export const ProcessSteps = () => {
     <section
       id="how"
       ref={sectionRef}
-      className="relative bg-black text-white flex flex-col sm:items-center sm:justify-center overflow-hidden sm:py-20 pointer-events-none min-h-screen lg:h-screen"
+      className="relative bg-black text-white flex flex-col sm:items-center sm:justify-center overflow-hidden sm:py-20 pointer-events-none min-h-screen xl:h-screen"
     >
       {/* Фоновое изображение — только фон, прозрачность не влияет на контент */}
       <div className="absolute inset-0 w-full h-full bg-[url('/mountain-bg.svg')] bg-cover bg-center bg-no-repeat pointer-events-none z-0" />
-      <SectionTitle title={t('how-we-work.tag')} position="center" hasBorder />
       {/* Ваша прежняя верстка этапов — не меняю! */}
-      <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center mt-16">
+      <SectionTitle title={t('how-we-work.tag')} position="center" hasBorder />
+      <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center">
         {/* Mobile: горизонтальный таймлайн без карточек */}
         <div className="block sm:hidden w-full relative py-8">
           {/* Горизонтальная линия */}
@@ -195,7 +195,7 @@ export const ProcessSteps = () => {
         {/* Desktop: вертикальный таймлайн */}
         <div className="hidden sm:block w-full">
           <TimelineLineSvg
-            className="absolute lg:left-1/2 left-20 top-0 -translate-x-1/2 z-0 select-none pointer-events-none"
+            className="absolute xl:left-1/2 left-20 top-0 -translate-x-1/2 z-0 select-none pointer-events-none"
             height={640}
             width={1}
           />

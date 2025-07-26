@@ -2,9 +2,10 @@
 
 import { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
+import { useLenis } from './lenis-context';
 
 export default function SmoothScrollWrapper({ children }: { children: React.ReactNode }) {
-  const lenisRef = useRef<Lenis | null>(null);
+  const lenisRef = useLenis();
   const rafRef = useRef<number>(null);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function SmoothScrollWrapper({ children }: { children: React.Reac
       lenisRef.current?.destroy();
       lenisRef.current = null;
     };
-  }, []);
+  }, [lenisRef]);
 
   return <>{children}</>;
 }

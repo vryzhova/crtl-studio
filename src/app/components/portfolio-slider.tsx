@@ -37,11 +37,11 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
   if (!portalRoot) return null;
 
   return createPortal(
-    <div className="fixed h-full w-full inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center p-2 sm:p-4">
+    <div className="fixed h-full w-full inset-0 z-50 bg-black/95 flex items-center justify-center p-2 sm:p-4">
       <div className="relative text-black w-full max-w-6xl max-h-[95vh] rounded-lg overflow-auto shadow-lg p-2 sm:p-6 flex flex-col items-center">
         {/* Мобильная шапка с тайтлом и кнопкой закрытия */}
         <div className="sm:hidden flex justify-between w-full pb-4">
-          <span className="text-2xl font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent text-left mb-2 mt-2">
+          <span className="text-3xl font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent text-left mb-2 mt-2">
             {caseData.title}
           </span>
           <button
@@ -54,7 +54,7 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
             </svg>
           </button>
         </div>
-        <div className="hidden md:flex md:flex-row gap-2 w-full md:w-auto md:m-5 items-center md:items-start lg:hidden">
+        <div className="hidden md:flex md:flex-row gap-2 w-full md:w-auto md:m-5 items-center md:items-start xl:hidden">
           {caseData.tags.map((tag, i) => (
             <div
               key={i}
@@ -66,13 +66,13 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           ))}
         </div>
         <div
-          className="relative w-full flex items-center justify-center bg-black/90 rounded-md min-h-[180px] sm:min-h-[320px] lg:min-h-[480px]"
+          className="relative w-full flex items-center justify-center  rounded-md min-h-[180px] sm:min-h-[320px] xl:min-h-[480px]"
           style={{ maxHeight: '70vh' }}
         >
           {/* Левая стрелка — только на desktop */}
           <button
             onClick={prev}
-            className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 rounded-md shadow text-black hover:bg-lime-default active:bg-lime-active"
+            className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 rounded-md shadow text-black hover:bg-lime-default active:bg-lime-active"
             style={{ width: 40, height: 40 }}
             aria-label="Предыдущий слайд"
           >
@@ -90,7 +90,7 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           {/* Правая стрелка — только на desktop */}
           <button
             onClick={next}
-            className="hidden lg:block absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 rounded-md shadow text-black hover:bg-lime-default active:bg-lime-active"
+            className="hidden xl:block absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 rounded-md shadow text-black hover:bg-lime-default active:bg-lime-active"
             style={{ width: 40, height: 40 }}
             aria-label="Следующий слайд"
           >
@@ -98,7 +98,7 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           </button>
           {/* Кнопка закрытия для desktop — поверх фото, справа сверху, отступ 30px */}
           <button
-            className="hidden sm:flex items-center justify-center right-5 lg:right-25 absolute z-20 bg-white active:text-white text-black border border-black rounded-md p-2 hover:bg-lime-default active:bg-lime-active"
+            className="hidden sm:flex items-center justify-center right-5 xl:right-25 absolute z-20 bg-white active:text-white text-black border border-black rounded-md p-2 hover:bg-lime-default active:bg-lime-active"
             style={{ top: 20, width: 40, height: 40 }}
             onClick={onClose}
             aria-label="Закрыть"
@@ -110,8 +110,8 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           </button>
         </div>
         {/* Стрелки снизу — только на мобильных и tablet до 1024px */}
-        <div className="lg:hidden flex flex-row justify-between items-center w-full">
-          <span className="text-2xl font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent hidden md:block">
+        <div className="xl:hidden flex flex-row justify-between items-center w-full">
+          <span className="text-3xl font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent hidden md:block">
             {caseData.title}
           </span>
           <div className="flex w-full md:w-auto justify-center gap-2.5 mt-4">
@@ -134,7 +134,7 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           </div>
         </div>
         {/* Превью только на desktop >=1024px (lg) */}
-        <div className="hidden lg:flex flex-row gap-2 justify-center items-center w-full overflow-x-auto mt-4 pb-2">
+        <div className="hidden xl:flex flex-row gap-2 justify-center items-center w-full overflow-x-auto mt-4 pb-2">
           {caseData.images.map((src, i) => (
             <button
               key={i}
@@ -154,11 +154,11 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
           ))}
         </div>
         {/* Теги и тайтл (desktop) */}
-        <div className="md:hidden lg:flex flex justify-between flex-wrap gap-3 w-full mt-10 sm:mt-4">
-          <span className="text-2xl font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent hidden md:block">
+        <div className="md:hidden xl:flex flex justify-between flex-wrap gap-3 w-full mt-10 sm:mt-4">
+          <span className="text-3xl font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent hidden md:block">
             {caseData.title}
           </span>
-          <div className="flex flex-col lg:flex-row gap-2 w-full md:w-auto items-center md:items-start">
+          <div className="flex flex-col xl:flex-row gap-2 w-full md:w-auto items-center md:items-start">
             {caseData.tags.map((tag, i) => (
               <div
                 key={i}

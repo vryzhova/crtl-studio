@@ -12,8 +12,8 @@ export function useBreakpoints() {
 
     const queries = {
       isMobile: window.matchMedia('(max-width: 767px)'),
-      isTablet: window.matchMedia('(min-width: 768px) and (max-width: 1023px)'),
-      isDesktop: window.matchMedia('(min-width: 1024px)'),
+      isTablet: window.matchMedia('(min-width: 768px) and (max-width: 1279px)'),
+      isDesktop: window.matchMedia('(min-width: 1280px)'),
     };
 
     const update = () => {

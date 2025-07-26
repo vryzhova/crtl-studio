@@ -16,7 +16,7 @@ export const ProgressElement: React.FC<TProps> = ({ step, idx, activeIndex, prog
 
   return isActive ? (
     <div
-      className={`rounded-xl p-6 bg-black transition-all duration-300 overflow-hidden relative shadow-2xl scale-105 z-10 h-[250px] lg:h-full`}
+      className={`rounded-xl px-5 py-6 bg-black transition-all duration-300 overflow-hidden relative shadow-3xl scale-100 z-10 h-[250px] xl:h-full`}
       onClick={() => !isActive && onClick?.(idx)}
       tabIndex={0}
       role="button"
@@ -43,7 +43,7 @@ export const ProgressElement: React.FC<TProps> = ({ step, idx, activeIndex, prog
       role="button"
       aria-pressed={isActive}
     >
-      <div className="font-bold mb-2 text-lg flex items-center">{step.title}</div>
+      <div className="pl-5 font-bold mb-2 text-lg flex items-center">{step.title}</div>
     </div>
   );
 };

@@ -36,7 +36,7 @@ export const Header = () => {
   return (
     <header className="w-full bg-gradient-to-r from-black/90 to-black/55 text-white">
       {/* Desktop Header */}
-      <div className="max-w-[1440px] h-[64px] mx-auto items-center justify-between px-5 xl:px-25 hidden lg:flex">
+      <div className="max-w-[1440px] h-[64px] mx-auto items-center justify-between px-5 xl:px-25 hidden xl:flex">
         {/* Logo + Divider + Nav */}
         <div className="flex items-center gap-4">
           {/* Logo */}
@@ -83,7 +83,7 @@ export const Header = () => {
           {/* Contact button */}
 
           <SecondaryButton
-            className="w-[320px] lg:w-[163px] 2xl:w-[196px] h-[60px] lg:h-[37px] text-sm 2xl:h-[44px]"
+            className="w-[320px] xl:w-[163px] 3xl:w-[196px] h-[60px] xl:h-[37px] text-sm 3xl:h-[44px]"
             onClick={() => {
               const el = document.getElementById('contact');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -95,12 +95,12 @@ export const Header = () => {
       </div>
 
       {/* Mobile Header */}
-      <div className="flex lg:hidden h-[84px] w-full items-center justify-between px-4">
+      <div className="flex xl:hidden h-[84px] w-full items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 text-lg font-semibold">
           <Image src="./logo.svg" alt="header-logo" width={180} height={29} />
         </Link>
         <button
-          className="lg:hidden flex items-center justify-center w-16 h-16"
+          className="xl:hidden flex items-center justify-center w-16 h-16"
           onClick={() => setMenuOpen(true)}
           aria-label="Открыть меню"
         >
@@ -133,7 +133,7 @@ export const Header = () => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -40, opacity: 0 }}
               transition={{ type: 'tween', duration: 0.38, ease: 'easeInOut' }}
-              className="fixed rounded-md left-0 top-0 z-50 w-full max-w-[1024px] bg-black border border-gray-elements shadow-2xl px-5 pt-5 pb-8  flex flex-col lg:hidden"
+              className="fixed rounded-md left-0 top-0 z-50 w-full max-w-[1024px] bg-black border border-gray-elements shadow-3xl px-5 pt-5 pb-8  flex flex-col xl:hidden"
               style={{ minHeight: 'auto' }}
             >
               <div className="flex items-center justify-between">
@@ -157,7 +157,7 @@ export const Header = () => {
                 </button>
               </div>
               <div className="flex justify-between w-full">
-                <nav className="flex flex-col gap-4 text-base font-medium mb-6 md:mb-0 lg:flex-1">
+                <nav className="flex flex-col gap-4 text-base font-medium mb-6 md:mb-0 xl:flex-1">
                   {navItems.map(item => (
                     <Link
                       key={item.href}
@@ -192,7 +192,7 @@ export const Header = () => {
                   </div>
                   <Link
                     href="#contact"
-                    className="hidden md:block border border-white rounded px-6 py-2 text-sm text-center hover:bg-white hover:text-black transition self-stretch lg:self-start"
+                    className="hidden md:block border border-white rounded px-6 py-2 text-sm text-center hover:bg-white hover:text-black transition self-stretch xl:self-start"
                     onClick={() => setMenuOpen(false)}
                   >
                     {t('contact-us')}
@@ -201,7 +201,7 @@ export const Header = () => {
               </div>
               <Link
                 href="#contact"
-                className=" md:hidden border border-white rounded px-6 py-2 text-sm text-center hover:bg-white hover:text-black transition self-stretch lg:self-start"
+                className=" md:hidden border border-white rounded px-6 py-2 text-sm text-center hover:bg-white hover:text-black transition self-stretch xl:self-start"
                 onClick={() => setMenuOpen(false)}
               >
                 {t('contact-us')}

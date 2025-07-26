@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({ icon, title, description }) => (
           <Image src={icon} alt={title} height={40} width={40} />
         </div>
       </div>
-      <div className="space-y-1 text-white font-inter text-base lg:text-[22px] flex-grow flex flex-col justify-center">
+      <div className="space-y-1 text-white font-inter text-base xl:text-[22px] flex-grow flex flex-col justify-center">
         {description}
       </div>
     </div>
@@ -51,11 +51,11 @@ export const WhoWeAreFor = () => {
   ];
 
   return (
-    <section id="clients" className="min-h-screen relative py-20 bg-black text-white">
+    <section id="clients" className="relative py-20 bg-black text-white">
       <SectionTitle title={t('who-we-are-for.tag')} position="center" hasBorder />
 
-      <div className="container mx-auto px-4 mt-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <div className="own-container">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {cards.map((card, index) => (
             <Card key={index} icon={card.icon} title={card.title} description={card.description} />
           ))}

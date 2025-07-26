@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Roboto_Mono, Inter_Tight } from 'next/font/google';
 import { I18nProvider } from './i18n-provider';
 import SmoothScrollWrapper from './smooth-scroll-wrapper';
+import { LenisProvider } from './lenis-context';
 import './globals.css';
 
 const inter = Inter({
@@ -44,10 +45,12 @@ export default function RootLayout({
         <link rel="preload" href="/bg-video.webp" as="image/webp" />
       </head>
       <body className={` ${inter.variable} ${robotoMono.variable} ${interTight.variable} antialiased`}>
-        <I18nProvider>
-          <SmoothScrollWrapper>{children}</SmoothScrollWrapper>
-        </I18nProvider>
-        <div id="modal-root" />
+        <LenisProvider>
+          <I18nProvider>
+            <SmoothScrollWrapper>{children}</SmoothScrollWrapper>
+          </I18nProvider>
+          <div id="modal-root" />
+        </LenisProvider>
       </body>
     </html>
   );
