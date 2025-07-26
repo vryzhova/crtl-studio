@@ -21,7 +21,7 @@ export const GlitchImageSwitch: React.FC<Props> = ({ imageSrc, alt, active, prio
   const disableGlitch = isWebView || isMobile;
 
   const wrapperClass = clsx('relative overflow-hidden w-full h-full', className);
-  const imageClass = 'absolute inset-0 transition-opacity duration-700 ease-in-out w-[60vw] lg:h-[60vh] h-[30vh]';
+  const imageClass = 'absolute inset-0 transition-opacity duration-700 ease-in-out w-[65vw] lg:h-[60vh] h-[25vh]';
   const visible = 'opacity-100 z-10';
   const hidden = 'opacity-0 z-0';
 

@@ -219,10 +219,10 @@ export const Cases = () => {
       <div
         id="gallery"
         ref={contentRef}
-        className="relative h-screen overflow-hidden z-10 flex flex-col xl:justify-center "
+        className="relative own-container h-screen overflow-hidden z-10 flex flex-col xl:justify-center"
       >
         {/* Header */}
-        <div className="w-full flex xl:justify-between flex-col xl:flex-row items-start xl:px-25 px-4 gap-5 pt-12 xl:pt-0 pb-12.5 z-20 pointer-events-none">
+        <div className="w-full flex xl:justify-between flex-col xl:flex-row items-start gap-5 pb-12.5 z-20 pointer-events-none">
           <h2 className="3xl:text-[58px] md:text-[42px] text-[28px] leading-[100%] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent">
             {t('cases.title')}
           </h2>
@@ -237,11 +237,7 @@ export const Cases = () => {
         </div>
 
         {/* Horizontal scroll */}
-        <div
-          ref={wrapperRef}
-          className="flex xl:mt-0  justify-center items-center"
-          style={{ width: `${cases.length * 60}vw` }}
-        >
+        <div ref={wrapperRef} className="flex justify-center items-center" style={{ width: `${cases.length * 65}vw` }}>
           {cases.map((item, index) => {
             const setRef = (el: HTMLDivElement) => (itemRefs.current[index] = el);
             return (
@@ -249,7 +245,7 @@ export const Cases = () => {
                 key={item.id}
                 // @ts-ignore
                 ref={setRef}
-                className="w-[60vw] lg:h-[60vh] h-[30vh] flex items-center justify-center cursor-pointer"
+                className="w-[65vw] lg:h-[60vh] h-[25vh] flex items-center justify-center cursor-pointer"
                 onClick={() => openGallery(item)}
               >
                 <GlitchImageSwitch
@@ -267,7 +263,7 @@ export const Cases = () => {
         {/* Case info + arrow */}
         <div
           ref={caseInfoRef}
-          className="sticky mt-6.5 xl:right-20 bottom-20 flex justify-center gap-2 h-[70px] z-30 mx-auto xl:mx-0"
+          className="sticky mt-6.5 bottom-5 flex justify-center gap-2 h-[70px] z-30 mx-auto xl:mx-0"
           style={{ position: 'sticky', marginLeft: 'auto', width: 'fit-content' }}
         >
           <div className="p-6 flex items-center justify-between bg-lime-default rounded-md xl:w-[540px] md:w-[620px] w-[250px] cursor-default select-none">

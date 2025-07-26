@@ -139,6 +139,11 @@ body {
         box-sizing: border-box;
         padding: 80px 20px 80px 20px;
     }
+
+    .carousel-container {
+        box-sizing: border-box;
+        padding: 103px 170px 103px 170px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -146,12 +151,22 @@ body {
         box-sizing: border-box;
         padding: 100px 36px 100px 36px;
     }
+
+    .carousel-container {
+        box-sizing: border-box;
+        padding: 80px 20px 80px 20px;
+    }
 }
 
-@media (min-width: 1024px) and (max-width: 1919px) {
+@media (min-width: 1280px) and (max-width: 1919px) {
     .own-container {
         box-sizing: border-box;
         padding: 100px 100px 100px 100px;
+    }
+
+    .carousel-container {
+        box-sizing: border-box;
+        padding: 103px 170px 103px 170px;
     }
 }
 
@@ -160,6 +175,11 @@ body {
     .own-container {
         box-sizing: border-box;
         padding: 180px 312px 180px 312px;
+    }
+
+    .carousel-container {
+        box-sizing: border-box;
+        padding: 103px 170px 103px 170px;
     }
 }
 
