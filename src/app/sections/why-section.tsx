@@ -76,7 +76,7 @@ export const WhySection: React.FC = () => {
               text={t('why-us.subtitle')}
               gradient="bg-gradient-to-b from-black to-gray-gradient bg-clip-text text-transparent"
             />
-            <div className="flex flex-col gap-6 xl:h-[310px]">
+            <div className="flex flex-col gap-6 h-[404px] xl:h-[310px]">
               {steps.map((step, idx) => {
                 const isActive = idx === activeIndex;
 

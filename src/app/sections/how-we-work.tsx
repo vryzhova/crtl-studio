@@ -55,7 +55,7 @@ export const HowWeWork = () => {
         duration: 7,
       },
       0
-    ).to(sectionRef.current, { background: '#141414' });
+    ).to(sectionRef.current, { background: '#141414', opacity: 0 });
 
     return () => {
       tl.kill();
