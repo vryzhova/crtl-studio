@@ -37,7 +37,7 @@ export const Footer = () => {
   const backgroundStyle = isMobile ? 'bg-[url("/bg-footer.svg")]' : 'bg-[url(/footer-bg.svg)]';
 
   return (
-    <footer className="bg-black text-white relative overflow-hidden xl:mx-25 md:border-t md:border-gray-elements">
+    <footer className="bg-black text-white relative overflow-hidden mx-5 md:mx-[36px] xl:mx-25 md:border-t md:border-gray-elements">
       {/* Background pattern */}
       <div className="w-full h-full opacity-20 pointer-events-none z-0 absolute md:bottom-[-30%] xl:bottom-[-10%] bottom-0">
         <div className={`w-full h-full ${backgroundStyle} bg-contain bg-bottom bg-no-repeat`} />

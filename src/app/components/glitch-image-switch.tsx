@@ -16,9 +16,9 @@ type Props = {
 
 export const GlitchImageSwitch: React.FC<Props> = ({ imageSrc, alt, active, priority = false, className = '' }) => {
   const isWebView = useIsWebView();
-  const { isMobile } = useBreakpoints();
+  const { isMobile, isTablet } = useBreakpoints();
 
-  const disableGlitch = isWebView || isMobile;
+  const disableGlitch = isWebView || isMobile || isTablet;
 
   const wrapperClass = clsx('relative overflow-hidden w-full h-full', className);
   const imageClass = 'absolute inset-0 transition-opacity duration-700 ease-in-out w-[65vw] lg:h-[60vh] h-[25vh]';
