@@ -16,9 +16,5 @@ export const useLenis = () => {
 
 export const LenisProvider = ({ children }: { children: React.ReactNode }) => {
   const lenisRef = useRef<Lenis | null>(null);
-  return (
-    <LenisContext.Provider value={{ lenisRef }}>
-      {children}
-    </LenisContext.Provider>
-  );
+  return <LenisContext.Provider value={{ lenisRef }}>{children}</LenisContext.Provider>;
 };

@@ -31,6 +31,7 @@ export const GlitchOverlay = ({ imageSrc, intensity = 12, className }: Props) =>
 
     return () => {
       resizeObserver.disconnect();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       animationRef.current?.kill();
     };
   }, [handleResize]);
@@ -107,6 +108,7 @@ export const GlitchOverlay = ({ imageSrc, intensity = 12, className }: Props) =>
     }
 
     return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       animationRef.current?.kill();
     };
   }, [imageSrc, dimensions, drawGlitch]);
@@ -114,6 +116,7 @@ export const GlitchOverlay = ({ imageSrc, intensity = 12, className }: Props) =>
   return (
     <div ref={containerRef} className={`relative w-full h-full ${className ?? ''}`}>
       {/* Предзагрузка изображения без отображения */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={imageSrc}
         alt=""
