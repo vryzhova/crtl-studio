@@ -66,10 +66,10 @@ export const HowWeWork = () => {
     <section
       ref={sectionRef}
       id="how-we-work"
-      className="relative h-full xl:h-screen text-black bg-white overflow-hidden w-full"
+      className="relative h-full xl:h-screen text-black bg-white overflow-hidden w-full xl:pt-[80px]"
     >
       {/* Ваш контент */}
-      <div ref={contentRef} className="own-container h-full flex flex-col items-center relative z-10">
+      <div ref={contentRef} className="work-container h-full grow flex flex-col items-center relative z-10">
         {/* Чип */}
         <SectionTitle title={t('inside-focus.tag')} position="center" />
 
@@ -82,7 +82,7 @@ export const HowWeWork = () => {
         />
 
         {/* Сетка из 4 блоков desktop */}
-        <div className="hidden grow-2 xl:grid relative w-full grid-cols-2 gap-x-18 gap-y-18">
+        <div className="hidden grow h-full xl:grid relative w-full grid-cols-2 gap-x-18 gap-y-18">
           {/* Вертикальная линия (desktop only) */}
           <div className="hidden xl:block absolute left-1/2 top-0 h-[calc(50%-48px)] w-px bg-gray-elements -translate-x-1/2" />
           <div className="hidden xl:block absolute left-1/2 bottom-0 h-[calc(50%-48px)] w-px bg-gray-elements -translate-x-1/2" />

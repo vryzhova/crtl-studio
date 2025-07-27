@@ -144,6 +144,11 @@ body {
         box-sizing: border-box;
         padding: 80px 20px 0 20px;
     }
+
+    .work-container {
+        box-sizing: border-box;
+        padding: 80px 20px 80px 20px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1279px) {
@@ -157,6 +162,10 @@ body {
         padding: 100px 36px 100px 36px;
     }
 
+    .work-container {
+        box-sizing: border-box;
+        padding: 100px 36px 100px 36px;
+    }
 }
 
 @media (min-width: 1280px) and (max-width: 1919px) {
@@ -168,6 +177,11 @@ body {
     .inside-container {
         box-sizing: border-box;
         padding: 100px 100px 100px 100px;
+    }
+
+    .work-container {
+        box-sizing: border-box;
+        padding: 0 100px 100px 100px;
     }
 }
 
@@ -182,12 +196,11 @@ body {
         box-sizing: border-box;
         padding: 180px 312px 180px 312px;
     }
-}
 
-body.disable-scroll {
-    overflow: hidden;
-    inset: 0;
-    overflow: hidden;
+    .work-container {
+        box-sizing: border-box;
+        padding: 0 312px 120px 312px;
+    }
 }
 
 #circle {
