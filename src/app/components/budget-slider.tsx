@@ -34,17 +34,20 @@ export const BudgetSlider: React.FC<BudgetSliderProps> = ({
         value={value}
         onChange={e => onChange(Number(e.target.value))}
         className={`
-          w-full custom-range appearance-none h-0.5 bg-gray-elements rounded-lg
-          [&::-webkit-slider-thumb]:appearance-none
-          [&::-webkit-slider-thumb]:w-5
-          [&::-webkit-slider-thumb]:h-5
-          [&::-webkit-slider-thumb]:bg-lime-default
-          [&::-webkit-slider-thumb]:rounded-full
-          [&::-webkit-slider-thumb]:border-2
-          [&::-webkit-slider-thumb]:border-lime-default
-          [&::-webkit-slider-thumb]:cursor-pointer
-          accent-lime-default
-        `}
+    w-full appearance-none h-0.5 rounded-lg
+    bg-gray-elements
+    [&::-webkit-slider-thumb]:appearance-none
+    [&::-webkit-slider-thumb]:w-2.5
+    [&::-webkit-slider-thumb]:h-2.5
+    [&::-webkit-slider-thumb]:bg-lime-default
+    [&::-webkit-slider-thumb]:rounded-full
+    [&::-webkit-slider-thumb]:border-2
+    [&::-webkit-slider-thumb]:border-lime-default
+    [&::-webkit-slider-thumb]:cursor-pointer
+  `}
+        style={{
+          background: `linear-gradient(to right, #CEF17B ${((value - min) / (max - min)) * 100}%, #808080 0%)`,
+        }}
       />
     </div>
   );
