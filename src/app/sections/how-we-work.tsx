@@ -37,7 +37,7 @@ export const HowWeWork = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: isDesktop ? sectionRef.current : lastElementRef.current,
-        pin: true,
+        pin: isDesktop,
         scrub: 2,
         start: 'top top',
         end: 'bottom top',
@@ -56,6 +56,13 @@ export const HowWeWork = () => {
       },
       0
     ).to(sectionRef.current, { background: '#141414', opacity: 0 });
+
+    const onResize = () => {
+      ScrollTrigger.refresh(); // пересчитать размеры ScrollTrigger
+    };
+
+    window.addEventListener('resize', onResize);
+    window.removeEventListener('resize', onResize);
 
     return () => {
       tl.kill();
@@ -159,11 +166,11 @@ export const HowWeWork = () => {
               </p>
             </div>
             {/* Линия-разделитель для mobile */}
-            <div ref={lastElementRef} className="w-full h-px bg-gray-elements my-7.5 xl:hidden" />
+            <div className="w-full h-px bg-gray-elements my-7.5 xl:hidden" />
           </div>
 
           {/* Верхний правый */}
-          <div className="flex flex-col items-center justify-center w-full">
+          <div ref={lastElementRef} className="flex flex-col items-center justify-center w-full">
             <div className="text-center w-[60vw]">
               <h4 className="subtitle text-center text-base xl:text-xl mb-4">{t('inside-focus.ai_title')}</h4>
               <p className="text-sm text-black leading-relaxed text-center">{t('inside-focus.ai_text')}</p>
