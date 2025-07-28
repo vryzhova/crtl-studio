@@ -59,7 +59,7 @@ const CustomSelect: React.FC<TProps> = ({ onChange }) => {
       {/* Основной селект */}
       <div className={`flex-1 flex flex-col gap-2 pl-8 pr-8 w-full cursor-pointer bg-black`} onClick={toggleDropdown}>
         <div className="relative py-3 border-e-gray-elements">
-          <span className={`text-lg font-mono ${selectedOption ? 'text-white' : 'text-gray-elements'}`}>
+          <span className="text-lg font-mono text-white">
             {selectedOption ? selectedOption.label : t('contact-form.contact_method')}
           </span>
         </div>
@@ -67,12 +67,12 @@ const CustomSelect: React.FC<TProps> = ({ onChange }) => {
 
       {/* Стрелка (как в вашей верстке) */}
       <svg
-        className={`absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-lime-default pointer-events-none transition-transform ${isOpen ? 'rotate-180' : ''}`}
-        fill="none"
+        className={`absolute right-4 top-1/2 -translate-y-1/2 w-4.5 h-4 text-lime-default pointer-events-none transition-transform ${isOpen ? 'rotate-180' : ''}`}
         viewBox="0 0 24 24"
-        stroke="currentColor"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        <path d="M6 9L12 15L18 9H6Z" />
       </svg>
 
       {/* Выпадающее меню */}

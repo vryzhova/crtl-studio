@@ -8,7 +8,8 @@ import { SectionTitle, GlitchTypewriterText, Button } from '../components';
 
 export const InsideProduct = () => {
   const { t } = useTranslation();
-  const { isDesktop } = useBreakpoints();
+  const { isDesktop, isMobile } = useBreakpoints();
+  const title = isMobile ? t('inside-product.title_mobile') : t('inside-product.title');
   return (
     <section className="relative flex justify-center items-center bg-black text-white overflow-hidden">
       {/* Background pattern */}
@@ -30,7 +31,7 @@ export const InsideProduct = () => {
           <div>
             <GlitchTypewriterText
               className="xl:pt-0 max-w-[100vw] 3xl:text-[58px] md:text-[42px] text-[28px] leading-[107%]"
-              text={t('inside-product.title')}
+              text={title}
               gradient="bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent"
               lineClassName="title"
             />

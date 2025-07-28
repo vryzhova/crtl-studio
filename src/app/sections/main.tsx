@@ -1,25 +1,43 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Header, Button, GlitchTypewriterText } from '../components';
 
 export const MainSection: React.FC = () => {
   const { t } = useTranslation();
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    if (videoRef.current && videoRef.current.paused) {
+      videoRef.current.play().catch(e => {
+        console.warn('Autoplay blocked or delayed:', e);
+      });
+    }
+  }, []);
+
   return (
     <section className="relative w-full text-white overflow-hidden">
-      <div
-        className="absolute inset-0 w-full h-full bg-black z-0 flex items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: 'url("/bg-image.jpg")' }}
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster="/bg-image.webp"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/bg-video.webp" alt="Animated background" className="object-cover w-full h-full" />
-      </div>
+        <source src="/bg-video.mp4" type="video/mp4" />
+        <source src="/bg-video.webm" type="video/webm" />
+        Your browser does not support the video tag.
+      </video>
+      <div className="pointer-events-none absolute inset-0 z-10 bg-transparent" />
+
       {/* Content */}
       <div className="relative flex flex-col md:min-h-screen">
         <Header />
         <div className="container mx-auto flex flex-1 justify-center items-center pt-[160px] pb-[120px] xl:pt-20 xl:pb-0">
-          <div className="relative z-10 text-center px-6 max-w-3xl mx-auto flex flex-col justify-center items-center ">
+          <div className="relative z-10 text-center px-5 max-w-3xl mx-auto flex flex-col justify-center items-center ">
             <GlitchTypewriterText
               className="xl:pt-0 text-[36px] md:text-[70px] 3xl:text-[80px] leading-[107%]"
               text={t('main.title')}
