@@ -1,14 +1,17 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { useBreakpoints } from '@/app/hooks';
 import { SecondaryButton } from '@/app/components/secondary-btn';
+import i18n from 'i18next';
+import { useLenis } from '@/app/lenis-context';
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { t } = useTranslation();
+  const lang = i18n.language;
+  const lenisRef = useLenis();
 
   const links = [
     {
@@ -32,9 +35,31 @@ export const Footer = () => {
       link: '#how',
     },
   ];
-  const docs = [t('footer.document_1'), t('footer.document_2')];
+  const docs = [
+    {
+      title: t('footer.document_1'),
+      linkEn: '/Privacy_Policy.pdf',
+      linkRu: '/Политика_конфиденциальности.pdf',
+    },
+    {
+      title: t('footer.document_2'),
+      linkRu: '/Пользовательское_Соглашение.pdf',
+      linkEn: '/Terms_and_Conditions.pdf',
+    },
+  ];
   const { isMobile } = useBreakpoints();
   const backgroundStyle = isMobile ? 'bg-[url("/bg-footer.svg")]' : 'bg-[url(/footer-bg.svg)]';
+
+  // @ts-ignore
+  const handleClick = to => {
+    const target = document.querySelector(to);
+    if (target && lenisRef.current) {
+      lenisRef.current.scrollTo(target, {
+        offset: 0,
+        duration: 1.2,
+      });
+    }
+  };
 
   return (
     <footer className="bg-black text-white relative overflow-hidden mx-5 md:mx-[36px] xl:mx-25 md:border-t md:border-gray-elements">
@@ -52,12 +77,12 @@ export const Footer = () => {
               <ul className="space-y-2">
                 {links.map((item, idx) => (
                   <li key={idx}>
-                    <Link
-                      href={item.link}
+                    <button
+                      onClick={() => handleClick(item.link)}
                       className="hover:text-lime-default active:text-lime-active transition-colors text-base font-normal whitespace-nowrap"
                     >
                       {item.title}
-                    </Link>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -69,12 +94,14 @@ export const Footer = () => {
               <ul className="space-y-2">
                 {docs.map((item, idx) => (
                   <li key={idx}>
-                    <Link
-                      href="#"
-                      className="hover:text-lime-default active:text-lime-active transition-colors text-base font-normal whitespace-nowrap"
+                    <a
+                      href={lang === 'en' ? item.linkEn : item.linkRu}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-lime-default active:text-lime-active transition-colors text-base font-normal break-words"
                     >
-                      {item}
-                    </Link>
+                      {item.title}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -82,12 +109,8 @@ export const Footer = () => {
           </div>
           {/* Копирайт */}
           <div className="text-left text-white text-base leading-tight mt-2 md:mt-8">
-            <p>
-              {t('footer.made_by')} <span className="font-semibold">Business Art</span>
-            </p>
             <p className="mt-1">
-              {currentYear} © CTRL Studio.
-              {isMobile && <br />}
+              {currentYear} © CTRL Studio. {isMobile && <br />}
               {t('footer.rights')}
             </p>
           </div>

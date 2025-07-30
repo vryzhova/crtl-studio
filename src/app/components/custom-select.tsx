@@ -65,7 +65,10 @@ const CustomSelect: React.FC<TProps> = ({ onChange }) => {
       />
 
       {/* Основной селект */}
-      <div className={`flex-1 flex flex-col gap-2 pl-8 pr-8 w-full cursor-pointer bg-black`} onClick={toggleDropdown}>
+      <div
+        className={`flex-1 flex flex-col justify-center gap-2 pl-8 pr-8 w-full cursor-pointer bg-black h-15`}
+        onClick={toggleDropdown}
+      >
         <div className="relative py-3 border-e-gray-elements">
           <span className="text-lg font-mono text-white">
             {selectedOption ? selectedOption.label : t('contact-form.contact_method')}

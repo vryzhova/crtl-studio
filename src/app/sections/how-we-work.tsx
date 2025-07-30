@@ -38,7 +38,7 @@ export const HowWeWork = () => {
       scrollTrigger: {
         trigger: isDesktop ? sectionRef.current : lastElementRef.current,
         pin: isDesktop,
-        scrub: 2,
+        scrub: 1,
         start: 'top top',
         end: 'bottom top',
       },

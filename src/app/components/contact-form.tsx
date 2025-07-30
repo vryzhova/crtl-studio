@@ -219,8 +219,9 @@ export const ContactForm: React.FC = () => {
               className="peer sr-only"
             />
             <span
-              className="w-6 h-6 rounded-sm border-1 border-lime-default bg-black
+              className="w-6 h-6 rounded-sm border-1 border-white bg-black
              peer-checked:after:content-['']
+             peer-checked:border-lime-default
              relative
              after:absolute
              after:inset-1/2

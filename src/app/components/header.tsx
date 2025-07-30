@@ -8,14 +8,15 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SecondaryButton } from '@/app/components';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { useLenis } from '@/app/lenis-context';
 
 export const Header = () => {
   const [locale, setLocale] = useState<'ru' | 'en'>('ru');
   const [menuOpen, setMenuOpen] = useState(false);
   const { i18n, t } = useTranslation();
+  const lenisRef = useLenis();
 
   const toggleLanguage = (lang: 'ru' | 'en') => {
-    console.log(lang);
     setLocale(lang);
     i18n.changeLanguage(lang);
     i18n.changeLanguage(lang).then(() => {
@@ -23,6 +24,17 @@ export const Header = () => {
         ScrollTrigger.refresh();
       }, 100); // дать время на изменение текста и перерендер
     });
+  };
+
+  // @ts-ignore
+  const handleClick = to => {
+    const target = document.querySelector(to);
+    if (target && lenisRef.current) {
+      lenisRef.current.scrollTo(target, {
+        offset: 0,
+        duration: 1.2,
+      });
+    }
   };
 
   const navItems = [
@@ -48,13 +60,13 @@ export const Header = () => {
           {/* Navigation */}
           <nav className="flex gap-4 text-sm font-medium">
             {navItems.map(item => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="hover:text-lime-default active:text-lime-active scroll-smooth transition"
+              <button
+                key={item.label}
+                onClick={() => handleClick(item.href)}
+                className="hover:text-lime-default active:text-lime-active transition-colors text-base font-normal whitespace-nowrap"
               >
                 {item.label}
-              </Link>
+              </button>
             ))}
           </nav>
         </div>
