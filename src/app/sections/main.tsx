@@ -18,6 +18,10 @@ export const MainSection: React.FC = () => {
 
   return (
     <section className="relative w-full text-white overflow-hidden">
+      <div className="absolute inset-0 w-full h-full bg-black z-0 flex items-center justify-center bg-cover bg-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/bg-image.webp" alt="Animated background" className="object-cover w-full h-full" />
+      </div>
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover z-0"
