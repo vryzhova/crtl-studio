@@ -74,19 +74,25 @@ export const Header = () => {
           {/* Language switch */}
           <div className="flex gap-1 overflow-hidden text-sm">
             <button
-              className={clsx('px-3 py-1 border border-white rounded hover:bg-lime-default h-[37px]', {
-                'bg-white text-black': locale === 'ru',
-                'hover:text-black': locale !== 'ru',
-              })}
+              className={clsx(
+                'px-3 py-1 border hover:border-lime-default border-white rounded hover:bg-lime-default h-[37px]',
+                {
+                  'bg-white text-black': locale === 'ru',
+                  'hover:text-black': locale !== 'ru',
+                }
+              )}
               onClick={() => toggleLanguage('ru')}
             >
               RU
             </button>
             <button
-              className={clsx('px-3 py-1 border border-white rounded hover:bg-lime-default h-[37px]', {
-                'bg-white text-black': locale === 'en',
-                'hover:text-black': locale !== 'en',
-              })}
+              className={clsx(
+                'px-3 py-1 border hover:border-lime-default border-white rounded hover:bg-lime-default h-[37px]',
+                {
+                  'bg-white text-black': locale === 'en',
+                  'hover:text-black': locale !== 'en',
+                }
+              )}
               onClick={() => toggleLanguage('en')}
             >
               EN
