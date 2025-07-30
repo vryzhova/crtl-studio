@@ -44,7 +44,6 @@ export const Cases = () => {
   const caseNumbersRef = useRef<HTMLHeadingElement>(null);
   const businessesTextRef = useRef<HTMLHeadingElement>(null);
   const caseInfoRef = useRef<HTMLDivElement>(null);
-  // const { isDesktop } = useBreakpoints();
 
   const [activeCase, setActiveCase] = useState<Case | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);

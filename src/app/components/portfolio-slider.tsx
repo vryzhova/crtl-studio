@@ -38,16 +38,16 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
       <div className="relative text-black w-full max-h-[95vh] mx-5 md:mx-[36px] xl:mx-[170px] rounded-lg shadow-lg p-2 sm:p-0 flex flex-col items-center max-w-[1100px]">
         {/* Мобильная шапка с тайтлом и кнопкой закрытия */}
         <div className="sm:hidden flex justify-between w-full pb-4">
-          <span className="text-3xl font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent text-left mb-2 mt-2">
+          <span className="text-[28px] font-bold bg-gradient-to-b from-white to-text-grad-dbg bg-clip-text text-transparent text-left">
             {caseData.title}
           </span>
           <button
-            className="absolute h-10 w-10 right-4 text-white border border-white z-20 rounded-md p-2 hover:bg-lime-default active:bg-lime-active flex items-center justify-center"
+            className="absolute h-10 w-10 right-4 text-white border border-0.5 border-white z-20 rounded-md p-2 hover:bg-lime-default active:bg-lime-active flex items-center justify-center"
             onClick={onClose}
           >
             <svg width="26.43" height="26.43" viewBox="0 0 26.43 26.43" fill="none">
-              <line x1="4" y1="4" x2="22.43" y2="22.43" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" />
-              <line x1="22.43" y1="4" x2="4" y2="22.43" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" />
+              <line x1="4" y1="4" x2="22.43" y2="22.43" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
+              <line x1="22.43" y1="4" x2="4" y2="22.43" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </button>
         </div>
@@ -157,7 +157,7 @@ export const CaseCarousel = ({ caseData, onClose }: Props) => {
             {caseData.tags.map((tag, i) => (
               <div
                 key={i}
-                className="bg-black flex justify-center items-center px-3 py-1 text-sm rounded-full text-lime-default border border-lime-default"
+                className=" h-[44px] flex justify-center items-center px-3 py-1 text-sm rounded-full text-lime-default border border-lime-default"
                 style={{ minWidth: 160, textAlign: 'center' }}
               >
                 {tag}
