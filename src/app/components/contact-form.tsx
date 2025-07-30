@@ -76,20 +76,28 @@ export const ContactForm: React.FC = () => {
     };
   }, []);
 
-  const leftTopLine = 'absolute z-10 left-0 top-0 w-8 h-2.5  border-t border-l border-white rounded-tl-[8px]';
-  const leftBottomLine = 'absolute z-10 left-0 bottom-0 w-8 h-2.5 border-b border-l border-white rounded-bl-[8px]';
-  const rightTopLine = 'absolute z-10 right-0 top-0 w-8 h-2.5 border-t border-r border-white rounded-tr-[8px]';
-  const rightBottomLine = 'absolute z-10 right-0 bottom-0 w-8 h-2.5  border-b border-r border-white rounded-br-[8px]';
+  const leftTopLine = 'absolute z-10 left-0 top-0 w-8 h-2.5  border-t border-l rounded-tl-[8px]';
+  const leftBottomLine = 'absolute z-10 left-0 bottom-0 w-8 h-2.5 border-b border-l rounded-bl-[8px]';
+  const rightTopLine = 'absolute z-10 right-0 top-0 w-8 h-2.5 border-t border-r rounded-tr-[8px]';
+  const rightBottomLine = 'absolute z-10 right-0 bottom-0 w-8 h-2.5  border-b border-r rounded-br-[8px]';
 
   return (
     <>
       <form onSubmit={handleSubmit} className="w-full flex flex-col gap-2.5 bg-transparent p-0 md:gap-4">
         {/* Имя */}
-        <div className="relative flex flex-col sm:flex-row items-center my-2 gap-0 sm:gap-2">
-          <div className={leftTopLine} />
-          <div className={leftBottomLine} />
-          <div className={rightTopLine} />
-          <div className={rightBottomLine} />
+        <div className="group relative flex flex-col sm:flex-row items-center my-2 gap-0 sm:gap-2">
+          <div
+            className={`transition-all duration-300 ${leftTopLine} ${name ? 'border-lime-default' : 'border-white'}  group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
+          <div
+            className={`transition-all duration-300 ${leftBottomLine} ${name ? 'border-lime-default' : 'border-white'}  group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
+          <div
+            className={`transition-all duration-300 ${rightTopLine} ${name ? 'border-lime-default' : 'border-white'}  group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
+          <div
+            className={`transition-all duration-300 ${rightBottomLine} ${name ? 'border-lime-default' : 'border-white'}  group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
           <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative bg-black">
             <input
               className={`bg-transparent outline-none font-mono text-lg py-1 h-15 w-full pr-16 ${errors.name ? 'text-red-error' : 'text-white'}`}
@@ -109,11 +117,19 @@ export const ContactForm: React.FC = () => {
         {/* Тип связи */}
         <CustomSelect onChange={setContactType} />
 
-        <div className="relative flex flex-col sm:flex-row items-center my-2 gap-0 sm:gap-2">
-          <div className={leftTopLine} />
-          <div className={leftBottomLine} />
-          <div className={rightTopLine} />
-          <div className={rightBottomLine} />
+        <div className="relative group flex flex-col sm:flex-row items-center my-2 gap-0 sm:gap-2">
+          <div
+            className={`transition-all duration-300 ${leftTopLine} ${phone ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
+          <div
+            className={`transition-all duration-300 ${leftBottomLine} ${phone ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
+          <div
+            className={`transition-all duration-300 ${rightTopLine} ${phone ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
+          <div
+            className={`transition-all duration-300 ${rightBottomLine} ${phone ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
           <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative bg-black">
             <input
               className={`bg-transparent outline-none font-mono text-lg py-1 h-15 w-full pr-16 ${errors.phone ? 'text-red-error' : 'text-white'}`}
@@ -131,12 +147,20 @@ export const ContactForm: React.FC = () => {
           </div>
         </div>
 
-        <div className="relative flex flex-col sm:flex-row items-center my-2 gap-0 sm:gap-2">
+        <div className="group relative flex flex-col sm:flex-row items-center my-2 gap-0 sm:gap-2">
           {/*TELEGRAM*/}
-          <div className={leftTopLine} />
-          <div className={leftBottomLine} />
-          <div className={rightTopLine} />
-          <div className={rightBottomLine} />
+          <div
+            className={`transition-all duration-300 ${leftTopLine} ${telegram ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
+          <div
+            className={`transition-all duration-300 ${leftBottomLine} ${telegram ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
+          <div
+            className={`transition-all duration-300 ${rightTopLine} ${telegram ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
+          <div
+            className={`transition-all duration-300 ${rightBottomLine} ${telegram ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
           <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative bg-black">
             <input
               className="bg-transparent outline-none text-white font-mono text-lg py-1 h-15 w-full pr-16"
@@ -148,12 +172,20 @@ export const ContactForm: React.FC = () => {
           </div>
         </div>
 
-        <div className="relative flex flex-col sm:flex-row items-center my-2 gap-0 sm:gap-2">
+        <div className="group relative flex flex-col sm:flex-row items-center my-2 gap-0 sm:gap-2">
           {/* EMAIL */}
-          <div className={leftTopLine} />
-          <div className={leftBottomLine} />
-          <div className={rightTopLine} />
-          <div className={rightBottomLine} />
+          <div
+            className={`transition-all duration-300 ${leftTopLine} ${email ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
+          <div
+            className={`transition-all duration-300 ${leftBottomLine} ${email ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
+          <div
+            className={`transition-all duration-300 ${rightTopLine} ${email ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
+          <div
+            className={`transition-all duration-300 ${rightBottomLine} ${email ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+          />
           <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative bg-black">
             <input
               className={`bg-transparent outline-none font-mono text-lg py-1 h-15 w-full pr-16 ${errors.email ? 'text-red-error' : 'text-white'}`}

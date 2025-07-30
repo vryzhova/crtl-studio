@@ -36,6 +36,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/favicon.svg" />
+        {/* Можно использовать PNG или SVG, если нужно */}
+        {/* <link rel="icon" type="image/png" href="/favicon.png" /> */}
         <link rel="preload" href="/cube-bg.svg" as="image" type="image/svg+xml" />
         <link rel="preload" href="/cube-bg-mobile.png" as="image" type="image/png" />
         <link rel="preload" href="/cube.png" as="image" type="image/png" />

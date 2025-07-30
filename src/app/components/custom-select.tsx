@@ -24,10 +24,10 @@ const CustomSelect: React.FC<TProps> = ({ onChange }) => {
   ];
 
   // Стили для линий (замените на ваши реальные классы)
-  const leftTopLine = 'absolute z-10 left-0 top-0 w-8 h-2.5  border-t border-l border-white rounded-tl-[8px]';
-  const leftBottomLine = 'absolute z-10  left-0 bottom-0 w-8 h-2.5 border-b border-l border-white rounded-bl-[8px]';
-  const rightTopLine = 'absolute z-10 right-0 top-0 w-8 h-2.5 border-t border-r border-white rounded-tr-[8px]';
-  const rightBottomLine = 'absolute z-10 right-0 bottom-0 w-8 h-2.5  border-b border-r border-white rounded-br-[8px]';
+  const leftTopLine = 'absolute z-10 left-0 top-0 w-8 h-2.5  border-t border-l rounded-tl-[8px]';
+  const leftBottomLine = 'absolute z-10  left-0 bottom-0 w-8 h-2.5 border-b border-l  rounded-bl-[8px]';
+  const rightTopLine = 'absolute z-10 right-0 top-0 w-8 h-2.5 border-t border-r rounded-tr-[8px]';
+  const rightBottomLine = 'absolute z-10 right-0 bottom-0 w-8 h-2.5  border-b border-r rounded-br-[8px]';
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -49,12 +49,20 @@ const CustomSelect: React.FC<TProps> = ({ onChange }) => {
   }, []);
 
   return (
-    <div className="relative flex flex-col sm:flex-row items-center my-2 gap-0 sm:gap-2" ref={selectRef}>
+    <div className="group relative flex flex-col sm:flex-row items-center my-2 gap-0 sm:gap-2" ref={selectRef}>
       {/* Декоративные линии */}
-      <div className={leftTopLine} />
-      <div className={leftBottomLine} />
-      <div className={rightTopLine} />
-      <div className={rightBottomLine} />
+      <div
+        className={`transition-all duration-300 ${leftTopLine}  ${selectedOption ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+      />
+      <div
+        className={`transition-all duration-300 ${leftBottomLine} ${selectedOption ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+      />
+      <div
+        className={`transition-all duration-300 ${rightTopLine} ${selectedOption ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+      />
+      <div
+        className={`transition-all duration-300 ${rightBottomLine} ${selectedOption ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+      />
 
       {/* Основной селект */}
       <div className={`flex-1 flex flex-col gap-2 pl-8 pr-8 w-full cursor-pointer bg-black`} onClick={toggleDropdown}>
