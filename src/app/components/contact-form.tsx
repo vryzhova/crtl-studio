@@ -16,7 +16,7 @@ export const ContactForm: React.FC = () => {
   const [mobile, setMobile] = useState('');
   const [telegram, setTelegram] = useState('');
   const [email, setEmail] = useState('');
-  const [agree, setAgree] = useState(true);
+  const [agreePolicy, setAgree] = useState(true);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
   const lang = i18n.language;
@@ -67,8 +67,10 @@ export const ContactForm: React.FC = () => {
         mobile,
         telegram,
         email,
-        agree,
+        agreePolicy,
       };
+
+      console.log(data);
       setIsThankYouModalOpen(true);
     }
   };
@@ -210,7 +212,7 @@ export const ContactForm: React.FC = () => {
           <label className="relative flex cursor-pointer">
             <input
               type="checkbox"
-              checked={agree}
+              checked={agreePolicy}
               onChange={e => setAgree(e.target.checked)}
               className="peer sr-only"
             />
@@ -245,7 +247,7 @@ export const ContactForm: React.FC = () => {
           onClick={handleSubmit}
           type="submit"
           className="mt-4 w-[320px] xl:w-[244px] 3xl:w-[300px]"
-          disabled={!agree}
+          disabled={!agreePolicy}
         >
           {t('contact-form.submit')}
         </Button>
