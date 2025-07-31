@@ -32,16 +32,16 @@
     "title_mobile": "We integrate Al where\nit drives real business\nimpact - focusing on\nvalue, not just\nchasing trends",
     "main_subtitle": "We apply Al where it truly matters - enhancing user experience and speeding up processes.",
     "main_subtitle2": "We build intuitive interfaces, automate repetitive tasks, use generative Al models, and make complicated simple - always aligned with product goals and business logic.",
-    "main_cta": "Submit an application"
+    "main_cta": "Get in touch"
   },
   "inside-focus": {
     "tag": "// FULL-CYCLE DEVELOPMENT",
     "title": "Our focus — speed,\ncustomization, and results",
-    "creative_title": "Creative &\n visual systems",
+    "creative_title": "Creative &\n Visual systems",
     "creative_text": "// Logos and brand identity // AI-assisted and visual image generation\n// Creative communications // Gamification of services and loyalty programs\n(Telegram, HTML5/WebGL, etc.)",
-    "ai_title": "AI tools &\n automation",
+    "ai_title": "AI tools &\n Automation",
     "ai_text": "// AI chats, personalization, analytics // Business process automation\n// Embedding models into products\n(AI concierges, assistants,\nprompt interfaces)",
-    "ux_title": "UX/UI &\n custom platforms",
+    "ux_title": "UX/UI &\n Custom platforms",
     "ux_text": "// Landing pages &\n promo sites // SaaS interfaces, payment flows // Personal accounts, admin panels // Telegram Mini Apps\nand web adaptations\n(games, stores, services)",
     "blockchain_title": "Blockchain technologies",
     "blockchain_text": "// Smart contract development\n(Ethereum, TON, Solana) // NFT projects\nand asset tokenization\n// Decentralized applications (DApps)"
@@ -65,18 +65,19 @@
     "phone": "PHONE NUMBER",
     "telegram": "TELEGRAM ACCOUNT",
     "email": "EMAIL",
-    "contact_method": "PREFERRED CONTACT METHOD",
+    "contact_method": "PREFERRED WAY TO CONTACT YOU",
+    "error_message": "VALIDATE INPUT CORRECTNESS",
     "contact_method_placeholder": "Select...",
-    "contact_method_phone": "Phone",
+    "contact_method_phone": "PHONE",
     "contact_method_telegram": "Telegram",
     "contact_method_email": "Email",
     "budget": "ESTIMATED BUDGET",
     "privacy": "I agree to the terms",
     "privacy_policy": "Privacy Policy",
     "agree": "I agree to the terms",
-    "submit": "Submit application",
+    "submit": "Submit",
     "thank_you_title": "// THANK YOU! :)",
-    "thank_you_description": "We will contact you soon."
+    "thank_you_description": "We will contact\nyou shortly!"
   },
   "cases": {
     "tag": "// OUR CASES",
@@ -124,7 +125,7 @@
     "task": "Task:",
     "result": "Result:"
   },
-  "contact-btn": "Submit application",
+  "contact-btn": "Get in touch",
   "contact-us": "Contact us",
   "footer": {
     "links": "Links",

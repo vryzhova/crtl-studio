@@ -28,7 +28,7 @@ export const ContactSection: React.FC = () => {
           position={isDesktop ? 'start' : 'center'}
         />
         {/* Левая колонка: заголовок, текст, картинка */}
-        <div className="flex flex-col mb-9 h-full md:flex-row md:max-xl:justify-between xl:flex-col xl:bg-[url('/ctrl-btn-bg.svg')] xl:bg-center xl:bg-auto bg-no-repeat xl:pl-12 bg">
+        <div className="flex flex-col h-full md:flex-row md:max-xl:justify-between xl:flex-col xl:bg-[url('/ctrl-btn-bg.svg')] xl:bg-[left_10px_top_67px] bg-no-repeat bg">
           <SectionTitle
             className="hidden xl:flex"
             title={t('contact-form.tag')}

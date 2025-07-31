@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import IMask from 'imask';
+import i18n from 'i18next';
 
 import { BudgetSlider, Button } from '@/app/components';
 import CustomSelect from '@/app/components/custom-select';
@@ -13,13 +13,14 @@ export const ContactForm: React.FC = () => {
   const [budget, setBudget] = useState(120000);
   const [name, setName] = useState('');
   const [contactType, setContactType] = useState('');
-  const [phone, setPhone] = useState('');
+  const [mobile, setMobile] = useState('');
   const [telegram, setTelegram] = useState('');
   const [email, setEmail] = useState('');
   const [agree, setAgree] = useState(true);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const lang = i18n.language;
+  const policyLink = lang === 'ru' ? '/Политика_конфиденциальности.pdf' : '/Privacy_Policy.pdf';
 
   const lenisRef = useLenis();
 
@@ -41,15 +42,15 @@ export const ContactForm: React.FC = () => {
     const newErrors: { [key: string]: string } = {};
     // Имя: только буквы (рус/лат)
     if (!name.trim() || !/^[a-zA-Zа-яА-ЯёЁ\s'-]+$/.test(name)) {
-      newErrors.name = 'ПРОВЕРЬТЕ ПРАВИЛЬНОСТЬ ВВОДА';
+      newErrors.name = t('contact-form.error_message');
     }
-    // Телефон: простой паттерн, минимум 10 цифр
-    if (!phone.trim() || !/^\+?\d{10,15}$/.test(phone.replace(/\D/g, ''))) {
-      newErrors.phone = 'ПРОВЕРЬТЕ ПРАВИЛЬНОСТЬ ВВОДА';
+    // Телефон: простой паттерн, минимум 6 цифр
+    if (!mobile.trim() || !/^\+?\d{6,15}$/.test(mobile.replace(/\D/g, ''))) {
+      newErrors.mobile = t('contact-form.error_message');
     }
     // Email: базовая проверка
     if (!email.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-      newErrors.email = 'ПРОВЕРЬТЕ ПРАВИЛЬНОСТЬ ВВОДА';
+      newErrors.email = t('contact-form.error_message');
     }
     return newErrors;
   };
@@ -59,22 +60,18 @@ export const ContactForm: React.FC = () => {
     const validationErrors = validate();
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
+      const data = {
+        budget,
+        name,
+        contactType,
+        mobile,
+        telegram,
+        email,
+        agree,
+      };
       setIsThankYouModalOpen(true);
-      // TODO: отправка данных на сервер
     }
   };
-
-  useEffect(() => {
-    if (!inputRef.current) return;
-
-    const mask = IMask(inputRef.current, {
-      mask: '+{7} (000) 000-00-00',
-    });
-
-    return () => {
-      mask.destroy();
-    };
-  }, []);
 
   const leftTopLine = 'absolute z-10 left-0 top-0 w-8 h-2.5  border-t border-l rounded-tl-[8px]';
   const leftBottomLine = 'absolute z-10 left-0 bottom-0 w-8 h-2.5 border-b border-l rounded-bl-[8px]';
@@ -119,29 +116,28 @@ export const ContactForm: React.FC = () => {
 
         <div className="relative group flex flex-col sm:flex-row items-center my-2 gap-0 sm:gap-2">
           <div
-            className={`transition-all duration-300 ${leftTopLine} ${phone ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+            className={`transition-all duration-300 ${leftTopLine} ${mobile ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
           />
           <div
-            className={`transition-all duration-300 ${leftBottomLine} ${phone ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+            className={`transition-all duration-300 ${leftBottomLine} ${mobile ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
           />
           <div
-            className={`transition-all duration-300 ${rightTopLine} ${phone ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+            className={`transition-all duration-300 ${rightTopLine} ${mobile ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
           />
           <div
-            className={`transition-all duration-300 ${rightBottomLine} ${phone ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
+            className={`transition-all duration-300 ${rightBottomLine} ${mobile ? 'border-lime-default' : 'border-white'} group-hover:border-lime-default group-focus:border-lime-default active:border-lime-default`}
           />
           <div className="flex-1 flex flex-col gap-2 pl-8 pr-8 relative bg-black">
             <input
-              className={`bg-transparent outline-none font-mono text-lg py-1 h-15 w-full pr-16 ${errors.phone ? 'text-red-error' : 'text-white'}`}
+              className={`bg-transparent outline-none font-mono text-lg py-1 h-15 w-full pr-16 ${errors.mobile ? 'text-red-error' : 'text-white'}`}
               type="tel"
-              ref={inputRef}
               placeholder={t('contact-form.phone')}
-              value={phone}
-              onChange={e => setPhone(e.target.value)}
+              value={mobile}
+              onChange={e => setMobile(e.target.value)}
             />
-            {errors.phone && (
+            {errors.mobile && (
               <span className="absolute right-2 top-1/2 -translate-y-1/2 text-red-error font-mono text-xs uppercase">
-                {errors.phone}
+                {errors.mobile}
               </span>
             )}
           </div>
@@ -238,7 +234,7 @@ export const ContactForm: React.FC = () => {
 
           <span className="text-lg text-white">
             {t('contact-form.agree')}{' '}
-            <a href="/privacy" className="text-lime-default">
+            <a href={policyLink} target="_blank" rel="noopener noreferrer" className="text-lime-default">
               {t('contact-form.privacy_policy')}
             </a>
             .

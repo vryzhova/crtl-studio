@@ -20,7 +20,7 @@ const CustomSelect: React.FC<TProps> = ({ onChange }) => {
   const options: SelectOption[] = [
     { value: 'telegram', label: 'TELEGRAM' },
     { value: 'email', label: 'EMAIL' },
-    { value: 'phone', label: 'ТЕЛЕФОН' },
+    { value: 'phone', label: t('contact-form.contact_method_phone') },
   ];
 
   // Стили для линий (замените на ваши реальные классы)
