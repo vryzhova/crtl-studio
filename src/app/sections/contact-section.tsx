@@ -57,7 +57,7 @@ export const ContactSection: React.FC = () => {
           </div>
         </div>
         {/* Правая колонка: форма */}
-        <div className="flex justify-center items-center w-full">
+        <div className="flex justify-center items-center w-full mt-[36px] md:mt-0">
           <ContactForm />
         </div>
 

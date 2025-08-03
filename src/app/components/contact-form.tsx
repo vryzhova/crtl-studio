@@ -202,7 +202,7 @@ export const ContactForm: React.FC = () => {
 
         {/* Бюджет — блок с input и range */}
         <div className="flex flex-col gap-2 mt-4">
-          <span className="text-base font-mono tracking-widest text-gray-elements bg-transparent mb-2 px-7.5">
+          <span className="text-lg font-mono tracking-widest text-gray-elements bg-transparent mb-2 px-7.5">
             {t('contact-form.budget')}
           </span>
           <BudgetSlider min={4000} max={700000} step={1000} value={budget} onChange={value => setBudget(value)} />

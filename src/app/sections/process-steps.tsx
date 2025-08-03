@@ -156,12 +156,12 @@ export const ProcessSteps = () => {
       <SectionTitle title={t('how-we-work.tag')} position="center" hasBorder />
       <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center">
         {/* Mobile: горизонтальный таймлайн без карточек */}
-        <div className="block sm:hidden w-full relative py-8">
+        <div className="block sm:hidden w-full relative py-8 px-5">
           {/* Горизонтальная линия */}
           {/* Этапы */}
           <div
             ref={mobileStepsRef}
-            className="flex flex-row relative z-10 px-2.5 scroll-smooth"
+            className="flex flex-row relative z-10 px-2.5 scroll-smooth h-full"
             style={{ width: `${steps.length * 80}vw` }}
           >
             <AutoWidthTimelineLine targetRef={mobileStepsRef} top={8} />
@@ -176,7 +176,7 @@ export const ProcessSteps = () => {
                   className={clsx(
                     'z-10 rounded-full flex items-center justify-center border-2 transition',
                     active === idx
-                      ? 'bg-lime-default border-lime-default w-8 h-8 text-black scale-110 shadow-lg'
+                      ? 'bg-lime-default border-lime-default w-4 h-4 text-black text-lg scale-200 shadow-lg'
                       : 'bg-gray-elements border-gray-elements  w-4 h-4 text-lime-default'
                   )}
                   onClick={() => {
@@ -189,17 +189,21 @@ export const ProcessSteps = () => {
                     }
                   }}
                 >
-                  {active === idx && <span className="font-mono text-lg">{idx + 1}</span>}
+                  {active === idx && (
+                    <span className="font-mono" style={{ transform: 'scale(0.476)', pointerEvents: 'none' }}>
+                      {idx + 1}
+                    </span>
+                  )}
                 </span>
                 {/* Заголовок */}
                 <span
-                  className={`text-start font-bold text-sm my-2 transition-colors duration-300 ${active === idx ? 'text-lime-default' : 'text-gray-elements'}`}
+                  className={`text-start text-base font-bold mt-10 mb-3.5 transition-colors duration-300 ${active === idx ? 'text-lime-default' : 'text-gray-elements'}`}
                 >
                   {t(`how-we-work.step_${idx + 1}_title`)}
                 </span>
                 {/* Текст */}
                 <span
-                  className={`text-white w-[200px] h-[100px] text-xs text-start transition-opacity duration-300 ${active === idx ? 'opacity-100' : 'opacity-60'}`}
+                  className={`text-white text-base w-[230px] h-[100px] text-start transition-opacity duration-300 ${active === idx ? 'opacity-100' : 'opacity-60'}`}
                 >
                   {t(`how-we-work.step_${idx + 1}_text`)}
                 </span>
