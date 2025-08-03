@@ -1,3 +1,7 @@
+import { useState } from 'react';
+import Slider from 'antd/es/slider';
+import 'antd/es/slider/style';
+
 type BudgetSliderProps = {
   value: number;
   onChange: (value: number) => void;
@@ -6,47 +10,39 @@ type BudgetSliderProps = {
   step?: number;
 };
 
+const formatCurrencyShort = (num: number) => {
+  if (num >= 1_000_000) return `$${(num / 1_000_000).toFixed(1)}M`;
+  if (num >= 1_000) return `$${Math.round(num / 1000)}k`;
+  return `$${num}`;
+};
+
 export const BudgetSlider: React.FC<BudgetSliderProps> = ({
   value,
   onChange,
-  min = 50000,
-  max = 1000000,
-  step = 10000,
+  min = 4000,
+  max = 700000,
+  step = 1000,
 }) => {
-  const percent = ((value - min) / (max - min)) * 100;
-
   return (
-    <div className="w-full relative mt-6">
-      {/* Tooltip */}
-      <div
-        className="absolute -top-8 z-10 px-2 py-1 text-sm font-mono text-black bg-white rounded shadow transition-all duration-200"
-        style={{ left: `clamp(0%, calc(${percent}% - 40px), calc(100% - 80px))` }}
-      >
-        {value.toLocaleString()}
-      </div>
-
-      {/* Input range */}
-      <input
-        type="range"
+    <div className="w-full mt-6">
+      <Slider
         min={min}
         max={max}
         step={step}
         value={value}
-        onChange={e => onChange(Number(e.target.value))}
-        className={`
-    w-full appearance-none h-0.5 rounded-lg
-    bg-gray-elements
-    [&::-webkit-slider-thumb]:appearance-none
-    [&::-webkit-slider-thumb]:w-2.5
-    [&::-webkit-slider-thumb]:h-2.5
-    [&::-webkit-slider-thumb]:bg-lime-default
-    [&::-webkit-slider-thumb]:rounded-full
-    [&::-webkit-slider-thumb]:border-2
-    [&::-webkit-slider-thumb]:border-lime-default
-    [&::-webkit-slider-thumb]:cursor-pointer
-  `}
-        style={{
-          background: `linear-gradient(to right, #CEF17B ${((value - min) / (max - min)) * 100}%, #808080 0%)`,
+        onChange={onChange}
+        className="budget-slider"
+        styles={{
+          rail: {
+            backgroundColor: '#808080',
+            height: 2,
+          },
+        }}
+        tooltip={{
+          formatter: (num?: number) => (num !== undefined ? formatCurrencyShort(num) : null),
+          open: true,
+          placement: 'top',
+          autoAdjustOverflow: false,
         }}
       />
     </div>

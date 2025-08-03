@@ -11,7 +11,7 @@ export const ContactSection: React.FC = () => {
   const { t } = useTranslation();
   const { isDesktop } = useBreakpoints();
   return (
-    <section id="contact" className="relative min-h-screen w-full bg-black text-white overflow-hidden">
+    <section id="contact" className="relative min-h-screen w-full bg-black text-white">
       <div className="inside-container pb-20 grid grid-cols-1 xl:grid-cols-2 items-center">
         {/* Background pattern */}
         <div
