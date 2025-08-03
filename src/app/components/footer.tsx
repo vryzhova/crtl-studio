@@ -88,10 +88,10 @@ export const Footer = () => {
               </ul>
             </div>
             <div className="min-w-0">
-              <h3 className="text-gray-elements text-md font-semibold mb-2 whitespace-nowrap">
+              <h3 className="text-gray-elements text-md font-semibold mb-2 whitespace-nowrap text-right md:text-start">
                 {t('footer.documents')}
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-2 text-right md:text-start">
                 {docs.map((item, idx) => (
                   <li key={idx}>
                     <a
