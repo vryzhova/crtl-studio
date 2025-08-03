@@ -154,7 +154,6 @@ export const Cases = () => {
             const min = 0.8;
             const maxDist = window.innerWidth / 2;
             const scale = max - (dist / maxDist) * (max - min);
-            console.log(scale);
 
             gsap.to(ref, {
               scale: Math.max(min, Math.min(max, scale)),
