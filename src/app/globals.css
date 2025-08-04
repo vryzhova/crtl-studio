@@ -140,21 +140,21 @@ body {
 }
 
 .budget-slider .ant-slider-handle {
-    width: 16px !important;
-    height: 16px !important;
-    margin-top: -4px !important;
+    width: 20px !important;
+    height: 20px !important;
+    margin-top: -5px !important;
 }
 
 .budget-slider .ant-slider-handle::before {
-    width: 16px !important;
-    height: 16px !important;
+    width: 20px !important;
+    height: 20px !important;
 }
 
 
 .budget-slider .ant-slider-handle::after {
     background: #CEF17B !important;
-    width: 16px !important;
-    height: 16px !important;
+    width: 20px !important;
+    height: 20px !important;
     outline: none !important;
     box-shadow: 0 0 0 2px #CEF17B !important;
 }
