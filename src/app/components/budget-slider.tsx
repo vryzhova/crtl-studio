@@ -10,12 +10,6 @@ type BudgetSliderProps = {
   step?: number;
 };
 
-const formatCurrencyShort = (num: number) => {
-  if (num >= 1_000_000) return `$${(num / 1_000_000).toFixed(1)}M`;
-  if (num >= 1_000) return `$${Math.round(num / 1000)}k`;
-  return `$${num}`;
-};
-
 export const BudgetSlider: React.FC<BudgetSliderProps> = ({
   value,
   onChange,
@@ -23,8 +17,15 @@ export const BudgetSlider: React.FC<BudgetSliderProps> = ({
   max = 700000,
   step = 1000,
 }) => {
+  const formatCurrencyShort = (num: number) => {
+    if (num === max) return `$${Math.round(max / 1000)}k+`; // Special case for max value
+    if (num >= 1_000_000) return `$${(num / 1_000_000).toFixed(1)}M`;
+    if (num >= 1_000) return `$${Math.round(num / 1000)}k`;
+    return `$${num}`;
+  };
+
   return (
-    <div className="w-full mt-6">
+    <div className="w-[97%] md:w-full mt-6 mx-auto">
       <Slider
         min={min}
         max={max}

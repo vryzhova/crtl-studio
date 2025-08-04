@@ -10,7 +10,7 @@ import { ThankYouModal } from './thankyou-modal';
 import { useLenis } from '@/app/lenis-context';
 
 export const ContactForm: React.FC = () => {
-  const [budget, setBudget] = useState(120000);
+  const [budget, setBudget] = useState(5000);
   const [name, setName] = useState('');
   const [contactType, setContactType] = useState('');
   const [mobile, setMobile] = useState('');
