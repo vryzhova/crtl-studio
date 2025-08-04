@@ -36,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="color-scheme" content="light only" />
         <link rel="icon" href="/favicon.svg" />
         {/* Можно использовать PNG или SVG, если нужно */}
         {/* <link rel="icon" type="image/png" href="/favicon.png" /> */}
