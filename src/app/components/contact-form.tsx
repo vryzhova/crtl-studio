@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
+import emailjs from '@emailjs/browser';
 
 import { BudgetSlider, Button } from '@/app/components';
 import CustomSelect from '@/app/components/custom-select';
@@ -69,6 +70,13 @@ export const ContactForm: React.FC = () => {
         email,
         agreePolicy,
       };
+
+      emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        data,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
 
       console.log(data);
       setIsThankYouModalOpen(true);
