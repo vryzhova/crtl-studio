@@ -8,6 +8,8 @@ import Image from 'next/image';
 import { useIsWebView } from '@/app/hooks';
 import { useMediaQuery } from '@/app/hooks/use-media-query';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export const HowWeWork = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLImageElement>(null);
@@ -47,6 +49,8 @@ export const HowWeWork = () => {
     ).to(sectionRef.current, { background: '#141414', opacity: 0 });
 
     return () => {
+      tl.scrollTrigger?.kill();
+      ScrollTrigger.refresh();
       tl.kill();
     };
   }, [isDesktop, isTelegram]);
