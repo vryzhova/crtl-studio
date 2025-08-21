@@ -15,6 +15,7 @@ import {
 } from './sections';
 import { Footer, Preloader } from './components';
 import gsap from 'gsap';
+import { useDebouncedResizeTick } from './hooks/useDebouncedResizeTrick';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,6 +25,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const [showPreloader, setShowPreloader] = useState(true);
+  const remountKey = useDebouncedResizeTick(300);
 
   useEffect(() => {
     if (showPreloader) {
@@ -41,11 +43,13 @@ export default function Home() {
           <MainSection />
           <WhySection />
           <InsideProduct />
-          <HowWeWork />
-          <WhoWeAreFor />
-          <ProcessSteps />
-          <ContactSection />
-          <Cases />
+          <div key={remountKey}>
+            <HowWeWork />
+            <WhoWeAreFor />
+            <ProcessSteps />
+            <ContactSection />
+            <Cases />
+          </div>
           <Footer />
         </div>
       )}
