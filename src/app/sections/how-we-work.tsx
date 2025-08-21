@@ -46,15 +46,8 @@ export const HowWeWork = () => {
       0
     ).to(sectionRef.current, { background: '#141414', opacity: 0 });
 
-    const onResize = () => {
-      ScrollTrigger.refresh(); // пересчитать размеры ScrollTrigger
-    };
-
-    window.addEventListener('resize', onResize);
-
     return () => {
       tl.kill();
-      window.removeEventListener('resize', onResize);
     };
   }, [isDesktop, isTelegram]);
 

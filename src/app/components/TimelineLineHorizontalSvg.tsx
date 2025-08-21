@@ -66,16 +66,16 @@ type Props = {
 export const AutoWidthTimelineLine = ({ targetRef, className, top = 40 }: Props) => {
   const [width, setWidth] = useState(0);
 
-  useEffect(() => {
-    if (!targetRef.current) return;
-    const update = () => {
-      setWidth(targetRef.current!.scrollWidth);
-    };
+  // useEffect(() => {
+  //   if (!targetRef.current) return;
+  //   const update = () => {
+  //     setWidth(targetRef.current!.scrollWidth);
+  //   };
 
-    update();
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
-  }, [targetRef]);
+  //   update();
+  //   window.addEventListener('resize', update);
+  //   return () => window.removeEventListener('resize', update);
+  // }, [targetRef]);
 
   return (
     <div

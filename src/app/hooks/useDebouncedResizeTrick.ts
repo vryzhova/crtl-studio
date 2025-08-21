@@ -1,5 +1,6 @@
 // hooks/useDebouncedResizeTick.ts
 import { useEffect, useRef, useState } from 'react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export function useDebouncedResizeTick(delay = 500) {
   const [tick, setTick] = useState(0);
@@ -17,6 +18,9 @@ export function useDebouncedResizeTick(delay = 500) {
           rafRef.current = null;
           if (id != null) window.cancelAnimationFrame(id);
           setTick(n => n + 1);
+          setTimeout(() => {
+            ScrollTrigger.refresh();
+          });
           return;
         }
         scheduleLoop();
