@@ -6,7 +6,6 @@ export function useDebouncedResizeTick(delay = 500) {
   const rafRef = useRef<number | null>(null);
   const lastTsRef = useRef<number>(0);
   const wRef = useRef<number>(typeof window !== 'undefined' ? window.innerWidth : 0);
-  const hRef = useRef<number>(typeof window !== 'undefined' ? window.innerHeight : 0);
 
   useEffect(() => {
     const scheduleLoop = () => {
@@ -26,10 +25,8 @@ export function useDebouncedResizeTick(delay = 500) {
 
     const onResize = () => {
       const w = window.innerWidth;
-      const h = window.innerHeight;
-      if (w === wRef.current && h === hRef.current) return;
+      if (w === wRef.current) return;
       wRef.current = w;
-      hRef.current = h;
 
       lastTsRef.current = Date.now();
       if (rafRef.current == null) scheduleLoop();
