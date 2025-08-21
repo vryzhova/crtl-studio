@@ -54,7 +54,7 @@ export const InsideProduct = () => {
           </div>
 
           {/* Right side - 3D Cube */}
-          <div className="relative h-90 md:h-[400px] md:w-[400px] xl:w-[500px] xl:h-[500px] w-full flex items-center justify-self-center justify-center 3xl:w-[721px] 3xl:h-[714px]">
+          <div className="relative h-90 w-90 md:h-[400px] md:w-[400px] xl:w-[500px] xl:h-[500px] flex items-center justify-self-center justify-center 3xl:w-[721px] 3xl:h-[714px]">
             <Image src="/cube.png" className="levitate" alt="cube" fill loading="eager" />
           </div>
         </div>

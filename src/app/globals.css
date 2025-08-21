@@ -260,4 +260,6 @@ body {
 
 body {
     background-color: #141414;
+    overflow-x: hidden;
+    width: 100vw
 }

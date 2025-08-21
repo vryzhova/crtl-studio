@@ -8,20 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslation } from 'react-i18next';
 import TimelineLineSvg from '../components/TimelineLineSvg';
 import { AutoWidthTimelineLine } from '../components/TimelineLineHorizontalSvg';
-import { useBreakpoints } from '@/app/hooks/use-break-points';
-
-function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    const listener = () => setMatches(media.matches);
-    media.addEventListener('change', listener);
-    return () => media.removeEventListener('change', listener);
-  }, [query]);
-
-  return matches;
-}
+import { useMediaQuery } from '@/app/hooks/use-media-query';
 
 export const ProcessSteps = () => {
   const [active, setActive] = useState(0); // default: первый этап
@@ -30,7 +17,6 @@ export const ProcessSteps = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const mobileStepsRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
-  // const { isMobile, isTablet } = useBreakpoints();
   const isMobile = useMediaQuery('(max-width: 767px)');
   const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1279px)');
 
@@ -156,7 +142,7 @@ export const ProcessSteps = () => {
       <SectionTitle title={t('how-we-work.tag')} position="center" hasBorder />
       <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center">
         {/* Mobile: горизонтальный таймлайн без карточек */}
-        <div className="block sm:hidden w-full relative py-8 px-5">
+        <div className="block md:hidden w-full relative py-8 px-5">
           {/* Горизонтальная линия */}
           {/* Этапы */}
           <div
@@ -212,7 +198,7 @@ export const ProcessSteps = () => {
           </div>
         </div>
         {/* Desktop: вертикальный таймлайн */}
-        <div className="hidden sm:block w-full">
+        <div className="hidden md:block w-full">
           <TimelineLineSvg
             className="absolute xl:left-1/2 left-20 top-0 -translate-x-1/2 z-0 select-none pointer-events-none"
             height={640}

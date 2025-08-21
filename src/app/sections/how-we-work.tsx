@@ -1,23 +1,12 @@
 'use client';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslation } from 'react-i18next';
 import { SectionTitle, GlitchTypewriterText } from '../components';
 import Image from 'next/image';
 import { useIsWebView } from '@/app/hooks';
-
-function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    const listener = () => setMatches(media.matches);
-    media.addEventListener('change', listener);
-    return () => media.removeEventListener('change', listener);
-  }, [query]);
-
-  return matches;
-}
+import { useMediaQuery } from '@/app/hooks/use-media-query';
 
 export const HowWeWork = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -62,10 +51,10 @@ export const HowWeWork = () => {
     };
 
     window.addEventListener('resize', onResize);
-    window.removeEventListener('resize', onResize);
 
     return () => {
       tl.kill();
+      window.removeEventListener('resize', onResize);
     };
   }, [isDesktop, isTelegram]);
 
@@ -143,7 +132,6 @@ export const HowWeWork = () => {
             <>
               <Image
                 id="morph"
-                // ref={circleRef}
                 width={88}
                 height={88}
                 src="/circle.svg"
